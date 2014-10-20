@@ -14,14 +14,17 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-/config/database.yml
+sass-cache
+esproj
 
 # Sensitive Data
+config/database.yml
 config/settings_private.yml
 
-# Stupid Files
-.DS_Store
-
-# Uploads
-public/files/
+# Public Uploads
 public/uploads/
+public/files/
+public/media/
+
+# Stupid Files
+*.DS_Store

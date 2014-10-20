@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/rocktree/cambium.git
+  revision: 95179cf8734cc58cb0b5dae4ba7ec487b5690459
+  specs:
+    cambium (0.3.0)
+      rails
+      rake
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -221,6 +229,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cambium!
   coffee-rails (~> 4.0.0)
   jbuilder (~> 2.0)
   jquery-rails

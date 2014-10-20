@@ -1,4 +1,6 @@
 Rails.application.configure do
+  config.assets.precompile += %w( admin/admin.css admin/admin.js admin/wysihtml5.css modernizr.js )
+  config.action_mailer.default_url_options = { :host => 'rocktree.us' }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
