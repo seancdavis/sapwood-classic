@@ -25,16 +25,16 @@ gem 'pickadate-rails'
 
 # ------------------------------------------ Utilities
 
-gem 'cambium'
+gem 'cambium', :github => 'rocktree/cambium'
 gem 'devise'
 gem 'carrierwave'
 gem 'hirb'
 
 # ------------------------------------------ Development/Test
 
-group :development do
+group :development, :test do
   gem 'annotate'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'rspec-rails'
 end
-
-gem 'factory_girl_rails'
-gem 'faker'

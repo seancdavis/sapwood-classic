@@ -10,9 +10,9 @@ module App
   class Application < Rails::Application
     
     config.generators do |g|
-      # g.fixture true
-      # g.fixture_replacement "factory_girl"
-      # g.test_framework :rspec
+      g.fixture true
+      g.fixture_replacement "factory_girl"
+      g.test_framework :rspec
       g.assets false
       g.view_specs false
       g.controller_specs false
