@@ -9,4 +9,9 @@
 #
 
 class Account < ActiveRecord::Base
+
+  # ------------------------------------------ Asssociations
+
+  has_many :users
+
 end

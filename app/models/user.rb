@@ -15,16 +15,19 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  account_id             :integer
+#  is_admin               :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
 
   # ------------------------------------------ Devise
 
-  # Include default devise modules. Others available are:
-  # :lockable, :timeoutable, :omniauthable, :confirmable, :registerable
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, 
-         :validatable
+  devise :database_authenticatable, :recoverable, :trackable, :validatable
+
+  # ------------------------------------------ Associations
+
+  belongs_to :account
 
   # ------------------------------------------ Scopes
 
