@@ -1,10 +1,10 @@
-@import 'bones/bones';
 
 // ------------------------------------------ Vendor
 
 @import 'bourbon';
-@import 'normalize';
+@import 'bones/bones';
 
 // ------------------------------------------ Partials
 
+@import 'partials/fonts';
 // @import 'partials/globals';
