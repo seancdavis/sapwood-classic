@@ -23,9 +23,9 @@ Rails.application.routes.draw do
   # 
   # After we define all namespaced routes, we can move on to those routes that
   # are not namespaced.
-  # 
-  # resources :users
-  # 
+
+  resources :sites, :only => [:index, :show], :param => :slug
+
   # ------------------------------------------ Home Page
 
   root :to => 'accounts#show'
