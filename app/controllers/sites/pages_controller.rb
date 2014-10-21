@@ -1,2 +1,6 @@
-class Sites::PagesController < ApplicationController
+class Sites::PagesController < SitesController
+
+  def index
+  end
+
 end
