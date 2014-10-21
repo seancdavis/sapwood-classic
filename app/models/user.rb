@@ -17,6 +17,7 @@
 #  updated_at             :datetime
 #  account_id             :integer
 #  is_admin               :boolean          default(FALSE)
+#  name                   :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -34,5 +35,11 @@ class User < ActiveRecord::Base
   # ------------------------------------------ Scopes
 
   scope :admins, -> { where(:is_admin => true) }
+
+  # ------------------------------------------ Instance Methods
+
+  def display_name
+    name || email
+  end
 
 end

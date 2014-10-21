@@ -1,3 +1,8 @@
+* {
+  @include box-sizing(border-box);
+  vertical-align: middle;
+}
+
 @mixin top-left($position: absolute) {
   position: $position;
   top: 0;

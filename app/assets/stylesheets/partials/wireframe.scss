@@ -1,8 +1,10 @@
 body {
   #container {
     > header {
+      @include clearfix;
       @include top-left(fixed);
       width: 100%;
+      padding: 10px 0;
       background: $color-2;
     }
     #sidebar {

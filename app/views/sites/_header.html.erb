@@ -1,1 +1,7 @@
-Header
+<div class="user">
+  <div class="avatar-container">
+    <%= avatar(current_user, 84) %>
+  </div>
+  <%= content_tag(:span, current_user.display_name.upcase, 
+    :class => 'name') %>
+</div>
