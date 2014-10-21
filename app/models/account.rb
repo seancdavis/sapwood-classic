@@ -3,7 +3,7 @@
 # Table name: accounts
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
+#  title      :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #
@@ -13,5 +13,6 @@ class Account < ActiveRecord::Base
   # ------------------------------------------ Asssociations
 
   has_many :users
+  has_many :sites
 
 end

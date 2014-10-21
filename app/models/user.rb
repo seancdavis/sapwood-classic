@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
 
   belongs_to :account
 
+  has_many :sites, :through => :account
+
   # ------------------------------------------ Scopes
 
   scope :admins, -> { where(:is_admin => true) }
