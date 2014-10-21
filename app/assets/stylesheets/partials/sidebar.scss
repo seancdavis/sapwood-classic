@@ -1,7 +1,16 @@
 aside#sidebar {
+  position: relative;
+
+  .logo {
+    @include top-left;
+    width: 100%;
+    height: 62px;
+    background: $color-3;
+  }
 
   ul {
     @include clear-list;
+    margin-top: 62px;
     li {
       a {
         display: block;
