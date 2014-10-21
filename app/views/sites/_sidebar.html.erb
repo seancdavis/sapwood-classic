@@ -1,0 +1,9 @@
+<ul>
+  <% nav.each do |item, attrs| %>
+    <li class="<%= attrs['classes'] %>">
+      <%= link_to(attrs['path']) { 
+        o = content_tag(:i, nil, :class => "icon-#{attrs['icon']}") 
+        o += content_tag(:span, attrs['label'].downcase) } %>
+    </li>
+  <% end %>
+</ul>

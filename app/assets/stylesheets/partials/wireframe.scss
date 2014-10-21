@@ -1,0 +1,15 @@
+body {
+  #container {
+    > header {
+      @include top-left(fixed);
+      width: 100%;
+      background: $color-2;
+    }
+    #sidebar {
+      @include top-left(fixed);
+      background: $color-1;
+      height: 100%;
+    }
+    #content {}
+  }
+}

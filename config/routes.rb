@@ -19,12 +19,16 @@ Rails.application.routes.draw do
   #   'users' => 'users#index'
   # end
   # 
-  # ------------------------------------------ Public
-  # 
-  # After we define all namespaced routes, we can move on to those routes that
-  # are not namespaced.
+
+  # ------------------------------------------ CMS App
 
   resources :sites, :only => [:index, :show], :param => :slug
+  namespace :sites do
+    scope ':site_slug' do
+      resources :pages, :param => :idx
+      resources :users, :param => :idx
+    end
+  end
 
   # ------------------------------------------ Home Page
 
