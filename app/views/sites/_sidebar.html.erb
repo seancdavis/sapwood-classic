@@ -3,7 +3,7 @@
     <li class="<%= attrs['classes'] %>">
       <%= link_to(attrs['path']) { 
         o = content_tag(:i, nil, :class => "icon-#{attrs['icon']}") 
-        o += content_tag(:span, attrs['label'].downcase) } %>
+        o += content_tag(:span, attrs['label'].upcase) } %>
     </li>
   <% end %>
 </ul>
