@@ -1,27 +1,22 @@
 # == Schema Information
 #
-# Table name: sites
+# Table name: page_types
 #
 #  id          :integer          not null, primary key
-#  account_id  :integer
+#  site_id     :integer
 #  title       :string(255)
 #  slug        :string(255)
-#  url         :string(255)
 #  description :text
+#  icon        :string(255)
+#  template    :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
 #
 
-class Site < ActiveRecord::Base
-
-  # ------------------------------------------ Plugins
-
-  include Slug
+class PageType < ActiveRecord::Base
 
   # ------------------------------------------ Associations
 
-  belongs_to :account
-
-  has_many :page_types
+  belongs_to :site
 
 end
