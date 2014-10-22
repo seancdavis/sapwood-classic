@@ -24,5 +24,6 @@ class Site < ActiveRecord::Base
 
   has_many :page_types
   has_many :pages, :through => :page_types
+  has_many :forms
 
 end
