@@ -31,6 +31,6 @@ Rails.application.routes.draw do
 
   # ------------------------------------------ Home Page
 
-  root :to => 'accounts#show'
+  root :to => 'sites#index'
 
 end

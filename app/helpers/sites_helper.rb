@@ -1,13 +1,15 @@
 module SitesHelper
 
-  include AccountsHelper
+  include AccountsHelper, UsersHelper
 
   def current_site
     @current_site ||= begin
       p = params[:site_slug] || params[:slug]
-      site = current_user.sites.where(:slug => p).first
-      return not_found if site.nil?
-      site
+      if current_user.is_admin?
+        Site.find_by_slug(p)
+      else
+        current_user.sites.where(:slug => p).first
+      end
     end
   end
 

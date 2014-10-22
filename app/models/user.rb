@@ -18,6 +18,7 @@
 #  account_id             :integer
 #  is_admin               :boolean          default(FALSE)
 #  name                   :string(255)
+#  settings               :text
 #
 
 class User < ActiveRecord::Base
@@ -25,6 +26,10 @@ class User < ActiveRecord::Base
   # ------------------------------------------ Devise
 
   devise :database_authenticatable, :recoverable, :trackable, :validatable
+
+  # ------------------------------------------ Attributes
+
+  serialize :settings
 
   # ------------------------------------------ Associations
 
@@ -51,6 +56,10 @@ class User < ActiveRecord::Base
   def last_name
     return email if name.nil?
     name.split(' ').last
+  end
+
+  def last_site
+    settings['last_site']
   end
 
 end
