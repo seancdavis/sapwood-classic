@@ -35,12 +35,22 @@ class User < ActiveRecord::Base
   # ------------------------------------------ Scopes
 
   scope :admins, -> { where(:is_admin => true) }
-  scope :alpha, -> { order('name asc', 'email asc') }
+  scope :alpha, -> { all.to_a.sort_by(&:last_name) }
 
   # ------------------------------------------ Instance Methods
 
   def display_name
     name || email
+  end
+
+  def first_name
+    return email if name.nil?
+    name.split(' ').first
+  end
+
+  def last_name
+    return email if name.nil?
+    name.split(' ').last
   end
 
 end
