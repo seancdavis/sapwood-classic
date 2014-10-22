@@ -1,6 +1,11 @@
+@mixin transition-all {
+  @include transition(all 0.35s linear);
+}
+
 * {
   @include box-sizing(border-box);
   vertical-align: middle;
+  @include transition-all;
 }
 
 @mixin top-left($position: absolute) {
@@ -21,10 +26,6 @@
       padding: 0;
     }
   }
-}
-
-@mixin transition-all {
-  @include transition(all 0.35s linear);
 }
 
 @mixin rounded-button($bkg: $color-1, $hover: $bkg) {

@@ -3,11 +3,23 @@
 
   .user {
     float: right;
+    margin: 0 15px 0 0;
     .name {
       vertical-align: middle;
       margin: 0 15px;
       color: $color-light;
       font-weight: 400;
+    }
+    > a {
+      padding: 5px;
+      &:hover {
+        i {
+          color: $color-light;
+        }
+      }
+      i {
+        color: rgba($color-light, 0.65);
+      }
     }
   }
 }
