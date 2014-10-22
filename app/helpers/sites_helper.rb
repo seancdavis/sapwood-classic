@@ -26,4 +26,11 @@ module SitesHelper
     end
   end
 
+  def routes
+    {
+      :index => send("site_#{controller_name}_path", current_site),
+      :new => send("new_site_#{controller_name.singularize}_path", current_site),
+    }
+  end
+
 end

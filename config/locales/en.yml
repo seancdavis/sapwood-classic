@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+notices:
+  created: "%{item} created successfully!"
+
