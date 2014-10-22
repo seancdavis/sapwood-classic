@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022224731) do
+ActiveRecord::Schema.define(version: 20141022224848) do
 
   create_table "accounts", force: true do |t|
     t.string   "title"
@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 20141022224731) do
     t.string   "title"
     t.string   "slug"
     t.boolean  "public",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "images", force: true do |t|
+    t.integer  "gallery_id"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
