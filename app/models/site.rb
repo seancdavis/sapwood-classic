@@ -23,5 +23,6 @@ class Site < ActiveRecord::Base
   belongs_to :account
 
   has_many :page_types
+  has_many :pages, :through => :page_types
 
 end
