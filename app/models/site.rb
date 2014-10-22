@@ -25,5 +25,7 @@ class Site < ActiveRecord::Base
   has_many :page_types
   has_many :pages, :through => :page_types
   has_many :forms
+  has_many :image_galleries
+  has_many :images, :through => :image_galleries
 
 end
