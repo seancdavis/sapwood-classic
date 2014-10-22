@@ -22,9 +22,8 @@ Rails.application.routes.draw do
 
   # ------------------------------------------ CMS App
 
-  resources :sites, :only => [:index, :show], :param => :slug
-  namespace :sites do
-    scope ':site_slug' do
+  resources :sites, :only => [:index, :show], :param => :slug do
+    scope :module => 'sites' do
       resources :pages, :param => :idx
       resources :users, :param => :idx
     end

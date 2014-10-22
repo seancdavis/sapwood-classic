@@ -26,3 +26,17 @@
 @mixin transition-all {
   @include transition(all 0.35s linear);
 }
+
+@mixin rounded-button($bkg: $color-1, $hover: $bkg) {
+  border-radius: 5px;
+  background: $bkg;
+  color: $color-light;
+  border: none;
+  @include transition-all;
+  &:hover, &:active, &:focus {
+    color: $color-light;
+    background: $hover;
+    border: none;
+    outline: none;
+  }
+}

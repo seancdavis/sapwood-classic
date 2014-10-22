@@ -17,7 +17,7 @@ module SitesHelper
     nav = YAML.load_file(file)
     nav.each do |item, attrs|
       # create path
-      nav[item]['path'] = send("sites_#{item}_path", current_site)
+      nav[item]['path'] = send("site_#{item}_path", current_site)
       # check for active class
       nav[item]['classes'] ||= ''
       if attrs['controllers'].include?(controller_name)

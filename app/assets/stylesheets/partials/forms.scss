@@ -1,0 +1,26 @@
+form {
+
+  div.input {
+    margin: 20px 0;
+    label {
+      text-transform: uppercase;
+      color: $color-1;
+      font-size: 14px;
+      font-weight: 400;
+    }
+    input {
+      margin: 5px 0 0 0;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      color: $color-light-darkest;
+      &:focus {
+        color: $color-1;
+      }
+    }
+  }
+
+  input[type=submit] {
+    @include rounded-button($color-1, $color-1-lighter);
+  }
+}
