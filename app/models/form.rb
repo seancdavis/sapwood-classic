@@ -20,4 +20,12 @@ class Form < ActiveRecord::Base
 
   belongs_to :site
 
+  has_many :form_fields
+
+  # ------------------------------------------ Instance Methods
+
+  def fields
+    form_fields
+  end
+
 end

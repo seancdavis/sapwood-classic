@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022224449) do
+ActiveRecord::Schema.define(version: 20141022224603) do
 
   create_table "accounts", force: true do |t|
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "form_fields", force: true do |t|
+    t.integer  "form_id"
+    t.string   "title"
+    t.string   "data_type"
+    t.text     "options"
+    t.boolean  "required",   default: false
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
