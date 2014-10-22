@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   # ------------------------------------------ Scopes
 
   scope :admins, -> { where(:is_admin => true) }
+  scope :alpha, -> { order('name asc', 'email asc') }
 
   # ------------------------------------------ Instance Methods
 

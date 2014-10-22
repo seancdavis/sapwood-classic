@@ -1,3 +1,5 @@
+$sidebar-width: 150px;
+
 body {
   #container {
     > header {
@@ -9,9 +11,15 @@ body {
     }
     #sidebar {
       @include top-left(fixed);
+      display: inline-block;
       background: $color-1;
+      width: $sidebar-width;
       height: 100%;
     }
-    #content {}
+    #content {
+      position: relative;
+      margin: 62px 0 0 $sidebar-width;
+      padding: 25px 50px;
+    }
   }
 }

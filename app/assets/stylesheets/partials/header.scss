@@ -3,18 +3,6 @@
 
   .user {
     float: right;
-    .avatar-container {
-      vertical-align: middle;
-      display: inline-block;
-      width: 42px;
-      height: 42px;
-      border-radius: 100%;
-      overflow: hidden;
-      border: 2px solid $color-light;
-      img {
-        width: 100%;
-      }
-    }
     .name {
       vertical-align: middle;
       margin: 0 15px;

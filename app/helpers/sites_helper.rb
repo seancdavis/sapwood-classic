@@ -1,5 +1,7 @@
 module SitesHelper
 
+  include AccountsHelper
+
   def current_site
     @current_site ||= begin
       p = params[:site_slug] || params[:slug]
