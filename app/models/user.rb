@@ -35,8 +35,6 @@ class User < ActiveRecord::Base
 
   belongs_to :account
 
-  has_many :sites, :through => :account
-
   # ------------------------------------------ Scopes
 
   scope :admins, -> { where(:is_admin => true) }
@@ -60,6 +58,10 @@ class User < ActiveRecord::Base
 
   def last_site
     settings['last_site']
+  end
+
+  def sites
+    is_admin? ? Site.all : account.sites
   end
 
 end
