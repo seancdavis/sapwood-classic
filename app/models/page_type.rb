@@ -20,11 +20,16 @@ class PageType < ActiveRecord::Base
   belongs_to :site
 
   has_many :page_type_field_groups
+  has_many :page_type_fields, :through => :page_type_field_groups
 
   # ------------------------------------------ Instance Methods
 
   def groups
     page_type_field_groups
+  end
+
+  def fields
+    page_type_fields
   end
 
 end

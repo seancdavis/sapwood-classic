@@ -17,4 +17,12 @@ class PageTypeFieldGroup < ActiveRecord::Base
 
   belongs_to :page_type
 
+  has_many :page_type_fields
+
+  # ------------------------------------------ Instance Methods
+
+  def fields
+    page_type_fields
+  end
+
 end

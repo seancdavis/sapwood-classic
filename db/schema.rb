@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022223628) do
+ActiveRecord::Schema.define(version: 20141022223804) do
 
   create_table "accounts", force: true do |t|
     t.string   "title"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 20141022223628) do
     t.string   "title"
     t.string   "slug"
     t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "page_type_fields", force: true do |t|
+    t.integer  "page_type_field_group_id"
+    t.string   "title"
+    t.string   "slug"
+    t.string   "data_type"
+    t.text     "options"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
