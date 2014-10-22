@@ -16,3 +16,14 @@
     width: 100%;
   }
 }
+
+a {
+  &.new {
+    &:before {
+      font-family: 'icomoon';
+      content: "\e702";
+      font-size: 12px;
+      margin-right: 5px;
+    }
+  }
+}

@@ -1,34 +1,46 @@
 #content {
+
   > .page-title {
     margin: 0 0 10px 0;
     padding: 0 0 10px 0;
-    font-weight: 200;
-    border-bottom: 1px solid $color-5-lighter;
-    color: $color-5;
+    border-bottom: 1px solid $color-light-darker;
+    h1 {
+      display: inline-block;
+      margin: 0;
+      font-weight: 200;
+      color: $color-5;
+    }
+    > a {
+      float: right;
+      margin: 35px 0 0 0;
+      text-align: right;
+      vertical-align: bottom;
+      font-weight: 400;
+      @include transition-all;
+    }
   }
 
   .data-table {
     margin: 25px 0 0 0;
-  }
-
-  table {
-    border: none;
-    thead {
-      tr {
-        background: transparent;
-        border-bottom: 1px solid $color-light-darker;
-        th {
-          padding: 10px;
-          color: $color-5;
-          text-align: left;
+     table {
+      border: none;
+      thead {
+        tr {
+          background: transparent;
+          border-bottom: 1px solid $color-light-darker;
+          th {
+            padding: 10px;
+            color: $color-5;
+            text-align: left;
+          }
         }
       }
-    }
-    tbody {
-      tr {
-        border-bottom: 1px solid $color-light-darker;
-        td {
-          padding: 10px;
+      tbody {
+        tr {
+          border-bottom: 1px solid $color-light-darker;
+          td {
+            padding: 10px;
+          }
         }
       }
     }

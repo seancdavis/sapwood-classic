@@ -1,4 +1,6 @@
-<%= content_tag(:h1, 'Users', :class => 'page-title') %>
+<%= page_title('Users') do %>
+  <%= link_to 'New User', new_sites_user_path(current_site), :class => 'new' %>
+<% end %>
 
 <section class="data-table users">
   <%= data_table(['','name']) { render @users } %>
