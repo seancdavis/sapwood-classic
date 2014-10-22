@@ -19,6 +19,7 @@ class PageType < ActiveRecord::Base
 
   belongs_to :site
 
+  has_many :pages
   has_many :page_type_field_groups
   has_many :page_type_fields, :through => :page_type_field_groups
 
