@@ -1,3 +1,4 @@
 <%= page_title(@page_type.title) do %>
-  <%= link_to 'Edit Page Type', routes(@page_type)[:edit], :class => 'edit' %>
+  <%= link_to 'New Field', routes([@page_type, @page_type.fields])[:new], :class => 'new' %>
+  <%= link_to 'Edit Page Type', routes([@page_type])[:edit], :class => 'edit' %>
 <% end %>

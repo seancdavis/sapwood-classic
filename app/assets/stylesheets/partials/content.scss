@@ -12,9 +12,11 @@
     }
     > a {
       float: right;
-      margin: 35px 0 0 0;
+      margin: 35px 0 0 15px;
       text-align: right;
       vertical-align: bottom;
+      font-size: 14px;
+      line-height: 14px;
       font-weight: 400;
       @include transition-all;
     }

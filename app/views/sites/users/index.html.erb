@@ -1,5 +1,5 @@
 <%= page_title('Users') do %>
-  <%= link_to 'New User', routes[:new], :class => 'new' %>
+  <%= link_to 'New User', routes([@users])[:new], :class => 'new' %>
 <% end %>
 
 <section class="data-table users">

@@ -51,18 +51,34 @@ module SitesHelper
     end
   end
 
-  def routes(obj = nil)
-    routes = {
-      :index => send("site_#{controller_name}_path", current_site),
-      :new => send("new_site_#{controller_name.singularize}_path", current_site),
-    }
-    unless obj.nil?
-      routes[:edit] = send("edit_site_#{obj.class.table_name.singularize}_path", 
-        current_site, obj)
-      routes[:show] = send("site_#{obj.class.table_name.singularize}_path", 
-        current_site, obj)
+  def routes(items)
+    i = "site_"; s = "site_"; pop = false
+    if items.last.is_a?(Array)
+      items[-1] = items.last.flatten.first
+      pop = true
     end
-    routes
+    items.each do |item|
+      klass = item.class.method_defined?(:model) ? item.model : item.class
+      t = klass.table_name; ts = t.singularize; s += "#{ts}_"
+      item == items.last ? i += "#{t}_" : i += "#{ts}_"
+    end
+    objs = items.reverse.drop(1).reverse
+    objs = objs.collect(&:to_param).join(',')
+    if objs.empty?
+      routes = {
+        :index => send("#{i}path", current_site),
+        :new => send("new_#{s}path", current_site),
+        :edit => send("edit_#{s}path", current_site, items.last.to_param),
+        :show => send("#{s}path", current_site, items.last.to_param)
+      }
+    else
+      routes = {
+        :index => send("#{i}path", current_site, objs),
+        :new => send("new_#{s}path", current_site, objs),
+        :edit => send("edit_#{s}path", current_site, objs, items.last.to_param),
+        :show => send("#{s}path", current_site, objs, items.last.to_param)
+      }
+    end
   end
 
 end
