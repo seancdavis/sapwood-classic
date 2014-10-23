@@ -15,6 +15,7 @@ class App.Routers.Router extends Backbone.Router
     # like this:
     # 
     new App.Views.DefaultHelpers
+    new App.Views.Header
 
   routes:
     '': 'initHomePage'

@@ -9,19 +9,29 @@
     a {
       display: inline-block;
       margin: 9px 0 0 50px;
-      color: $color-light;
-      font-size: 18px;
-      font-weight: 400;
+      span {
+        font-weight: 400;
+      }
+      span, i {
+        font-size: 18px;
+        margin: 0 10px 0 0;
+        color: $color-light;
+      }
     }
     ul {
       @include clear-list;
       position: absolute;
       top: 50px;
-      left: 50px;
+      left: 40px;
+      display: none;
+      &.active {
+        display: block;
+      }
       li {
-        background: $color-2;
         a {
-          padding: 5px 15px;
+          padding: 10px 20px;
+          background: $color-2;
+          color: $color-light;
           &:hover {
             background: $color-3;
           }
