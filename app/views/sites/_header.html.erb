@@ -1,6 +1,6 @@
 <div class="site-title">
   <%= link_to('#') { content_tag(:i, nil, :class => 'icon-loop2') + 
-    content_tag(:span, current_site.title) } %>
+    content_tag(:span, "#{current_site.title} (#{current_site.url})") } %>
   <%= site_list %>
 </div>
 <div class="user">
