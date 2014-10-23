@@ -1,7 +1,3 @@
-pages:
-  label: Pages
-  icon: file
-  controllers: ['pages']
 users:
   label: Users
   icon: user
