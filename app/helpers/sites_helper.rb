@@ -30,8 +30,9 @@ module SitesHelper
     nav.each do |item, attrs|
       nav[item]['path'] = send(nav[item]['path'], current_site)
       nav[item]['classes'] ||= ''
-      if attrs['controllers'].include?(controller_name)
-        nav[item]['classes'] += ' active'
+      if attrs['controllers'].include?(controller_name) || 
+        request.path == nav[item]['path']
+          nav[item]['classes'] += ' active'
       end
     end
   end

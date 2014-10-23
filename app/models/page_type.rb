@@ -15,6 +15,10 @@
 
 class PageType < ActiveRecord::Base
 
+  # ------------------------------------------ Plugins
+
+  include SiteSlug
+
   # ------------------------------------------ Associations
 
   belongs_to :site

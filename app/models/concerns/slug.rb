@@ -3,10 +3,6 @@ module Slug
 
   included do
     after_save :sluggify_slug
-
-    def self.find(input)
-      input.to_i == 0 ? find_by_slug(input) : super
-    end
   end
 
   def sluggify_slug
@@ -26,18 +22,6 @@ module Slug
     slug.gsub!(/\ /, "-") # replace spaces with underscores
     slug.gsub!(/\-+/, "-") # replace repeating underscores
 
-    dups = self.class.name.constantize.where(:slug => slug)
-    if dups.count == 1 and dups.first != self
-      if self.idx.present?
-        slug = "#{slug}-#{self.idx}"
-      else
-        slug = "#{slug}-#{self.id}"
-      end
-    end
-    slug
-  end
-
-  def make_slug_unique(slug)
     dups = self.class.name.constantize.where(:slug => slug)
     if dups.count == 1 and dups.first != self
       if self.idx.present?
