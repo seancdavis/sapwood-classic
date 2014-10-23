@@ -6,16 +6,19 @@
   .site-title {
     position: relative;
     margin-left: $sidebar-width;
-    a {
+    h1 {
       display: inline-block;
       margin: 9px 0 0 50px;
-      span {
+      line-height: 18px;
+      a {
         font-weight: 400;
-      }
-      span, i {
         font-size: 18px;
-        margin: 0 10px 0 0;
         color: $color-light;
+        i {
+          font-size: 18px;
+          margin: 0 10px 0 0;
+          color: $color-light;
+        }
       }
     }
     ul {

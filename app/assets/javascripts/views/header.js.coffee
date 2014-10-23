@@ -3,7 +3,7 @@ class App.Views.Header extends Backbone.View
   el: '#container > header'
 
   events:
-    'click .site-title > a': 'toggleSiteMenu'
+    'click .site-menu-trigger': 'toggleSiteMenu'
 
   toggleSiteMenu: (e) ->
     e.preventDefault()
