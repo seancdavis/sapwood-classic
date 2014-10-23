@@ -30,8 +30,8 @@ module SitesHelper
         'label' => type.title,
         'icon' => type.icon,
         'path' => site_page_type_path(current_site, type),
-        'classes' => (request.path == site_page_type_path(
-          current_site, type)) ? ' active' : nil
+        'classes' => request.path.include?(
+          site_page_type_path(current_site, type)) ? ' active' : nil
       }
     end
     items
