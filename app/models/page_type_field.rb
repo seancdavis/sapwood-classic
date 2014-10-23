@@ -14,9 +14,20 @@
 
 class PageTypeField < ActiveRecord::Base
 
+  # ------------------------------------------ Plugins
+
+  include SiteSlug
+
   # ------------------------------------------ Associations
 
   belongs_to :page_type_field_group
+
+  has_one :page_type, :through => :page_type_field_group
+  has_one :site, :through => :page_type
+
+  # ------------------------------------------ Validations
+
+  validates :title, :data_type, :page_type_field_group_id, :presence => true
 
   # ------------------------------------------ Instance Methods
 

@@ -1,0 +1,10 @@
+<%= simple_form_for(@group, :url => [
+  current_site, current_page_type, @group]) do |f| %>
+
+  <section class="form">
+    <%= f.input :title %>
+    <%= f.input :position %>
+  </section>
+
+  <%= f.submit %>
+<% end %>

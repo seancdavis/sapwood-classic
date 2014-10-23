@@ -29,4 +29,9 @@ a {
   &.new:before { content: "\e702"; }
   &.edit:before { content: "\e606"; }
   &.back:before { content: "\e726"; }
+
+  &.button {
+    @include rounded-button($color-1, $color-1-lighter);
+    margin: 5px 0 10px 0;
+  }
 }

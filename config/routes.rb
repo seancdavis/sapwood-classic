@@ -25,7 +25,12 @@ Rails.application.routes.draw do
   resources :sites, :only => [:index, :show], :param => :slug do
     scope :module => 'sites' do
       resources :page_types, :param => :slug, :path => :t do
-        resources :page_type_fields, :param => :slug, :path => :fields
+        scope :module => :page_types do
+          resources :page_type_fields, :controller => :fields, :param => :slug, 
+            :path => :f
+          resources :page_type_field_groups, :controller => :groups, 
+            :param => :slug, :path => :g
+        end
       end
       resources :users
     end

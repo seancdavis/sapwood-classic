@@ -13,9 +13,15 @@
 
 class PageTypeFieldGroup < ActiveRecord::Base
 
+  # ------------------------------------------ Plugins
+
+  include SiteSlug
+
   # ------------------------------------------ Associations
 
   belongs_to :page_type
+
+  has_one :site, :through => :page_type
 
   has_many :page_type_fields
 

@@ -1,5 +1,7 @@
 class Sites::PageTypesController < SitesController
 
+  include Sites::PagesHelper
+
   before_action :set_page_type
 
   def new
