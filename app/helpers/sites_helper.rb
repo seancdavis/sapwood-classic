@@ -23,6 +23,20 @@ module SitesHelper
     end
   end
 
+  def site_nav
+    items = []
+    current_site.page_types.each do |type|
+      items << {
+        'label' => type.title,
+        'icon' => type.icon,
+        'path' => site_page_type_path(current_site, type),
+        'classes' => (request.path == site_page_type_path(
+          current_site, type)) ? ' active' : nil
+      }
+    end
+    items
+  end
+
   def bottom_nav
     file = "#{Rails.root}/config/sites/nav.yml"
     return nil unless File.exists?(file)
