@@ -1,3 +1,7 @@
+<div class="site-title">
+  <%= link_to(current_site.title, '#') %>
+  <%= site_list %>
+</div>
 <div class="user">
   <%= avatar(current_user, 84) %>
   <%= content_tag(:span, current_user.display_name.upcase, 

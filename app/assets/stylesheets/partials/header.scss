@@ -1,8 +1,39 @@
 #container > header {
+  position: relative;
   height: 62px;
+  z-index: 9;
+
+  .site-title {
+    position: relative;
+    margin-left: $sidebar-width;
+    a {
+      display: inline-block;
+      margin: 9px 0 0 50px;
+      color: $color-light;
+      font-size: 18px;
+      font-weight: 400;
+    }
+    ul {
+      @include clear-list;
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      li {
+        background: $color-2;
+        a {
+          padding: 5px 15px;
+          &:hover {
+            background: $color-3;
+          }
+        }
+      }
+    }
+  }
 
   .user {
-    float: right;
+    position: absolute;
+    right: 35px;
+    top: 9px;
     margin: 0 15px 0 0;
     .name {
       vertical-align: middle;

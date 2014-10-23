@@ -1,5 +1,6 @@
 aside#sidebar {
   position: relative;
+  z-index: 99;
 
   .logo {
     @include top-left;

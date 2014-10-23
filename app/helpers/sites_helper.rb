@@ -13,6 +13,16 @@ module SitesHelper
     end
   end
 
+  def site_list
+    content_tag(:ul) do
+      o = ''
+      (current_user.sites - [current_site]).each do |site|
+        o += content_tag(:li, link_to(site.title, site_path(site)))
+      end
+      o.html_safe
+    end
+  end
+
   def nav
     file = "#{Rails.root}/config/sites/nav.yml"
     return nil unless File.exists?(file)
