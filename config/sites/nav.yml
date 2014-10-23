@@ -1,4 +1,10 @@
 users:
-  label: Users
+  label: Site Users
   icon: user
+  path: site_users_path
   controllers: ['users']
+new_page_type:
+  label: New Page Type
+  icon: plus
+  path: new_site_page_type_path
+  controllers: []

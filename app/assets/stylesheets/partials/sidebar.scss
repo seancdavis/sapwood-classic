@@ -11,7 +11,13 @@ aside#sidebar {
 
   ul {
     @include clear-list;
+    width: 100%;
     margin-top: 62px;
+    &.bottom-nav {
+      position: absolute;
+      margin: 0;
+      bottom: 0;
+    }
     li {
       position: relative;
       &.active {

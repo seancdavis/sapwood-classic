@@ -1,8 +1,8 @@
 <div class="logo">
   rocktree
 </div>
-<ul>
-  <% nav.each do |item, attrs| %>
+<ul class="bottom-nav">
+  <% bottom_nav.each do |item, attrs| %>
     <li class="<%= attrs['classes'] %>">
       <%= link_to(attrs['path']) { 
         o = content_tag(:i, nil, :class => "icon-#{attrs['icon']}") 
