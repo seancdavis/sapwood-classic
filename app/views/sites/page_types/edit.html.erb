@@ -1,0 +1,6 @@
+<%= page_title("Edit #{@page_type.title}") do %>
+  <%= link_to 'Back to Page Type', routes(@page_type)[:show], 
+    :class => 'back' %>
+<% end %>
+
+<%= render 'form' %>

@@ -51,11 +51,18 @@ module SitesHelper
     end
   end
 
-  def routes
-    {
+  def routes(obj = nil)
+    routes = {
       :index => send("site_#{controller_name}_path", current_site),
       :new => send("new_site_#{controller_name.singularize}_path", current_site),
     }
+    unless obj.nil?
+      routes[:edit] = send("edit_site_#{obj.class.table_name.singularize}_path", 
+        current_site, obj)
+      routes[:show] = send("site_#{obj.class.table_name.singularize}_path", 
+        current_site, obj)
+    end
+    routes
   end
 
 end

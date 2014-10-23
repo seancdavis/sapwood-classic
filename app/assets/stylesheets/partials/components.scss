@@ -19,12 +19,14 @@
 }
 
 a {
-  &.new {
+  &.new, &.edit, &.back {
     &:before {
       font-family: 'icomoon';
-      content: "\e702";
       font-size: 12px;
       margin-right: 5px;
     }
   }
+  &.new:before { content: "\e702"; }
+  &.edit:before { content: "\e606"; }
+  &.back:before { content: "\e726"; }
 }

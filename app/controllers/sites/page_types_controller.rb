@@ -7,8 +7,15 @@ class Sites::PageTypesController < SitesController
   end
 
   def create
-    @page_type.save ? redirect_to(routes[:index], :notice => t('notices.created', 
+    @page_type.save ? redirect_to(routes(@page_type)[:show], 
+      :notice => t('notices.created', 
       :item => controller_name.humanize.titleize)) : render('new')
+  end
+
+  def update
+    @page_type.update(update_params) ? redirect_to(routes(@page_type)[:show], 
+      :notice => t('notices.updated', 
+      :item => controller_name.humanize.titleize)) : render('edit')
   end
 
   private

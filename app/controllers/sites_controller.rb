@@ -12,4 +12,16 @@ class SitesController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
+  private
+
+    def create_params
+    end
+
+    def update_params
+      create_params
+    end
+
 end
