@@ -15,7 +15,7 @@ module SitesHelper
 
   def site_list
     content_tag(:ul) do
-      o = ''
+      o = content_tag(:h2, 'Change Site')
       (current_user.sites - [current_site]).each do |site|
         o += content_tag(:li, link_to(site.title, site_path(site)))
       end

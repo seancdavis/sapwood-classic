@@ -22,21 +22,33 @@
       }
     }
     ul {
+      display: none;
       @include clear-list;
       position: absolute;
-      top: 50px;
+      min-width: 200px;
+      padding: 15px 0;
+      top: 52px;
       left: 40px;
-      display: none;
+      background: $color-4;
       &.active {
         display: block;
       }
+      h2 {
+        margin: 0 15px 5px 15px;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        line-height: 14px;
+        color: $color-light;
+      }
       li {
         a {
-          padding: 10px 20px;
-          background: $color-2;
+          display: block;
+          padding: 10px 15px;
+          background: $color-4;
           color: $color-light;
           &:hover {
-            background: $color-3;
+            background: $color-4-darker;
           }
         }
       }
