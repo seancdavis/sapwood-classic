@@ -9,7 +9,7 @@ class App.Routers.Router extends Backbone.Router
     new App.Views.Tabs if $('ul.tabs').length > 0
 
   routes:
-    '': 'initHomePage'
+    'sites/:site_slug/t/:page_type_slug/edit': 'editPageType'
 
-  initHomePage: ->
-    console.log "Welcome to this awesome site, built using Cambium!"
+  editPageType: (site_slug, page_type_slug) ->
+    new App.Views.DeleteGroup

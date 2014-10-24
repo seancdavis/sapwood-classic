@@ -66,6 +66,12 @@ form {
         &:hover, &.active {
           border-bottom-color: $color-1;
         }
+        &.to-delete {
+          color: $color-danger;
+          &:hover, &.active {
+            border-bottom-color: $color-danger;
+          }
+        }
       }
     }
   }

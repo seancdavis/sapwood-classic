@@ -19,6 +19,10 @@ class PageType < ActiveRecord::Base
 
   include SiteSlug
 
+  # ------------------------------------------ Attributes
+
+  attr_accessor :delete_group
+
   # ------------------------------------------ Associations
 
   belongs_to :site

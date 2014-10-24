@@ -5,6 +5,7 @@
   <section class="form tabbed details">
     <%= f.input :title %>
     <%= f.input :description %>
+    <%= f.input :delete_group, :as => :hidden %>
     <div class="half-row">
       <%= f.input :icon %>
       <%= f.input :template %>
@@ -16,6 +17,8 @@
     <section class="tabbed <%= fields.object.title.nil? ? 'new-group' : 
       fields.object.slug %>">
       <h3>Group Details</h3>
+      <%= link_to 'Delete Group', '#', :class => 'delete', :data => { 
+        :group => fields.object.slug } unless fields.object.title.nil? %>
       <div class="half-row">
         <%= fields.input :title %>
         <%= fields.input :position %>

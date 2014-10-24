@@ -19,9 +19,16 @@ class Sites::PageTypesController < SitesController
   end
 
   def update
-    @page_type.update(update_params) ? redirect_to(routes([@page_type])[:edit], 
-      :notice => t('notices.updated', 
-      :item => controller_name.humanize.titleize)) : render('edit')
+    if @page_type.update(update_params)
+      delete_groups = params[:page_type][:delete_group].split(',').reject(&:blank?)
+      if delete_groups.size > 0
+        PageTypeFieldGroup.where(:slug => delete_groups).destroy_all
+      end
+      redirect_to(routes([@page_type])[:edit], :notice => t('notices.updated', 
+        :item => controller_name.humanize.titleize))
+    else
+      render('edit')
+    end
   end
 
   private
