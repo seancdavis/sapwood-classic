@@ -19,7 +19,7 @@
 }
 
 a {
-  &.new, &.edit, &.back {
+  &.new, &.edit, &.back, &.delete, &.dont-delete {
     &:before {
       font-family: 'icomoon';
       font-size: 10px;
@@ -29,6 +29,8 @@ a {
   &.new:before { content: "\e702"; }
   &.edit:before { content: "\e606"; }
   &.back:before { content: "\e726"; }
+  &.delete:before { content: "\e6a7"; }
+  &.dont-delete:before { content: "\e662"; }
 
   &.button {
     @include rounded-button($color-1, $color-1-lighter);

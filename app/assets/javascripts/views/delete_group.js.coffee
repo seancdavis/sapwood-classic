@@ -14,7 +14,7 @@ class App.Views.DeleteGroup extends Backbone.View
       groups.push(group)
       $('#page_type_delete_group').val(groups.join(','))
     $("ul.tabs a[data-section='#{group}']").addClass('to-delete')
-    $(e.target).text("Don't delete")
+    $(e.target).text("Don't Delete")
     $(e.target).toggleClass("delete dont-delete")
 
   dontDeleteGroup: (e) ->
@@ -25,5 +25,5 @@ class App.Views.DeleteGroup extends Backbone.View
       groups.splice(groups.indexOf(group))
       $('#page_type_delete_group').val(groups.join(','))
     $("ul.tabs a[data-section='#{group}']").removeClass('to-delete')
-    $(e.target).text("Delete")
+    $(e.target).text("Delete Group")
     $(e.target).toggleClass("delete dont-delete")

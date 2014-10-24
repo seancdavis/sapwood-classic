@@ -47,8 +47,21 @@ form {
 
   section.tabbed {
     display: none;
+    position: relative;
     &.active {
       display: block;
+    }
+    a.delete, a.dont-delete {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 14px;
+      line-height: 14px;
+      color: $color-danger;
+      @include transition(none);
+      &.dont-delete {
+        color: $color-1;
+      }
     }
   }
 
