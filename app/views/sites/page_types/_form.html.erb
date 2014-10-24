@@ -1,6 +1,6 @@
 <%= simple_form_for(@page_type, :url => [current_site, @page_type]) do |f| %>
 
-  <%= form_tabs ['details', 'fields'] %>
+  <%= form_tabs ['details'] + @groups.collect(&:slug) %>
 
   <section class="form tabbed details">
     <%= f.input :title %>
@@ -11,8 +11,22 @@
     </div>
   </section>
 
+  <%= f.simple_fields_for :page_type_field_groups, @groups do |fields| %>
+    <section class="tabbed <%= fields.object.slug %>">
+      <h3>Group Details</h3>
+      <div class="half-row">
+        <%= fields.input :title %>
+        <%= fields.input :position %>
+      </div>
+    </section>
+  <% end %>
+
   <section class="tabbed fields">
-    Hi!
+    <%#= f.simple_fields_for :fields, @page_type.fields do |fields| %>
+      <%#= fields.input :title %>
+      <%#= fields.input :data_type, :collection => page_type_field_options %>
+      <%#= fields.input :options %>
+    <%# end %>
   </section>
 
   <%= f.submit %>

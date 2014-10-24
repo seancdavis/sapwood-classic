@@ -70,6 +70,13 @@ form {
     }
   }
 
+  h3 {
+    margin: 20px 0 5px 0;
+    font-size: 24px;
+    font-weight: 400;
+    color: $color-5;
+  }
+
   input[type=submit] {
     @include rounded-button($color-1, $color-1-lighter);
   }

@@ -27,6 +27,9 @@ class PageType < ActiveRecord::Base
   has_many :page_type_field_groups
   has_many :page_type_fields, :through => :page_type_field_groups
 
+  accepts_nested_attributes_for :page_type_field_groups
+  accepts_nested_attributes_for :page_type_fields
+
   # ------------------------------------------ Instance Methods
 
   def groups

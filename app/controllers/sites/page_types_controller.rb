@@ -9,13 +9,17 @@ class Sites::PageTypesController < SitesController
   end
 
   def create
-    @page_type.save ? redirect_to(routes(@page_type)[:show], 
+    @page_type.save ? redirect_to(routes([@page_type])[:show], 
       :notice => t('notices.created', 
       :item => controller_name.humanize.titleize)) : render('new')
   end
 
+  def edit
+    @groups = @page_type.groups
+  end
+
   def update
-    @page_type.update(update_params) ? redirect_to(routes(@page_type)[:show], 
+    @page_type.update(update_params) ? redirect_to(routes([@page_type])[:edit], 
       :notice => t('notices.updated', 
       :item => controller_name.humanize.titleize)) : render('edit')
   end
@@ -34,6 +38,13 @@ class Sites::PageTypesController < SitesController
     def create_params
       params.require(:page_type).permit(:title, :description, :icon, 
         :template).merge(:site => current_site)
+    end
+
+    def update_params
+      params.require(:page_type).permit(
+        :title, :description, :icon, :template,
+        :page_type_field_groups_attributes => [:id, :title, :position]
+      ).merge(:site => current_site)
     end
 
 end
