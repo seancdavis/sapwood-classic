@@ -15,7 +15,7 @@ class Sites::PageTypesController < SitesController
   end
 
   def edit
-    @groups = @page_type.groups
+    @groups = @page_type.groups.in_order
   end
 
   def update

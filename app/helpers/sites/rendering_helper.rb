@@ -22,8 +22,11 @@ module Sites
     def form_tabs(tabs)
       content_tag(:ul, :class => 'tabs') do
         o = ''
-        tabs.each { |t| o += content_tag(:li, link_to(t.upcase, '#', :data => { 
-          :section => t.downcase } )) }
+        tabs.each do |t| 
+          label = t.upcase.gsub(/\-/, ' ')
+          o += content_tag(:li, link_to(label, '#', :data => { 
+            :section => t.downcase } ))
+        end
         o.html_safe
       end
     end

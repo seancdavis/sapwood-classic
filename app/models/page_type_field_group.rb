@@ -23,7 +23,19 @@ class PageTypeFieldGroup < ActiveRecord::Base
 
   has_one :site, :through => :page_type
 
-  has_many :page_type_fields
+  has_many :page_type_fields, :dependent => :destroy
+
+  # ------------------------------------------ Scopes
+
+  scope :in_order, -> { order('position asc') }
+
+  # ------------------------------------------ Callbacks
+
+  before_save :set_position
+
+  def set_position
+    self.position = 1 if self.position.blank?
+  end
 
   # ------------------------------------------ Instance Methods
 
