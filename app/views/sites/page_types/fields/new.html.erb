@@ -1,3 +1,6 @@
-<%= page_title("New Field (#{current_page_type.title})") %>
+<%= page_title("New Field (#{current_page_type.title})") do %>
+  <%= link_to 'Page Type', routes([current_page_type])[:show], 
+    :class => 'back' %>
+<% end %>
 
 <%= render 'form' %>
