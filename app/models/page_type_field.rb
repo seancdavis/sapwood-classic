@@ -25,10 +25,6 @@ class PageTypeField < ActiveRecord::Base
   has_one :page_type, :through => :page_type_field_group
   has_one :site, :through => :page_type
 
-  # ------------------------------------------ Validations
-
-  validates :title, :data_type, :page_type_field_group_id, :presence => true
-
   # ------------------------------------------ Instance Methods
 
   def group

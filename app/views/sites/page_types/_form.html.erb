@@ -12,27 +12,32 @@
     </div>
   </section>
 
-  <%= f.simple_fields_for :page_type_field_groups, 
-    (@groups + [PageTypeFieldGroup.new]) do |fields| %>
-    <section class="tabbed <%= fields.object.title.nil? ? 'new-group' : 
-      fields.object.slug %>">
-      <h3>Group Details</h3>
+  <%= f.simple_fields_for :groups, 
+    (@groups + [PageTypeFieldGroup.new]) do |group| %>
+    <section class="tabbed <%= group.object.title.nil? ? 'new-group' : 
+      group.object.slug %>">
+      <h3>Details</h3>
+      <hr>
       <%= link_to 'Delete Group', '#', :class => 'delete', :data => { 
-        :group => fields.object.slug } unless fields.object.title.nil? %>
+        :group => group.object.slug } unless group.object.title.nil? %>
       <div class="half-row">
-        <%= fields.input :title %>
-        <%= fields.input :position %>
+        <%= group.input :title %>
+        <%= group.input :position %>
       </div>
+      <% unless group.object.title.nil? %>
+        <h3>Fields</h3>
+        <%= group.simple_fields_for :fields, 
+          (group.object.fields + [PageTypeField.new]) do |field| %>
+          <hr>
+          <div class="half-row">
+            <%= field.input :title %>
+            <%= field.input :data_type, :collection => page_type_field_options %>
+          </div>
+          <%= field.input :options %>
+        <% end %>
+      <% end %>
     </section>
   <% end %>
-
-  <section class="tabbed fields">
-    <%#= f.simple_fields_for :fields, @page_type.fields do |fields| %>
-      <%#= fields.input :title %>
-      <%#= fields.input :data_type, :collection => page_type_field_options %>
-      <%#= fields.input :options %>
-    <%# end %>
-  </section>
 
   <%= f.submit %>
 <% end %>

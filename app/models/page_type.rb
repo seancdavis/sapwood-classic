@@ -28,11 +28,11 @@ class PageType < ActiveRecord::Base
   belongs_to :site
 
   has_many :pages
-  has_many :page_type_field_groups, :dependent => :destroy
-  has_many :page_type_fields, :through => :page_type_field_groups
+  has_many :groups, :class_name => 'PageTypeFieldGroup', :dependent => :destroy
+  has_many :fields, :class_name => 'PageTypeField', :through => :groups
 
-  accepts_nested_attributes_for :page_type_field_groups
-  accepts_nested_attributes_for :page_type_fields
+  accepts_nested_attributes_for :groups
+  accepts_nested_attributes_for :fields
 
   # ------------------------------------------ Callbacks
 
@@ -40,16 +40,6 @@ class PageType < ActiveRecord::Base
 
   def remove_blank_groups
     groups.where("title = ''").destroy_all
-  end
-
-  # ------------------------------------------ Instance Methods
-
-  def groups
-    page_type_field_groups
-  end
-
-  def fields
-    page_type_fields
   end
 
 end

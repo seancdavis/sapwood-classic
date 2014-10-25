@@ -23,7 +23,9 @@ class PageTypeFieldGroup < ActiveRecord::Base
 
   has_one :site, :through => :page_type
 
-  has_many :page_type_fields, :dependent => :destroy
+  has_many :fields, :class_name => 'PageTypeField', :dependent => :destroy
+
+  accepts_nested_attributes_for :fields
 
   # ------------------------------------------ Scopes
 
@@ -37,10 +39,10 @@ class PageTypeFieldGroup < ActiveRecord::Base
     self.position = 1 if self.position.blank?
   end
 
-  # ------------------------------------------ Instance Methods
+  after_save :remove_blank_fields
 
-  def fields
-    page_type_fields
+  def remove_blank_fields
+    fields.where("title = ''").destroy_all
   end
 
 end

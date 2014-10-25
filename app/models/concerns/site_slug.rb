@@ -6,9 +6,11 @@ module SiteSlug
   end
 
   def sluggify_slug
-    s = slug.blank? ? create_slug : clean_slug(slug)
-    update_column(:slug, s) unless slug == s
-    s
+    unless title.blank?
+      s = slug.blank? ? create_slug : clean_slug(slug)
+      update_column(:slug, s) unless slug == s
+      s
+    end
   end
 
   def create_slug
