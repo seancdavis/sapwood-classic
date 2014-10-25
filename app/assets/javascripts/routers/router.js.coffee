@@ -13,3 +13,4 @@ class App.Routers.Router extends Backbone.Router
 
   editPageType: (site_slug, page_type_slug) ->
     new App.Views.DeleteGroup
+    new App.Views.PageTypeFieldForm

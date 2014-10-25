@@ -28,6 +28,9 @@ form {
         color: $color-1;
       }
     }
+    &.field-options {
+      display: none;
+    }
   }
 
   div.half-row {

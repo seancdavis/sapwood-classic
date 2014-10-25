@@ -29,11 +29,15 @@
         <%= group.simple_fields_for :fields, 
           (group.object.fields + [PageTypeField.new]) do |field| %>
           <hr>
-          <div class="half-row">
-            <%= field.input :title %>
-            <%= field.input :data_type, :collection => page_type_field_options %>
+          <div class="field">
+            <div class="half-row">
+              <%= field.input :title %>
+              <%= field.input :data_type, :collection => page_type_field_options, 
+                :input_html => { :class => 'field-data-type' } %>
+            </div>
+            <%= field.input :options, :wrapper_html => { 
+              :class => 'field-options' } %>
           </div>
-          <%= field.input :options %>
         <% end %>
       <% end %>
     </section>
