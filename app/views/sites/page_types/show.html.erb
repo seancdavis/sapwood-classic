@@ -1,4 +1,8 @@
 <%= page_title(@page_type.title) do %>
-  <%= link_to 'New Field', routes([@page_type, @page_type.fields])[:new], :class => 'new' %>
+  <%= link_to 'New Page', routes([@page_type, @pages])[:new], :class => 'new' %>
   <%= link_to 'Edit Page Type', routes([@page_type])[:edit], :class => 'edit' %>
 <% end %>
+
+<section class="data-table pages">
+  <%= data_table(['title']) { render :partial => 'page', :collection => @pages } %>
+</section>

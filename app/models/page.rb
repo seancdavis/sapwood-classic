@@ -17,8 +17,16 @@
 
 class Page < ActiveRecord::Base
 
+  # ------------------------------------------ Plugins
+
+  include PageTypeSlug
+
   # ------------------------------------------ Associations
 
   belongs_to :page_type
+
+  # ------------------------------------------ Validations
+
+  validates :title, :body, :presence => true
 
 end

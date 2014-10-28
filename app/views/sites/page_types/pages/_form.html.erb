@@ -1,0 +1,16 @@
+<%= simple_form_for [current_site, current_page_type, @page] do |f| %>
+
+  <%= form_tabs ['details', 'content'] %>
+
+  <section class="form tabbed details">
+    <%= f.input :title %>
+    <%= f.input :description %>
+  </section>
+
+  <section class="form tabbed content">
+    <%= f.input :body, :label => false %>
+  </section>
+
+  <%= f.submit %>
+
+<% end %>

@@ -4,6 +4,10 @@ class Sites::PageTypesController < SitesController
 
   before_action :set_page_type
 
+  def show
+    @pages = @page_type.pages
+  end
+
   def new
     @page_type = PageType.new
   end
