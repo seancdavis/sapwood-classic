@@ -105,6 +105,10 @@ form {
 
   a.save, a.publish, a.draft, a.cancel {
     @include button;
+    &:before {
+      content: '';
+      margin-right: 0;
+    }
   }
   a.save.publish {
     @include rounded-button($color-1, $color-1-lighter);

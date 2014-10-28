@@ -3,6 +3,4 @@
   <%= link_to "Edit #{@page_type.title}", routes([@page_type])[:edit], :class => 'edit' %>
 <% end %>
 
-<section class="data-table pages">
-  <%= data_table(['title']) { render :partial => 'page', :collection => @pages } %>
-</section>
+<%= data_table(@pages, 'page') %>

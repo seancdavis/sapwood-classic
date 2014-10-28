@@ -9,13 +9,13 @@ module Sites
       end
     end
 
-    def data_table(headers, &block)
-      content_tag(:table) do
-        a = content_tag(:thead) do
-          b = ''; headers.each { |header| b += content_tag(:th, header.upcase) }
-          b.html_safe
+    def data_table(collection, partial = nil)
+      content_tag(:section, :class => 'data-table') do
+        if partial.nil?
+          render(collection)
+        else
+          render(:partial => partial, :collection => collection)
         end
-        a += content_tag(:tbody) { capture(&block) }
       end
     end
 
@@ -28,6 +28,14 @@ module Sites
             :section => t.downcase } ))
         end
         o.html_safe
+      end
+    end
+
+    def page_status(page)
+      if page.published?
+        content_tag(:a, 'Published', :class => 'published disabled')
+      else
+        content_tag(:a, 'Draft', :class => 'draft disabled')
       end
     end
 

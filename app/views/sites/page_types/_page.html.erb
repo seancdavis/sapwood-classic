@@ -1,8 +1,13 @@
-<tr>
-  <td>
-    <%= page.title %>
-    <%= link_to('edit', routes([current_page_type, page])[:edit]) %>
-    <%= link_to('delete', routes([current_page_type, page])[:show], 
-      :method => :delete, :data => { :confirm => 'Are you sure?' } ) %>
-  </td>
-</tr>
+<article class="page">
+  <div class="published">
+    <%= page_status(page) %>
+  </div>
+  <%= content_tag(:h4, page.title, :class => 'title') %>
+  <%= simple_format(page.description) unless page.description.blank? %>
+  <div class="links">
+    <%= link_to('Edit', routes([current_page_type, page])[:edit], :class => 'edit') %>
+    <%= link_to('Delete', routes([current_page_type, page])[:show], 
+      :method => :delete, :class => 'delete', :data => { 
+        :confirm => 'Are you sure?' } ) %>
+  </div>
+</article>
