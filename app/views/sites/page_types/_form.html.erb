@@ -3,7 +3,10 @@
   <%= form_tabs ['details'] + @groups.collect(&:slug) + ['new-group'] %>
 
   <section class="form tabbed details">
-    <%= f.input :title %>
+    <div class="half-row">
+      <%= f.input :title %>
+      <%= f.input :slug, :label => 'URL' %>
+    </div>
     <%= f.input :description %>
     <%= f.input :delete_group, :as => :hidden %>
     <div class="half-row">

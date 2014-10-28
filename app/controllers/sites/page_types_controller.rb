@@ -47,13 +47,13 @@ class Sites::PageTypesController < SitesController
     end
 
     def create_params
-      params.require(:page_type).permit(:title, :description, :icon, 
+      params.require(:page_type).permit(:title, :description, :icon, :slug, 
         :template).merge(:site => current_site)
     end
 
     def update_params
       params.require(:page_type).permit(
-        :title, :description, :icon, :template,
+        :title, :description, :icon, :template, :slug, 
         :groups_attributes => [:id, :title, :position, 
           :fields_attributes => [:id, :title, :data_type, :options, :required, 
             :position]

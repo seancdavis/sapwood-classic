@@ -33,6 +33,23 @@ Rails.application.routes.draw do
     end
   end
 
+  # ------------------------------------------ Viewer
+
+  # resources :viewer, :only => [:show], :param => :slug, :path => :v  do
+  #   scope :module => 'viewer' do
+  #     get '/:page_type_slug' => 'pages#index', :as => :page_type do
+  #       get '/:page_slug'
+  #     end
+  #   end
+  # end
+
+  scope :module => :viewer do
+    scope 'v/:site_slug' do
+      get ':slug' => 'pages#index', :as => :page_type
+      get ':page_type_slug/:slug' => 'pages#show', :as => :page
+    end
+  end
+
   # ------------------------------------------ Home Page
 
   root :to => 'sites#index'
