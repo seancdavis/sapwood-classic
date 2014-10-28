@@ -1,6 +1,6 @@
 <%= simple_form_for [current_site, current_page_type, @page] do |f| %>
 
-  <%= form_tabs ['details', 'content'] %>
+  <%= form_tabs ['details', 'content'] + @groups.collect(&:slug) %>
 
   <section class="form tabbed details">
     <%= f.input :title %>
@@ -10,6 +10,17 @@
   <section class="form tabbed content">
     <%= f.input :body, :label => false %>
   </section>
+
+  <%= f.simple_fields_for :field_data, OpenStruct.new(f.object.field_data) do |fd| %>
+    <% @groups.each do |group| %>
+      <section class="form tabbed <%= group.slug %>">
+        <% group.fields.each do |field| %>
+          <%= fd.input :"#{field.slug}", :as => :"#{field.data_type}", 
+            :input_html => { :value => @page.field_data[field.slug.to_sym] } %>
+        <% end %>      
+      </section>
+    <% end %>
+  <% end %>
 
   <%= f.submit %>
 

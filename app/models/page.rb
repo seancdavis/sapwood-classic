@@ -21,6 +21,10 @@ class Page < ActiveRecord::Base
 
   include PageTypeSlug
 
+  # ------------------------------------------ Attributes
+
+  serialize :field_data, Hash
+
   # ------------------------------------------ Associations
 
   belongs_to :page_type

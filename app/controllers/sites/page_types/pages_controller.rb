@@ -32,6 +32,7 @@ class Sites::PageTypes::PagesController < Sites::PageTypesController
     end
 
     def set_page
+      @groups = current_page_type.groups.includes(:fields)
       if action_name == 'new' || action_name == 'create'
         @page = Page.new(params[:page] ? create_params : nil)
       else
@@ -41,7 +42,10 @@ class Sites::PageTypes::PagesController < Sites::PageTypesController
     end
 
     def create_params
-      params.require(:page).permit(:title, :description, :body, :published
+      fields = []; @groups.each { |g| fields << g.fields }
+      fields = fields.flatten.uniq.collect(&:slug).map { |f| f.to_sym }
+      params.require(:page).permit(:title, :description, :body, :published,
+        :field_data => fields
       ).merge(
         :page_type => current_page_type,
       )
