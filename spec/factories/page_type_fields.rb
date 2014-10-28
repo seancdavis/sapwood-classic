@@ -10,6 +10,8 @@
 #  options                  :text
 #  created_at               :datetime
 #  updated_at               :datetime
+#  required                 :boolean          default(FALSE)
+#  position                 :integer          default(0)
 #
 
 FactoryGirl.define do

@@ -37,6 +37,10 @@
             </div>
             <%= field.input :options, :wrapper_html => { 
               :class => 'field-options' } %>
+            <div class="half-row">
+              <%= field.input :position %>
+              <%= field.input :required %>
+            </div>
           </div>
         <% end %>
       <% end %>

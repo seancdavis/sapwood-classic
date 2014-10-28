@@ -10,6 +10,8 @@
 #  options                  :text
 #  created_at               :datetime
 #  updated_at               :datetime
+#  required                 :boolean          default(FALSE)
+#  position                 :integer          default(0)
 #
 
 class PageTypeField < ActiveRecord::Base
@@ -24,6 +26,10 @@ class PageTypeField < ActiveRecord::Base
 
   has_one :page_type, :through => :page_type_field_group
   has_one :site, :through => :page_type
+
+  # ------------------------------------------ Scopes
+
+  default_scope { order('position asc') }
 
   # ------------------------------------------ Instance Methods
 

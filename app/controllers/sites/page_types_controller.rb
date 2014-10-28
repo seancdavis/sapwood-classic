@@ -55,7 +55,8 @@ class Sites::PageTypesController < SitesController
       params.require(:page_type).permit(
         :title, :description, :icon, :template,
         :groups_attributes => [:id, :title, :position, 
-          :fields_attributes => [:id, :title, :data_type, :options]
+          :fields_attributes => [:id, :title, :data_type, :options, :required, 
+            :position]
         ]
       ).merge(:site => current_site)
     end
