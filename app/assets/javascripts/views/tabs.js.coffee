@@ -6,7 +6,6 @@ class App.Views.Tabs extends Backbone.View
     'click ul.tabs a': 'tabToggle'
 
   initialize: ->
-    $("section.tabbed").first().addClass('active')
     if window.location.hash
       s = window.location.hash.replace('#','')
       $("section.#{s}, ul.tabs a[data-section='#{s}']").addClass('active')
