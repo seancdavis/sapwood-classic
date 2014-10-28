@@ -10,9 +10,9 @@ class App.Routers.Router extends Backbone.Router
     new App.Views.PickADate if $('.time-js').length > 0 || $('.date-js').length > 0
 
   routes:
-    'sites/:site_slug/t/:page_type_slug/edit': 'editPageType'
-    'sites/:site_slug/t/:page_type_slug/p/new': 'newPage'
-    'sites/:site_slug/t/:page_type_slug/p/:page_slug/edit': 'editPage'
+    's/:site_slug/t/:page_type_slug/edit': 'editPageType'
+    's/:site_slug/t/:page_type_slug/p/new': 'newPage'
+    's/:site_slug/t/:page_type_slug/p/:page_slug/edit': 'editPage'
 
   editPageType: (site_slug, page_type_slug) ->
     new App.Views.DeleteGroup

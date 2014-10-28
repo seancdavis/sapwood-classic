@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   # ------------------------------------------ CMS App
 
-  resources :sites, :only => [:index, :show], :param => :slug do
+  resources :sites, :only => [:index, :show], :param => :slug, :path => :s do
     scope :module => 'sites' do
       resources :page_types, :param => :slug, :path => :t do
         scope :module => :page_types do
