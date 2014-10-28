@@ -11,7 +11,15 @@ class App.Routers.Router extends Backbone.Router
 
   routes:
     'sites/:site_slug/t/:page_type_slug/edit': 'editPageType'
+    'sites/:site_slug/t/:page_type_slug/p/new': 'newPage'
+    'sites/:site_slug/t/:page_type_slug/p/:page_slug/edit': 'editPage'
 
   editPageType: (site_slug, page_type_slug) ->
     new App.Views.DeleteGroup
     new App.Views.PageTypeFieldForm
+
+  newPage: (site_slug, page_type_slug, page_slug) ->
+    new App.Views.Publishable
+
+  editPage: (site_slug, page_type_slug, page_slug) ->
+    new App.Views.Publishable

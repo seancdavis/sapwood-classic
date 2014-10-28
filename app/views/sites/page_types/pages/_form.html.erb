@@ -5,6 +5,7 @@
   <section class="form tabbed details">
     <%= f.input :title %>
     <%= f.input :description %>
+    <%= f.input :published, :as => :hidden %>
   </section>
 
   <section class="form tabbed content">
@@ -30,6 +31,9 @@
     <% end %>
   <% end %>
 
-  <%= f.submit %>
+  <%= link_to "Save and Publish", '#', :class => 'save publish' %>
+  <%= link_to "Save as Draft", '#', :class => 'save draft' %>
+  <%= link_to "Cancel", routes([current_page_type])[:show], 
+    :class => 'cancel', :data => { :confirm => 'Are you sure?' } %>
 
 <% end %>

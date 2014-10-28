@@ -102,4 +102,19 @@ form {
   input[type=submit] {
     @include rounded-button($color-1, $color-1-lighter);
   }
+
+  a.save, a.publish, a.draft, a.cancel {
+    @include button;
+  }
+  a.save.publish {
+    @include rounded-button($color-1, $color-1-lighter);
+    margin-right: 10px;
+  }
+  a.save.draft {
+    @include rounded-button($color-danger, $color-danger-dark);
+  }
+  a.cancel {
+    float: right;
+    @include rounded-button($color-5, $color-5-darker);
+  }
 }
