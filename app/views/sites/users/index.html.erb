@@ -2,6 +2,4 @@
   <%= link_to 'New User', routes([@users])[:new], :class => 'new' %>
 <% end %>
 
-<section class="data-table users">
-  <%= data_table(['','name']) { render @users } %>
-</section>
+<%= data_table(@users) %>
