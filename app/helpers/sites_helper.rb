@@ -1,6 +1,6 @@
 module SitesHelper
 
-  include AccountsHelper, UsersHelper
+  include AccountsHelper, UsersHelper, ErrorsHelper
 
   def current_site
     @current_site ||= begin

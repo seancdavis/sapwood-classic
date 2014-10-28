@@ -1,3 +1,8 @@
 <tr>
-  <%= content_tag(:td, page.title) %>
+  <td>
+    <%= page.title %>
+    <%= link_to('edit', routes([current_page_type, page])[:edit]) %>
+    <%= link_to('delete', routes([current_page_type, page])[:show], 
+      :method => :delete, :data => { :confirm => 'Are you sure?' } ) %>
+  </td>
 </tr>

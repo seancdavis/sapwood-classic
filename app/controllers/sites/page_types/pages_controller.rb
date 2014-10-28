@@ -11,7 +11,25 @@ class Sites::PageTypes::PagesController < Sites::PageTypesController
       :item => controller_name.humanize.titleize)) : render('new')
   end
 
+  def edit
+  end
+
+  def update
+    @page.update(create_params) ? redirect_to(routes([current_page_type])[:show], 
+      :notice => t('notices.updated', 
+        :item => controller_name.humanize.titleize)) : render('new')
+  end
+
+  def destroy
+    @page.destroy
+    redirect_to(routes([current_page_type])[:show], 
+      :notice => t('notices.updated', :item => 'Page'))
+  end
+
   private
+
+    def set_page_type
+    end
 
     def set_page
       if action_name == 'new' || action_name == 'create'
