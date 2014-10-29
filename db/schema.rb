@@ -11,26 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028214913) do
+ActiveRecord::Schema.define(version: 20141029111505) do
 
-  create_table "accounts", force: true do |t|
+  create_table "heartwood_accounts", force: true do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "form_fields", force: true do |t|
+  create_table "heartwood_form_fields", force: true do |t|
     t.integer  "form_id"
     t.string   "title"
     t.string   "data_type"
     t.text     "options"
     t.boolean  "required",   default: false
-    t.integer  "position"
+    t.integer  "position",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "forms", force: true do |t|
+  create_table "heartwood_forms", force: true do |t|
     t.integer  "site_id"
     t.string   "title"
     t.string   "slug"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20141028214913) do
     t.datetime "updated_at"
   end
 
-  create_table "image_galleries", force: true do |t|
+  create_table "heartwood_image_galleries", force: true do |t|
     t.integer  "site_id"
     t.string   "title"
     t.string   "slug"
@@ -51,35 +51,35 @@ ActiveRecord::Schema.define(version: 20141028214913) do
     t.datetime "updated_at"
   end
 
-  create_table "images", force: true do |t|
+  create_table "heartwood_images", force: true do |t|
     t.integer  "gallery_id"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "page_type_field_groups", force: true do |t|
+  create_table "heartwood_page_type_field_groups", force: true do |t|
     t.integer  "page_type_id"
     t.string   "title"
     t.string   "slug"
-    t.integer  "position"
+    t.integer  "position",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "page_type_fields", force: true do |t|
-    t.integer  "page_type_field_group_id"
+  create_table "heartwood_page_type_fields", force: true do |t|
+    t.integer  "group_id"
     t.string   "title"
     t.string   "slug"
     t.string   "data_type"
     t.text     "options"
+    t.boolean  "required",   default: false
+    t.integer  "position",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "required",                 default: false
-    t.integer  "position",                 default: 0
   end
 
-  create_table "page_types", force: true do |t|
+  create_table "heartwood_page_types", force: true do |t|
     t.integer  "site_id"
     t.string   "title"
     t.string   "slug"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20141028214913) do
     t.datetime "updated_at"
   end
 
-  create_table "pages", force: true do |t|
+  create_table "heartwood_pages", force: true do |t|
     t.integer  "page_type_id"
     t.string   "title"
     t.string   "slug"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 20141028214913) do
     t.datetime "updated_at"
   end
 
-  create_table "sites", force: true do |t|
+  create_table "heartwood_sites", force: true do |t|
     t.integer  "account_id"
     t.string   "title"
     t.string   "slug"
@@ -113,26 +113,22 @@ ActiveRecord::Schema.define(version: 20141028214913) do
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+  create_table "heartwood_users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "account_id"
-    t.boolean  "is_admin",               default: false
-    t.string   "name"
-    t.text     "settings"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "heartwood_users", ["email"], name: "index_heartwood_users_on_email", unique: true, using: :btree
+  add_index "heartwood_users", ["reset_password_token"], name: "index_heartwood_users_on_reset_password_token", unique: true, using: :btree
 
 end

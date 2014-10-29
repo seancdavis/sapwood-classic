@@ -25,8 +25,8 @@ gem 'pickadate-rails'
 
 # ------------------------------------------ Utilities
 
+gem 'heartwood', :path => '/Volumes/sean/code/rocktree/rt/cms/heartwood'
 gem 'cambium', :github => 'rocktree/cambium'
-gem 'devise'
 gem 'carrierwave'
 gem 'hirb'
 

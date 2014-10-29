@@ -6,6 +6,13 @@ GIT
       rails
       rake
 
+PATH
+  remote: /Volumes/sean/code/rocktree/rt/cms/heartwood
+  specs:
+    heartwood (0.0.1)
+      devise
+      rails (~> 4.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -316,9 +323,9 @@ DEPENDENCIES
   cambium!
   carrierwave
   coffee-rails
-  devise
   factory_girl_rails
   faker
+  heartwood!
   hirb
   jbuilder
   jquery-rails

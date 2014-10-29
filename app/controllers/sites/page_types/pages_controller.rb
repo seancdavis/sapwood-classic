@@ -15,9 +15,22 @@ class Sites::PageTypes::PagesController < Sites::PageTypesController
   end
 
   def update
-    @page.update(create_params) ? redirect_to(routes([current_page_type])[:show], 
-      :notice => t('notices.updated', 
-        :item => controller_name.humanize.titleize)) : render('new')
+    if @page.update(create_params)
+      # Expire Page
+      expire_page(:controller => '/viewer/pages', :action => 'show', 
+        :slug => @page.slug)
+      # Download New Page
+      system("curl #{page_url(current_site, current_page_type, @page)}")
+      # Expire Page Typep
+      expire_page(:controller => '/viewer/pages', :action => 'index', 
+        :slug => current_page_type.slug)
+      # Redirect
+      redirect_to(routes([current_page_type])[:show],
+        :notice => t('notices.updated', 
+          :item => controller_name.humanize.titleize))
+    else
+      render('new')
+    end
   end
 
   def destroy
