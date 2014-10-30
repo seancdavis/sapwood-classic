@@ -33,7 +33,7 @@
 
   <%= link_to "Save and Publish", '#', :class => 'save publish' %>
   <%= link_to "Save as Draft", '#', :class => 'save draft' %>
-  <%= link_to "Cancel", routes([current_page_type])[:show], 
+  <%= link_to "Cancel",  site_route([current_page_type])[:show], 
     :class => 'cancel', :data => { :confirm => 'Are you sure?' } %>
 
 <% end %>

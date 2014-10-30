@@ -15,38 +15,24 @@ Rails.application.routes.draw do
   # end
   # 
 
-  # ------------------------------------------ CMS App
+  # ------------------------------------------ App
 
-  resources :sites, :only => [:index, :show], :param => :slug, :path => :s do
-    scope :module => 'sites' do
-      resources :page_types, :param => :slug, :path => :t do
-        scope :module => :page_types do
-          resources :pages, :param => :slug, :path => :p
-        end
-      end
-      resources :users
-    end
-  end
+  resources :accounts, :except => [:show, :destroy], :param => :slug, 
+    :path => :a
 
-  # ------------------------------------------ Viewer
-
-  # resources :viewer, :only => [:show], :param => :slug, :path => :v  do
-  #   scope :module => 'viewer' do
-  #     get '/:page_type_slug' => 'pages#index', :as => :page_type do
-  #       get '/:page_slug'
+  # resources :sites, :only => [:index, :show], :param => :slug, :path => :s do
+  #   scope :module => 'sites' do
+  #     resources :page_types, :param => :slug, :path => :t do
+  #       scope :module => :page_types do
+  #         resources :pages, :param => :slug, :path => :p
+  #       end
   #     end
+  #     resources :users
   #   end
   # end
 
-  scope :module => :viewer do
-    scope 'v/:site_slug' do
-      get ':slug' => 'pages#index', :as => :page_type
-      get ':page_type_slug/:slug' => 'pages#show', :as => :page
-    end
-  end
-
   # ------------------------------------------ Home Page
 
-  root :to => 'sites#index'
+  root :to => 'accounts#home'
 
 end

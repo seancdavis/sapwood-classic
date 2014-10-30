@@ -53,7 +53,7 @@ module SitesHelper
     end
   end
 
-  def routes(items)
+  def site_route(items)
     i = "site_"; s = "site_"; pop = false
     if items.last.is_a?(Array)
       items[-1] = items.last.flatten.first
@@ -61,7 +61,8 @@ module SitesHelper
     end
     items.each do |item|
       klass = item.class.method_defined?(:model) ? item.model : item.class
-      t = klass.table_name; ts = t.singularize; s += "#{ts}_"
+      t = klass.table_name.gsub(/heartwood\_/, '')
+      ts = t.singularize; s += "#{ts}_"
       item == items.last ? i += "#{t}_" : i += "#{ts}_"
     end
     objs = items.reverse.drop(1).reverse

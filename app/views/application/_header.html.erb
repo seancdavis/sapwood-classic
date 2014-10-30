@@ -1,12 +1,12 @@
-<div class="site-title">
+<!-- <div class="site-title">
   <h1>
-    <%= link_to('#', :class => 'site-menu-trigger') { 
+    <%#= link_to('#', :class => 'site-menu-trigger') { 
       content_tag(:i, nil, :class => 'icon-loop2') } %>
-    <%= link_to("#{current_site.title} (#{current_site.url})", 
+    <%#= link_to("#{current_site.title} (#{current_site.url})", 
       site_path(current_site)) %>
   </h1>
-  <%= site_list %>
-</div>
+  <%#= site_list %>
+</div> -->
 <div class="user">
   <%= avatar(current_user, 84) %>
   <%= content_tag(:span, current_user.display_name.upcase, 

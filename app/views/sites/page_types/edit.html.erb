@@ -1,5 +1,5 @@
 <%= page_title("Edit #{@page_type.title}") do %>
-  <%= link_to @page_type.title, routes([@page_type])[:show], 
+  <%= link_to @page_type.title,  site_route([@page_type])[:show], 
     :class => 'back' %>
 <% end %>
 

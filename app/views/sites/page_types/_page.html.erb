@@ -7,8 +7,8 @@
   <div class="links">
     <%= link_to('Preview', page_path(current_site, current_page_type, page), 
       :target => :blank, :class => 'preview') %>
-    <%= link_to('Edit', routes([current_page_type, page])[:edit], :class => 'edit') %>
-    <%= link_to('Delete', routes([current_page_type, page])[:show], 
+    <%= link_to('Edit',  site_route([current_page_type, page])[:edit], :class => 'edit') %>
+    <%= link_to('Delete',  site_route([current_page_type, page])[:show], 
       :method => :delete, :class => 'delete', :data => { 
         :confirm => 'Are you sure?' } ) %>
   </div>

@@ -1,5 +1,5 @@
 <%= page_title('New Page') do %>
-  <%= link_to current_page_type.title, routes([current_page_type])[:show], 
+  <%= link_to current_page_type.title,  site_route([current_page_type])[:show], 
     :class => 'back' %>
 <% end %>
 
