@@ -7,11 +7,11 @@ module SitesHelper
       p = params[:site_slug] || params[:slug]
       if admin?
         site = Heartwood::Site.find_by_slug(p)
-        return site unless site.nil?
-        Heartwood::Site.first
+        site = Heartwood::Site.first if site.nil?
       else
-        current_user.sites.where(:slug => p).first
+        site = current_user.sites.where(:slug => p).first
       end
+      site
     end
   end
 
@@ -51,6 +51,13 @@ module SitesHelper
           nav[item]['classes'] += ' active'
       end
     end
+  end
+
+  def site_admin?(user = current_user)
+    # site_users needs to be in memory
+    su = user.site_users.select { |u| u.site_id = current_site.id }.first
+    return su.site_admin? unless su.nil?
+    false
   end
 
 end

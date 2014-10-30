@@ -31,6 +31,15 @@
       border-bottom: 1px solid $color-light-darker;
       color: $color-5;
       &.user {
+        .admin {
+          margin-left: 44px;
+          i, span {
+            color: $color-1;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 600;
+          }
+        }
         .avatar-container {
           margin-right: 10px;
         }

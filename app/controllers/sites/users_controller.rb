@@ -3,7 +3,7 @@ class Sites::UsersController < SitesController
   before_action :set_user, :except => [:index, :create]
 
   def index
-    @users = current_site.users
+    @users = current_site.users.includes(:site_users)
   end
 
   def new
@@ -24,6 +24,13 @@ class Sites::UsersController < SitesController
     else
       render 'new'
     end
+  end
+
+  def destroy
+    site_users = Heartwood::SiteUser.where(:user_id => params[:id])
+    site_users.destroy_all
+    redirect_to(site_route([@user], :index), 
+      :notice => t('notices.deleted', :item => "User"))
   end
 
   private
