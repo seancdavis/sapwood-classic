@@ -18,14 +18,14 @@ Rails.application.routes.draw do
   # ------------------------------------------ App
 
   resources :sites, :except => [:destroy], :param => :slug do
-  #   scope :module => 'sites' do
-  #     resources :page_types, :param => :slug, :path => :t do
-  #       scope :module => :page_types do
-  #         resources :pages, :param => :slug, :path => :p
-  #       end
-  #     end
-  #     resources :users
-  #   end
+    scope :module => 'sites' do
+      resources :page_types, :param => :slug, :path => :t do
+        scope :module => :page_types do
+          resources :pages, :param => :slug, :path => :p
+        end
+      end
+      resources :users
+    end
   end
 
   # ------------------------------------------ Home Page
