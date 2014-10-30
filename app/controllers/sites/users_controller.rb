@@ -1,6 +1,6 @@
 class Sites::UsersController < SitesController
 
-  before_action :set_user, :except => [:index]
+  before_action :set_user, :except => [:index, :create]
 
   def index
     @users = current_site.users
@@ -10,24 +10,36 @@ class Sites::UsersController < SitesController
   end
 
   def create
-    @user.save ? redirect_to(routes[:index], :notice => t('notices.created', 
-      :item => 'User')) : render('new')
+    @user = Heartwood::User.find_by_email(params[:user][:email])
+    @user = Heartwood::User.create!(create_params) if @user.nil?
+    if @user.save
+      @site_user = Heartwood::SiteUser.create!(:user => @user, 
+        :site => current_site)
+      if @site_user.save
+        redirect_to(site_route([@user], :index), 
+          :notice => t('notices.created', :item => "User"))
+      else
+        render 'new'
+      end
+    else
+      render 'new'
+    end
   end
 
   private
 
     def set_user
-      if action_name == 'new' || action_name == 'create'
-        @user = User.new(params[:user] ? create_params : nil)
+      if action_name == 'new'
+        @user = Heartwood::User.new(params[:user] ? create_params : nil)
       else
-        @user = current_account.users.where(:idx => params[:idx]).first
+        @user = current_site.users.find_by_id(params[:id])
       end
       not_found if @user.nil?
     end
 
     def create_params
       params.require(:user).permit(:name, :email, :password, 
-        :password_confirmation).merge(:account => current_account)
+        :password_confirmation)
     end
 
 end
