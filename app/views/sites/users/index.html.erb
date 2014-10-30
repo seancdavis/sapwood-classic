@@ -1,5 +1,5 @@
 <%= page_title('Users') do %>
-  <%= link_to 'New User',  site_route([@users])[:new], :class => 'new' %>
+  <%= link_to 'New User',  site_route([@users], :new), :class => 'new' %>
 <% end %>
 
-<%= data_table(@users) %>
+<%= data_table(@users, 'user') %>

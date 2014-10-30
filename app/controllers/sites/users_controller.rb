@@ -3,7 +3,7 @@ class Sites::UsersController < SitesController
   before_action :set_user, :except => [:index]
 
   def index
-    @users = current_account.users.alpha
+    @users = current_site.users
   end
 
   def new

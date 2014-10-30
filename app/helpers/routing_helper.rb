@@ -29,7 +29,7 @@ module RoutingHelper
   end
 
   def site_route(items, action)
-    route([current_site] + items)
+    route([current_site] + items, action)
   end
 
   def page_type_route(items, action)
