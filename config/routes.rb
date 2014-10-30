@@ -17,10 +17,7 @@ Rails.application.routes.draw do
 
   # ------------------------------------------ App
 
-  resources :accounts, :except => [:show, :destroy], :param => :slug, 
-    :path => :a
-
-  # resources :sites, :only => [:index, :show], :param => :slug, :path => :s do
+  resources :sites, :except => [:destroy], :param => :slug do
   #   scope :module => 'sites' do
   #     resources :page_types, :param => :slug, :path => :t do
   #       scope :module => :page_types do
@@ -29,10 +26,10 @@ Rails.application.routes.draw do
   #     end
   #     resources :users
   #   end
-  # end
+  end
 
   # ------------------------------------------ Home Page
 
-  root :to => 'accounts#home'
+  root :to => 'application#home'
 
 end

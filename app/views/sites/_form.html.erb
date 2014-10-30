@@ -1,0 +1,9 @@
+<%= simple_form_for(@site) do |f| %>
+
+  <%= f.input :title %>
+  <%= f.input :url, :as => :string %>
+  <%= f.input :description %>
+
+  <%= f.submit %>
+
+<% end %>

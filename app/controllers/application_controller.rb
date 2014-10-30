@@ -1,21 +1,30 @@
 class ApplicationController < ActionController::Base
-
-  include ApplicationHelper
-
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  include ApplicationHelper
+
   before_filter :authenticate_user!
 
-  # redirect to admin dashboard after signing in
-  def after_sign_in_path_for(user)
-    root_path
+  def home
+    if admin?
+      redirect_to sites_path
+    else
+      redirect_to last_site
+    end
   end
 
-  # redirect back to sign in form when signed out
-  def after_sign_out_path_for(user)
-    root_path
-  end
+  private
+
+    # redirect to admin dashboard after signing in
+    def after_sign_in_path_for(user)
+      root_path
+    end
+
+    # redirect back to sign in form when signed out
+    def after_sign_out_path_for(user)
+      root_path
+    end
 
 end

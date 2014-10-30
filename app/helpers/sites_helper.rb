@@ -1,11 +1,11 @@
 module SitesHelper
 
-  include AccountsHelper, UsersHelper, ErrorsHelper
+  include UsersHelper
 
   def current_site
     @current_site ||= begin
       p = params[:site_slug] || params[:slug]
-      if current_user.is_admin?
+      if admin?
         site = Heartwood::Site.find_by_slug(p)
         return site unless site.nil?
         Heartwood::Site.first
@@ -50,37 +50,6 @@ module SitesHelper
         request.path == nav[item]['path']
           nav[item]['classes'] += ' active'
       end
-    end
-  end
-
-  def site_route(items)
-    i = "site_"; s = "site_"; pop = false
-    if items.last.is_a?(Array)
-      items[-1] = items.last.flatten.first
-      pop = true
-    end
-    items.each do |item|
-      klass = item.class.method_defined?(:model) ? item.model : item.class
-      t = klass.table_name.gsub(/heartwood\_/, '')
-      ts = t.singularize; s += "#{ts}_"
-      item == items.last ? i += "#{t}_" : i += "#{ts}_"
-    end
-    objs = items.reverse.drop(1).reverse
-    objs = objs.collect(&:to_param).join(',')
-    if objs.empty?
-      routes = {
-        :index => send("#{i}path", current_site),
-        :new => send("new_#{s}path", current_site),
-        :edit => send("edit_#{s}path", current_site, items.last.to_param),
-        :show => send("#{s}path", current_site, items.last.to_param)
-      }
-    else
-      routes = {
-        :index => send("#{i}path", current_site, objs),
-        :new => send("new_#{s}path", current_site, objs),
-        :edit => send("edit_#{s}path", current_site, objs, items.last.to_param),
-        :show => send("#{s}path", current_site, objs, items.last.to_param)
-      }
     end
   end
 

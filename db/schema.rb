@@ -11,13 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029111505) do
-
-  create_table "heartwood_accounts", force: true do |t|
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20141030103231) do
 
   create_table "heartwood_form_fields", force: true do |t|
     t.integer  "form_id"
@@ -103,8 +97,15 @@ ActiveRecord::Schema.define(version: 20141029111505) do
     t.datetime "updated_at"
   end
 
+  create_table "heartwood_site_users", force: true do |t|
+    t.integer  "site_id"
+    t.integer  "user_id"
+    t.boolean  "site_admin", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "heartwood_sites", force: true do |t|
-    t.integer  "account_id"
     t.string   "title"
     t.string   "slug"
     t.string   "url"
@@ -114,10 +115,9 @@ ActiveRecord::Schema.define(version: 20141029111505) do
   end
 
   create_table "heartwood_users", force: true do |t|
-    t.integer  "account_id"
     t.string   "name"
     t.text     "settings"
-    t.boolean  "is_admin",               default: false
+    t.boolean  "admin",                  default: false
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
