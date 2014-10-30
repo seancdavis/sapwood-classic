@@ -6,7 +6,9 @@ module SitesHelper
     @current_site ||= begin
       p = params[:site_slug] || params[:slug]
       if current_user.is_admin?
-        Site.find_by_slug(p)
+        site = Heartwood::Site.find_by_slug(p)
+        return site unless site.nil?
+        Heartwood::Site.first
       else
         current_user.sites.where(:slug => p).first
       end

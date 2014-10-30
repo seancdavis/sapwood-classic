@@ -9,7 +9,8 @@ class Sites::PageTypesController < SitesController
   end
 
   def new
-    @page_type = PageType.new
+    @page_type = Heartwood::PageType.new
+    @groups = @page_type.groups
   end
 
   def create
@@ -26,7 +27,7 @@ class Sites::PageTypesController < SitesController
     if @page_type.update(update_params)
       delete_groups = params[:page_type][:delete_group].split(',').reject(&:blank?)
       if delete_groups.size > 0
-        PageTypeFieldGroup.where(:slug => delete_groups).destroy_all
+        Heartwood::PageTypeFieldGroup.where(:slug => delete_groups).destroy_all
       end
       redirect_to(routes([@page_type])[:edit], :notice => t('notices.updated', 
         :item => controller_name.humanize.titleize))
@@ -39,7 +40,7 @@ class Sites::PageTypesController < SitesController
 
     def set_page_type
       if action_name == 'new' || action_name == 'create'
-        @page_type = PageType.new(params[:page_type] ? create_params : nil)
+        @page_type = Heartwood::PageType.new(params[:page_type] ? create_params : nil)
       else
         @page_type = current_site.page_types.where(:slug => params[:slug]).first
       end

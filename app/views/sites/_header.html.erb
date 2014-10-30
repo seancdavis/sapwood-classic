@@ -11,6 +11,7 @@
   <%= avatar(current_user, 84) %>
   <%= content_tag(:span, current_user.display_name.upcase, 
     :class => 'name') %>
-  <%= link_to(destroy_user_session_path, :class => 'user-menu-trigger') { 
-    content_tag(:i, nil, :class => 'icon-exit') } %>
+  <%= link_to(heartwood.destroy_user_session_path, 
+    :class => 'user-menu-trigger') { content_tag(:i, nil, 
+      :class => 'icon-exit') } %>
 </div>
