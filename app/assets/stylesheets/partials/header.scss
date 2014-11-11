@@ -61,8 +61,9 @@
     top: 9px;
     margin: 0 15px 0 0;
     .name {
-      vertical-align: middle;
-      margin: 0 15px;
+
+      display: inline-block;
+      margin: 5px 10px 0 0;
       color: $color-light;
       font-weight: 400;
     }
@@ -75,6 +76,24 @@
       }
       i {
         color: rgba($color-light, 0.65);
+      }
+    }
+    .user-menu {
+      @include clear-list;
+      display: none;
+      margin: 11px 0 0 0;
+      background: $color-light-dark;
+      border: 1px solid $color-light-darker;
+      border-top: none;
+      li {
+        display: block;
+        a {
+          display: block;
+          padding: 10px 5px;
+          text-align: right;
+          font-weight: 400;
+          text-transform: uppercase;
+        }
       }
     }
   }

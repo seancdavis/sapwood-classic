@@ -8,10 +8,19 @@
   <%#= site_list %>
 </div> -->
 <div class="user">
-  <%= avatar(current_user, 84) %>
-  <%= content_tag(:span, current_user.display_name.upcase, 
-    :class => 'name') %>
-  <%= link_to(heartwood.destroy_user_session_path, 
-    :class => 'user-menu-trigger') { content_tag(:i, nil, 
-      :class => 'icon-exit') } %>
+  <%= link_to('#', :class => 'user-menu-trigger') do %>
+    <%= content_tag(:span, current_user.display_name.upcase, 
+      :class => 'name') %>
+    <%= avatar(current_user, 84) %>
+  <% end %>
+  <ul class="user-menu">
+    <%= content_tag(
+      :li, 
+      link_to(
+        'Sign Out',
+        heartwood.destroy_user_session_path, 
+        :class => 'user-menu-trigger'
+      )
+    ) %>
+  </ul>
 </div>
