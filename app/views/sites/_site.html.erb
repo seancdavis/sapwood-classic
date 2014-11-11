@@ -1,0 +1,9 @@
+<article class="site">
+  <%= content_tag(:h4, site.title) %>
+  <div class="links">
+    <%= link_to('Edit', edit_site_path(site), :class => 'edit') %>
+    <%#= link_to('Delete', site_route([site], :show), :method => :delete, 
+      :class => 'delete', :data => { :confirm => 'Are you sure?' } ) unless 
+      site == current_site%>
+  </div>
+</article>

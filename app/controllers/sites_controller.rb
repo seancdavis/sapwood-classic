@@ -7,7 +7,7 @@ class SitesController < ApplicationController
 
   def index
     @sites = current_user.sites
-    redirect_to site_path(last_site) if @sites.size == 1
+    # redirect_to site_path(last_site) if @sites.size == 1
   end
 
   def show
@@ -29,6 +29,7 @@ class SitesController < ApplicationController
   end
 
   def edit
+    @site = current_site
   end
 
   private
