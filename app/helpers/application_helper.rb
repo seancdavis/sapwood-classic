@@ -10,7 +10,7 @@ module ApplicationHelper
 
   def authenticate_admin!
     authenticate_user!
-    redirect_to current_user.last_site unless current_user.is_admin?
+    redirect_to current_user.last_site unless admin?
   end
 
   def admin?

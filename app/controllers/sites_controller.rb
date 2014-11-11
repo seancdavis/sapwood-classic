@@ -1,19 +1,20 @@
 class SitesController < ApplicationController
 
+  before_filter :authenticate_admin!, :except => [:show]
   before_action :cache_user_state
-  before_action :set_site
 
   include SitesHelper
 
   def index
     @sites = current_user.sites
-    redirect_to last_site if @sites.size == 1
+    redirect_to site_path(last_site) if @sites.size == 1
   end
 
   def show
   end
 
   def new
+    @site = Heartwood::Site.new
   end
 
   def create
@@ -31,20 +32,6 @@ class SitesController < ApplicationController
   end
 
   private
-
-    def set_site
-      slug = params[:site_slug] || params[:slug]
-      if action_name == 'new' || action_name == 'create'
-        @site = Heartwood::Site.new(params[:site] ? create_params : nil)
-      else
-        if admin?
-          @site = Heartwood::Site.find_by_slug(slug)
-        else
-          @site = current_user.sites.where(:slug => slug).first
-        end
-      end
-      not_found if @site.nil?
-    end
 
     def create_params
       params.require(:site).permit(:title, :url, :description)
