@@ -5,13 +5,15 @@ module SitesHelper
   def current_site
     @current_site ||= begin
       p = params[:site_slug] || params[:slug]
-      if admin?
-        site = Heartwood::Site.find_by_slug(p)
-        site = Heartwood::Site.first if site.nil?
-      else
-        site = current_user.sites.where(:slug => p).first
+      unless p.nil?
+        if admin?
+          site = Heartwood::Site.find_by_slug(p)
+          site = Heartwood::Site.first if site.nil?
+        else
+          site = current_user.sites.where(:slug => p).first
+        end
+        site
       end
-      site
     end
   end
 
