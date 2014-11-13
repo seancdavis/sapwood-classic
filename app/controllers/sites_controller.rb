@@ -30,6 +30,15 @@ class SitesController < ApplicationController
     @site = current_site
   end
 
+  def update
+    if current_site.update(update_params)
+      redirect_to(route([current_site], :show), 
+        :notice => t('notices.updated', :item => "Site")) 
+    else
+      render('edit')
+    end
+  end
+
   private
 
     def create_params

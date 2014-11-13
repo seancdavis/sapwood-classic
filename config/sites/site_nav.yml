@@ -16,5 +16,5 @@ users:
   controllers: ['users']
 settings:
   icon: cog3
-  path: site_path
+  path: edit_site_path
   controllers: []
