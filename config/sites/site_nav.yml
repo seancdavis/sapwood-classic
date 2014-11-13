@@ -1,3 +1,7 @@
+home:
+  icon: home6
+  path: site_path
+  controllers: ['site']
 new_page_type:
   icon: file-plus2
   path: new_site_page_type_path
