@@ -8,6 +8,14 @@ module Sites
       end
     end
 
+    def all_page_types
+      @all_page_types ||= current_site.page_types
+    end
+
+    def has_page_type?
+      all_page_types.size > 0
+    end
+
     def page_type_field_options
       [
         ['Text (Single Line)', 'string'],

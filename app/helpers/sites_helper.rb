@@ -14,7 +14,7 @@ module SitesHelper
   end
 
   def has_multiple_sites?
-    my_sites.size > 0
+    my_sites.size > 1
   end
 
   def only_site
