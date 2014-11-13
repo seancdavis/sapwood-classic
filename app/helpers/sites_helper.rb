@@ -18,7 +18,7 @@ module SitesHelper
   end
 
   def only_site
-    my_sites.first if has_multiple_sites
+    my_sites.first unless has_multiple_sites?
   end
 
   def site_list

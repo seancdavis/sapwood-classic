@@ -5,7 +5,7 @@ class SitesController < ApplicationController
 
   def index
     @sites = current_user.sites
-    # redirect_to site_path(last_site) if @sites.size == 1
+    has_multiple_sites? ? render(:layout => 'my_sites') : redirect_to(only_site)
   end
 
   def show

@@ -54,6 +54,11 @@
         font-size: 22px;
         font-weight: 400;
         color: $color-5;
+        a {
+          margin: 10px 0 0 0;
+          font-size: 22px;
+          font-weight: 400;
+        }
       }
       > p {
         font-size: 15px;
@@ -67,6 +72,12 @@
           margin-left: 7.5px;
           font-size: 14px;
         }
+      }
+      .date {
+        float: right;
+        margin: 18px 0 0 0;
+        color: $color-5;
+        font-size: 14px;
       }
       .published, .draft {
         font-size: 14px;
