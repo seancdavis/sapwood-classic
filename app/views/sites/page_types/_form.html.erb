@@ -9,10 +9,10 @@
     </div>
     <%= f.input :description %>
     <%= f.input :delete_group, :as => :hidden %>
-    <div class="half-row">
-      <%= f.input :icon %>
-      <%= f.input :template %>
-    </div>
+    <%= f.input(
+      :template, 
+      :collection => current_site.page_templates.split("\n") 
+    ) %>
   </section>
 
   <%= f.simple_fields_for :groups, 

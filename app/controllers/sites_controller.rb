@@ -39,7 +39,7 @@ class SitesController < ApplicationController
 
   def update
     if current_site.update(update_params)
-      redirect_to(route([current_site], :show), 
+      redirect_to(route([current_site], :edit), 
         :notice => t('notices.updated', :item => "Site")) 
     else
       render('edit')
@@ -49,7 +49,12 @@ class SitesController < ApplicationController
   private
 
     def create_params
-      params.require(:site).permit(:title, :url, :description)
+      params.require(:site).permit(
+        :title, 
+        :url, 
+        :description,
+        :page_templates
+      )
     end
 
     def update_params
