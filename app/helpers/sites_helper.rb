@@ -1,20 +1,24 @@
 module SitesHelper
 
-  include UsersHelper
-
   def current_site
     @current_site ||= begin
       p = params[:site_slug] || params[:slug]
-      unless p.nil?
-        if admin?
-          site = Heartwood::Site.find_by_slug(p)
-          site = Heartwood::Site.first if site.nil?
-        else
-          site = current_user.sites.where(:slug => p).first
-        end
-        site
-      end
+      my_sites.select{ |s| s.slug == p }.first unless p.nil?
     end
+  end
+
+  def my_sites
+    @my_sites ||= begin
+      admin? ? Heartwood::Site.all : current_user.sites
+    end
+  end
+
+  def has_multiple_sites?
+    my_sites.size > 0
+  end
+
+  def only_site
+    my_sites.first if has_multiple_sites
   end
 
   def site_list

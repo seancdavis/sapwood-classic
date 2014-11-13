@@ -3,8 +3,6 @@ class SitesController < ApplicationController
   before_filter :authenticate_admin!, :except => [:show]
   before_action :cache_user_state
 
-  include SitesHelper
-
   def index
     @sites = current_user.sites
     # redirect_to site_path(last_site) if @sites.size == 1
