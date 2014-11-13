@@ -31,7 +31,7 @@ module SitesHelper
     end
   end
 
-  def site_nav
+  def site_menu
     items = []
     current_site.page_types.each do |type|
       items << {
@@ -45,8 +45,8 @@ module SitesHelper
     items
   end
 
-  def bottom_nav
-    file = "#{Rails.root}/config/sites/nav.yml"
+  def site_nav
+    file = "#{Rails.root}/config/sites/site_nav.yml"
     return nil unless File.exists?(file)
     nav = YAML.load_file(file)
     nav.each do |item, attrs|

@@ -1,16 +1,18 @@
-<%= render 'logo' %>
-<% if current_site %>
-  <ul class="site-nav">
-    <% site_nav.each do |attrs, val| %>
-      <li class="<%= attrs['classes'] %>">
-        <%= link_to(attrs['path']) { 
-          o = content_tag(:i, nil, :class => "icon-#{attrs['icon']}") 
-          o += content_tag(:span, attrs['label'].upcase) } %>
-      </li>
-    <% end %>
-  </ul>
+<section class="site-control">
   <ul class="bottom-nav">
-    <% bottom_nav.each do |item, attrs| %>
+    <% site_nav.each do |item, attrs| %>
+      <li class="<%= attrs['classes'] %>">
+        <%= link_to(attrs['path']) do %>
+          <%= content_tag(:i, nil, :class => "icon-#{attrs['icon']}") %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<section class="site-menu">
+  <ul class="site-nav">
+    <% site_menu.each do |attrs, val| %>
       <li class="<%= attrs['classes'] %>">
         <%= link_to(attrs['path']) { 
           o = content_tag(:i, nil, :class => "icon-#{attrs['icon']}") 
@@ -18,4 +20,4 @@
       </li>
     <% end %>
   </ul>
-<% end %>
+</section>

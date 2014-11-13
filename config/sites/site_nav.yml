@@ -1,0 +1,16 @@
+new_page_type:
+  icon: file-plus2
+  path: new_site_page_type_path
+  controllers: []
+forms:
+  icon: clipboard3
+  path: site_path
+  controllers: []
+users:
+  icon: user2
+  path: site_users_path
+  controllers: ['users']
+settings:
+  icon: cog3
+  path: site_path
+  controllers: []
