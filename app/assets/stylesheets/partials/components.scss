@@ -21,20 +21,20 @@
 a {
   &.new, &.edit, &.back, &.delete, &.dont-delete, &.published, &.draft {
     &:before {
-      font-family: 'icomoon';
+      font-family: 'Icomoon-Ultimate';
       font-size: 10px;
       margin-right: 5px;
     }
     &.published { color: $color-1; }
     &.draft { color: $color-danger; }
   }
-  &.new:before { content: "\e702"; }
-  &.edit:before { content: "\e606"; }
-  &.back:before { content: "\e726"; }
-  &.delete:before { content: "\e6a7"; }
-  &.dont-delete:before { content: "\e662"; }
-  &.published:before { content: "\e6fb"; }
-  &.draft:before { content: "\e6fa"; }
+  &.new:before { content: "\e35e"; }
+  &.edit:before { content: "\e00f"; }
+  &.back:before { content: "\e3b3"; }
+  &.delete:before { content: "\e084"; }
+  &.dont-delete:before { content: "\e13b"; }
+  &.published:before { content: "\e367"; }
+  &.draft:before { content: "\e365"; }
 
   &.button {
     @include rounded-button($color-1, $color-1-lighter);
