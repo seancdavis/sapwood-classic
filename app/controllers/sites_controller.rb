@@ -3,11 +3,13 @@ class SitesController < ApplicationController
   before_filter :authenticate_admin!, :except => [:show]
   before_action :cache_user_state
 
+  layout 'my_sites', :only => [:index, :new, :create]
+
   include Sites::PagesHelper
 
   def index
     @sites = current_user.sites
-    has_multiple_sites? ? render(:layout => 'my_sites') : redirect_to(only_site)
+    redirect_to(only_site) unless has_multiple_sites?
   end
 
   def show
