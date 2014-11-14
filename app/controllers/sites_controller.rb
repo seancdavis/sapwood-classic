@@ -3,7 +3,7 @@ class SitesController < ApplicationController
   before_filter :authenticate_admin!, :except => [:show]
   before_action :cache_user_state
 
-  layout 'my_sites', :only => [:index, :new, :create]
+  layout :resolve_layout
 
   include Sites::PagesHelper
 
@@ -25,6 +25,7 @@ class SitesController < ApplicationController
   end
 
   def create
+    @site = Heartwood::Site.new(create_params)
     if @site.save
       Heartwood::SiteUser.create!(:user => current_user, :site => @site, 
         :site_admin => true)
@@ -61,6 +62,17 @@ class SitesController < ApplicationController
 
     def update_params
       create_params
+    end
+
+    def resolve_layout
+      if controller_name == 'sites'
+        case action_name
+        when 'index', 'new', 'create'
+          'my_sites'
+        else
+          'application'
+        end
+      end
     end
 
 end
