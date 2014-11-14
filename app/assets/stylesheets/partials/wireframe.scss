@@ -35,3 +35,14 @@ body.my-sites {
     }
   }
 }
+
+body.sign-in {
+  #container {
+    #content {
+      max-width: 400px;
+      margin: 25px auto;
+      padding: 25px;
+      border: 1px solid $color-5;
+    }
+  }
+}

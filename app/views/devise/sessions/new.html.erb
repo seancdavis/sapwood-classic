@@ -1,0 +1,15 @@
+<%= image_tag('rocktree-logo-web.png') %>
+
+<%= simple_form_for(
+  resource, :as => resource_name, 
+  :url => session_path(resource_name)
+) do |f| %>
+
+  <%= f.input :email, required: false, autofocus: true %>
+  <%= f.input :password, required: false %>
+  <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+
+  <%= f.submit "Sign In" %>
+<% end %>
+
+<%= render "devise/shared/links" %>
