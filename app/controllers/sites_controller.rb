@@ -5,7 +5,7 @@ class SitesController < ApplicationController
   include Sites::PageTypesHelper, Sites::PagesHelper
 
   def index
-    @sites = current_user.sites
+    current_sites = current_user.sites
     redirect_to(only_site) unless has_multiple_sites?
   end
 
@@ -18,15 +18,15 @@ class SitesController < ApplicationController
   end
 
   def new
-    @site = Heartwood::Site.new
+    @current_site = Heartwood::Site.new
   end
 
   def create
-    @site = Heartwood::Site.new(create_params)
-    if @site.save
-      Heartwood::SiteUser.create!(:user => current_user, :site => @site, 
+    @current_site = Heartwood::Site.new(create_params)
+    if current_site.save
+      Heartwood::SiteUser.create!(:user => current_user, :site => current_site, 
         :site_admin => true)
-      redirect_to(route([@site], :show), 
+      redirect_to(route([current_site], :show), 
         :notice => t('notices.created', :item => "Site")) 
     else
       render('new')
@@ -34,7 +34,7 @@ class SitesController < ApplicationController
   end
 
   def edit
-    @site = current_site
+    current_site = current_site
   end
 
   def update
@@ -52,7 +52,8 @@ class SitesController < ApplicationController
       params.require(:site).permit(
         :title, 
         :url, 
-        :description
+        :description,
+        :home_page_id
       )
     end
 

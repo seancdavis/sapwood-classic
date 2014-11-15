@@ -1,6 +1,12 @@
 module Sites
   module PagesHelper
 
+    def site_pages
+      @site_pages ||= begin
+        current_site.pages
+      end
+    end
+
     def current_page
       @current_page ||= begin
         p = params[:page_slug] || params[:slug]
