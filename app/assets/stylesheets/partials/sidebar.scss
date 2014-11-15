@@ -52,7 +52,6 @@ aside#sidebar {
     ul {
       @include clear-list;
       width: 100%;
-      margin-top: 62px;
       li {
         position: relative;
         &.active {
@@ -76,22 +75,15 @@ aside#sidebar {
         }
         a {
           display: block;
-          padding: 10px 25px;
+          padding: 10px 15px;
+          vertical-align: middle;
+          line-height: 23px;
+          font-size: 13px;
+          font-weight: 600;
           @include transition-all;
+          color: $color-2;
           &:hover {
-            background: $color-1-light;
-          }
-          span, i {
-            line-height: 23px;
-            font-size: 20px;
-            vertical-align: middle;
-            @include transition-all;
-            color: $color-2;
-          }
-          span {
-            margin: 0 10px 0 15px;
-            font-size: 13px;
-            font-weight: 600;
+            background: $color-light-darkest;
           }
         }
       }

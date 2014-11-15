@@ -1,5 +1,8 @@
 class Sites::PagesController < SitesController
 
+  def show
+  end
+
   def new
     redirect_to current_site unless params[:page_type]
     @current_page_type = current_site.page_types.find_by_slug(params[:page_type])

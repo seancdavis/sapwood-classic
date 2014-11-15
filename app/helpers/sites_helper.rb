@@ -36,7 +36,7 @@ module SitesHelper
     current_site.pages.each do |type|
       items << {
         'label' => type.title,
-        'path' => site_page_type_path(current_site, type),
+        'path' => site_route([type], :show),
         'classes' => request.path.include?(
           site_page_type_path(current_site, type)) ? ' active' : nil
       }
