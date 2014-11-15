@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141115144633) do
+ActiveRecord::Schema.define(version: 20141115201112) do
 
   create_table "heartwood_form_fields", force: true do |t|
     t.integer  "form_id"
@@ -101,6 +101,8 @@ ActiveRecord::Schema.define(version: 20141115144633) do
     t.string   "template"
     t.string   "order"
   end
+
+  add_index "heartwood_pages", ["ancestry"], name: "index_heartwood_pages_on_ancestry", using: :btree
 
   create_table "heartwood_site_users", force: true do |t|
     t.integer  "site_id"

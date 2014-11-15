@@ -10,6 +10,7 @@ PATH
   remote: /Volumes/sean/code/rocktree/rt/cms/heartwood
   specs:
     heartwood (0.0.1)
+      ancestry
       devise
       rails (~> 4.1.0)
 
@@ -46,6 +47,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    ancestry (2.1.0)
+      activerecord (>= 3.0.0)
     annotate (2.6.5)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
@@ -59,7 +62,7 @@ GEM
       ejs
       jquery-rails
       railties
-    bcrypt (3.1.7)
+    bcrypt (3.1.9)
     better_errors (2.0.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -86,7 +89,7 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     debug_inspector (0.0.2)
-    devise (3.4.0)
+    devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -153,7 +156,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.3.2)
-    responders (1.1.1)
+    responders (1.1.2)
       railties (>= 3.2, < 4.2)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)

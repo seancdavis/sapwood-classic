@@ -17,9 +17,9 @@
     <%= f.input(
       :children, 
       :label => 'Allowable Children', 
-      :collection => available_page_type_children, 
-      :as => :check_boxes
-    ) if available_page_type_children.size > 0 %>
+      :collection => all_page_types.reject(&:blank?), 
+      :as => :check_boxes, :value_method => :slug,
+    ) if all_page_types.size > 0 %>
     <%= f.input :delete_group, :as => :hidden, :wrapper => false %>
   </section>
 
