@@ -6,7 +6,10 @@
   <%= form_tabs ['details'] + current_page_type.groups.collect(&:slug) + ['new-group'] %>
 
   <section class="form tabbed details">
-    <%= f.input :title %>
+    <div class="half-row">
+      <%= f.input :title %>
+      <%= f.input :label %>
+    </div>
     <%= f.input :is_home, :label => 'Home Page Type' %>
     <%= f.input :description %>
     <%= f.input :page_templates %>

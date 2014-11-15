@@ -62,6 +62,7 @@ class Sites::PageTypesController < SitesController
         :description, 
         :page_templates,
         :is_home,
+        :label,
         :groups_attributes => [
           :id, 
           :title, 
