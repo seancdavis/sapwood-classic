@@ -15,7 +15,6 @@
   <% end %>
   <ul class="user-menu">
     <%= content_tag(:li, link_to('My Sites', sites_path)) %>
-    <%= content_tag(:li, link_to('New Site', new_site_path)) %>
     <%= content_tag(:li, link_to('Sign Out', 
       heartwood.destroy_user_session_path, :method => :delete)) %>
   </ul>
