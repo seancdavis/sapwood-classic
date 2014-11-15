@@ -1,7 +1,5 @@
 class Sites::PageTypesController < SitesController
 
-  include Sites::PagesHelper
-
   def new
     @current_page_type = Heartwood::PageType.new
   end

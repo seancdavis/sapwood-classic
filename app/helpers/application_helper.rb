@@ -8,17 +8,8 @@ module ApplicationHelper
     }
   end
 
-  def authenticate_admin!
-    authenticate_user!
-    redirect_to current_user.last_site unless admin?
-  end
-
   def admin?
     current_user.admin?
-  end
-
-  def last_site
-    current_user.last_site
   end
 
   def not_found

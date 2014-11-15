@@ -1,11 +1,8 @@
 class SitesController < ApplicationController
 
-  before_filter :authenticate_admin!, :except => [:show]
-  before_action :cache_user_state
-
   layout :resolve_layout
 
-  include Sites::PagesHelper
+  include Sites::PageTypesHelper, Sites::PagesHelper
 
   def index
     @sites = current_user.sites

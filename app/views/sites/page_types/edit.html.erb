@@ -1,4 +1,9 @@
 <%= page_title("Edit #{current_page_type.title}") do %>
+  <%= link_to(
+      'New Page', 
+      new_site_page_path(current_site, :page_type => current_page_type.slug),
+      :class => 'new'
+    ) %>
   <%= link_to 'Page Types',  site_route([current_page_type], :index), 
     :class => 'back' %>
 <% end %>

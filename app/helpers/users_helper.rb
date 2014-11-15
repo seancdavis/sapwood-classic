@@ -9,14 +9,4 @@ module UsersHelper
     end
   end
 
-  def cache_user_state
-    if current_site
-      current_user.settings = {} if current_user.settings.nil?
-      unless current_site.slug == current_user.settings['last_site']
-        current_user.settings['last_site'] = current_site.slug
-        current_user.save!
-      end
-    end
-  end
-
 end

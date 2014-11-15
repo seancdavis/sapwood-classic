@@ -1,0 +1,55 @@
+<%= simple_form_for [current_site, current_page] do |f| %>
+
+  <%= form_tabs ['details', 'content'] + current_page_type.groups.collect(&:slug) %>
+
+  <section class="form tabbed details">
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :published, :as => :hidden %>
+    <%= f.input :template, :collection => current_page_type.templates %>
+    <%= f.input :page_type_id, :as => :hidden, :wrapper => false, 
+      :input_html => { :value => current_page_type.id } %>
+  </section>
+
+  <section class="form tabbed content">
+    <%= f.input :body, :label => false %>
+  </section>
+
+  <%= f.simple_fields_for :field_data, OpenStruct.new(f.object.field_data) do |fd| %>
+    <% current_page_type.groups.each do |group| %>
+      <section class="form tabbed <%= group.slug %>">
+        <% group.fields.each do |field| %>
+          <% case field.data_type %>
+          <% when 'date' %>
+            <%= fd.input(
+              :"#{field.slug}", 
+              :as => :string, 
+              :required => field.required, 
+              :label => field.title,
+              :input_html => { 
+                :class => 'date-js', 
+                :value => current_page.field_data[field.slug.to_sym] 
+              } 
+            ) %>
+          <% else %>
+            <%= fd.input(
+              :"#{field.slug}", 
+              :as => :"#{field.data_type}", 
+              :required => field.required, 
+              :label => field.title,
+              :input_html => { 
+                :value => current_page.field_data[field.slug.to_sym] 
+              } 
+            ) %>
+          <% end %>
+        <% end %>      
+      </section>
+    <% end %>
+  <% end %>
+
+  <%= link_to "Save and Publish", '#', :class => 'save publish' %>
+  <%= link_to "Save as Draft", '#', :class => 'save draft' %>
+  <%#= link_to "Cancel",  site_route([current_page_type])[:show], 
+    :class => 'cancel', :data => { :confirm => 'Are you sure?' } %>
+
+<% end %>
