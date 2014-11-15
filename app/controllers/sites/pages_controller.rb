@@ -1,6 +1,10 @@
 class Sites::PagesController < SitesController
 
   def show
+    current_page
+    unless page_type_children.size > 0
+      redirect_to site_route([current_page], :edit)
+    end
   end
 
   def new

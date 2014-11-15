@@ -11,21 +11,21 @@ module Sites
     end
 
     def new_page_children_links
-      output = ''
-      children = current_page_type.children.reject(&:blank?)
-      page_types = current_site.page_types.where(:slug => children)
-      page_types.each do |page_type|
-        output += link_to(
-          "New #{page_type.label}", 
-          new_site_page_path(
-            current_site, 
-            :page_type => page_type.slug,
-            :parent => current_page.slug
-          ),
-          :class => 'new'
-        )
+      @new_page_children_links ||= begin
+        output = ''
+        page_type_children.each do |page_type|
+          output += link_to(
+            "New #{page_type.label}", 
+            new_site_page_path(
+              current_site, 
+              :page_type => page_type.slug,
+              :parent => current_page.slug
+            ),
+            :class => 'new'
+          )
+        end
+        output.html_safe
       end
-      output.html_safe
     end
 
   end

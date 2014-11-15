@@ -16,6 +16,13 @@ module Sites
       all_page_types.size > 0
     end
 
+    def page_type_children
+      @page_type_children ||= begin
+        children = current_page_type.children.reject(&:blank?)
+        current_site.page_types.where(:slug => children)
+      end
+    end
+
     def page_type_field_options
       [
         ['Text (Single Line)', 'string'],
