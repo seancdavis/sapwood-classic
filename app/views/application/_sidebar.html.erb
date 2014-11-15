@@ -14,9 +14,9 @@
   <ul class="site-nav">
     <% site_menu.each do |attrs, val| %>
       <li class="<%= attrs['classes'] %>">
-        <%= link_to(attrs['path']) { 
-          o = content_tag(:i, nil, :class => "icon-#{attrs['icon']}") 
-          o += content_tag(:span, attrs['label'].upcase) } %>
+        <%= link_to(attrs['path']) do 
+          content_tag(:span, attrs['label'].upcase) 
+        end %>
       </li>
     <% end %>
   </ul>

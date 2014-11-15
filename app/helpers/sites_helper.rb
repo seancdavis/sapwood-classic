@@ -33,10 +33,9 @@ module SitesHelper
 
   def site_menu
     items = []
-    current_site.page_types.each do |type|
+    current_site.pages.each do |type|
       items << {
         'label' => type.title,
-        'icon' => type.icon,
         'path' => site_page_type_path(current_site, type),
         'classes' => request.path.include?(
           site_page_type_path(current_site, type)) ? ' active' : nil

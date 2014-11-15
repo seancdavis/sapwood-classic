@@ -19,11 +19,8 @@ Rails.application.routes.draw do
 
   resources :sites, :except => [:destroy], :param => :slug do
     scope :module => 'sites' do
-      resources :page_types, :param => :slug, :path => :t do
-        scope :module => :page_types do
-          resources :pages, :param => :slug, :path => :p
-        end
-      end
+      resources :page_types, :param => :slug, :except => [:show]
+      resources :pages, :param => :slug, :path => :p
       resources :users
     end
   end

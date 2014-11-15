@@ -2,10 +2,10 @@ home:
   icon: home6
   path: site_path
   controllers: ['site']
-new_page_type:
-  icon: file-plus2
-  path: new_site_page_type_path
-  controllers: []
+page_types:
+  icon: stack
+  path: site_page_types_path
+  controllers: ['page_types']
 forms:
   icon: clipboard3
   path: site_path

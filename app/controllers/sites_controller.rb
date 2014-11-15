@@ -55,8 +55,7 @@ class SitesController < ApplicationController
       params.require(:site).permit(
         :title, 
         :url, 
-        :description,
-        :page_templates
+        :description
       )
     end
 

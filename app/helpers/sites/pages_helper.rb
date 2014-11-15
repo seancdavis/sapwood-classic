@@ -31,5 +31,9 @@ module Sites
       current_page_type.groups
     end
 
+    def available_page_type_children
+      all_page_types - [current_page_type]
+    end
+
   end
 end

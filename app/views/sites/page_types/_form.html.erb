@@ -1,22 +1,27 @@
-<%= simple_form_for(@page_type, :url => [current_site, @page_type]) do |f| %>
+<%= simple_form_for(
+  current_page_type, 
+  :url => [current_site, current_page_type]
+) do |f| %>
 
-  <%= form_tabs ['details'] + @groups.collect(&:slug) + ['new-group'] %>
+  <%= form_tabs ['details'] + current_page_type.groups.collect(&:slug) + ['new-group'] %>
 
   <section class="form tabbed details">
-    <div class="half-row">
-      <%= f.input :title %>
-      <%= f.input :slug, :label => 'URL' %>
-    </div>
+    <%= f.input :title %>
+    <%= f.input :is_home, :label => 'Home Page Type' %>
     <%= f.input :description %>
-    <%= f.input :delete_group, :as => :hidden %>
+    <%= f.input :page_templates %>
+    <p><em>Place each template on a new line.</em></p>
     <%= f.input(
-      :template, 
-      :collection => current_site.page_templates.split("\n") 
-    ) %>
+      :children, 
+      :label => 'Allowable Children', 
+      :collection => available_page_type_children, 
+      :as => :check_boxes
+    ) if available_page_type_children.size > 0 %>
+    <%= f.input :delete_group, :as => :hidden, :wrapper => false %>
   </section>
 
   <%= f.simple_fields_for :groups, 
-    (@groups + [Heartwood::PageTypeFieldGroup.new]) do |group| %>
+    (current_page_type.groups + [Heartwood::PageTypeFieldGroup.new]) do |group| %>
     <section class="tabbed <%= group.object.title.nil? ? 'new-group' : 
       group.object.slug %>">
       <h3>Details</h3>
