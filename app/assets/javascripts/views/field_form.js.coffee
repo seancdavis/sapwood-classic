@@ -1,4 +1,4 @@
-class App.Views.PageTypeFieldForm extends Backbone.View
+class App.Views.FieldForm extends Backbone.View
 
   el: 'body'
 

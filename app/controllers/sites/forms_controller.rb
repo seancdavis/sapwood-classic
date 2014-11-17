@@ -39,7 +39,15 @@ class Sites::FormsController < SitesController
         :description,
         :body,
         :thank_you_body,
-        :notification_emails
+        :notification_emails,
+        :form_fields_attributes => [
+          :id,
+          :title,
+          :data_type,
+          :position,
+          :required,
+          :options
+        ]
       ).merge(
         :site => current_site
       )

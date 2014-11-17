@@ -8,6 +8,7 @@ class App.Routers.Router extends Backbone.Router
     new App.Views.Header
     new App.Views.Tabs if $('ul.tabs').length > 0
     new App.Views.PickADate if $('.time-js').length > 0 || $('.date-js').length > 0
+    new App.Views.FieldForm if $('.field-data-type').length > 0
 
   routes:
     'sites/:site_slug/page_types/:page_type_slug/edit': 'editPageType'
@@ -16,7 +17,6 @@ class App.Routers.Router extends Backbone.Router
 
   editPageType: (site_slug, page_type_slug) ->
     new App.Views.DeleteGroup
-    new App.Views.PageTypeFieldForm
 
   newPage: (site_slug) ->
     new App.Views.Publishable

@@ -12,5 +12,16 @@ module Sites
       end
     end
 
+    def form_field_options
+      [
+        ['Text (Single Line)', 'string'],
+        ['Text (Multi-Line)', 'text'],
+        ['Dropdown', 'select'],
+        # ['Date', 'date'],
+        # ['Date & Time', 'datetime'],
+        # ['File Upload', 'file']
+      ].sort
+    end
+
   end
 end
