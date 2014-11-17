@@ -5,7 +5,6 @@ class SitesController < ApplicationController
   include Sites::PageTypesHelper, Sites::PagesHelper
 
   def index
-    current_sites = current_user.sites
     redirect_to(only_site) unless has_multiple_sites?
   end
 
