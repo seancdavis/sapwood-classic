@@ -9,11 +9,11 @@ class SitesController < ApplicationController
   end
 
   def show
-    if has_page_type?
-      redirect_to(site_route([all_page_types.first], :show))
-    else
-      redirect_to(site_route([all_page_types], :new))
-    end
+    # if has_page_type?
+    #   redirect_to(site_route([all_page_types.first], :show))
+    # else
+    #   redirect_to(site_route([all_page_types], :new))
+    # end
   end
 
   def new
