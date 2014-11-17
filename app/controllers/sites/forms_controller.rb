@@ -18,7 +18,7 @@ class Sites::FormsController < SitesController
 
   def update
     if current_form.update(form_params)
-      redirect_to site_route([current_form], :index), 
+      redirect_to site_route([current_form], :edit), 
         :notice => t('notices.updates', :item => 'Form')
     else
       render 'edit'

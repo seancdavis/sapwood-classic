@@ -1,7 +1,18 @@
 <%= simple_form_for([current_site, current_form]) do |f| %>
 
-  <%= f.input :title %>
-  <%= f.input :description %>
+  <%= form_tabs(['details','thank-you','fields']) %>
+
+  <section class="form tabbed details">
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :notification_emails %>
+    <p><em>Place each email address on a new line.</em></p>
+  </section>
+
+  <section class="form tabbed thank-you">
+    <%= f.input :thank_you_body, :label => 'Thank You Text' %>
+  </section>
+
   <%= f.submit %>
 
 <% end %>
