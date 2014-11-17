@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     scope :module => 'sites' do
       resources :page_types, :param => :slug, :except => [:show]
       resources :pages, :param => :slug
+      resources :forms, :param => :slug, :except => [:show]
       resources :users, :except => [:show]
     end
   end

@@ -8,8 +8,8 @@ page_types:
   controllers: ['page_types']
 forms:
   icon: clipboard3
-  path: site_path
-  controllers: []
+  path: site_forms_path
+  controllers: ['forms']
 users:
   icon: user2
   path: site_users_path
