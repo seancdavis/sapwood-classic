@@ -8,7 +8,11 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
 
   def home
-    redirect_to(has_multiple_sites? ? sites_path : site_path(only_site))
+    if has_sites?
+      redirect_to(has_multiple_sites? ? sites_path : site_path(only_site))
+    else
+      sign_out_and_redirect(current_user)
+    end
   end
 
   private

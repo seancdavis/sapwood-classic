@@ -21,6 +21,10 @@ module SitesHelper
     my_sites.first unless has_multiple_sites?
   end
 
+  def has_sites?
+    my_sites.size > 0
+  end
+
   def site_list
     content_tag(:ul) do
       o = content_tag(:h2, 'Change Site')
