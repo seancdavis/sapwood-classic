@@ -18,6 +18,9 @@ section.images-container {
       padding: 5px;
       text-align: right;
       background: rgba($color-1, 0.9);
+      &.select {
+        text-align: center;
+      }
       a {
         color: rgba(white, 0.8);
         &:hover {
@@ -26,6 +29,11 @@ section.images-container {
         &:before {
           margin: 0;
           font-size: 16px;
+        }
+        &.select {
+          display: block;
+          font-size: 14px;
+          font-weight: 400;
         }
       }
     }

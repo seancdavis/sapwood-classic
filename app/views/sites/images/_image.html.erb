@@ -1,7 +1,17 @@
-<article class="image">
+<article class="image" data-src="<%= image.image.url %>">
   <%= image_tag image.image.url(:thumb) %>
-  <header>
-    <%= link_to '', site_route([image], :show), :class => 'delete', 
-      :method => :delete, :data => { :confirm => 'Are you sure?' } %>
+  <header class="<%= 'select' if params[:select] %>">
+    <%= link_to(
+      '', 
+      site_route([image], :show), 
+      :class => 'delete', 
+      :method => :delete, 
+      :data => { :confirm => 'Are you sure?' } 
+    ) unless params[:select] %>
+    <%= link_to(
+      'Add This Image', 
+      '#', 
+      :class => 'select', 
+    ) if params[:select] %>
   </header>
 </article>

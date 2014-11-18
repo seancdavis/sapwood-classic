@@ -22,7 +22,7 @@ class App.Views.ImageUploader extends Backbone.View
       done: (e, data) ->
         data.context.remove()
         console.log window.location
-        $.get "#{window.location.pathname}?content_only=true", (data) ->
+        $.get window.location.pathname, (data) ->
           $('section.data-table').html(data)
       fail: (e, data) ->
         console.log 'FAIL'

@@ -11,7 +11,13 @@ class App.Views.PageImageUploader extends Backbone.View
 
   triggerUploader: (e) ->
     e.preventDefault()
-    $.get "/sites/#{@site}/images?content_only=true", (data) =>
+    @input = $(e.target).parents('.upload-field').find('input')
+    $.get $(e.target).attr('href'), (data) =>
       @ajaxPage.loadContent('Images', data)
+      $('.image a.select').click(@selectImage)
 
-
+  selectImage: (e) =>
+    e.preventDefault()
+    src = $(e.target).parents('article.image').attr('data-src')
+    @input.val(src)
+    @ajaxPage.closePage()

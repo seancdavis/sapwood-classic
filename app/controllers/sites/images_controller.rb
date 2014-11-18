@@ -4,11 +4,7 @@ class Sites::ImagesController < SitesController
 
   def index
     if request.xhr?
-      if params[:content_only]
-        render :partial => 'content', :layout => false
-      else
-        render :layout => false
-      end
+      render :partial => 'content', :layout => false
     end
   end
 
