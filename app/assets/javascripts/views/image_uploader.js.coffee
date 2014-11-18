@@ -2,14 +2,17 @@ class App.Views.ImageUploader extends Backbone.View
 
   el: 'body'
 
+  events:
+    'click .upload-trigger': 'toggleForm'
+
   initialize: ->
     @initUploader()
 
   initUploader: ->
-    $('#new_image').fileupload
+    $('#fileupload').fileupload
       add: (e, data) ->
         data.context = $(tmpl("template-upload", data.files[0]))
-        $('#new_image').append(data.context)
+        $('section.data-table').before(data.context)
         data.submit()
         console.log data
       progress: (e, data) ->
@@ -25,3 +28,7 @@ class App.Views.ImageUploader extends Backbone.View
         console.log 'FAIL'
         console.log e
         console.log data
+
+  toggleForm: (e) ->
+    e.preventDefault()
+    $('#image_image').click()
