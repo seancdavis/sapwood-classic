@@ -12,6 +12,6 @@ class App.Views.PageImageUploader extends Backbone.View
   triggerUploader: (e) ->
     e.preventDefault()
     $.get "/sites/#{@site}/images?content_only=true", (data) =>
-      @ajaxPage.loadContent(data)
+      @ajaxPage.loadContent('Images', data)
 
 
