@@ -2,7 +2,7 @@ module Sites
   module PageTypesHelper
 
     def all_page_types
-      @all_page_types ||= current_site.page_types
+      @all_page_types ||= current_site.page_types.alpha
     end
 
     def current_page_type

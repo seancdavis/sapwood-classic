@@ -3,7 +3,10 @@
   <%= form_tabs ['details', 'content'] + current_page_type.groups.collect(&:slug) %>
 
   <section class="form tabbed details">
-    <%= f.input :title %>
+    <div class="half-row">
+      <%= f.input :title %>
+      <%= f.input :position %>
+    </div>
     <%= f.input :description %>
     <%= f.input :published, :as => :hidden %>
     <%= f.input :template, :collection => current_page_type.templates, 

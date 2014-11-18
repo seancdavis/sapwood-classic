@@ -37,7 +37,7 @@ module SitesHelper
 
   def site_menu
     items = []
-    root_pages.each do |page|
+    root_pages.in_position.each do |page|
       items << {
         'label' => page.title,
         'path' => site_route([page], :show),

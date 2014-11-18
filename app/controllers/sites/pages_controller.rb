@@ -61,6 +61,7 @@ class Sites::PagesController < SitesController
         :description, 
         :body, 
         :published,
+        :position,
         :template,
         :field_data => fields
       ).merge(
@@ -77,6 +78,7 @@ class Sites::PagesController < SitesController
         :description, 
         :body, 
         :published,
+        :position,
         :template,
         :field_data => fields
       )
