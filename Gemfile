@@ -15,6 +15,7 @@ gem 'jquery-rails'
 gem 'bones-rails'
 gem 'bourbon'
 gem 'backbone-on-rails'
+gem 'jquery-fileupload-rails'
 
 # ------------------------------------------ View Helpers
 

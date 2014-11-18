@@ -37,6 +37,17 @@
                 :value => current_page.field_data[field.slug.to_sym] 
               } 
             ) %>
+          <% when 'file' %>
+            <%= fd.input(
+              :"#{field.slug}", 
+              :as => :string, 
+              :required => field.required, 
+              # :label => field.title,
+              :input_html => { 
+                :value => ''
+              } 
+            ) %>
+            <input type="file" class="file-upload">
           <% else %>
             <%= fd.input(
               :"#{field.slug}", 

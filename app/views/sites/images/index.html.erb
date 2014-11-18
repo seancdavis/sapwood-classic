@@ -1,0 +1,9 @@
+<%= page_title('Images') do %>
+  <%= simple_form_for([current_site, Heartwood::Image.new]) do |f| %>
+    <%= f.input :image %>
+  <% end %>
+<% end %>
+
+<%= render 'progress' %>
+
+<%= render 'content' %>

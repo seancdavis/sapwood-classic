@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       resources :page_types, :param => :slug, :except => [:show]
       resources :pages, :param => :slug
       resources :forms, :param => :slug, :except => [:show]
+      resources :images, :param => :idx, :except => [:show]
       resources :users, :except => [:show]
     end
   end

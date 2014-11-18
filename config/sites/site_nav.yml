@@ -6,6 +6,10 @@ page_types:
   icon: stack
   path: site_page_types_path
   controllers: ['page_types']
+images:
+  icon: image
+  path: site_images_path
+  controllers: ['images']
 forms:
   icon: clipboard3
   path: site_forms_path
