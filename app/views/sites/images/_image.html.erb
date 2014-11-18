@@ -1,5 +1,7 @@
 <article class="image">
   <%= image_tag image.image.url(:thumb) %>
-  <%= link_to 'Delete', site_route([image], :show), 
-    :method => :delete, :data => { :confirm => 'Are you sure?' } %>
+  <header>
+    <%= link_to '', site_route([image], :show), :class => 'delete', 
+      :method => :delete, :data => { :confirm => 'Are you sure?' } %>
+  </header>
 </article>
