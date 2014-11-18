@@ -25,13 +25,14 @@ module Sites
 
     def page_type_field_options
       [
-        ['Text (Single Line)', 'string'],
-        ['Text (Editor)', 'text'],
+        ['String', 'string'],
+        ['Text', 'text'],
         ['Dropdown', 'select'],
-        ['Date', 'date'],
-        ['Date & Time', 'datetime'],
-        ['File Upload', 'file']
-      ].sort
+        # ['Date', 'date'],
+        # ['Date & Time', 'datetime'],
+        # ['File Upload', 'file']
+        ['Image', 'image'],
+      ]
     end
 
     def field_groups

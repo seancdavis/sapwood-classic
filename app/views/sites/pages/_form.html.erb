@@ -37,17 +37,18 @@
                 :value => current_page.field_data[field.slug.to_sym] 
               } 
             ) %>
-          <% when 'file' %>
+          <% when 'image' %>
             <%= fd.input(
-              :"#{field.slug}", 
+              :"rtimage_#{field.slug}", 
               :as => :string, 
               :required => field.required, 
-              # :label => field.title,
+              :label => field.title,
               :input_html => { 
                 :value => ''
               } 
             ) %>
-            <input type="file" class="file-upload">
+            <%= link_to 'Add Image', '#', 
+              :class => 'image-upload-trigger button' %>
           <% else %>
             <%= fd.input(
               :"#{field.slug}", 

@@ -22,9 +22,15 @@ class App.Routers.Router extends Backbone.Router
 
   newPage: (site_slug) ->
     new App.Views.Publishable
+    if $('.image-upload-trigger').length > 0
+      new App.Views.PageImageUploader
+        site: site_slug
 
   editPage: (site_slug, page_slug) ->
     new App.Views.Publishable
+    if $('.image-upload-trigger').length > 0
+      new App.Views.PageImageUploader
+        site: site_slug
 
   images: (site_slug) ->
     new App.Views.ImageUploader

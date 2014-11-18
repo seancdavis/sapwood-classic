@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118011926) do
+ActiveRecord::Schema.define(version: 20141118132318) do
 
   create_table "heartwood_form_fields", force: true do |t|
     t.integer  "form_id"
@@ -51,6 +51,14 @@ ActiveRecord::Schema.define(version: 20141118011926) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "idx",        default: 0
+  end
+
+  create_table "heartwood_page_images", force: true do |t|
+    t.integer  "page_id"
+    t.integer  "image_id"
+    t.string   "field_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "heartwood_page_type_field_groups", force: true do |t|

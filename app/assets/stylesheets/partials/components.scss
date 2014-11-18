@@ -55,3 +55,18 @@ a {
     margin: 5px 0 10px 0;
   }
 }
+
+
+#ajax-page {
+  position: fixed;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  background: $color-5;
+  @include transition-all;
+  &.active {
+    top: 0;
+  }
+}
