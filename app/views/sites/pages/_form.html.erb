@@ -10,6 +10,8 @@
       :selected => current_page_type.templates.first %>
     <%= f.input :page_type_id, :as => :hidden, :wrapper => false, 
       :input_html => { :value => current_page_type.id } %>
+    <%= f.input :parent_id, :as => :hidden, :input_html => { 
+      :value => current_parent.id } unless current_parent.nil? %>
   </section>
 
   <section class="form tabbed content">

@@ -37,13 +37,14 @@ module SitesHelper
 
   def site_menu
     items = []
-    current_site.pages.each do |page|
+    root_pages.each do |page|
       items << {
         'label' => page.title,
         'path' => site_route([page], :show),
-        'classes' => request.path.include?(
+        'classes' => (
+          request.path.include?(
             site_page_path(current_site, page)
-          ) && controller_name == 'pages' ? ' active' : nil
+          ) || page == current_parent) && controller_name == 'pages' ? ' active' : nil
       }
     end
     items

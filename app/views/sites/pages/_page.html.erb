@@ -1,0 +1,10 @@
+<article class="page">
+  <%= content_tag(:h4, page.title, :class => 'title') %>
+  <%= simple_format(page.description) unless page.description.blank? %>
+  <div class="links">
+    <%= link_to('Edit',  site_route([page], :edit), :class => 'edit') %>
+    <%= link_to('Delete',  site_route([page], :show), 
+      :method => :delete, :class => 'delete', :data => { 
+        :confirm => 'Are you sure?' } ) %>
+  </div>
+</article>

@@ -2,17 +2,30 @@ module Sites
   module PagesHelper
 
     def site_pages
-      @site_pages ||= begin
-        current_site.pages
-      end
+      @site_pages ||= current_site.pages
+    end
+
+    def root_pages
+      @root_pages ||= current_site.pages.roots
     end
 
     def current_page
       @current_page ||= begin
-        p = params[:page_slug] || params[:slug]
-        page = current_site.pages.find_by_slug(p)
-        @current_page_type = page.page_type
-        page
+        if controller_name == 'pages'
+          p = params[:page_slug] || params[:slug]
+          page = current_site.pages.find_by_slug(p)
+          @current_page_type = page.page_type
+          page
+        end
+      end
+    end
+
+    def current_parent
+      @current_parent ||= begin
+        if current_page
+          current_page.parent || 
+          current_site.pages.find_by_slug(params[:parent])
+        end
       end
     end
 
