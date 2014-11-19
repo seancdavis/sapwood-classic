@@ -104,6 +104,18 @@ form {
     }
   }
 
+  div.upload-field {
+    margin: 10px 0;
+    img {
+      display: block;
+      width: 200px;
+    }
+    a {
+      clear: both;
+      margin: 10px 0 0 0;
+    }
+  }
+
   h3 {
     margin: 20px 0 5px 0;
     font-size: 24px;

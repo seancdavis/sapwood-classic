@@ -41,15 +41,18 @@
             <div class="upload-field">
               <%= fd.input(
                 :"rtimage_#{field.slug}", 
-                :as => :string, 
+                :as => :hidden, 
                 :required => field.required, 
                 :label => field.title,
                 :input_html => { 
                   :value => current_page.field_data[field.slug]
                 } 
               ) %>
+              <%= image_tag(
+                find_page_image(current_page.field_data[field.slug])
+              ) unless current_page.field_data[field.slug].blank? %>
               <%= link_to(
-                'Add Image', 
+                "Add New #{field.title}", 
                 site_images_path(current_site, :select => true), 
                 :class => 'image-upload-trigger button' 
               ) %>

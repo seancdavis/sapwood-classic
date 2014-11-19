@@ -12,7 +12,7 @@ class App.Views.PageImageUploader extends Backbone.View
 
   triggerUploader: (e) ->
     e.preventDefault()
-    @input = $(e.target).parents('.upload-field').find('input')
+    @container = $(e.target).parents('.upload-field')
     if @triggered
       @ajaxPage.openPage()
     else
@@ -24,8 +24,11 @@ class App.Views.PageImageUploader extends Backbone.View
 
   selectImage: (e) =>
     e.preventDefault()
-    src = $(e.target).parents('article.image').attr('data-idx')
-    @input.val(src)
+    idx = $(e.target).parents('article.image').attr('data-idx')
+    thumb = $(e.target).parents('article.image').attr('data-thumb')
+    @container.find('input').val(idx)
+    @container.prepend('<img>') unless @container.find('img').length > 0
+    @container.find('img').attr('src', thumb)
     @ajaxPage.closePage()
 
   # This can be refactored. It shares much with image_uploader.js.coffee
