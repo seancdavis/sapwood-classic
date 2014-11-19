@@ -45,7 +45,7 @@
                 :required => field.required, 
                 :label => field.title,
                 :input_html => { 
-                  :value => ''
+                  :value => current_page.field_data[field.slug]
                 } 
               ) %>
               <%= link_to(

@@ -29,6 +29,7 @@ class Sites::PagesController < SitesController
   end
 
   def update
+    process_images
     if current_page.update(update_params)
       redirect_to(site_route([current_page], :show),
         :notice => t(
@@ -82,6 +83,17 @@ class Sites::PagesController < SitesController
         :template,
         :field_data => fields
       )
+    end
+
+    def process_images
+      keys = params[:page][:field_data].keys
+      keys.each do |key|
+        if key.starts_with?('rtimage_')
+          clean_key = key.gsub(/rtimage\_/, '')
+          value = params[:page][:field_data][key.to_sym]
+          params[:page][:field_data][clean_key.to_sym] = value
+        end
+      end
     end
 
 end
