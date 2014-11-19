@@ -45,11 +45,12 @@ class Sites::PagesController < SitesController
     end
   end
 
-  # def destroy
-  #   @page.destroy
-  #   redirect_to(routes([current_page_type])[:show], 
-  #     :notice => t('notices.updated', :item => 'Page'))
-  # end
+  def destroy
+    parent_page = current_page.parent
+    current_page.destroy
+    redirect_to(site_route([parent_page], :show), 
+      :notice => t('notices.updated', :item => 'Page'))
+  end
 
   private
 
