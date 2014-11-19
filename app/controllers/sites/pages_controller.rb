@@ -31,6 +31,7 @@ class Sites::PagesController < SitesController
   def update
     process_images
     if current_page.update(update_params)
+      save_images
       redirect_to(site_route([current_page], :show),
         :notice => t(
           'notices.updated', 
@@ -86,13 +87,27 @@ class Sites::PagesController < SitesController
     end
 
     def process_images
+      @images_to_save = {}
       keys = params[:page][:field_data].keys
       keys.each do |key|
         if key.starts_with?('rtimage_')
           clean_key = key.gsub(/rtimage\_/, '')
           value = params[:page][:field_data][key.to_sym]
           params[:page][:field_data][clean_key.to_sym] = value
+          @images_to_save[clean_key] = value.to_i
         end
+      end
+    end
+
+    def save_images
+      images = current_site.images.where(:idx => @images_to_save.values)
+      @images_to_save.each do |field_name, idx|
+        image = images.select { |i| i.idx == idx }.first
+        Heartwood::PageImage.find_or_create_by(
+          :page => current_page,
+          :image => image,
+          :field_name => field_name
+        )
       end
     end
 

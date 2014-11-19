@@ -24,7 +24,7 @@ class App.Views.PageImageUploader extends Backbone.View
 
   selectImage: (e) =>
     e.preventDefault()
-    src = $(e.target).parents('article.image').attr('data-src')
+    src = $(e.target).parents('article.image').attr('data-idx')
     @input.val(src)
     @ajaxPage.closePage()
 
