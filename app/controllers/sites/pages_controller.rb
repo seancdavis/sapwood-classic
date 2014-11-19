@@ -14,14 +14,16 @@ class Sites::PagesController < SitesController
   end
 
   def create
+    process_images
     @current_page = Heartwood::Page.new(create_params)
     if current_page.save!
+      save_images
       redirect_to(
         site_route([current_page], :show), 
         :notice => t(
           'notices.created', 
           :item => controller_name.humanize.titleize
-          )
+        )
       )
     else
       render('new')
@@ -65,6 +67,7 @@ class Sites::PagesController < SitesController
         :published,
         :position,
         :template,
+        :parent_id,
         :field_data => fields
       ).merge(
         :page_type => current_page_type,
@@ -81,6 +84,7 @@ class Sites::PagesController < SitesController
         :body, 
         :published,
         :position,
+        :parent_id,
         :template,
         :field_data => fields
       )
