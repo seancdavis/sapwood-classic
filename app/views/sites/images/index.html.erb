@@ -1,11 +1,7 @@
 <%= page_title('Images') do %>
   <%= link_to 'New Image', site_route([site_images], :new), 
     :class => 'new upload-trigger' %>
-  <%= simple_form_for([current_site, Heartwood::Image.new], 
-    :html => { :id => 'fileupload' }
-  ) do |f| %>
-    <%= f.input :image %>
-  <% end %>
+  <%= render 'form' %>
 <% end %>
 
 <%= render 'progress' %>

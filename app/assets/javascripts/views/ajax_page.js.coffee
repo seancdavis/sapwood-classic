@@ -13,5 +13,8 @@ class App.Views.AjaxPage extends Backbone.View
   clearContent: ->
     $(@el).html('')
 
+  openPage: ->
+    $(@el).addClass('active')
+
   closePage: ->
     $(@el).removeClass('active')

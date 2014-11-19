@@ -1,5 +1,12 @@
 section.images-container {
 
+  .upload-control {
+    margin: 0 0 15px 0;
+    .upload-trigger {
+      margin-left: 10px;
+    }
+  }
+
   article.image {
     display: inline-block;
     position: relative;
