@@ -93,13 +93,15 @@ class Sites::PagesController < SitesController
 
     def process_images
       @images_to_save = {}
-      keys = params[:page][:field_data].keys
-      keys.each do |key|
-        if key.starts_with?('rtimage_')
-          clean_key = key.gsub(/rtimage\_/, '')
-          value = params[:page][:field_data][key.to_sym]
-          params[:page][:field_data][clean_key.to_sym] = value
-          @images_to_save[clean_key] = value.to_i
+      unless params[:page][:field_data].nil?
+        keys = params[:page][:field_data].keys
+        keys.each do |key|
+          if key.starts_with?('rtimage_')
+            clean_key = key.gsub(/rtimage\_/, '')
+            value = params[:page][:field_data][key.to_sym]
+            params[:page][:field_data][clean_key.to_sym] = value
+            @images_to_save[clean_key] = value.to_i
+          end
         end
       end
     end
