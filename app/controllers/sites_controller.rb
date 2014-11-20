@@ -9,11 +9,6 @@ class SitesController < ApplicationController
   end
 
   def show
-    # if has_page_type?
-    #   redirect_to(site_route([all_page_types.first], :show))
-    # else
-    #   redirect_to(site_route([all_page_types], :new))
-    # end
   end
 
   def new
@@ -52,7 +47,13 @@ class SitesController < ApplicationController
         :title, 
         :url, 
         :description,
-        :home_page_id
+        :home_page_id,
+        :image_croppings_attributes => [
+          :title,
+          :ratio,
+          :min_width,
+          :min_height
+        ]
       )
     end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118132318) do
+ActiveRecord::Schema.define(version: 20141120225236) do
 
   create_table "heartwood_form_fields", force: true do |t|
     t.integer  "form_id"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 20141118132318) do
     t.datetime "updated_at"
   end
 
+  create_table "heartwood_image_croppings", force: true do |t|
+    t.string   "title"
+    t.integer  "site_id"
+    t.integer  "min_width"
+    t.integer  "min_height"
+    t.string   "ratio"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "heartwood_image_galleries", force: true do |t|
     t.integer  "site_id"
     t.string   "title"
@@ -51,6 +61,7 @@ ActiveRecord::Schema.define(version: 20141118132318) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "idx",        default: 0
+    t.text     "crop_data"
   end
 
   create_table "heartwood_page_images", force: true do |t|
