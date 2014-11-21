@@ -29,10 +29,16 @@ gem 'jcrop-rails-v2'
 
 gem 'cambium', :github => 'rocktree/cambium'
 gem 'carrierwave'
-gem 'hirb'
 gem 'devise'
 gem 'ancestry'
 gem 'rmagick', :require => 'RMagick'
+gem 'rails-console-tweaks'
+
+group :console do
+  gem 'wirb'
+  gem 'hirb'
+  gem 'awesome_print'
+end
 
 group :development do
   gem "better_errors"
