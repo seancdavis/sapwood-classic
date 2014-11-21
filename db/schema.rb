@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
 
   create_table "heartwood_image_croppings", force: true do |t|
     t.string   "title"
+    t.string   "slug"
     t.integer  "site_id"
     t.integer  "min_width"
     t.integer  "min_height"

@@ -5,7 +5,7 @@
 * {
   @include box-sizing(border-box);
   vertical-align: middle;
-  @include transition-all;
+  // @include transition-all;
 }
 
 @mixin top-left($position: absolute) {

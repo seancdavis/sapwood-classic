@@ -15,7 +15,6 @@ gem 'jquery-rails'
 gem 'bones-rails'
 gem 'bourbon'
 gem 'backbone-on-rails'
-gem 'jquery-fileupload-rails'
 
 # ------------------------------------------ View Helpers
 
@@ -23,6 +22,8 @@ gem 'jbuilder'
 gem 'simple_form'
 gem 'wysihtml5-rails'
 gem 'pickadate-rails'
+gem 'jquery-fileupload-rails'
+gem 'jcrop-rails-v2'
 
 # ------------------------------------------ Utilities
 

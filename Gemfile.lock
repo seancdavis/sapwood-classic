@@ -120,6 +120,7 @@ GEM
     jbuilder (2.2.3)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jcrop-rails-v2 (0.9.12.3)
     jquery-fileupload-rails (0.4.1)
       actionpack (>= 3.1)
       railties (>= 3.1)
@@ -347,6 +348,7 @@ DEPENDENCIES
   heartwood!
   hirb
   jbuilder
+  jcrop-rails-v2
   jquery-fileupload-rails
   jquery-rails
   mysql2

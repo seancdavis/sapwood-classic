@@ -5,6 +5,7 @@
 //= require pickadate/picker
 //= require pickadate/picker.date
 //= require pickadate/picker.time
+//= require jquery.Jcrop
 //= require underscore
 //= require backbone
 //= require app

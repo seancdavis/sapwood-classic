@@ -1,0 +1,31 @@
+<%= simple_form_for(
+  current_image, 
+  :url => site_image_crop_path(current_site, current_image)
+) do |f| %>
+
+  <%= f.simple_fields_for :crop_data do |data| %>
+    <% current_site.image_croppings.each do |cropping| %>
+      <%= data.simple_fields_for cropping.slug do |crop| %>
+
+        <section class="cropper" data-slug="<%= cropping.slug %>" 
+          data-min-width="<%= cropping.min_width %>" 
+          data-min-height="<%= cropping.min_height %>"
+          data-ratio="<%= cropping.aspect_ratio %>">
+          <%= content_tag(:h2, cropping.title) %>
+          <%= image_tag current_image.image.url(:to_crop) %>
+          <% value = current_image.crop(cropping.slug) %>
+          <%= crop.input :x, :as => :hidden, :input_html => { 
+            :value => value.nil? ? nil : value.x } %>
+          <%= crop.input :y, :as => :hidden, :input_html => { 
+            :value => value.nil? ? nil : value.y } %>
+          <%= crop.input :width, :as => :hidden, :input_html => { 
+            :value => value.nil? ? nil : value.width } %>
+          <%= crop.input :height, :as => :hidden, :input_html => { 
+            :value => value.nil? ? nil : value.height } %>
+        </section>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= f.submit "Save Croppings" %>
+<% end %>

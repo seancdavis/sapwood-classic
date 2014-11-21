@@ -4,6 +4,11 @@
   <header class="<%= 'select' if params[:select] %>">
     <%= link_to(
       '', 
+      site_image_cropper_path(current_site, image),
+      :class => 'crop image-crop-trigger'
+    ) unless params[:select] %>
+    <%= link_to(
+      '', 
       site_route([image], :show), 
       :class => 'delete', 
       :method => :delete, 

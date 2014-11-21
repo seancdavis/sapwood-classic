@@ -9,6 +9,8 @@ module Sites
       @current_image ||= begin
         if controller_name == 'images'
           current_site.images.find_by_idx(params[:idx])
+        elsif controller_name == 'croppings'
+          current_site.images.find_by_idx(params[:image_idx])
         end
       end
     end
