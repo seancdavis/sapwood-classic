@@ -62,7 +62,8 @@ class Sites::PagesController < SitesController
       current_page_type.groups.each { |g| fields << g.fields }
       fields = fields.flatten.uniq.collect(&:slug).map { |f| f.to_sym }
       params.require(:page).permit(
-        :title, 
+        :title,
+        :slug,  
         :description, 
         :body, 
         :published,
@@ -80,7 +81,8 @@ class Sites::PagesController < SitesController
       current_page_type.groups.each { |g| fields << g.fields }
       fields = fields.flatten.uniq.collect(&:slug).map { |f| f.to_sym }
       params.require(:page).permit(
-        :title, 
+        :title,
+        :slug,  
         :description, 
         :body, 
         :published,

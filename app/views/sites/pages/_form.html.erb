@@ -7,10 +7,13 @@
       <%= f.input :title %>
       <%= f.input :position %>
     </div>
+    <div class="half-row">
+      <%= f.input :slug %>
+      <%= f.input :template, :collection => current_page_type.templates, 
+        :selected => current_page_type.templates.first %>
+    </div>
     <%= f.input :description %>
     <%= f.input :published, :as => :hidden %>
-    <%= f.input :template, :collection => current_page_type.templates, 
-      :selected => current_page_type.templates.first %>
     <%= f.input :page_type_id, :as => :hidden, :wrapper => false, 
       :input_html => { :value => current_page_type.id } %>
     <%= f.input :parent_id, :as => :hidden, :input_html => { 
