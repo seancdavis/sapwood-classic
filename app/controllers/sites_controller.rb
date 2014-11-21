@@ -49,6 +49,7 @@ class SitesController < ApplicationController
         :description,
         :home_page_id,
         :image_croppings_attributes => [
+          :id, 
           :title,
           :ratio,
           :min_width,
