@@ -13,6 +13,9 @@
 #  field_data   :text
 #  created_at   :datetime
 #  updated_at   :datetime
+#  position     :integer          default(0)
+#  template     :string(255)
+#  order        :string(255)
 #
 
 FactoryGirl.define do

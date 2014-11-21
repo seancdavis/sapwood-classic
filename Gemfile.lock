@@ -6,16 +6,6 @@ GIT
       rails
       rake
 
-PATH
-  remote: /Volumes/sean/code/rocktree/rt/cms/heartwood
-  specs:
-    heartwood (0.0.1)
-      ancestry
-      carrierwave
-      devise
-      rails (~> 4.1.0)
-      rmagick
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -334,6 +324,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ancestry
   annotate
   backbone-on-rails
   better_errors
@@ -343,9 +334,9 @@ DEPENDENCIES
   cambium!
   carrierwave
   coffee-rails
+  devise
   factory_girl_rails
   faker
-  heartwood!
   hirb
   jbuilder
   jcrop-rails-v2
@@ -354,6 +345,7 @@ DEPENDENCIES
   mysql2
   pickadate-rails
   rails (= 4.1.0)
+  rmagick
   rspec-rails
   sass-rails
   simple_form

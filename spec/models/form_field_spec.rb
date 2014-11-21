@@ -8,7 +8,7 @@
 #  data_type  :string(255)
 #  options    :text
 #  required   :boolean          default(FALSE)
-#  position   :integer
+#  position   :integer          default(0)
 #  created_at :datetime
 #  updated_at :datetime
 #

@@ -10,12 +10,12 @@ class Sites::PagesController < SitesController
   def new
     redirect_to current_site unless params[:page_type]
     @current_page_type = current_site.page_types.find_by_slug(params[:page_type])
-    @current_page = Heartwood::Page.new
+    @current_page = Page.new
   end
 
   def create
     process_images
-    @current_page = Heartwood::Page.new(create_params)
+    @current_page = Page.new(create_params)
     if current_page.save!
       save_images
       redirect_to(
@@ -110,7 +110,7 @@ class Sites::PagesController < SitesController
       images = current_site.images.where(:idx => @images_to_save.values)
       @images_to_save.each do |field_name, idx|
         image = images.select { |i| i.idx == idx }.first
-        Heartwood::PageImage.find_or_create_by(
+        PageImage.find_or_create_by(
           :page => current_page,
           :image => image,
           :field_name => field_name

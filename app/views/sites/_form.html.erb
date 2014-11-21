@@ -13,7 +13,7 @@
 
   <section class="form tabbed image-croppers">
     <% croppings = (
-      current_site.image_croppings + [Heartwood::ImageCropping.new]
+      current_site.image_croppings + [ImageCropping.new]
     ) %>
     <%= f.simple_fields_for(:image_croppings, croppings) do |crop| %>
       <div class="half-row">

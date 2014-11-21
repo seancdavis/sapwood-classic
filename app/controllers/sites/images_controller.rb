@@ -11,7 +11,7 @@ class Sites::ImagesController < SitesController
   def create
     respond_to do |format|
       format.json do
-        @image = Heartwood::Image.create!(image_params)
+        @image = Image.create!(image_params)
         render :json => @image
       end
     end

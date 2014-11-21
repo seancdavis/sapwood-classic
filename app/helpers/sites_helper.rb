@@ -9,7 +9,7 @@ module SitesHelper
 
   def my_sites
     @my_sites ||= begin
-      admin? ? Heartwood::Site.last_updated : current_user.sites.last_updated
+      admin? ? Site.last_updated : current_user.sites.last_updated
     end
   end
 

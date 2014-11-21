@@ -1,15 +1,15 @@
 class Sites::PageTypesController < SitesController
 
   def new
-    @current_page_type = Heartwood::PageType.new
+    @current_page_type = PageType.new
   end
 
   def create
-    @current_page_type = Heartwood::PageType.new(create_params)
+    @current_page_type = PageType.new(create_params)
     if current_page_type.save
       delete_groups = params[:page_type][:delete_group].split(',').reject(&:blank?)
       if delete_groups.size > 0
-        Heartwood::PageTypeFieldGroup.where(:slug => delete_groups).destroy_all
+        PageTypeFieldGroup.where(:slug => delete_groups).destroy_all
       end
       redirect_to(
         site_route([all_page_types], :index), 
@@ -27,7 +27,7 @@ class Sites::PageTypesController < SitesController
     if current_page_type.update(update_params)
       delete_groups = params[:page_type][:delete_group].split(',').reject(&:blank?)
       if delete_groups.size > 0
-        Heartwood::PageTypeFieldGroup.where(:slug => delete_groups).destroy_all
+        PageTypeFieldGroup.where(:slug => delete_groups).destroy_all
       end
       redirect_to(
         site_route([current_page_type], :edit), 

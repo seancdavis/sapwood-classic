@@ -16,7 +16,7 @@
   <section class="form tabbed fields">
     <%= f.simple_fields_for(
       :form_fields, 
-      (current_form.form_fields + [Heartwood::FormField.new])
+      (current_form.form_fields + [FormField.new])
     ) do |field| %>
       <div class="field">
         <div class="half-row">

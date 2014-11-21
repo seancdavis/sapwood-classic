@@ -12,13 +12,13 @@ class SitesController < ApplicationController
   end
 
   def new
-    @current_site = Heartwood::Site.new
+    @current_site = Site.new
   end
 
   def create
-    @current_site = Heartwood::Site.new(create_params)
+    @current_site = Site.new(create_params)
     if current_site.save
-      Heartwood::SiteUser.create!(:user => current_user, :site => current_site, 
+      SiteUser.create!(:user => current_user, :site => current_site, 
         :site_admin => true)
       redirect_to(route([current_site], :show), 
         :notice => t('notices.created', :item => "Site")) 

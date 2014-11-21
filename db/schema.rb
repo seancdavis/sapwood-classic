@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20141120225236) do
 
-  create_table "heartwood_form_fields", force: true do |t|
+  create_table "form_fields", force: true do |t|
     t.integer  "form_id"
     t.string   "title"
     t.string   "data_type"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.datetime "updated_at"
   end
 
-  create_table "heartwood_forms", force: true do |t|
+  create_table "forms", force: true do |t|
     t.integer  "site_id"
     t.string   "title"
     t.string   "slug"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.datetime "updated_at"
   end
 
-  create_table "heartwood_image_croppings", force: true do |t|
+  create_table "image_croppings", force: true do |t|
     t.string   "title"
     t.string   "slug"
     t.integer  "site_id"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.datetime "updated_at"
   end
 
-  create_table "heartwood_image_galleries", force: true do |t|
+  create_table "image_galleries", force: true do |t|
     t.integer  "site_id"
     t.string   "title"
     t.string   "slug"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.datetime "updated_at"
   end
 
-  create_table "heartwood_images", force: true do |t|
+  create_table "images", force: true do |t|
     t.integer  "site_id"
     t.string   "image"
     t.datetime "created_at"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.text     "crop_data"
   end
 
-  create_table "heartwood_page_images", force: true do |t|
+  create_table "page_images", force: true do |t|
     t.integer  "page_id"
     t.integer  "image_id"
     t.string   "field_name"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.datetime "updated_at"
   end
 
-  create_table "heartwood_page_type_field_groups", force: true do |t|
+  create_table "page_type_field_groups", force: true do |t|
     t.integer  "page_type_id"
     t.string   "title"
     t.string   "slug"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.datetime "updated_at"
   end
 
-  create_table "heartwood_page_type_fields", force: true do |t|
+  create_table "page_type_fields", force: true do |t|
     t.integer  "page_type_field_group_id"
     t.string   "title"
     t.string   "slug"
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.datetime "updated_at"
   end
 
-  create_table "heartwood_page_types", force: true do |t|
+  create_table "page_types", force: true do |t|
     t.integer  "site_id"
     t.string   "title"
     t.string   "slug"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.string   "label"
   end
 
-  create_table "heartwood_pages", force: true do |t|
+  create_table "pages", force: true do |t|
     t.integer  "page_type_id"
     t.string   "title"
     t.string   "slug"
@@ -122,9 +122,9 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.string   "order"
   end
 
-  add_index "heartwood_pages", ["ancestry"], name: "index_heartwood_pages_on_ancestry", using: :btree
+  add_index "pages", ["ancestry"], name: "index_pages_on_ancestry", using: :btree
 
-  create_table "heartwood_site_users", force: true do |t|
+  create_table "site_users", force: true do |t|
     t.integer  "site_id"
     t.integer  "user_id"
     t.boolean  "site_admin", default: false
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.datetime "updated_at"
   end
 
-  create_table "heartwood_sites", force: true do |t|
+  create_table "sites", force: true do |t|
     t.string   "title"
     t.string   "slug"
     t.string   "url"
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.integer  "home_page_id"
   end
 
-  create_table "heartwood_users", force: true do |t|
+  create_table "users", force: true do |t|
     t.string   "name"
     t.text     "settings"
     t.boolean  "admin",                  default: false
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.datetime "updated_at"
   end
 
-  add_index "heartwood_users", ["email"], name: "index_heartwood_users_on_email", unique: true, using: :btree
-  add_index "heartwood_users", ["reset_password_token"], name: "index_heartwood_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

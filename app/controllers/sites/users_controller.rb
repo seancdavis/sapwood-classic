@@ -10,10 +10,10 @@ class Sites::UsersController < SitesController
   end
 
   def create
-    @user = Heartwood::User.find_by_email(params[:user][:email])
-    @user = Heartwood::User.create!(create_params) if @user.nil?
+    @user = User.find_by_email(params[:user][:email])
+    @user = User.create!(create_params) if @user.nil?
     if @user.save
-      @site_user = Heartwood::SiteUser.create!(:user => @user, 
+      @site_user = SiteUser.create!(:user => @user, 
         :site => current_site)
       if @site_user.save
         redirect_to(site_route([@user], :index), 
@@ -27,7 +27,7 @@ class Sites::UsersController < SitesController
   end
 
   def destroy
-    site_users = Heartwood::SiteUser.where(:user_id => params[:id])
+    site_users = SiteUser.where(:user_id => params[:id])
     site_users.destroy_all
     redirect_to(site_route([@user], :index), 
       :notice => t('notices.deleted', :item => "User"))
@@ -37,7 +37,7 @@ class Sites::UsersController < SitesController
 
     def set_user
       if action_name == 'new'
-        @user = Heartwood::User.new(params[:user] ? create_params : nil)
+        @user = User.new(params[:user] ? create_params : nil)
       else
         @user = current_site.users.find_by_id(params[:id])
       end

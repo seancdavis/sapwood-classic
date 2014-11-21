@@ -27,10 +27,12 @@ gem 'jcrop-rails-v2'
 
 # ------------------------------------------ Utilities
 
-gem 'heartwood', :path => '/Volumes/sean/code/rocktree/rt/cms/heartwood'
 gem 'cambium', :github => 'rocktree/cambium'
 gem 'carrierwave'
 gem 'hirb'
+gem 'devise'
+gem 'ancestry'
+gem 'rmagick', :require => 'RMagick'
 
 group :development do
   gem "better_errors"

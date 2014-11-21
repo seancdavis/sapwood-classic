@@ -6,7 +6,7 @@
 #  page_type_id :integer
 #  title        :string(255)
 #  slug         :string(255)
-#  position     :integer
+#  position     :integer          default(0)
 #  created_at   :datetime
 #  updated_at   :datetime
 #

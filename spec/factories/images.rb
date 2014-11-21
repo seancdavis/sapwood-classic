@@ -3,10 +3,12 @@
 # Table name: images
 #
 #  id         :integer          not null, primary key
-#  gallery_id :integer
-#  url        :string(255)
+#  site_id    :integer
+#  image      :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  idx        :integer          default(0)
+#  crop_data  :text
 #
 
 FactoryGirl.define do

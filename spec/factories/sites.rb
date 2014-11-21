@@ -2,14 +2,14 @@
 #
 # Table name: sites
 #
-#  id          :integer          not null, primary key
-#  account_id  :integer
-#  title       :string(255)
-#  slug        :string(255)
-#  url         :string(255)
-#  description :text
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id           :integer          not null, primary key
+#  title        :string(255)
+#  slug         :string(255)
+#  url          :string(255)
+#  description  :text
+#  created_at   :datetime
+#  updated_at   :datetime
+#  home_page_id :integer
 #
 
 FactoryGirl.define do
