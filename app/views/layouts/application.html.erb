@@ -4,13 +4,8 @@
     <%= render :partial => 'status' %>
 
     <div id="container">
-      <%= content_tag(:header, render('header')) %>
-      <%= content_tag(:aside, render('sidebar'), :id => 'sidebar') %>
       <%= content_tag(:div, yield, :id => 'content') %>
     </div>
 
-    <%= render 'ajax_page' %>
-
-    <%= javascript_include_tag 'application' %>
   </body>
 </html>

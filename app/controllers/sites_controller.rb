@@ -5,7 +5,6 @@ class SitesController < ApplicationController
   include Sites::PageTypesHelper, Sites::PagesHelper
 
   def index
-    # redirect_to(only_site) unless has_multiple_sites?
   end
 
   def show
@@ -68,7 +67,7 @@ class SitesController < ApplicationController
         when 'index', 'new', 'create'
           'my_sites'
         else
-          'application'
+          'sites'
         end
       end
     end

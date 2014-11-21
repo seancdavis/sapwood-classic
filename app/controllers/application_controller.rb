@@ -6,10 +6,12 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper, SitesHelper, UsersHelper
 
   def home
-    if has_sites? || admin?
-      redirect_to(has_multiple_sites? ? sites_path : site_path(only_site))
-    else
-      sign_out_and_redirect(current_user)
+    if user_signed_in?
+      if has_sites? || admin?
+        redirect_to(has_multiple_sites? ? sites_path : site_path(only_site))
+      else
+        sign_out_and_redirect(current_user)
+      end
     end
   end
 
