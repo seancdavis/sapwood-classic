@@ -5,10 +5,8 @@ class ApplicationController < ActionController::Base
 
   include ApplicationHelper, SitesHelper, UsersHelper
 
-  before_filter :authenticate_user!
-
   def home
-    if has_sites?
+    if has_sites? || admin?
       redirect_to(has_multiple_sites? ? sites_path : site_path(only_site))
     else
       sign_out_and_redirect(current_user)
