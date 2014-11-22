@@ -28,7 +28,7 @@ module ViewerHelper
     content_tag(:nav, :class => 'main') do
       content_tag(:ul) do
         o = ''
-        site_pages.each do |page|
+        site_root_pages.each do |page|
           o += content_tag(:li, link_to(
             page.title, 
             viewer_page_path(:page_path => page.slug))
