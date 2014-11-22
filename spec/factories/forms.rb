@@ -13,6 +13,7 @@
 #  created_at          :datetime
 #  updated_at          :datetime
 #  key                 :string(255)
+#  button_label        :string(255)
 #
 
 FactoryGirl.define do

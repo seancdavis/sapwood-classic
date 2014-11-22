@@ -36,6 +36,7 @@ class Builder::FormsController < BuilderController
     def form_params
       params.require(:form).permit(
         :title,
+        :button_label,
         :description,
         :body,
         :thank_you_body,

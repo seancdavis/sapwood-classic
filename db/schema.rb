@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122134140) do
+ActiveRecord::Schema.define(version: 20141122142028) do
 
   create_table "form_fields", force: true do |t|
     t.integer  "form_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20141122134140) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "key"
+    t.string   "button_label"
   end
 
   create_table "image_croppings", force: true do |t|
