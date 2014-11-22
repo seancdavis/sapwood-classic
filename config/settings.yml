@@ -5,8 +5,11 @@
 # access "Hello" through SETTINGS['say']['hello']
 #
 development: &default
-  say:
-    hello: "Hello"
+  transform_u_fitness:
+    social:
+      facebook: "https://www.facebook.com/SetaPersonalTraining"
+      twitter: "https://twitter.com/TrainerMike28"
+      youtube: "http://www.youtube.com/user/MikeSetaPT"
 
 test:
   <<: *default

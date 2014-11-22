@@ -1,7 +1,8 @@
 # Loads config/settings.yml into SETTINGS[]
 config_file = File.join(Rails.root,'config','settings.yml')
 if File.exists?(config_file)
-  SETTINGS = YAML.load_file(config_file)[Rails.env]
+  settings = YAML.load_file(config_file)[Rails.env]
+  SETTINGS = settings.to_ostruct
 end
 
 # Loads config/settings_private.yml (sensitive settings) into PRIVATE[]

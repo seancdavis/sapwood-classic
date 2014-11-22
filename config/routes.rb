@@ -9,17 +9,6 @@ Rails.application.routes.draw do
     get '/logout' => 'devise/sessions#destroy', :as => :destroy_user_session
   end
 
-  # ------------------------------------------ JSON
-  # 
-  # If you plan to use any public json routes, it's good to nest them in their
-  # own scope. We use a scope instead of a namespace because a controller action
-  # can have routes to it in different formats, so namespacing is unecessary.
-  # 
-  # scope 'json' do
-  #   'users' => 'users#index'
-  # end
-  # 
-
   # ------------------------------------------ Builder
 
   namespace :builder, :path => '' do
@@ -35,8 +24,17 @@ Rails.application.routes.draw do
     end
   end
 
+  # ------------------------------------------ Viewer
+
+  namespace :viewer, :path => '' do
+    scope ':site_slug' do
+      get '/' => 'pages#home', :as => :site_home
+      get '/*page_path' => 'pages#show', :as => :page
+    end
+  end
+
   # ------------------------------------------ Home Page
 
-  root :to => 'application#home'
+  root :to => 'builder#home'
 
 end
