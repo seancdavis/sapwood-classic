@@ -28,3 +28,6 @@ public/media/
 
 # Stupid Files
 *.DS_Store
+
+# Imported Assets
+lib/assets/import/
