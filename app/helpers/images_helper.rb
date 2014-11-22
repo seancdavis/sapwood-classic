@@ -20,7 +20,7 @@ module ImagesHelper
 
   def find_page_image(idx)
     image = page_images.select { |image| image.idx == idx.to_i }.first
-    image.image.url(:thumb)
+    return image.image.url(:thumb) unless image.nil?
   end
 
 end
