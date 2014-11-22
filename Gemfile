@@ -29,6 +29,7 @@ gem 'jcrop-rails-v2'
 
 gem 'cambium', :github => 'rocktree/cambium'
 gem 'carrierwave'
+gem 'fog'
 gem 'devise'
 gem 'ancestry'
 gem 'rmagick', :require => 'RMagick'

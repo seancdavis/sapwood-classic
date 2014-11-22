@@ -5,10 +5,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   include CarrierWave::MimeTypes
 
-  storage :file
-
   def store_dir
-    "media/#{model.site.slug}/images/#{model.id}"
+    "sites/#{model.site.slug}/media/images/#{model.idx}"
   end
 
   version :thumb do
