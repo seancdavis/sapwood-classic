@@ -8,4 +8,8 @@ class TransformUFitness
     @site.page_types.find_by_slug('result').pages
   end
 
+  def free_consultation_form
+    @site.forms.find_by_slug('free-consultation')
+  end
+
 end
