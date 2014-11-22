@@ -1,6 +1,6 @@
 <%= simple_form_for(
-  current_image, 
-  :url => site_image_crop_path(current_site, current_image)
+  [:builder, current_image], 
+  :url => builder_site_image_crop_path(current_site, current_image)
 ) do |f| %>
 
   <%= f.simple_fields_for :crop_data do |data| %>
