@@ -3,7 +3,11 @@ module SitesHelper
   def current_site
     @current_site ||= begin
       p = params[:site_slug] || params[:slug]
-      my_sites.select{ |s| s.slug == p }.first unless p.nil?
+      if user_signed_in?
+        my_sites.select{ |s| s.slug == p }.first unless p.nil?
+      else
+        Site.find_by_slug(p) unless p.nil?
+      end
     end
   end
 
