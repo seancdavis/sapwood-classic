@@ -1,4 +1,4 @@
-<%= page_title("Edit #{current_page_type.title}") do %>
+<%= builder_page_title("Edit #{current_page_type.title}") do %>
   <%= link_to(
       'New Page', 
       new_builder_site_page_path(current_site, :page_type => current_page_type.slug),

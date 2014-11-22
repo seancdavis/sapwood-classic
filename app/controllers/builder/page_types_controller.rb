@@ -12,7 +12,7 @@ class Builder::PageTypesController < BuilderController
         PageTypeFieldGroup.where(:slug => delete_groups).destroy_all
       end
       redirect_to(
-        builder_route([all_page_types], :index), 
+        builder_route([site_page_types], :index), 
         :notice => t(
           'notices.created', 
           :item => controller_name.humanize.titleize
@@ -44,7 +44,7 @@ class Builder::PageTypesController < BuilderController
   def destroy
     current_page_type.destroy
     redirect_to(
-      builder_route([all_page_types], :index), 
+      builder_route([site_page_types], :index), 
       :notice => t(
         'notices.deleted', 
         :item => controller_name.humanize.titleize

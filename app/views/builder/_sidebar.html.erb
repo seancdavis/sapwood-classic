@@ -1,6 +1,6 @@
 <section class="site-control">
   <ul class="bottom-nav">
-    <% site_nav.each do |item, attrs| %>
+    <% builder_site_nav.each do |item, attrs| %>
       <li class="<%= attrs['classes'] %>">
         <%= link_to(attrs['path']) do %>
           <%= content_tag(:i, nil, :class => "icon-#{attrs['icon']}") %>
@@ -12,7 +12,7 @@
 
 <section class="site-menu">
   <ul class="site-nav">
-    <% site_menu.each do |attrs, val| %>
+    <% builder_site_menu.each do |attrs, val| %>
       <li class="<%= attrs['classes'] %>">
         <%= link_to attrs['label'].upcase, attrs['path'] %>
       </li>

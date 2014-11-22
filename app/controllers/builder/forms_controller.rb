@@ -1,6 +1,6 @@
 class Builder::FormsController < BuilderController
 
-  include Builder::FormsHelper
+  include FormsHelper
 
   def new
     @current_form = Form.new

@@ -13,7 +13,7 @@ class Viewer::PagesController < ViewerController
       @current_page = current_site.pages.find_by_slug(slug)
     end
     render(
-      "viewer/#{current_site.slug}/#{template}", 
+      "viewer/#{current_site.slug}/#{current_page_template}", 
       :layout => current_site.slug
     )
   end

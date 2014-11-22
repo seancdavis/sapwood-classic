@@ -1,6 +1,6 @@
 class Builder::ImagesController < BuilderController
 
-  include Builder::ImagesHelper
+  include ImagesHelper
 
   def index
     if request.xhr?

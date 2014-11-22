@@ -1,4 +1,4 @@
-<%= page_title(current_page.title) do %>
+<%= builder_page_title(current_page.title) do %>
   <%= link_to "Edit #{current_page.title}", builder_route([current_page], :edit), 
     :class => 'edit' %>
   <%= new_page_children_links %>

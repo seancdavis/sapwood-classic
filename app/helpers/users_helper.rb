@@ -13,4 +13,10 @@ module UsersHelper
     end
   end
 
+  def site_admin?(user = current_user)
+    su = user.site_users.select { |u| u.site_id = current_site.id }.first
+    return su.site_admin? unless su.nil?
+    false
+  end
+
 end
