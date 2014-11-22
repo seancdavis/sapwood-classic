@@ -21,6 +21,8 @@ class BuilderController < ActionController::Base
       else
         sign_out_and_redirect(current_user)
       end
+    else
+      render(:layout => 'application')
     end
   end
 
