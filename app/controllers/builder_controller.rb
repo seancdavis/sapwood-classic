@@ -15,15 +15,16 @@ class BuilderController < ActionController::Base
   before_filter :init_options
 
   def home
-    if user_signed_in?
+    authenticate_user!
+    # if user_signed_in?
       if has_sites? || admin?
         redirect_to(has_multiple_sites? ? builder_sites_path : builder_site_path(only_site))
       else
         sign_out_and_redirect(current_user)
       end
-    else
-      render(:layout => 'application')
-    end
+    # else
+    #   # render(:layout => 'application')
+    # end
   end
 
   private
