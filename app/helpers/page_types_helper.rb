@@ -27,7 +27,8 @@ module PageTypesHelper
       ['String', 'string'],
       ['Text', 'text'],
       ['Dropdown', 'select'],
-      # ['Date', 'date'],
+      ['Date', 'date'],
+      ['Checkbox', 'boolean'],
       # ['Date & Time', 'datetime'],
       # ['File Upload', 'file']
       ['Image', 'image'],

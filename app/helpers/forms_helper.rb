@@ -16,7 +16,7 @@ module FormsHelper
       ['Text (Single Line)', 'string'],
       ['Text (Multi-Line)', 'text'],
       ['Dropdown', 'select'],
-      # ['Date', 'date'],
+      ['Date', 'date'],
       # ['Date & Time', 'datetime'],
       # ['File Upload', 'file']
     ].sort
