@@ -46,7 +46,12 @@ class Builder::FormsController < BuilderController
           :data_type,
           :position,
           :required,
-          :options
+          :options,
+          :slug,
+          :label,
+          :placeholder,
+          :default_value,
+          :show_label,
         ]
       ).merge(
         :site => current_site

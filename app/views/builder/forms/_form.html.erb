@@ -21,15 +21,26 @@
       <div class="field">
         <div class="half-row">
           <%= field.input :title %>
+          <%= field.input :slug, :label => 'Name' %>
+        </div>
+        <div class="half-row">
+          <%= field.input :label %>
+          <%= field.input :show_label %>
+        </div>
+        <div class="half-row">
           <%= field.input :data_type, :collection => form_field_options, 
             :input_html => { :class => 'field-data-type' } %>
+          <%= field.input :required %>
+        </div>
+        <div class="half-row">
+          <%= field.input :placeholder %>
+          <%= field.input :default_value %>
         </div>
         <div class="half-row">
           <%= field.input :position %>
-          <%= field.input :required %>
+          <%= field.input :options, :wrapper_html => { 
+            :class => 'field-options input' } %>
         </div>
-        <%= field.input :options, :wrapper_html => { 
-          :class => 'field-options' } %>
         <hr>
       </div>
     <% end %>

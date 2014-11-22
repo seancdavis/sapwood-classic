@@ -12,6 +12,7 @@
 #  notification_emails :text
 #  created_at          :datetime
 #  updated_at          :datetime
+#  key                 :string(255)
 #
 
 class Form < ActiveRecord::Base
@@ -25,6 +26,7 @@ class Form < ActiveRecord::Base
   belongs_to :site, :touch => true
 
   has_many :form_fields
+  has_many :form_submissions
 
   accepts_nested_attributes_for :form_fields
 
@@ -38,6 +40,13 @@ class Form < ActiveRecord::Base
 
   def remove_blank_fields
     form_fields.where("title = ''").destroy_all
+  end
+
+  after_create :add_key
+
+  def add_key
+    require 'securerandom'
+    self.update_columns(:key => SecureRandom.hex(14))
   end
 
   # ------------------------------------------ Instance Methods

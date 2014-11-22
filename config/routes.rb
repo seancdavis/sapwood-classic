@@ -24,6 +24,14 @@ Rails.application.routes.draw do
     end
   end
 
+  # ------------------------------------------ API
+
+  namespace :api do
+    namespace :v1 do
+      resources :forms, :only => [:create]
+    end
+  end
+
   # ------------------------------------------ Viewer
 
   namespace :viewer, :path => '' do

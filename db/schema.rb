@@ -11,15 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120225236) do
+ActiveRecord::Schema.define(version: 20141122134140) do
 
   create_table "form_fields", force: true do |t|
     t.integer  "form_id"
     t.string   "title"
     t.string   "data_type"
     t.text     "options"
-    t.boolean  "required",   default: false
-    t.integer  "position",   default: 0
+    t.boolean  "required",      default: false
+    t.integer  "position",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "slug"
+    t.string   "label"
+    t.string   "placeholder"
+    t.string   "default_value"
+    t.boolean  "show_label",    default: true
+  end
+
+  create_table "form_submissions", force: true do |t|
+    t.integer  "form_id"
+    t.integer  "idx",        default: 0
+    t.text     "field_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,6 +47,7 @@ ActiveRecord::Schema.define(version: 20141120225236) do
     t.text     "notification_emails"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "key"
   end
 
   create_table "image_croppings", force: true do |t|
