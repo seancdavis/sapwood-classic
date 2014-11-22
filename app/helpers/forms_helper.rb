@@ -31,7 +31,11 @@ module FormsHelper
       :url => api_v1_forms_path(:key => form.key)
     ) do |f|  
       f.simple_fields_for :field_data do |field_data|
-        o = ''
+        o = f.input(
+          :redirect_url, 
+          :as => :hidden,
+          :input_html => { :value => request.url }
+        )
         form.fields.each do |field|
           o += form_field_view(field, field_data)
         end

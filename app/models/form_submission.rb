@@ -12,6 +12,10 @@
 
 class FormSubmission < ActiveRecord::Base
 
+  # ------------------------------------------ Plugins
+
+  include FormIdx
+
   # ------------------------------------------ Attributes
 
   serialize :field_data, Hash

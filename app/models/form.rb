@@ -46,8 +46,9 @@ class Form < ActiveRecord::Base
   after_create :add_key
 
   def add_key
-    require 'securerandom'
-    self.update_columns(:key => SecureRandom.hex(14))
+    require 'digest/md5'
+    logic = "form-#{id}-#{created_at}"
+    self.update_columns(:key => Digest::MD5.hexdigest(logic))
   end
 
   # ------------------------------------------ Instance Methods
