@@ -1,0 +1,9 @@
+<section class="images-container">
+  <%= content_tag(:div, :class => 'upload-control') do %>
+    <%= link_to 'New Image', builder_route([site_images], :new), 
+      :class => 'new upload-trigger' %>
+    <%= render 'form' %>
+    <%= render 'progress' %>
+  <% end if params[:select] %>
+  <%= render :partial => 'image', :collection => site_images %>
+</section>

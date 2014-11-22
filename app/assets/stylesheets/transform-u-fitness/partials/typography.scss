@@ -1,0 +1,39 @@
+h1 {
+  position: relative;
+  z-index: 1;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: center;
+  text-transform: uppercase;
+  &:before {
+    border-top: 2px solid $color-3;
+    content:"";
+    margin: 0 auto;
+    position: absolute;
+    top: 21px;
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+  }
+  span { 
+    background: white;
+    padding: 0 15px;
+    color: $color-3;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+  }
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 15px 0 0 0;
+}
+
+p {
+  margin: 5px 0 10px 0;
+}

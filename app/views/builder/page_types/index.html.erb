@@ -1,0 +1,9 @@
+<%= page_title('Page Types') do %>
+  <%= link_to(
+    'New Page Type',  
+    builder_route([all_page_types], :new), 
+    :class => 'new'
+  ) %>
+<% end %>
+
+<%= data_table(all_page_types, 'page_type') %>

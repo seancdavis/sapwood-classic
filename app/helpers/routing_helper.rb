@@ -1,14 +1,21 @@
 module RoutingHelper
 
-  def route(items, action)
-    i = ""; s = ""; pop = false
+  def route(items, action, namespace = '')
+    if namespace.blank?
+      i = ""
+      s = ""
+    else
+      i = "#{namespace}_"
+      s = "#{namespace}_"
+    end
+    pop = false
     if items.last.is_a?(Array)
       items[-1] = items.last.flatten.first
       pop = true
     end
     items.each do |item|
       klass = item.class.method_defined?(:model) ? item.model : item.class
-      t = klass.table_name.gsub(/heartwood\_/, '')
+      t = klass.table_name
       ts = t.singularize; s += "#{ts}_"
       item == items.last ? i += "#{t}_" : i += "#{ts}_"
     end
@@ -28,12 +35,8 @@ module RoutingHelper
     end
   end
 
-  def site_route(items, action)
-    route([current_site] + items, action)
-  end
-
-  def page_type_route(items, action)
-    route([current_site, current_page_type], action)
+  def builder_route(items, action)
+    route([current_site] + items, action, 'builder')
   end
 
 end

@@ -1,0 +1,11 @@
+<%= page_title("Edit #{current_page_type.title}") do %>
+  <%= link_to(
+      'New Page', 
+      new_builder_site_page_path(current_site, :page_type => current_page_type.slug),
+      :class => 'new'
+    ) %>
+  <%= link_to 'Page Types',  builder_route([current_page_type], :index), 
+    :class => 'back' %>
+<% end %>
+
+<%= render 'form' %>

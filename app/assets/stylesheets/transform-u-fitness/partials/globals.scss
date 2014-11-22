@@ -1,0 +1,9 @@
+@mixin container($size: large) {
+  display: block;
+  @if $size == large {
+    max-width: 1000px;
+  } @else {
+    max-width: 800px;
+  }
+  margin: 0 auto;
+}

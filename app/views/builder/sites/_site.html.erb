@@ -1,0 +1,8 @@
+<article class="site">
+  <%= content_tag(
+    :time, 
+    "Updated #{time_ago_in_words(site.updated_at)} ago", 
+    :class => 'date'
+  ) %>
+  <%= content_tag(:h4, link_to(site.title, builder_site_path(site))) %>
+</article>

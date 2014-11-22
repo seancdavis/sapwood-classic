@@ -1,0 +1,12 @@
+<article class="user">
+  <%= content_tag(:div, :class => 'admin') { 
+    o = content_tag(:i, nil, :class => 'icon-user4')
+    o+= content_tag(:span, 'Admin') } if site_admin?(user) %>
+  <%= avatar(user, 64, "grey small") %>
+  <%= content_tag(:h4, user.display_name) %>
+  <div class="links">
+    <%= link_to('Delete', builder_route([user], :show), :method => :delete, 
+      :class => 'delete', :data => { :confirm => 'Are you sure?' } ) unless 
+      user == current_user%>
+  </div>
+</article>

@@ -1,0 +1,87 @@
+body > header {
+  margin: 0 0 15px;
+
+  .logo {
+    @include container;
+    position: relative;
+    z-index: 99999;
+    a {
+      position: absolute;
+      top: -4px;
+      width: 350px;
+      @include transition(none);
+      &:active {
+        top: -2px;
+        outline: none;
+      }
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .social {
+    padding: 25px;
+    background: white;
+    ul {
+      @include clear-list;
+      @include container;
+      padding-right: 15px;
+      text-align: right;
+      li {
+        display: inline-block;
+        a {
+          display: block;
+          width: 20px;
+          height: 20px;
+          margin: 0 2px;
+          padding: 5px;
+          text-align: center;
+          border-radius: 100%;
+          color: white;
+          background: $color-1;
+          font-size: 10px;
+          &:before {
+            font-family: 'icomoon';
+            font-size: 10px;
+          }
+          &.facebook:before { content: "\e769"; }
+          &.twitter:before { content: "\e76d"; }
+          &.youtube:before { content: "\e773"; }
+        }
+      }
+    }
+  }
+
+  .main-nav {
+    padding: 15px 0;
+    background: $color-4;
+    border-bottom: 20px solid $color-1;
+    nav {
+      text-align: right;
+      ul {
+        @include container;
+        float: none;
+        li {
+          line-height: 0;
+          border-right: 1px solid $color-dark;
+          &:last-child {
+            border-right: none;
+          }
+          a {
+            padding: 0;
+            font-size: 16px;
+            line-height: 16px;
+            text-transform: uppercase;
+            color: $color-dark;
+            border-bottom: none;
+            &:hover {
+              color: $color-1;
+              border-bottom: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

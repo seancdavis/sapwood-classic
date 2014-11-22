@@ -1,7 +1,0 @@
-<%= page_title(current_page.title) do %>
-  <%= link_to "Edit #{current_page.title}", site_route([current_page], :edit), 
-    :class => 'edit' %>
-  <%= new_page_children_links %>
-<% end %>
-
-<%= data_table(current_page.children, 'page') %>

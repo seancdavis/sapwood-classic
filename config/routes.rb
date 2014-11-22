@@ -20,10 +20,10 @@ Rails.application.routes.draw do
   # end
   # 
 
-  # ------------------------------------------ App
+  # ------------------------------------------ Builder
 
-  resources :sites, :except => [:destroy], :param => :slug do
-    scope :module => 'sites' do
+  namespace :builder, :path => '' do
+    resources :sites, :except => [:destroy], :param => :slug do
       resources :page_types, :param => :slug, :except => [:show]
       resources :pages, :param => :slug
       resources :forms, :param => :slug, :except => [:show]

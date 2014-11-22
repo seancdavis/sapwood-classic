@@ -1,24 +1,24 @@
 home:
   icon: home6
-  path: site_path
+  path: builder_site_path
   controllers: ['site']
 page_types:
   icon: stack
-  path: site_page_types_path
+  path: builder_site_page_types_path
   controllers: ['page_types']
 images:
   icon: image
-  path: site_images_path
+  path: builder_site_images_path
   controllers: ['images']
 forms:
   icon: clipboard3
-  path: site_forms_path
+  path: builder_site_forms_path
   controllers: ['forms']
 users:
   icon: user2
-  path: site_users_path
+  path: builder_site_users_path
   controllers: ['users']
 settings:
   icon: cog3
-  path: edit_site_path
+  path: edit_builder_site_path
   controllers: []

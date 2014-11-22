@@ -1,5 +1,9 @@
 module UsersHelper
 
+  def admin?
+    current_user.admin?
+  end
+
   def avatar(user, size = 100, klass = nil)
     default_url = "#{root_url}images/guest.png"
     gravatar_id = Digest::MD5.hexdigest(user.email.downcase)

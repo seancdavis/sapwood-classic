@@ -10,18 +10,27 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
 
-    <%= stylesheet_link_tag 'application', :media => 'all' %>
+    <%= stylesheet_link_tag 'builder/application', :media => 'all' %>
     <%= javascript_include_tag "modernizr" %>
 
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body class="<%= @options['body_classes'] %>">
 
     <%= render :partial => 'status' %>
 
     <div id="container">
+      <%= content_tag(:header, render('header')) %>
+      <%= content_tag(
+        :aside, 
+        render('sidebar'), 
+        :id => 'sidebar'
+      ) if @options['sidebar'] %>
       <%= content_tag(:div, yield, :id => 'content') %>
     </div>
 
+    <%= render 'ajax_page' %>
+
+    <%= javascript_include_tag 'builder/application' %>
   </body>
 </html>

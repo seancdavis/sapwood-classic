@@ -1,7 +1,0 @@
-<% reload_url = params[:select] ? site_images_path(:select => true) : site_images_path %>
-<%= simple_form_for(
-  [current_site, Image.new], 
-  :html => { :id => 'fileupload', :data => { :"reload-url" => reload_url } }
-) do |f| %>
-  <%= f.input :image %>
-<% end %>
