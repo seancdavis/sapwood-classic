@@ -66,7 +66,7 @@ class Image < ActiveRecord::Base
 
   def crop(version)
     unless crop_data[version].blank?
-      hash = crop_data[version].map { |k,v| {k => v.to_i} }.reduce(:merge)
+      hash = crop_data[version].map { |k,v| {k => v.to_f} }.reduce(:merge)
       OpenStruct.new(hash)
     end
   end

@@ -22,6 +22,14 @@
             :value => value.nil? ? nil : value.width } %>
           <%= crop.input :height, :as => :hidden, :input_html => { 
             :value => value.nil? ? nil : value.height } %>
+          <%= crop.input :x_p, :as => :hidden, :input_html => { 
+            :value => value.nil? ? nil : value.x_p } %>
+          <%= crop.input :y_p, :as => :hidden, :input_html => { 
+            :value => value.nil? ? nil : value.y_p } %>
+          <%= crop.input :width_p, :as => :hidden, :input_html => { 
+            :value => value.nil? ? nil : value.width_p } %>
+          <%= crop.input :height_p, :as => :hidden, :input_html => { 
+            :value => value.nil? ? nil : value.height_p } %>
         </section>
       <% end %>
     <% end %>

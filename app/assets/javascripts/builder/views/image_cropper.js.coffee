@@ -25,9 +25,9 @@ class App.Views.ImageCropper extends Backbone.View
       setSelect: [coords.x, coords.y, coords.w, coords.h]
       minSize: [minWidth, minHeight]
       onSelect: (coords) =>
-        @setFormCoords(coords, parent.data('slug'))
+        @setFormCoords(coords, img, parent.data('slug'))
       onChange: (coords) =>
-        @setFormCoords(coords, parent.data('slug'))
+        @setFormCoords(coords, img, parent.data('slug'))
 
   initFormCoords: (container) ->
     fCoords = @getFormCoords(container.data('slug'))
@@ -37,11 +37,15 @@ class App.Views.ImageCropper extends Backbone.View
       w: if fCoords.w then fCoords.w else container.data('min-width')
       h: if fCoords.h then fCoords.h else container.data('min-height')
     
-  setFormCoords: (coords, version) ->
+  setFormCoords: (coords, img, version) ->
     $("#image_crop_data_#{version}_x").val(coords.x)
     $("#image_crop_data_#{version}_y").val(coords.y)
     $("#image_crop_data_#{version}_width").val(coords.w)
     $("#image_crop_data_#{version}_height").val(coords.h)
+    $("#image_crop_data_#{version}_x_p").val(coords.x / img.width())
+    $("#image_crop_data_#{version}_y_p").val(coords.y / img.height())
+    $("#image_crop_data_#{version}_width_p").val(coords.w / img.width())
+    $("#image_crop_data_#{version}_height_p").val(coords.h / img.height())
 
   getFormCoords: (version) ->
     x: $("#image_crop_data_#{version}_x").val()

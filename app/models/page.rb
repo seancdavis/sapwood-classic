@@ -58,7 +58,7 @@ class Page < ActiveRecord::Base
     rescue
       if respond_to_fields.include?(method.to_s)
         if method.to_s =~ /image/
-          Image.find_by_idx(field_data[method.to_s]).image
+          Image.find_by_idx(field_data[method.to_s])
         else
           field_data[method.to_s]
         end
