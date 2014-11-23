@@ -25,6 +25,7 @@ config/settings_private.yml
 public/uploads/
 public/files/
 public/media/
+public/system/
 
 # Stupid Files
 *.DS_Store
