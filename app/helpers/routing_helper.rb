@@ -42,7 +42,7 @@ module RoutingHelper
   def viewer_home
     if(
       Rails.env.production? || 
-      !['localhost','cms.rocktree.us'].include?(request.domain)
+      !['localhost','cms.rocktree.us'].include?(request.host)
     )
       send("#{current_site.slug.underscore}_home_path")
     else
@@ -53,7 +53,7 @@ module RoutingHelper
   def viewer_page(page_path)
     if(
       Rails.env.production? || 
-      !['localhost','cms.rocktree.us'].include?(request.domain)
+      !['localhost','cms.rocktree.us'].include?(request.host)
     )
       send("#{current_site.slug.underscore}_page_path", :page_path => page_path)
     else
