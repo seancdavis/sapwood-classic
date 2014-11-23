@@ -16,13 +16,23 @@
           <%= content_tag(:h2, cropping.title) %>
           <%= image_tag current_image.image.url %>
           <% value = current_image.crop(cropping.slug) %>
-          <% ['x','y','width','height'].each do |dim| %>
+          <% ['x','y','crop_width','crop_height'].each do |dim| %>
             <%= crop.input(
               dim.to_sym, 
               :as => :hidden, 
+              :wrapper => false,
               :input_html => { 
-                :value => value.nil? ? nil : value.send(dim)
+                :value => value.nil? ? nil : value.send(dim),
+                :data => { :value => value.nil? ? 0 : value.send(dim), }
               } 
+            ) %>
+          <% end %>
+          <% ['width','height'].each do |dim| %>
+            <%= crop.input(
+              dim.to_sym, 
+              :as => :hidden,
+              :wrapper => false,
+              :input_html => { :value => cropping.send(dim) } 
             ) %>
           <% end %>
         </section>

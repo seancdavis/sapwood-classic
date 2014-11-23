@@ -24,9 +24,16 @@ module ImagesHelper
   end
 
   def cropped_image(image, version)
-    c = image.crop(version)
-    magic = "#{c.width.to_i}x#{c.height.to_i}+#{c.x.to_i}+#{c.y.to_i}"
-    image_tag(image.image.thumb(magic).thumb('250x375#').url)
+    unless image.nil?
+      c = image.crop(version)
+      if c.nil?
+        c = current_site.image_croppings.find_by_slug(version)
+        image_tag(image.image.thumb("#{c.width.to_i}x#{c.height.to_i}#").url)
+      else
+        magic = "#{c.crop_width.to_i}x#{c.crop_height.to_i}+#{c.x.to_i}+#{c.y.to_i}"
+        image_tag(image.image.thumb(magic).thumb("#{c.width.to_i}x#{c.height.to_i}#").url)
+      end
+    end
   end
 
 end

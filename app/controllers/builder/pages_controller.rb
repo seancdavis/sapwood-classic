@@ -98,6 +98,7 @@ class Builder::PagesController < BuilderController
       unless params[:page][:field_data].nil?
         keys = params[:page][:field_data].keys
         keys.each do |key|
+          value = nil
           if key.starts_with?('rtimage_')
             clean_key = key.gsub(/rtimage\_/, '')
             value = params[:page][:field_data][key.to_sym]
