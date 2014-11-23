@@ -6,6 +6,7 @@ class ViewerController < ActionController::Base
   include(
     ApplicationHelper, 
     RoutingHelper,
+    ErrorsHelper,
     UsersHelper,
     SitesHelper,
     PagesHelper

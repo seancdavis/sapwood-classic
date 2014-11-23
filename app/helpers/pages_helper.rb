@@ -13,8 +13,12 @@ module PagesHelper
       if controller_name == 'pages'
         p = params[:page_slug] || params[:slug]
         page = current_site.pages.find_by_slug(p)
-        @current_page_type = page.page_type
-        page
+        if page.nil?
+          nil
+        else
+          @current_page_type = page.page_type
+          page
+        end
       end
     end
   end
