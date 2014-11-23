@@ -2,11 +2,15 @@ module SitesHelper
 
   def current_site
     @current_site ||= begin
-      p = params[:site_slug] || params[:slug]
-      if user_signed_in?
-        my_sites.select{ |s| s.slug == p }.first unless p.nil?
+      if ['localhost','cms.rocktree.us'].include?(request.domain)
+        p = params[:site_slug] || params[:slug]
+        if user_signed_in?
+          my_sites.select{ |s| s.slug == p }.first unless p.nil?
+        else
+          Site.find_by_slug(p) unless p.nil?
+        end
       else
-        Site.find_by_slug(p) unless p.nil?
+        Site.find_by_url(request.domain)
       end
     end
   end

@@ -16,13 +16,10 @@
       current_site.image_croppings + [ImageCropping.new]
     ) %>
     <%= f.simple_fields_for(:image_croppings, croppings) do |crop| %>
+      <%= crop.input :title %>
       <div class="half-row">
-        <%= crop.input :title %>
-        <%= crop.input :ratio %>
-      </div>
-      <div class="half-row">
-        <%= crop.input :min_width, :label => 'Minimum Width (px)' %>
-        <%= crop.input :min_height, :label => 'Minimum Height (px)' %>
+        <%= crop.input :width, :label => 'Minimum Width (px)' %>
+        <%= crop.input :height, :label => 'Minimum Height (px)' %>
       </div>
       <%= content_tag(:hr) unless crop.object == croppings.last %>
     <% end %>

@@ -1,5 +1,22 @@
 Rails.application.routes.draw do
 
+  # ------------------------------------------ Domains
+
+  Site.all.each do |site|
+    unless site.url.nil?
+      constraints DomainConstraint.new(site.url) do
+        get(
+          '/' => 'viewer/pages#home', 
+          :as => :"#{site.slug}_home"
+        )
+        get(
+          '/*page_path' => 'viewer/pages#show', 
+          :as => :"#{site.slug}_page"
+        )
+      end
+    end
+  end
+
   # ------------------------------------------ Devise
 
   devise_for :users, :skip => [:sessions, :registrations]
@@ -36,7 +53,7 @@ Rails.application.routes.draw do
 
   namespace :viewer, :path => '' do
     scope ':site_slug' do
-      get '/' => 'pages#home', :as => :site_home
+      get '/' => 'pages#home', :as => :home
       get '/*page_path' => 'pages#show', :as => :page
     end
   end

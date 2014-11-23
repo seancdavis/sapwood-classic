@@ -31,7 +31,7 @@ module ViewerHelper
         site_root_pages.each do |page|
           o += content_tag(:li, link_to(
             page.title, 
-            viewer_page_path(:page_path => page.slug))
+            viewer_page(page.slug))
           )
         end
         o.html_safe

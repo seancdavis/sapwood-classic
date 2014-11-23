@@ -17,7 +17,7 @@ class Builder::SitesController < BuilderController
     if current_site.save
       SiteUser.create!(:user => current_user, :site => current_site, 
         :site_admin => true)
-      redirect_to(route([current_site], :show), 
+      redirect_to(route([current_site], :show, 'builder'), 
         :notice => t('notices.created', :item => "Site")) 
     else
       render('new')
@@ -30,7 +30,7 @@ class Builder::SitesController < BuilderController
 
   def update
     if current_site.update(update_params)
-      redirect_to(route([current_site], :edit), 
+      redirect_to(route([current_site], :edit, 'builder'), 
         :notice => t('notices.updated', :item => "Site")) 
     else
       render('edit')
