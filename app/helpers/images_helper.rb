@@ -18,9 +18,9 @@ module ImagesHelper
     @page_images ||= current_page.images
   end
 
-  def find_page_image(idx)
+  def find_page_thumb(idx)
     image = page_images.select { |image| image.idx == idx.to_i }.first
-    return image.image.url(:thumb) unless image.nil?
+    return image.image.thumb('200x200#').url unless image.nil?
   end
 
   def cropped_image(image, version)

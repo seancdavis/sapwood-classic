@@ -19,7 +19,6 @@ class App.Views.ImageCropper extends Backbone.View
   initCropper: (img) ->
     parent = img.parents('section.cropper')
     coords = @initFormCoords(img, parent)
-    console.log coords
     img.Jcrop
       aspectRatio: parent.data('ratio')
       setSelect: [coords.x, coords.y, coords.w, coords.h]

@@ -9,9 +9,6 @@
 #  updated_at :datetime
 #  idx        :integer          default(0)
 #  crop_data  :text
-#  width      :float
-#  height     :float
-#  title      :string(255)
 #
 
 class Image < ActiveRecord::Base

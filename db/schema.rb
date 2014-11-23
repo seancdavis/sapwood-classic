@@ -77,9 +77,6 @@ ActiveRecord::Schema.define(version: 20141123114457) do
     t.datetime "updated_at"
     t.integer  "idx",        default: 0
     t.text     "crop_data"
-    t.float    "width"
-    t.float    "height"
-    t.string   "title"
   end
 
   create_table "page_images", force: true do |t|

@@ -52,7 +52,7 @@
                 } 
               ) %>
               <%= image_tag(
-                find_page_image(current_page.field_data[field.slug])
+                find_page_thumb(current_page.field_data[field.slug])
               ) unless current_page.field_data[field.slug].blank? %>
               <%= link_to(
                 "Add New #{field.title}", 

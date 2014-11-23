@@ -11,15 +11,15 @@
           data-width="<%= cropping.width %>" 
           data-height="<%= cropping.height %>"
           data-ratio="<%= cropping.width.to_f / cropping.height.to_f %>"
-          data-img-width="<%= current_image.width %>"
-          data-img-height="<%= current_image.height %>">
+          data-img-width="<%= current_image.image.width %>"
+          data-img-height="<%= current_image.image.height %>">
           <%= content_tag(:h2, cropping.title) %>
           <%= image_tag current_image.image.url %>
           <% value = current_image.crop(cropping.slug) %>
           <% ['x','y','width','height'].each do |dim| %>
             <%= crop.input(
               dim.to_sym, 
-              :as => :string, 
+              :as => :hidden, 
               :input_html => { 
                 :value => value.nil? ? nil : value.send(dim)
               } 

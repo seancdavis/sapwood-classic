@@ -25,7 +25,7 @@ class App.Views.PageImageUploader extends Backbone.View
   selectImage: (e) =>
     e.preventDefault()
     idx = $(e.target).parents('article.image').attr('data-idx')
-    thumb = $(e.target).parents('article.image').attr('data-thumb')
+    thumb = $(e.target).parents('article.image').find('img').attr('src')
     @container.find('input').val(idx)
     @container.prepend('<img>') unless @container.find('img').length > 0
     @container.find('img').attr('src', thumb)

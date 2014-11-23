@@ -1,6 +1,7 @@
 class AddDragonflyToImages < ActiveRecord::Migration
   def change
     rename_column :images, :image, :image_uid
-    add_column :images, :title, :string
+    remove_column :images, :width, :float
+    remove_column :images, :height, :float
   end
 end
