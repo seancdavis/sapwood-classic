@@ -12,10 +12,10 @@ class BuilderController < ActionController::Base
     PagesHelper
   )
 
+  before_filter :authenticate_user!
   before_filter :init_options
 
   def home
-    authenticate_user!
     # if user_signed_in?
       if has_sites? || admin?
         redirect_to(has_multiple_sites? ? builder_sites_path : builder_site_path(only_site))
