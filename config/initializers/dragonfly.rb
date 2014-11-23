@@ -8,14 +8,18 @@ Dragonfly.app.configure do
 
   url_format "/media/:site/images/:name"
 
-  # datastore :file,
-  #   root_path: Rails.root.join('public/system/dragonfly', Rails.env),
-  #   server_root: Rails.root.join('public')
-  datastore :s3,
-    :bucket_name => PRIVATE['aws']['bucket'],
-    :access_key_id => PRIVATE['aws']['access_key_id'],
-    :secret_access_key => PRIVATE['aws']['secret_access_key'],
-    :url_scheme => 'https'
+  if Rails.env.production?
+    datastore :s3,
+      :bucket_name => PRIVATE['aws']['bucket'],
+      :access_key_id => PRIVATE['aws']['access_key_id'],
+      :secret_access_key => PRIVATE['aws']['secret_access_key'],
+      :url_scheme => 'https'
+  else
+    datastore :file,
+      :root_path => Rails.root.join('public/system/dragonfly', Rails.env),
+      :server_root => Rails.root.join('public')
+  end
+
 end
 
 # Logger
