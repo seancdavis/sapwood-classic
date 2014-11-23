@@ -9,6 +9,8 @@
 #  updated_at :datetime
 #  idx        :integer          default(0)
 #  crop_data  :text
+#  width      :float
+#  height     :float
 #
 
 FactoryGirl.define do

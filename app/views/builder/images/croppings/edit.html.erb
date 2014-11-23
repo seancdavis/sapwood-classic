@@ -8,28 +8,23 @@
       <%= data.simple_fields_for cropping.slug do |crop| %>
 
         <section class="cropper" data-slug="<%= cropping.slug %>" 
-          data-min-width="<%= cropping.min_width %>" 
-          data-min-height="<%= cropping.min_height %>"
-          data-ratio="<%= cropping.aspect_ratio %>">
+          data-width="<%= cropping.width %>" 
+          data-height="<%= cropping.height %>"
+          data-ratio="<%= cropping.width.to_f / cropping.height.to_f %>"
+          data-img-width="<%= current_image.width %>"
+          data-img-height="<%= current_image.height %>">
           <%= content_tag(:h2, cropping.title) %>
-          <%= image_tag current_image.image.url(:to_crop) %>
+          <%= image_tag current_image.image.url %>
           <% value = current_image.crop(cropping.slug) %>
-          <%= crop.input :x, :as => :hidden, :input_html => { 
-            :value => value.nil? ? nil : value.x } %>
-          <%= crop.input :y, :as => :hidden, :input_html => { 
-            :value => value.nil? ? nil : value.y } %>
-          <%= crop.input :width, :as => :hidden, :input_html => { 
-            :value => value.nil? ? nil : value.width } %>
-          <%= crop.input :height, :as => :hidden, :input_html => { 
-            :value => value.nil? ? nil : value.height } %>
-          <%= crop.input :x_p, :as => :hidden, :input_html => { 
-            :value => value.nil? ? nil : value.x_p } %>
-          <%= crop.input :y_p, :as => :hidden, :input_html => { 
-            :value => value.nil? ? nil : value.y_p } %>
-          <%= crop.input :width_p, :as => :hidden, :input_html => { 
-            :value => value.nil? ? nil : value.width_p } %>
-          <%= crop.input :height_p, :as => :hidden, :input_html => { 
-            :value => value.nil? ? nil : value.height_p } %>
+          <% ['x','y','width','height'].each do |dim| %>
+            <%= crop.input(
+              dim.to_sym, 
+              :as => :string, 
+              :input_html => { 
+                :value => value.nil? ? nil : value.send(dim)
+              } 
+            ) %>
+          <% end %>
         </section>
       <% end %>
     <% end %>

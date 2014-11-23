@@ -6,9 +6,8 @@
 #  title      :string(255)
 #  slug       :string(255)
 #  site_id    :integer
-#  min_width  :integer
-#  min_height :integer
-#  ratio      :string(255)
+#  width      :integer
+#  height     :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
@@ -25,7 +24,7 @@ class ImageCropping < ActiveRecord::Base
 
   # ------------------------------------------ Callbacks
 
-  after_save :update_images
+  # after_save :update_images
 
   def update_images
     site.images.each do |image|
@@ -34,22 +33,11 @@ class ImageCropping < ActiveRecord::Base
           slug => {
             'x' => '0',
             'y' => '0',
-            'width' => min_width.to_s,
-            'height' => min_height.to_s,
+            'width' => width.to_s,
+            'height' => height.to_s,
           }
         )
         image.update_columns(:crop_data => crop_data)
-      end
-    end
-  end
-
-  # ------------------------------------------ Instance Methods
-
-  def aspect_ratio
-    unless ratio.blank?
-      dimensions = ratio.split(':')
-      unless dimensions.empty?
-        dimensions.first.to_f / dimensions.last.to_f
       end
     end
   end
