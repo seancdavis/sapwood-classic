@@ -24,21 +24,9 @@ module ImagesHelper
   end
 
   def cropped_image(image, version)
-    crop = image.crop(version)
-    unless crop.nil?
-      content_tag(
-        :div, 
-        :class => 'cropbox',
-        :data => {
-          :x => crop.x_p,
-          :y => crop.y_p,
-          :width => crop.width_p,
-          :height => crop.height_p,
-        }
-      ) do
-        image_tag(image.image.url(:to_crop))
-      end
-    end
+    c = image.crop(version)
+    magic = "#{c.width.to_i}x#{c.height.to_i}+#{c.x.to_i}+#{c.y.to_i}"
+    image_tag(image.image.thumb(magic).thumb('250x375#').url)
   end
 
 end
