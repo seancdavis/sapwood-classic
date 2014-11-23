@@ -1,6 +1,6 @@
 <article class="image" data-src="<%= image.image.url %>" 
-  data-idx="<%= image.idx %>" data-thumb="<%= image.image.url(:thumb) %>">
-  <%= image_tag image.image.url(:thumb) %>
+  data-idx="<%= image.idx %>" data-thumb="<%#= image.image.url(:thumb) %>">
+  <%= image_tag image.image.thumb('250x250').url %>
   <header class="<%= 'select' if params[:select] %>">
     <%= link_to(
       '', 

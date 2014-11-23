@@ -28,12 +28,12 @@ gem 'jcrop-rails-v2'
 # ------------------------------------------ Utilities
 
 gem 'cambium', :github => 'rocktree/cambium'
-gem 'carrierwave'
 gem 'fog'
 gem 'devise'
 gem 'ancestry'
-gem 'rmagick', :require => 'RMagick'
 gem 'rails-console-tweaks'
+gem 'dragonfly'
+gem 'dragonfly-s3_data_store'
 
 group :console do
   gem 'wirb'
@@ -44,6 +44,10 @@ end
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
+end
+
+group :production do
+  gem 'rack-cache', :require => 'rack/cache'
 end
 
 # ------------------------------------------ Development/Test

@@ -40,6 +40,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.6)
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
     annotate (2.6.5)
@@ -69,11 +70,6 @@ GEM
       sass (~> 3.2)
       thor
     builder (3.2.2)
-    carrierwave (0.10.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -91,6 +87,13 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    dragonfly (1.0.7)
+      addressable (~> 2.3)
+      multi_json (~> 1.0)
+      rack
+    dragonfly-s3_data_store (1.0.4)
+      dragonfly (~> 1.0)
+      fog
     eco (1.0.0)
       coffee-script
       eco-source
@@ -204,6 +207,8 @@ GEM
       railties (>= 3.1.0)
     polyglot (0.3.5)
     rack (1.5.2)
+    rack-cache (1.2)
+      rack (>= 0.4)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.0)
@@ -233,7 +238,6 @@ GEM
       trollop
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
-    rmagick (2.13.3)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -415,9 +419,10 @@ DEPENDENCIES
   bones-rails
   bourbon
   cambium!
-  carrierwave
   coffee-rails
   devise
+  dragonfly
+  dragonfly-s3_data_store
   factory_girl_rails
   faker
   fog
@@ -428,9 +433,9 @@ DEPENDENCIES
   jquery-rails
   mysql2
   pickadate-rails
+  rack-cache
   rails (= 4.1.0)
   rails-console-tweaks
-  rmagick
   rspec-rails
   sass-rails
   simple_form

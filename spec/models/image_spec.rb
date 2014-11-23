@@ -4,13 +4,14 @@
 #
 #  id         :integer          not null, primary key
 #  site_id    :integer
-#  image      :string(255)
+#  image_uid  :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #  idx        :integer          default(0)
 #  crop_data  :text
 #  width      :float
 #  height     :float
+#  title      :string(255)
 #
 
 require 'rails_helper'

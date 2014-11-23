@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122214950) do
+ActiveRecord::Schema.define(version: 20141123114457) do
 
   create_table "form_fields", force: true do |t|
     t.integer  "form_id"
@@ -72,13 +72,14 @@ ActiveRecord::Schema.define(version: 20141122214950) do
 
   create_table "images", force: true do |t|
     t.integer  "site_id"
-    t.string   "image"
+    t.string   "image_uid"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "idx",        default: 0
     t.text     "crop_data"
     t.float    "width"
     t.float    "height"
+    t.string   "title"
   end
 
   create_table "page_images", force: true do |t|
