@@ -47,6 +47,14 @@ class Image < ActiveRecord::Base
     )
   end
 
+  # ------------------------------------------ Validations
+
+  validates_property(
+    :format, 
+    :of => :image, 
+    :in => ['jpeg', 'jpg', 'png', 'gif']
+  )
+
   # ------------------------------------------ Instance Methods
 
   def to_param
