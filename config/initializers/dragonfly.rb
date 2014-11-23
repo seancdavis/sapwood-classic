@@ -6,7 +6,7 @@ Dragonfly.app.configure do
 
   secret "09195be7669c466300f9f7d29c812aa66555bb5dc290e225114c9195d1d8c9c4"
 
-  url_format "/media/:job/:name"
+  url_format "/media/:site/images/:name"
 
   datastore :file,
     root_path: Rails.root.join('public/system/dragonfly', Rails.env),

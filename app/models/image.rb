@@ -9,6 +9,8 @@
 #  updated_at :datetime
 #  idx        :integer          default(0)
 #  crop_data  :text
+#  image_site :string(255)
+#  image_name :string(255)
 #
 
 class Image < ActiveRecord::Base
@@ -35,6 +37,15 @@ class Image < ActiveRecord::Base
   # ------------------------------------------ Callbacks
 
   after_create :create_idx
+
+  after_save :cache_attrs
+
+  def cache_attrs
+    update_columns(
+      :image_site => site.slug, 
+      :image_name => self.image.meta['name']
+    )
+  end
 
   # ------------------------------------------ Instance Methods
 
@@ -69,6 +80,10 @@ class Image < ActiveRecord::Base
       hash = crop_data[version].map { |k,v| {k => v.to_f} }.reduce(:merge)
       OpenStruct.new(hash)
     end
+  end
+
+  def url_things
+    ['hello_world','beast'].join('/')
   end
 
 end

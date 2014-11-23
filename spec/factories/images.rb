@@ -9,6 +9,8 @@
 #  updated_at :datetime
 #  idx        :integer          default(0)
 #  crop_data  :text
+#  image_site :string(255)
+#  image_name :string(255)
 #
 
 FactoryGirl.define do
