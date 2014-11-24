@@ -17,6 +17,12 @@ Rails.application.routes.draw do
     end
   end
 
+  # ------------------------------------------ App Admin
+
+  namespace :admin do
+    get 'facebook/auth' => 'facebook#auth', :as => :facebook_auth
+  end
+
   # ------------------------------------------ Devise
 
   devise_for :users, :skip => [:sessions, :registrations]
