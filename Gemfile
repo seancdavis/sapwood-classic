@@ -34,6 +34,8 @@ gem 'ancestry'
 gem 'rails-console-tweaks'
 gem 'dragonfly'
 gem 'dragonfly-s3_data_store'
+gem 'koala'
+gem 'httpclient'
 
 group :console do
   gem 'wirb'

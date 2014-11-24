@@ -40,6 +40,30 @@
                 :value => current_page.field_data[field.slug.to_sym] 
               } 
             ) %>
+          <% when 'select' %>
+            <%= fd.input(
+              :"#{field.slug}", 
+              :as => :"#{field.data_type}", 
+              :collection => field.option_values,
+              :required => field.required, 
+              :label => field.title,
+              :selected => current_page.field_data[field.slug],
+              # :input_html => { 
+              #   :value => current_page.field_data[field.slug.to_sym] 
+              # } 
+            ) %>
+          <% when 'check_boxes', 'radio_buttons' %>
+            <%= fd.input(
+              :"#{field.slug}", 
+              :as => :"#{field.data_type}", 
+              :collection => field.option_values,
+              :required => field.required, 
+              :label => field.title,
+              :checked => current_page.field_data[field.slug],
+              # :input_html => { 
+              #   :value => current_page.field_data[field.slug.to_sym] 
+              # } 
+            ) %>
           <% when 'image' %>
             <div class="upload-field">
               <%= fd.input(

@@ -16,47 +16,47 @@
 
 class PageType < ActiveRecord::Base
 
-# ------------------------------------------ Plugins
+  # ------------------------------------------ Plugins
 
-include SiteSlug
+  include SiteSlug
 
-# ------------------------------------------ Attributes
+  # ------------------------------------------ Attributes
 
-attr_accessor :delete_group
+  attr_accessor :delete_group
 
-serialize :children, Array
+  serialize :children, Array
 
-# ------------------------------------------ Associations
+  # ------------------------------------------ Associations
 
-belongs_to :site, :touch => true
+  belongs_to :site, :touch => true
 
-has_many :pages
-has_many :groups, :class_name => 'PageTypeFieldGroup', :dependent => :destroy
-has_many :fields, :class_name => 'PageTypeField', :through => :groups
+  has_many :pages
+  has_many :groups, :class_name => 'PageTypeFieldGroup', :dependent => :destroy
+  has_many :fields, :class_name => 'PageTypeField', :through => :groups
 
-accepts_nested_attributes_for :groups
-accepts_nested_attributes_for :fields
+  accepts_nested_attributes_for :groups
+  accepts_nested_attributes_for :fields
 
-# ------------------------------------------ Scopes
+  # ------------------------------------------ Scopes
 
-scope :alpha, -> { order('title asc') }
+  scope :alpha, -> { order('title asc') }
 
-# ------------------------------------------ Validations
+  # ------------------------------------------ Validations
 
-validates :title, :page_templates, :presence => true
+  validates :title, :page_templates, :presence => true
 
-# ------------------------------------------ Callbacks
+  # ------------------------------------------ Callbacks
 
-after_save :remove_blank_groups
+  after_save :remove_blank_groups
 
-def remove_blank_groups
-  groups.where("title = ''").destroy_all
-end
+  def remove_blank_groups
+    groups.where("title = ''").destroy_all
+  end
 
-# ------------------------------------------ Instance Methods
+  # ------------------------------------------ Instance Methods
 
-def templates
-  page_templates.split("\n").reject(&:blank?)
-end
+  def templates
+    page_templates.split("\n").reject(&:blank?)
+  end
 
 end

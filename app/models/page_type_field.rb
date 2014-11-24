@@ -37,4 +37,8 @@ class PageTypeField < ActiveRecord::Base
     page_type_field_group
   end
 
+  def option_values
+    options.gsub(/\r/, '').split("\n") unless options.blank?
+  end
+
 end

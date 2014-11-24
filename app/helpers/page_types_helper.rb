@@ -29,6 +29,8 @@ module PageTypesHelper
       ['Dropdown', 'select'],
       ['Date', 'date'],
       ['Checkbox', 'boolean'],
+      ['Checkboxes', 'check_boxes'],
+      ['Radio Buttons', 'radio_buttons'],
       # ['Date & Time', 'datetime'],
       # ['File Upload', 'file']
       ['Image', 'image'],
