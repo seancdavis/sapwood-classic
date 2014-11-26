@@ -15,7 +15,7 @@ class Viewer::PagesController < ViewerController
     not_found if current_page.nil?
     render(
       "viewer/#{current_site.slug}/#{current_page_template}", 
-      :layout => current_site.slug
+      :layout => "viewer/#{current_site.slug}"
     )
   end
 
