@@ -34,9 +34,15 @@ public/system/
 lib/assets/import/
 
 # Site-Specific Files
-app/assets/images/viewer/
-app/assets/javascripts/viewer/
-app/assets/stylesheets/viewer/
+app/assets/images/viewer/*
+!app/assets/images/viewer/.keep
+app/assets/javascripts/viewer/*
+!app/assets/javascripts/viewer/.keep
+app/assets/stylesheets/viewer/*
+!app/assets/stylesheets/viewer/.keep
 app/services/*_viewer.rb
-app/views/layouts/viewer/
-app/views/viewer/
+!app/services/.keep
+app/views/layouts/viewer/*
+!app/views/layouts/viewer/.keep
+app/views/viewer/*
+!app/views/viewer/.keep
