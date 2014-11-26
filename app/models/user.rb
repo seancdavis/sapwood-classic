@@ -18,6 +18,8 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  fb_access_token        :string(255)
+#  fb_token_expires       :datetime
 #
 
 class User < ActiveRecord::Base

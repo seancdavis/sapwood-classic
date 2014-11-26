@@ -1,6 +1,6 @@
 <%= simple_form_for([:builder, current_site]) do |f| %>
 
-  <%= form_tabs ['details', 'image-croppers'] %>
+  <%= form_tabs ['details', 'git', 'image-croppers'] %>
 
   <section class="form tabbed details">
     <div class="half-row">
@@ -9,6 +9,17 @@
     </div>
     <%= f.input(:home_page_id, :collection => site_pages) if site_pages.size > 0 %>
     <%= f.input :description %>
+  </section>
+
+  <section class="form tabbed git">
+    <div>
+      <%= link_to 'Update Git', builder_site_git_path(current_site), 
+        :class => 'button', :method => :post %>
+    </div>
+    <div class="half-row">
+      <%= f.input :git_url, :as => :string, :label => 'Remote Git URL' %>
+      <%= f.input :local_repo, :label => 'Path to Local Repository' %>
+    </div>
   </section>
 
   <section class="form tabbed image-croppers">

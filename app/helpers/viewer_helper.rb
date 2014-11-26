@@ -1,7 +1,7 @@
 module ViewerHelper
 
   def viewer_service
-    @viewer_service ||= current_site.title.gsub(/\ /, '').constantize.new(current_site)
+    @viewer_service ||= "#{current_site.title.gsub(/\ /, '')}Viewer".constantize.new(current_site)
   end
 
   def meta_tag(content)
@@ -48,7 +48,7 @@ module ViewerHelper
   end
 
   def viewer_image(filename)
-    image_tag "#{current_site.slug}/#{filename}"
+    image_tag "viewer/#{current_site.slug}/#{filename}"
   end
 
   def main_header_image

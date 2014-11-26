@@ -37,6 +37,29 @@ class Builder::SitesController < BuilderController
     end
   end
 
+  def git
+    local_repo = current_site.local_repo
+    if local_repo.present? && Dir.exists?(local_repo)
+      system("cd #{local_repo}; git checkout master")
+      system("cd #{local_repo}; git pull origin master")
+      ['images', 'stylesheets', 'javascripts'].each do |asset| 
+        system("rm app/assets/#{asset}/viewer/#{current_site.slug}")
+        system("ln -s #{local_repo}/#{asset} app/assets/#{asset}/viewer/#{current_site.slug}")
+      end
+      service = "#{current_site.slug.underscore}_viewer.rb"
+      system("rm app/services/#{service}")
+      system("ln -s #{local_repo}/services/#{service} app/services/#{service}")
+      system("rm app/views/layouts/viewer/#{current_site.slug}.html.erb")
+      system("ln -s #{local_repo}/templates/layout.html.erb app/views/layouts/viewer/#{current_site.slug}.html.erb")
+      system("rm app/views/viewer/#{current_site.slug}")
+      system("ln -s #{local_repo}/templates app/views/viewer/#{current_site.slug}")
+      system("RAILS_ENV=#{Rails.env} bundle exec rake assets:precompile")
+      redirect_to request.referrer, :notice => 'Git updated successfully.'
+    else
+      redirect_to request.referrer, :notice => 'There was a problem.'
+    end
+  end
+
   private
 
     def create_params
@@ -45,6 +68,8 @@ class Builder::SitesController < BuilderController
         :url, 
         :description,
         :home_page_id,
+        :git_url,
+        :local_repo,
         :image_croppings_attributes => [
           :id, 
           :title,

@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   namespace :builder, :path => '' do
     resources :sites, :except => [:destroy], :param => :slug do
+      post 'git' => 'sites#git', :as => :git
       resources :page_types, :param => :slug, :except => [:show]
       resources :pages, :param => :slug
       resources :forms, :param => :slug, :except => [:show]
