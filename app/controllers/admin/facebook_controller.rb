@@ -9,7 +9,7 @@ class Admin::FacebookController < AdminController
         token = $facebook.get_access_token_info(code)
         current_user.update(
           :fb_access_token => token['access_token'],
-          :fb_token_expires => 1.year.from_now
+          :fb_token_expires => token['expires'].to_i.seconds.from_now
         )
         redirect_to(
           builder_sites_path, 
