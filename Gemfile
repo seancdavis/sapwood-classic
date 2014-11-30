@@ -44,8 +44,9 @@ group :console do
 end
 
 group :development do
-  gem "better_errors"
-  gem "binding_of_caller"
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'dbsync'
 end
 
 group :production do

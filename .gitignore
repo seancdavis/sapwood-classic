@@ -46,3 +46,6 @@ app/views/layouts/viewer/*
 !app/views/layouts/viewer/.keep
 app/views/viewer/*
 !app/views/viewer/.keep
+
+# Database backups/merges
+db/backups/
