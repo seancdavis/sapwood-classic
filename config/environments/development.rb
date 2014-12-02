@@ -37,7 +37,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.dbsync = {
-    :remote => 'rt.cms:~/backups/rt_cms_production.sql',
+    :remote => "rt.cms:~/backups/rt_cms_production.#{Time.now.strftime('%d')}.sql",
     :local  => './db/backups/rt_cms_production.sql'
   }
 end
