@@ -16,52 +16,52 @@
 
 class Site < ActiveRecord::Base
 
-# ------------------------------------------ Plugins
+  # ------------------------------------------ Plugins
 
-include Slug
+  include Slug
 
-# ------------------------------------------ Attributes
+  # ------------------------------------------ Attributes
 
-serialize :crop_settings, Hash
+  serialize :crop_settings, Hash
 
-# ------------------------------------------ Associations
+  # ------------------------------------------ Associations
 
-has_many :site_users
-has_many :users, :through => :site_users
-has_many :page_types, :dependent => :destroy
-has_many :pages, :through => :page_types, :dependent => :destroy
-has_many :page_type_field_groups, :through => :page_types, 
-  :source => :groups, :dependent => :destroy
-has_many :page_type_fields, :through => :page_type_field_groups, 
-  :source => :fields, :dependent => :destroy
-has_many :forms, :dependent => :destroy
-has_many :images, :dependent => :destroy
-has_many :image_croppings
+  has_many :site_users
+  has_many :users, :through => :site_users
+  has_many :page_types, :dependent => :destroy
+  has_many :pages, :through => :page_types, :dependent => :destroy
+  has_many :page_type_field_groups, :through => :page_types, 
+    :source => :groups, :dependent => :destroy
+  has_many :page_type_fields, :through => :page_type_field_groups, 
+    :source => :fields, :dependent => :destroy
+  has_many :forms, :dependent => :destroy
+  has_many :images, :dependent => :destroy
+  has_many :image_croppings
 
-belongs_to :home_page, :class_name => 'Page'
+  belongs_to :home_page, :class_name => 'Page'
 
-accepts_nested_attributes_for :image_croppings
+  accepts_nested_attributes_for :image_croppings
 
-# ------------------------------------------ Scopes
+  # ------------------------------------------ Scopes
 
-scope :last_updated, -> { order('updated_at desc') }
+  scope :last_updated, -> { order('updated_at desc') }
 
-# ------------------------------------------ Validations
+  # ------------------------------------------ Validations
 
-validates :title, :presence => true
+  validates :title, :presence => true
 
-# ------------------------------------------ Callbacks
+  # ------------------------------------------ Callbacks
 
-after_save :remove_blank_image_croppings
+  after_save :remove_blank_image_croppings
 
-def remove_blank_image_croppings
-  image_croppings.where("title = ''").destroy_all
-end
+  def remove_blank_image_croppings
+    image_croppings.where("title = ''").destroy_all
+  end
 
-# ------------------------------------------ Instance Method
+  # ------------------------------------------ Instance Method
 
-def croppers
-  crop_settings
-end
+  def croppers
+    crop_settings
+  end
 
 end
