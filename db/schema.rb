@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126104104) do
+ActiveRecord::Schema.define(version: 20141202113754) do
 
   create_table "form_fields", force: true do |t|
     t.integer  "form_id"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20141126104104) do
     t.text     "page_templates"
     t.text     "children"
     t.string   "label"
+    t.string   "order_by"
   end
 
   create_table "pages", force: true do |t|

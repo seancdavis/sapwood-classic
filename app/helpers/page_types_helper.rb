@@ -37,4 +37,16 @@ module PageTypesHelper
     ]
   end
 
+  def order_by_fields
+    fields = []
+    current_page_type.fields.each { |f| fields << [f.title, f.slug] }
+    ([
+      ['Title','title'],
+      ['URL','slug'],
+      ['Position','position'],
+      ['Created','created_at'],
+      ['Updated','updated_at'],
+    ] + fields).uniq.sort
+  end
+
 end

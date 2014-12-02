@@ -50,6 +50,19 @@ class Page < ActiveRecord::Base
 
   validates :title, :template, :presence => true
 
+  # ------------------------------------------ Callbacks
+
+  after_save :cache_order_by
+
+  def cache_order_by
+    order_by = self.page_type.order_by
+    unless order_by.blank?
+      update_columns(:order => self.send(order_by))
+    end
+  end
+
+  # ------------------------------------------ Instance Methods
+
   def respond_to_fields
     field_data.keys
   end
@@ -76,6 +89,12 @@ class Page < ActiveRecord::Base
     rescue
       respond_to_fields.include?(method.to_s) ? true : false
     end
+  end
+
+  # ------------------------------------------ Class Methods
+
+  def self.order_by_fields
+    ['title','slug','position','created_at','updated_at']
   end
 
 end

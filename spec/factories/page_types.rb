@@ -12,6 +12,7 @@
 #  page_templates :text
 #  children       :text
 #  label          :string(255)
+#  order_by       :string(255)
 #
 
 FactoryGirl.define do

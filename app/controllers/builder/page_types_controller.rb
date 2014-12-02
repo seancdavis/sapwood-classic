@@ -60,6 +60,7 @@ class Builder::PageTypesController < BuilderController
         :description, 
         :page_templates,
         :label,
+        :order_by,
         :children => [], 
         :groups_attributes => [
           :id, 
