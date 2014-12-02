@@ -16,7 +16,7 @@ Dragonfly.app.configure do
       :url_scheme => 'https'
   else
     datastore :file,
-      :root_path => Rails.root.join('public/system/dragonfly', Rails.env),
+      :root_path => PRIVATE['dragonfly']['root_path'],
       :server_root => Rails.root.join('public')
   end
 
