@@ -11,10 +11,27 @@ class Api::V1::FormsController < ApplicationController
           :form => current_form,
           :field_data => params[:form_submission][:field_data].to_hash
         )
+
+        uri = URI::parse(redirect_url)
+        query_string = ''
+        unless uri.query.nil?
+          query = uri.query.split('&')
+          p = {}
+          query.each do |param|
+            q = param.split('=')
+            p[q.first] = q.last unless ['form','result'].include?(q.first)
+          end
+          p.each { |k,v| query_string += "&#{k}=#{v}" }
+        end
+
         if submission.save
-          redirect_to("#{redirect_url}?form=#{params[:key]}&result=success")
+          redirect_to(
+            "#{uri.path}?form=#{params[:key]}&result=success#{query_string}"
+          )
         else
-          redirect_to("#{redirect_url}?form=#{params[:key]}&result=error")
+          redirect_to(
+            "#{uri.path}?form=#{params[:key]}&result=error#{query_string}"
+          )
         end
       else
         redirect_to(redirect_url)
@@ -23,10 +40,5 @@ class Api::V1::FormsController < ApplicationController
       redirect_to(redirect_url)
     end
   end
-
-  private
-
-    def form_params
-    end
 
 end
