@@ -30,8 +30,9 @@ public/system/
 # Stupid Files
 *.DS_Store
 
-# Imported Assets
+# Imported & Development Assets
 lib/assets/import/
+public/assets/
 
 # Site-Specific Files
 app/assets/images/viewer/*
@@ -40,6 +41,8 @@ app/assets/javascripts/viewer/*
 !app/assets/javascripts/viewer/.keep
 app/assets/stylesheets/viewer/*
 !app/assets/stylesheets/viewer/.keep
+lib/tasks/viewer/*
+!lib/tasks/viewer/.keep
 app/services/*_viewer.rb
 !app/services/.keep
 app/views/layouts/viewer/*

@@ -47,7 +47,7 @@ class Builder::SitesController < BuilderController
         system("ln -s #{local_repo}/#{asset} app/assets/#{asset}/viewer/#{current_site.slug}")
       end
       service = "#{current_site.slug.underscore}_viewer.rb"
-      system("rm lib/tasks/viewer/#{current_site.slug}.rake")
+      system("rm lib/tasks/viewer/#{current_site.slug.underscore}.rake")
       system("ln -s #{local_repo}/tasks/#{current_site.slug.underscore}.rake lib/tasks/viewer/#{current_site.slug.underscore}.rake")
       system("rm app/services/#{service}")
       system("ln -s #{local_repo}/services/#{service} app/services/#{service}")
