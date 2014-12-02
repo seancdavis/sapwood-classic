@@ -43,6 +43,8 @@ class Page < ActiveRecord::Base
 
   scope :in_position, -> { order('position asc') }
   scope :published, -> { where(:published => true) }
+  scope :asc, -> { order('order asc') }
+  scope :desc, -> { order('order desc') }
 
   # ------------------------------------------ Validations
 
