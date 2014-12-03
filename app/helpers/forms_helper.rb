@@ -24,23 +24,25 @@ module FormsHelper
   end
 
   def form_view(form)
-    if params[:form] && params[:form] == form.key 
-      if params[:result] && params[:result] == 'success' 
-        form.thank_you_body.html_safe 
-      elsif form 
-        o = content_tag(
-          :p, 
-          'There was an error with your submission.',
-          :class => 'error'
-        )
-        o += form_markup(form) 
-        o.html_safe
+    unless form.nil?
+      if params[:form] && params[:form] == form.key 
+        if params[:result] && params[:result] == 'success' 
+          form.thank_you_body.html_safe 
+        elsif form 
+          o = content_tag(
+            :p, 
+            'There was an error with your submission.',
+            :class => 'error'
+          )
+          o += form_markup(form) 
+          o.html_safe
+        else 
+          form_markup(form) 
+        end 
       else 
         form_markup(form) 
       end 
-    else 
-      form_markup(form) 
-    end 
+    end
   end
 
   def form_markup(form)
