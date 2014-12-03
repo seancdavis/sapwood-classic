@@ -10,7 +10,7 @@
     <div class="half-row">
       <%= f.input :slug %>
       <%= f.input :template, :collection => current_page_type.templates, 
-        :selected => current_page_type.templates.first %>
+        :selected => current_page.template.blank? ? current_page_type.templates.first : current_page.template %>
     </div>
     <%= f.input :description %>
     <%= f.input :published, :as => :hidden %>
