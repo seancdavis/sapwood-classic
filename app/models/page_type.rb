@@ -57,7 +57,7 @@ class PageType < ActiveRecord::Base
   # ------------------------------------------ Instance Methods
 
   def templates
-    page_templates.split("\n").reject(&:blank?)
+    page_templates.split("\n").reject(&:blank?).map { |t| t.strip }
   end
 
 end
