@@ -10,6 +10,7 @@ development: &default
       facebook: "https://www.facebook.com/SetaPersonalTraining"
       twitter: "https://twitter.com/TrainerMike28"
       youtube: "http://www.youtube.com/user/MikeSetaPT"
+      instagram: "http://instagram.com/transformufitness"
 
 test:
   <<: *default
