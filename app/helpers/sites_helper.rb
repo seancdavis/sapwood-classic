@@ -41,7 +41,7 @@ module SitesHelper
     items = []
     site_root_pages.in_position.each do |page|
       items << {
-        'label' => page.title,
+        'label' => page.slug.gsub(/\_/, ' '),
         'path' => builder_route([page], :show),
         'classes' => (
           request.path.include?(
