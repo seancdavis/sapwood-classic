@@ -36,6 +36,14 @@ module PagesHelper
     end
   end
 
+  def home_page
+    @home_page ||= current_site.home_page
+  end
+
+  def is_home_page?(page)
+    page == home_page
+  end
+
   def new_page_children_links
     @new_page_children_links ||= begin
       output = ''

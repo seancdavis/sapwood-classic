@@ -29,9 +29,13 @@ module ViewerHelper
       content_tag(:ul) do
         o = ''
         site_root_pages.each do |page|
-          o += content_tag(:li, link_to(
-            page.title, 
-            viewer_page(page.slug))
+          path = is_home_page?(page) ? viewer_home : viewer_page(page.slug)
+          o += content_tag(
+            :li, 
+            link_to(
+              page.slug.gsub(/\_/, ' ').titleize, 
+              path
+            )
           )
         end
         o.html_safe
