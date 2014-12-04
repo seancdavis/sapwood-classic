@@ -43,8 +43,8 @@ module ViewerHelper
     end
   end
 
-  def viewer_page_title(title)
-    content_tag(:header) do
+  def viewer_page_title(title, options = {})
+    content_tag(:header, options[:header]) do
       content_tag(:h1) do
         content_tag(:span, title)
       end
@@ -61,6 +61,10 @@ module ViewerHelper
 
   def viewer_logo_image
     viewer_image('logo.png')
+  end
+
+  def slug_title(slug)
+    slug.gsub(/\_/, ' ').humanize.titleize
   end
 
 end
