@@ -35,20 +35,13 @@ lib/assets/import/
 public/assets/
 
 # Site-Specific Files
-app/assets/images/viewer/*
-!app/assets/images/viewer/.keep
-app/assets/javascripts/viewer/*
-!app/assets/javascripts/viewer/.keep
-app/assets/stylesheets/viewer/*
-!app/assets/stylesheets/viewer/.keep
-lib/tasks/viewer/*
-!lib/tasks/viewer/.keep
-app/services/*_viewer.rb
-!app/services/.keep
-app/views/layouts/viewer/*
-!app/views/layouts/viewer/.keep
-app/views/viewer/*
-!app/views/viewer/.keep
+app/assets/images/viewer/
+app/assets/javascripts/viewer/
+app/assets/stylesheets/viewer/
+lib/tasks/viewer/
+app/viewer_services/
+app/views/layouts/viewer/
+app/views/viewer/
 
 # Database backups/merges
 db/backups/

@@ -49,13 +49,15 @@ class Builder::SitesController < BuilderController
       service = "#{current_site.slug.underscore}_viewer.rb"
       system("rm lib/tasks/viewer/#{current_site.slug.underscore}.rake")
       system("ln -s #{local_repo}/tasks/#{current_site.slug.underscore}.rake lib/tasks/viewer/#{current_site.slug.underscore}.rake")
-      system("rm app/services/#{service}")
-      system("ln -s #{local_repo}/services/#{service} app/services/#{service}")
+      system("rm app/viewer_services/#{service}")
+      system("ln -s #{local_repo}/services/#{service} app/viewer_services/#{service}")
       system("rm app/views/layouts/viewer/#{current_site.slug}.html.erb")
       system("ln -s #{local_repo}/templates/layout.html.erb app/views/layouts/viewer/#{current_site.slug}.html.erb")
       system("rm app/views/viewer/#{current_site.slug}")
       system("ln -s #{local_repo}/templates app/views/viewer/#{current_site.slug}")
-      system("RAILS_ENV=#{Rails.env} bundle exec rake assets:precompile")
+      if Rails.env.production?
+        system("RAILS_ENV=#{Rails.env} bundle exec rake assets:precompile")
+      end
       redirect_to request.referrer, :notice => 'Git updated successfully.'
     else
       redirect_to request.referrer, :notice => 'There was a problem.'
