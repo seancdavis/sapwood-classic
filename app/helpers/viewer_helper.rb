@@ -51,6 +51,10 @@ module ViewerHelper
     end
   end
 
+  def viewer_image_path(filename)
+    image_path "viewer/#{current_site.slug}/#{filename}"
+  end
+
   def viewer_image(filename)
     image_tag "viewer/#{current_site.slug}/#{filename}"
   end
