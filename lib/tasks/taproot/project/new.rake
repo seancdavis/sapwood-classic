@@ -11,7 +11,7 @@ namespace :taproot do
       # 
       ARGV.each { |a| task a.to_sym do ; end }
       unless ARGV.size == 3
-        puts "Usage: bundle exec rake taproot:new:project [NAME] [REPO_URL]"
+        puts "Usage: bundle exec rake taproot:project:new [NAME] [REPO_URL]"
         exit
       end
 
