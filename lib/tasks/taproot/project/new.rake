@@ -44,7 +44,7 @@ namespace :taproot do
       FileUtils.rm("#{project_dir}/tasks/.keep")
       FileUtils.touch("#{project_dir}/tasks/#{site.slug.underscore}.rake")
       FileUtils.rm("#{project_dir}/services/.keep")
-      FileUtils.touch("#{project_dir}/services/#{site.slug.underscore}.rb")
+      FileUtils.touch("#{project_dir}/services/#{site.slug.underscore}_viewer.rb")
 
       # initialize git repository
       # 
