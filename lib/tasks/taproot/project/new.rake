@@ -48,10 +48,13 @@ namespace :taproot do
 
       # initialize git repository
       # 
+      git_url = "#{PRIVATE['git']['protocol']}://#{PRIVATE['git']['username']}"
+      git_url += ":#{PRIVATE['git']['password']}@#{PRIVATE['git']['url']}" 
+      git_url += "/#{site.git_url}"
       system("cd #{project_dir}; git init")
       system("cd #{project_dir}; git add .")
       system("cd #{project_dir}; git commit -m 'init commit'")
-      system("cd #{project_dir}; git remote add origin #{site.git_url}")
+      system("cd #{project_dir}; git remote add origin #{git_url}")
       system("cd #{project_dir}; git push origin master")
 
       # create symlinks to project

@@ -19,8 +19,6 @@ namespace :taproot do
       # 
       slug = ARGV[1]
       site = Site.find_by_slug(slug)
-      git_url = "#{PRIVATE['git']['protocol']}://#{PRIVATE['git']['username']}"
-      git_url += ":#{PRIVATE['git']['password']}@#{PRIVATE['git']['url']}" 
       if site.nil?
         puts "Couldn't find project with slug: #{slug}"
         exit
@@ -38,8 +36,10 @@ namespace :taproot do
 
       # clone the repository
       # 
-      full_git_url = "#{git_url}/#{site.git_url}.git"
-      system("cd #{projects_dir}; git clone #{full_git_url} #{slug}")
+      git_url = "#{PRIVATE['git']['protocol']}://#{PRIVATE['git']['username']}"
+      git_url += ":#{PRIVATE['git']['password']}@#{PRIVATE['git']['url']}" 
+      git_url += "/#{site.git_url}.git"
+      system("cd #{projects_dir}; git clone #{git_url} #{slug}")
 
       # symlink the dinkuses
       # 
