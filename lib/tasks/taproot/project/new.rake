@@ -52,6 +52,7 @@ namespace :taproot do
       system("cd #{project_dir}; git add .")
       system("cd #{project_dir}; git commit -m 'init commit'")
       system("cd #{project_dir}; git remote add origin #{site.git_url}")
+      system("cd #{project_dir}; git push origin master")
 
       # create symlinks to project
       # 
