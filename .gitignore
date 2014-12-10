@@ -35,14 +35,16 @@ lib/assets/import/
 public/assets/
 
 # Site-Specific Files
-projects/
+projects/*
+!projects/_default-site_/
 app/assets/images/viewer/
 app/assets/javascripts/viewer/
 app/assets/stylesheets/viewer/
-lib/tasks/viewer/
-app/viewer_services/
 app/views/layouts/viewer/
 app/views/viewer/
+app/viewer_services/
+lib/tasks/viewer/
+config/viewer/
 
 # Database backups/merges
 db/backups/
