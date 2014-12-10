@@ -50,7 +50,7 @@ namespace :taproot do
       # 
       git_url = "#{PRIVATE['git']['protocol']}://#{PRIVATE['git']['username']}"
       git_url += ":#{PRIVATE['git']['password']}@#{PRIVATE['git']['url']}" 
-      git_url += "/#{site.git_url}"
+      git_url += "/#{site.git_url}.git"
       system("cd #{project_dir}; git init")
       system("cd #{project_dir}; git add .")
       system("cd #{project_dir}; git commit -m 'init commit'")
