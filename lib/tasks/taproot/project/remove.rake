@@ -10,6 +10,10 @@ namespace :taproot do
       # create references
       # 
       slug = args.slug
+      if slug.nil?
+        puts "Usage: bundle exec taproot:project:remove[SLUG]"
+        exit
+      end
       underscore = "#{slug.underscore}"
       service = "#{underscore}_viewer.rb"
       project_dir = "#{Rails.root}/projects/#{slug}"
