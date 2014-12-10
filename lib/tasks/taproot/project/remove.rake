@@ -18,25 +18,19 @@ namespace :taproot do
       service = "#{underscore}_viewer.rb"
       project_dir = "#{Rails.root}/projects/#{slug}"
 
-      # remove symlinks
-      # 
-      [
-        "app/assets/images/viewer/#{slug}",
-        "app/assets/javascripts/viewer/#{slug}", 
-        "app/viewer_services/#{service}", 
-        "app/assets/stylesheets/viewer/#{slug}", 
-        "lib/tasks/viewer/#{underscore}.rake", 
-        "app/views/viewer/#{slug}",
-        "app/views/layouts/viewer/#{slug}.html.erb"
-      ].each do |symlink|
-        if File.exists?("#{Rails.root}/#{symlink}")
-          FileUtils.rm("#{Rails.root}/#{symlink}") 
-        end
-      end
-
       # remove project files
       # 
-      FileUtils.rm_r(project_dir)
+      if Dir.exists?(project_dir)
+        FileUtils.rm_r(project_dir)
+        puts "Removed project directory: #{project_dir}"
+      else
+        puts "Couldn't find project directory"
+      end
+
+      # remove dead symlinks
+      # 
+      system("find #{Rails.root} -type l -exec sh -c \"file -b {} | grep -q ^broken\" \\; -delete")
+      puts "Removed dead symlinks"
 
     end
 
