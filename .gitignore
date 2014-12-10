@@ -36,7 +36,7 @@ public/assets/
 
 # Site-Specific Files
 projects/*
-!projects/_default-site_/
+!projects/.default-site/
 app/assets/images/viewer/
 app/assets/javascripts/viewer/
 app/assets/stylesheets/viewer/
