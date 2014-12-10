@@ -35,6 +35,7 @@ lib/assets/import/
 public/assets/
 
 # Site-Specific Files
+projects/
 app/assets/images/viewer/
 app/assets/javascripts/viewer/
 app/assets/stylesheets/viewer/
