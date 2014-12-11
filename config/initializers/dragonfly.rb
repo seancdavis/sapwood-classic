@@ -4,16 +4,16 @@ require 'dragonfly'
 Dragonfly.app.configure do
   plugin :imagemagick
 
-  secret "09195be7669c466300f9f7d29c812aa66555bb5dc290e225114c9195d1d8c9c4"
+  secret TaprootSetting.dragonfly.secret
 
   url_format "/media/:site/images/:name"
 
   if Rails.env.production?
     datastore :s3,
-      :bucket_name => PRIVATE['aws']['bucket'],
-      :access_key_id => PRIVATE['aws']['access_key_id'],
-      :secret_access_key => PRIVATE['aws']['secret_access_key'],
-      :url_scheme => 'https'
+      :bucket_name          => TaprootSetting.aws.bucket,
+      :access_key_id        => TaprootSetting.aws.access_key_id,
+      :secret_access_key    => TaprootSetting.aws.secret_access_key,
+      :url_scheme           => 'https'
   else
     datastore :file,
       :root_path => Rails.root.join('public/system/dragonfly', Rails.env),

@@ -1,12 +1,6 @@
-# Loads config/settings.yml into SETTINGS[]
-config_file = File.join(Rails.root,'config','settings.yml')
+config_file = File.join(Rails.root,'config','taproot.yml')
 if File.exists?(config_file)
-  settings = YAML.load_file(config_file)[Rails.env]
-  SETTINGS = settings.to_ostruct
-end
-
-# Loads config/settings_private.yml (sensitive settings) into PRIVATE[]
-private_file = File.join(Rails.root,'config','settings_private.yml')
-if File.exists?(private_file)
-  PRIVATE = YAML.load_file(private_file)[Rails.env]
+  TaprootSetting = YAML.load_file(config_file)[Rails.env].to_ostruct
+else
+  raise "Can't find file: #{config_file}"
 end

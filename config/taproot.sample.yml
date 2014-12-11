@@ -1,0 +1,34 @@
+# 
+# Taproot Settings
+# =================
+# 
+# This file is for storing your personal settings to make Taproot work properly
+# for you.
+#
+# If you need to use any of the values here, you can get to them through the
+# TaprootSetting class. For example, you can access your aws bucket name like
+# this:
+# 
+#     TaprootSetting.aws.bucket
+# 
+# This file is not tracked by git, so these settings are only present in this
+# file on this machine.
+#
+development: &default
+  aws:
+    access_key_id:      ''          # amazon s3 api key
+    secret_access_key:  ''          # amazon s3 secret
+    bucket:             ''          # amazon s3 bucket name (in us standard region)
+  git:
+    protocol:           https       # http(s)
+    url:                ''          # git host url without protocol
+    username:           ''          # your git app username
+    password:           ''          # your git app password
+  dragonfly:
+    secret:             ''          # some random hash
+
+test:
+  <<: *default
+
+production:
+  <<: *default
