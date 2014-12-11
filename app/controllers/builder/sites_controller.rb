@@ -16,8 +16,9 @@ class Builder::SitesController < BuilderController
   def create
     @current_site = Site.new(create_params)
     if current_site.save
-      taproot = TaprootProject.new(current_site)
-      taproot.create_site
+      if params[:site][:new_repo].to_bool
+        create_taproot_project
+      end
       SiteUser.create!(
         :user => current_user, 
         :site => current_site, 
@@ -52,32 +53,10 @@ class Builder::SitesController < BuilderController
     redirect_to(builder_sites_path, :notice => 'Site deleted successfully.')
   end
 
-  # def git
-  #   local_repo = current_site.local_repo
-  #   if local_repo.present? && Dir.exists?(local_repo)
-  #     system("cd #{local_repo}; git checkout master")
-  #     system("cd #{local_repo}; git pull origin master")
-  #     ['images', 'stylesheets', 'javascripts'].each do |asset| 
-  #       system("rm app/assets/#{asset}/viewer/#{current_site.slug}")
-  #       system("ln -s #{local_repo}/#{asset} app/assets/#{asset}/viewer/#{current_site.slug}")
-  #     end
-  #     service = "#{current_site.slug.underscore}_viewer.rb"
-  #     system("rm lib/tasks/viewer/#{current_site.slug.underscore}.rake")
-  #     system("ln -s #{local_repo}/tasks/#{current_site.slug.underscore}.rake lib/tasks/viewer/#{current_site.slug.underscore}.rake")
-  #     system("rm app/viewer_services/#{service}")
-  #     system("ln -s #{local_repo}/services/#{service} app/viewer_services/#{service}")
-  #     system("rm app/views/layouts/viewer/#{current_site.slug}.html.erb")
-  #     system("ln -s #{local_repo}/templates/layout.html.erb app/views/layouts/viewer/#{current_site.slug}.html.erb")
-  #     system("rm app/views/viewer/#{current_site.slug}")
-  #     system("ln -s #{local_repo}/templates app/views/viewer/#{current_site.slug}")
-  #     if Rails.env.production?
-  #       system("RAILS_ENV=#{Rails.env} bundle exec rake assets:precompile")
-  #     end
-  #     redirect_to request.referrer, :notice => 'Git updated successfully.'
-  #   else
-  #     redirect_to request.referrer, :notice => 'There was a problem.'
-  #   end
-  # end
+  def git
+    # ISSUE #2
+    # TODO: Queue the site for pulling and restarting the server
+  end
 
   private
 
@@ -108,6 +87,11 @@ class Builder::SitesController < BuilderController
         @options['sidebar'] = false
         @options['body_classes'] += ' my-sites'
       end
+    end
+
+    def create_taproot_project
+      taproot = TaprootProject.new(current_site)
+      taproot.create_site
     end
 
 end
