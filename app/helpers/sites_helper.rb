@@ -53,7 +53,7 @@ module SitesHelper
   end
 
   def builder_site_nav
-    file = "#{Rails.root}/config/sites/builder_site_nav.yml"
+    file = "#{Rails.root}/config/taproot/builder_site_nav.yml"
     return nil unless File.exists?(file)
     nav = YAML.load_file(file)
     nav.each do |item, attrs|

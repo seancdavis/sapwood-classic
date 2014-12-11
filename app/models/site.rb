@@ -64,4 +64,17 @@ class Site < ActiveRecord::Base
     crop_settings
   end
 
+  def class_file
+    slug.gsub(/\-/, '_')
+  end
+
+  def settings
+    file = File.join(Rails.root,'config','sites',"#{class_file}.yml")
+    if File.exists?(file)
+      YAML.load_file(file)[Rails.env].to_ostruct
+    else
+      OpenStruct.new
+    end
+  end
+
 end
