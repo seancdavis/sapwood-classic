@@ -58,6 +58,15 @@ class Builder::SitesController < BuilderController
     # TODO: Queue the site for pulling and restarting the server
   end
 
+  def import
+    taproot = TaprootProject.new(current_site)
+    taproot.import_site
+    redirect_to(
+      route([current_site], :show, 'builder'), 
+      :notice => 'Repo imported successfully!'
+    ) 
+  end
+
   private
 
     def create_params

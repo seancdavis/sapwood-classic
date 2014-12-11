@@ -73,20 +73,22 @@ class TaprootProject
   def create_symlinks
     verify_site
     Dir.glob("#{project_dir}/**/*", File::FNM_DOTMATCH).each do |file|
-      if File.file?(file)
-        filename = file.split('/').last
-        if filename == '.symlink'
-          dest = File.read(file).strip.split('/')[0..-2].join('/')
-          src = file.split('/')[0..-2].join('/')
-          unless File.exists?(dest)
-            system("ln -s #{src} #{dest}")
-          end
-        else
-          symlink = File.read(file).match(/rtsym\:(.*)[\n|\ ]/)
-          unless symlink.nil?
-            dest = symlink.to_s.gsub(/rtsym\:/, '').strip.split(' ').first
+      unless file.split('/').include?('.git')
+        if File.file?(file)
+          filename = file.split('/').last
+          if filename == '.symlink'
+            dest = File.read(file).strip.split('/')[0..-2].join('/')
+            src = file.split('/')[0..-2].join('/')
             unless File.exists?(dest)
-              system("ln -s #{file} #{dest}")
+              system("ln -s #{src} #{dest}")
+            end
+          else
+            symlink = File.read(file).match(/rtsym\:(.*)[\n|\ ]/)
+            unless symlink.nil?
+              dest = symlink.to_s.gsub(/rtsym\:/, '').strip.split(' ').first
+              unless File.exists?(dest)
+                system("ln -s #{file} #{dest}")
+              end
             end
           end
         end

@@ -1,3 +1,11 @@
-<%= builder_page_title("#{current_site.title} Settings") %>
+<%= builder_page_title("#{current_site.title} Settings") do %>
+  <%= link_to(
+    'Import Repo', 
+    builder_site_import_path(current_site), 
+    :class => 'download',
+    :method => :post,
+    :data => { :confirm => 'Ready to import project?' }
+  ) %>
+<% end %>
 
 <%= render 'form' %>
