@@ -4,6 +4,12 @@
 # 
 # This file is for storing your personal settings to make Taproot work properly
 # for you.
+# 
+# Replace the values here with your config, then copy to: 
+# 
+#     config/taproot.yml
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # If you need to use any of the values here, you can get to them through the
 # TaprootSetting class. For example, you can access your aws bucket name like
@@ -13,6 +19,8 @@
 # 
 # This file is not tracked by git, so these settings are only present in this
 # file on this machine.
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 development: &default
   aws:
