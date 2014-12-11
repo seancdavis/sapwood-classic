@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202113754) do
+ActiveRecord::Schema.define(version: 20141211163919) do
 
   create_table "form_fields", force: true do |t|
     t.integer  "form_id"
@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(version: 20141202113754) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "home_page_id"
-    t.string   "git_url"
+    t.string   "git_path"
     t.string   "local_repo"
   end
 

@@ -72,7 +72,7 @@ class Builder::SitesController < BuilderController
         :url, 
         :description,
         :home_page_id,
-        :git_url,
+        :git_path,
         :local_repo,
         :image_croppings_attributes => [
           :id, 

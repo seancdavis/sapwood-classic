@@ -10,7 +10,7 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  home_page_id :integer
-#  git_url      :string(255)
+#  git_path     :string(255)
 #  local_repo   :string(255)
 #
 
