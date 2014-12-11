@@ -1,7 +1,7 @@
-home:
-  icon: home6
-  path: builder_site_path
-  controllers: ['site']
+# home:
+#   icon: home6
+#   path: builder_site_path
+#   controllers: ['site']
 page_types:
   icon: stack
   path: builder_site_page_types_path

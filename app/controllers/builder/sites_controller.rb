@@ -6,6 +6,7 @@ class Builder::SitesController < BuilderController
   end
 
   def show
+    redirect_to route([current_site], :edit, 'builder')
   end
 
   def new
