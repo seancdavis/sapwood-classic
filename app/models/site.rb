@@ -48,7 +48,11 @@ class Site < ActiveRecord::Base
 
   # ------------------------------------------ Validations
 
-  validates :title, :presence => true
+  validates :title, :git_path, :presence => true
+
+  validates_uniqueness_of :title
+
+  validates_format_of :title, :with => /\A[A-Z][A-Za-z\ ]+\z/
 
   # ------------------------------------------ Callbacks
 

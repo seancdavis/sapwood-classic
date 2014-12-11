@@ -23,7 +23,7 @@
 #
 
 class User < ActiveRecord::Base
-  
+
   # ------------------------------------------ Devise
 
   devise :database_authenticatable, :recoverable, :trackable, :validatable

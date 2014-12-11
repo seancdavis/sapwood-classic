@@ -16,7 +16,7 @@
     <link href="<%= viewer_image_path('favicon.png') %>" rel="shortcut icon" 
       type="image/png">
 
-    <%= stylesheet_link_tag 'viewer/taproot/application', :media => 'all' %>
+    <%= stylesheet_link_tag 'viewer/default-site/application', :media => 'all' %>
     <%= javascript_include_tag "modernizr" %>
 
     <%= csrf_meta_tags %>
@@ -28,6 +28,6 @@
       <%= yield %>
     </div>
 
-    <%= javascript_include_tag 'viewer/taproot/application' %>
+    <%= javascript_include_tag 'viewer/default-site/application' %>
   </body>
 </html>

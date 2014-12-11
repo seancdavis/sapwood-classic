@@ -26,7 +26,7 @@
     margin: 25px 0 0 0;
     article {
       position: relative;
-      padding: 15px;
+      padding: 20px 15px;
       text-align: left;
       border-bottom: 1px solid $color-light-darker;
       color: $color-5;
@@ -75,9 +75,16 @@
       }
       .date {
         float: right;
-        margin: 18px 0 0 0;
+        clear: right;
+        margin: 12px 0 0 0;
         color: $color-5;
         font-size: 14px;
+      }
+      .delete {
+        float: right;
+        margin: 0;
+        font-size: 13px;
+        color: $color-5;
       }
       .published, .draft {
         font-size: 14px;

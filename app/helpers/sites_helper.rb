@@ -33,10 +33,6 @@ module SitesHelper
     my_sites.first unless has_multiple_sites?
   end
 
-  def site_setting
-    SETTINGS.send(current_site.slug.underscore)
-  end
-
   def builder_site_menu
     items = []
     site_root_pages.in_position.each do |page|
