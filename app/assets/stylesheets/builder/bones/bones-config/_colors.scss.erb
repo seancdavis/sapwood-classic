@@ -1,12 +1,10 @@
 /* Color Palette
 ============================ */
-$color-1: #099B77; // used most often by default
-$color-2: #34495E;
-$color-3: #233342;
-$color-4: #4BADD0;
-$color-5: #929E9E;
-$color-dark: #363636; // designed to be a dark color
-$color-light: #FFFFFF; // designed to be a light color
+$color-primary: #<%= TaprootSetting.design.colors.primary %>;
+$color-secondary: #<%= TaprootSetting.design.colors.secondary %>;
+$color-dark: #<%= TaprootSetting.design.colors.dark %>;
+$color-grey: #<%= TaprootSetting.design.colors.grey %>;
+$color-light: #<%= TaprootSetting.design.colors.light %>;
 
 // used primarily for notifications:
 $color-warning: #CCA300;
@@ -28,44 +26,30 @@ $color-factor-3: 25%;
  * You don't need to change anything below, but can
  * if you'd like, or you can add new variations.
  */
-$color-1-light:     lighten($color-1, $color-factor-1);
-$color-1-lighter:   lighten($color-1, $color-factor-2);
-$color-1-lightest:  lighten($color-1, $color-factor-3);
-$color-1-dark:      darken($color-1, $color-factor-1);
-$color-1-darker:    darken($color-1, $color-factor-2);
-$color-1-darkest:   darken($color-1, $color-factor-3);
+$color-primary-light:     lighten($color-primary, $color-factor-1);
+$color-primary-lighter:   lighten($color-primary, $color-factor-2);
+$color-primary-lightest:  lighten($color-primary, $color-factor-3);
+$color-primary-dark:      darken($color-primary, $color-factor-1);
+$color-primary-darker:    darken($color-primary, $color-factor-2);
+$color-primary-darkest:   darken($color-primary, $color-factor-3);
 
-$color-2-light:     lighten($color-2, $color-factor-1);
-$color-2-lighter:   lighten($color-2, $color-factor-2);
-$color-2-lightest:  lighten($color-2, $color-factor-3);
-$color-2-dark:      darken($color-2, $color-factor-1);
-$color-2-darker:    darken($color-2, $color-factor-2);
-$color-2-darkest:   darken($color-2, $color-factor-3);
-
-$color-3-light:     lighten($color-3, $color-factor-1);
-$color-3-lighter:   lighten($color-3, $color-factor-2);
-$color-3-lightest:  lighten($color-3, $color-factor-3);
-$color-3-dark:      darken($color-3, $color-factor-1);
-$color-3-darker:    darken($color-3, $color-factor-2);
-$color-3-darkest:   darken($color-3, $color-factor-3);
-
-$color-4-light:     lighten($color-4, $color-factor-1);
-$color-4-lighter:   lighten($color-4, $color-factor-2);
-$color-4-lightest:  lighten($color-4, $color-factor-3);
-$color-4-dark:      darken($color-4, $color-factor-1);
-$color-4-darker:    darken($color-4, $color-factor-2);
-$color-4-darkest:   darken($color-4, $color-factor-3);
-
-$color-5-light:     lighten($color-5, $color-factor-1);
-$color-5-lighter:   lighten($color-5, $color-factor-2);
-$color-5-lightest:  lighten($color-5, $color-factor-3);
-$color-5-dark:      darken($color-5, $color-factor-1);
-$color-5-darker:    darken($color-5, $color-factor-2);
-$color-5-darkest:   darken($color-5, $color-factor-3);
+$color-secondary-light:     lighten($color-dark, $color-factor-1);
+$color-secondary-lighter:   lighten($color-dark, $color-factor-2);
+$color-secondary-lightest:  lighten($color-dark, $color-factor-3);
+$color-secondary-dark:      darken($color-dark, $color-factor-1);
+$color-secondary-darker:    darken($color-dark, $color-factor-2);
+$color-secondary-darkest:   darken($color-dark, $color-factor-3);
 
 $color-dark-light:     lighten($color-dark, $color-factor-1);
 $color-dark-lighter:   lighten($color-dark, $color-factor-2);
 $color-dark-lightest:  lighten($color-dark, $color-factor-3);
+
+$color-grey-light:     lighten($color-grey, $color-factor-1);
+$color-grey-lighter:   lighten($color-grey, $color-factor-2);
+$color-grey-lightest:  lighten($color-grey, $color-factor-3);
+$color-grey-dark:      darken($color-grey, $color-factor-1);
+$color-grey-darker:    darken($color-grey, $color-factor-2);
+$color-grey-darkest:   darken($color-grey, $color-factor-3);
 
 $color-light-dark:      darken($color-light, $color-factor-1);
 $color-light-darker:    darken($color-light, $color-factor-2);

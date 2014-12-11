@@ -8,7 +8,7 @@
       display: inline-block;
       margin: 0;
       font-weight: 200;
-      color: $color-5;
+      color: $color-grey;
     }
     > a {
       float: right;
@@ -29,12 +29,12 @@
       padding: 20px 15px;
       text-align: left;
       border-bottom: 1px solid $color-light-darker;
-      color: $color-5;
+      color: $color-grey;
       &.user {
         .admin {
           margin-left: 44px;
           i, span {
-            color: $color-1;
+            color: $color-primary;
             font-size: 14px;
             text-transform: uppercase;
             font-weight: 600;
@@ -53,7 +53,7 @@
         margin: 10px 0 0 0;
         font-size: 22px;
         font-weight: 400;
-        color: $color-5;
+        color: $color-grey;
         a {
           margin: 10px 0 0 0;
           font-size: 22px;
@@ -77,14 +77,14 @@
         float: right;
         clear: right;
         margin: 12px 0 0 0;
-        color: $color-5;
+        color: $color-grey;
         font-size: 14px;
       }
       .delete {
         float: right;
         margin: 0;
         font-size: 13px;
-        color: $color-5;
+        color: $color-grey;
       }
       .published, .draft {
         font-size: 14px;

@@ -2,7 +2,7 @@ p.notice {
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba($color-1, 0.85);
+  background: rgba($color-primary, 0.85);
   margin: 0;
   padding: 25px;
   text-align: center;
@@ -40,7 +40,7 @@ a {
       font-size: 10px;
       margin-right: 5px;
     }
-    &.published { color: $color-1; }
+    &.published { color: $color-primary; }
     &.draft { color: $color-danger; }
   }
   &.new:before { content: "\e35e"; }
@@ -54,7 +54,7 @@ a {
   &.download:before { content: "\e132"; }
 
   &.button {
-    @include rounded-button($color-1, $color-1-lighter);
+    @include rounded-button($color-primary, $color-primary-lighter);
     margin: 5px 0 10px 0;
   }
 }
@@ -76,7 +76,7 @@ a {
 
   header {
     width: 100%;
-    background: $color-1;
+    background: $color-primary;
     h1 {
       margin: 0;
       padding: 10px;

@@ -7,12 +7,12 @@ form {
     margin: 10px 0;
     label {
       text-transform: uppercase;
-      color: $color-1;
+      color: $color-primary;
       font-size: 14px;
       font-weight: 400;
       abbr {
         border-bottom: none;
-        color: $color-1;
+        color: $color-primary;
       }
     }
     textarea {
@@ -25,7 +25,7 @@ form {
       border-radius: 5px;
       color: $color-light-darkest;
       &:focus {
-        color: $color-1;
+        color: $color-primary;
       }
     }
     span.checkbox {
@@ -76,7 +76,7 @@ form {
       color: $color-danger;
       @include transition(none);
       &.dont-delete {
-        color: $color-1;
+        color: $color-primary;
       }
     }
   }
@@ -91,9 +91,9 @@ form {
         display: inline-block;
         padding: 7.5px 15px;
         border-bottom: 3px solid transparent;
-        color: $color-5;
+        color: $color-grey;
         &:hover, &.active {
-          border-bottom-color: $color-1;
+          border-bottom-color: $color-primary;
         }
         &.to-delete {
           color: $color-danger;
@@ -121,11 +121,11 @@ form {
     margin: 20px 0 5px 0;
     font-size: 24px;
     font-weight: 400;
-    color: $color-5;
+    color: $color-grey;
   }
 
   input[type=submit] {
-    @include rounded-button($color-1, $color-1-lighter);
+    @include rounded-button($color-primary, $color-primary-lighter);
   }
 
   a.save, a.publish, a.draft, a.cancel {
@@ -136,7 +136,7 @@ form {
     }
   }
   a.save.publish {
-    @include rounded-button($color-1, $color-1-lighter);
+    @include rounded-button($color-primary, $color-primary-lighter);
     margin-right: 10px;
   }
   a.save.draft {
@@ -144,6 +144,6 @@ form {
   }
   a.cancel {
     float: right;
-    @include rounded-button($color-5, $color-5-darker);
+    @include rounded-button($color-grey, $color-grey-darker);
   }
 }

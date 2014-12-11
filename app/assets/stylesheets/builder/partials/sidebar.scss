@@ -7,7 +7,7 @@ aside#sidebar {
     display: inline-block;
     width: 50px;
     height: 100%;
-    background: $color-1;
+    background: $color-primary;
     ul {
       @include clear-list;
       width: 100%;
@@ -26,14 +26,14 @@ aside#sidebar {
           @include transition-all;
           text-align: center;
           &:hover {
-            background: $color-1-light;
+            background: $color-primary-light;
           }
           span, i {
             line-height: 23px;
             font-size: 20px;
             vertical-align: middle;
             @include transition-all;
-            color: $color-2;
+            color: $color-dark;
           }
           span {
             margin: 0 10px 0 15px;
@@ -81,7 +81,7 @@ aside#sidebar {
           font-size: 13px;
           font-weight: 600;
           @include transition-all;
-          color: $color-2;
+          color: $color-dark;
           &:hover {
             background: $color-light-darkest;
           }

@@ -29,7 +29,7 @@
       padding: 15px 0;
       top: 52px;
       left: 40px;
-      background: $color-4;
+      background: $color-grey;
       &.active {
         display: block;
       }
@@ -45,10 +45,10 @@
         a {
           display: block;
           padding: 10px 15px;
-          background: $color-4;
+          background: $color-grey;
           color: $color-light;
           &:hover {
-            background: $color-4-darker;
+            background: $color-grey-darker;
           }
         }
       }

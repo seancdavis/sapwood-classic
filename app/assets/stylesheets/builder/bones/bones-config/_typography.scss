@@ -46,13 +46,13 @@ $type-codeBlock-lineHeight: 19px;
 /* Inline Elements
 ============================ */
 // links
-$type-link-color: $color-1;
-$type-link-color-hover: $color-1-light;
+$type-link-color: $color-primary;
+$type-link-color-hover: $color-primary-light;
 $type-link-underline: false;
 $type-link-underline-hover: false;
 // code
 $type-code-font-family: Consolas, monospace;
-$type-code-color: $color-2;
+$type-code-color: $color-dark;
 $type-code-fontSize: 12px;
 $type-code-background: $color-light;
 $type-code-padding: 1px 2px;

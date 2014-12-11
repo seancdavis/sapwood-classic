@@ -28,7 +28,7 @@
   }
 }
 
-@mixin rounded-button($bkg: $color-1, $hover: $bkg) {
+@mixin rounded-button($bkg: $color-primary, $hover: $bkg) {
   border-radius: 5px;
   background: $bkg;
   color: $color-light;

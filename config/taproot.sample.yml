@@ -23,6 +23,13 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 development: &default
+  design:
+    colors:
+      primary:          099B77      # primary color
+      secondary:        34495E      # accent color (good contrast to primary)
+      dark:             363636      # for fonts and some grey accents
+      grey:             929E9E      # a medium or dark grey works well
+      light:            FFFFFF      # used to create other accent greys
   aws:
     access_key_id:      ''          # amazon s3 api key
     secret_access_key:  ''          # amazon s3 secret
