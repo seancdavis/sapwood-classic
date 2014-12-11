@@ -17,9 +17,10 @@
 sass-cache
 esproj
 
-# Sensitive Data
+# Configuration for distributed copies
 config/database.yml
 config/taproot.yml
+app/assets/images/logo.png
 
 # Public Uploads
 public/uploads/
