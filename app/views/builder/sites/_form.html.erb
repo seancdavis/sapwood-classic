@@ -10,7 +10,18 @@
       <%= f.input :title %>
       <%= f.input :url, :as => :string %>
     </div>
-    <%= f.input :git_path, :as => :string, :label => 'Remote Git Path' %>
+    <% if current_site.id.nil? %>
+      <div class="half-row">
+        <%= f.input :git_path, :as => :string, :label => 'Remote Git Path' %>
+        <%= f.input(
+          :new_repo, 
+          :as => :boolean, 
+          :label => 'Create and push new repo?'
+        ) if current_site.id.nil? %>
+      </div>
+    <% else %>
+      <%= f.input :git_path, :as => :string, :label => 'Remote Git Path' %>
+    <% end %>
     <%= f.input(:home_page_id, :collection => site_pages) if site_pages.size > 0 %>
     <%= f.input :description %>
   </section>

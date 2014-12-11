@@ -24,6 +24,8 @@ class Site < ActiveRecord::Base
 
   serialize :crop_settings, Hash
 
+  attr_accessor :new_repo
+
   # ------------------------------------------ Associations
 
   has_many :site_users
