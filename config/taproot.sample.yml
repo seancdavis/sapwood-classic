@@ -41,6 +41,8 @@ development: &default
     password:           ''          # your git app password
   dragonfly:
     secret:             ''          # some random hash
+  remote:
+    db_backup_file:     ''          # reference to remote backup using ssh
 
 test:
   <<: *default
