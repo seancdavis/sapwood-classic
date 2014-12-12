@@ -2,19 +2,23 @@ Rails.application.routes.draw do
 
   # ------------------------------------------ Domains
 
-  Site.all.each do |site|
-    unless site.url.nil?
-      constraints DomainConstraint.new(site.url) do
-        get(
-          '/' => 'viewer/pages#home', 
-          :as => :"#{site.slug}_home"
-        )
-        get(
-          '/*page_path' => 'viewer/pages#show', 
-          :as => :"#{site.slug}_page"
-        )
+  if ActiveRecord::Base.connection.table_exists?('sites')
+
+    Site.all.each do |site|
+      unless site.url.nil?
+        constraints DomainConstraint.new(site.url) do
+          get(
+            '/' => 'viewer/pages#home', 
+            :as => :"#{site.slug}_home"
+          )
+          get(
+            '/*page_path' => 'viewer/pages#show', 
+            :as => :"#{site.slug}_page"
+          )
+        end
       end
     end
+
   end
 
   # ------------------------------------------ App Admin
