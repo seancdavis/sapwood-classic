@@ -23,6 +23,8 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 development: &default
+  site:
+    title:              Taproot     # default title for the site
   design:
     colors:
       primary:          099B77      # primary color

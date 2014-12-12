@@ -2,7 +2,7 @@ module ApplicationHelper
 
   def data
     @data ||= {
-      :title => current_site ? current_site.title : "rocktree"
+      :title => current_site ? current_site.title : TaprootSetting.site.title
     }
   end
 
