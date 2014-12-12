@@ -18,7 +18,7 @@ class BuilderController < ActionController::Base
   def home
     # if user_signed_in?
       if has_sites? || admin?
-        redirect_to(has_multiple_sites? ? builder_sites_path : builder_site_path(only_site))
+        redirect_to(builder_sites_path)
       else
         sign_out_and_redirect(current_user)
       end
