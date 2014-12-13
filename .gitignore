@@ -20,6 +20,7 @@ esproj
 # Configuration for distributed copies
 config/database.yml
 config/taproot.yml
+config/unicorn.rb
 app/assets/images/logo.png
 
 # Public Uploads
