@@ -7,6 +7,11 @@ namespace :taproot do
       TaprootDatabase.new.backup
     end
 
+    desc 'Backup database'
+    task :sync => :environment do
+      TaprootDatabase.new.sync
+    end
+
   end
 
 end

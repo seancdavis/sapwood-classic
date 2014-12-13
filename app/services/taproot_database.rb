@@ -10,18 +10,18 @@ class TaprootDatabase
     cmd =  "mysqldump -u #{config[:user]} --password='#{config[:password]}' "
     cmd += "#{config[:name]} > #{backup_file}"
     system(cmd)
-    if File.exists?(backup_symlink)
-      system("rm #{backup_symlink}")
+    if File.exists?(backup_file_copy)
+      system("rm #{backup_file_copy}")
     end
-    system("ln -s #{backup_file} #{backup_symlink}")
+    system("cp #{backup_file} #{backup_file_copy}")
   end
 
-  def backup_symlink
+  def sync
+    system("bundle exec rake dbsync:clone")
+  end
+
+  def backup_file_copy
     "#{backup_dir}/#{config[:name]}.sql"
-  end
-
-  def fetch_remote
-    system("bundle exec rake dbsync:fetch")
   end
 
   private
