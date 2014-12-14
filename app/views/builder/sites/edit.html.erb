@@ -2,10 +2,23 @@
   <%= link_to(
     'Import Repo', 
     builder_site_import_path(current_site), 
-    :class => 'download',
+    :class => 'code',
     :method => :post,
     :data => { :confirm => 'Ready to import project?' }
   ) %>
+  <%= link_to(
+    'Backup Database', 
+    builder_site_backup_path(current_site), 
+    :class => 'database',
+    :method => :post
+  ) if Rails.env.production? %>
+  <%= link_to(
+    'Sync Database', 
+    builder_site_sync_path(current_site), 
+    :class => 'database',
+    :method => :post,
+    :data => { :confirm => 'This is a destructive action. Proceed?' }
+  ) if Rails.env.development? %>
 <% end %>
 
 <%= render 'form' %>

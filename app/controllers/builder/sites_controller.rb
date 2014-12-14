@@ -67,6 +67,22 @@ class Builder::SitesController < BuilderController
     ) 
   end
 
+  def backup
+    TaprootDatabase.new.backup
+    redirect_to(
+      route([current_site], :show, 'builder'), 
+      :notice => 'Database backed up successfully!'
+    )
+  end
+
+  def sync
+    TaprootDatabase.new.sync
+    redirect_to(
+      route([current_site], :show, 'builder'), 
+      :notice => 'Database synced successfully!'
+    )
+  end 
+
   private
 
     def create_params

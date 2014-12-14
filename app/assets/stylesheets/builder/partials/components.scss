@@ -34,7 +34,7 @@ p.notice {
 
 a {
   &.new, &.edit, &.back, &.delete, &.dont-delete, &.published, &.draft, &.crop, 
-  &.download {
+  &.download, &.code, &.database {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
@@ -52,6 +52,8 @@ a {
   &.draft:before { content: "\e365"; }
   &.crop:before { content: "\e43c"; }
   &.download:before { content: "\e132"; }
+  &.code:before { content: "\e480"; }
+  &.database:before { content: "\e138"; }
 
   &.button {
     @include rounded-button($color-primary, $color-primary-lighter);
