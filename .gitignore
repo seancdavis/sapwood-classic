@@ -42,6 +42,7 @@ projects/*
 app/assets/images/viewer/
 app/assets/javascripts/viewer/
 app/assets/stylesheets/viewer/
+app/assets/fonts/viewer/
 app/views/layouts/viewer/
 app/views/viewer/
 app/viewer_services/
