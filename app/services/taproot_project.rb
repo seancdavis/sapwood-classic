@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'uri'
 
 class TaprootProject
 
@@ -172,7 +173,9 @@ class TaprootProject
 
     def git_url
       t = TaprootSetting
-      o =  "#{t.git.protocol}://#{t.git.username}:#{t.git.password}"
+      username = URI.escape(t.git.username, "!?=")
+      password = URI.escape(t.git.password, "!?=")
+      o =  "#{t.git.protocol}://#{username}:#{password}"
       o += "@#{t.git.url}/#{@site.git_path}.git"
     end
 
