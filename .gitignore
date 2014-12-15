@@ -47,6 +47,7 @@ app/views/viewer/
 app/viewer_services/
 lib/tasks/viewer/
 config/viewer/
+config/sites/
 
 # Database backups/merges
 db/backups/
