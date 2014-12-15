@@ -1,4 +1,4 @@
-# rtsym:app/viewer_services/default_site.rb
+# rtsym:app/viewer_services/default_site_viewer.rb
 # 
 # Site Service Object
 # =================
