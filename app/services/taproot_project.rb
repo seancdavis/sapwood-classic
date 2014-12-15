@@ -82,7 +82,7 @@ class TaprootProject
             unless File.exists?(dest)
               system("ln -s #{src} #{dest}")
             end
-          else
+          elsif file.text?
             symlink = File.read(file).match(/rtsym\:(.*)[\n|\ ]/)
             unless symlink.nil?
               dest = symlink.to_s.gsub(/rtsym\:/, '').strip.split(' ').first

@@ -37,6 +37,7 @@ gem 'dragonfly-s3_data_store'
 gem 'koala'
 gem 'httpclient'
 gem 'kaminari'
+gem 'ruby-filemagic'
 
 group :console do
   gem 'wirb'
