@@ -55,8 +55,8 @@ module ViewerHelper
     image_path "viewer/#{current_site.slug}/#{filename}"
   end
 
-  def viewer_image(filename)
-    image_tag "viewer/#{current_site.slug}/#{filename}"
+  def viewer_image(filename, options = {})
+    image_tag "viewer/#{current_site.slug}/#{filename}", options
   end
 
   def main_header_image
