@@ -2,7 +2,7 @@ module SitesHelper
 
   def current_site
     @current_site ||= begin
-      if ['localhost','cms.rocktree.us'].include?(request.host)
+      if ['localhost',TaprootSetting.site.url].include?(request.host)
         p = params[:site_slug] || params[:slug]
         if user_signed_in?
           my_sites.select{ |s| s.slug == p }.first unless p.nil?

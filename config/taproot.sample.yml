@@ -25,6 +25,7 @@
 development: &default
   site:
     title:              Taproot     # default title for the site
+    url:                ''          # the url at which you will run this application
   design:
     colors:
       primary:          099B77      # primary color
