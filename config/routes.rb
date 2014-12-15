@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       post 'import' => 'sites#import', :as => :import
       post 'backup' => 'sites#backup', :as => :backup
       post 'sync' => 'sites#sync', :as => :sync
+      post 'symlink' => 'sites#symlink', :as => :symlink
 
       resources :page_types, :param => :slug, :except => [:show]
       resources :pages, :param => :slug

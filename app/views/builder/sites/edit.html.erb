@@ -7,6 +7,12 @@
     :data => { :confirm => 'Ready to import project?' }
   ) %>
   <%= link_to(
+    'Generate Symlinks', 
+    builder_site_symlink_path(current_site), 
+    :class => 'link',
+    :method => :post
+  ) %>
+  <%= link_to(
     'Backup Database', 
     builder_site_backup_path(current_site), 
     :class => 'database',

@@ -24,6 +24,12 @@ class TaprootProject
     create_symlinks
   end
 
+  def update_symlinks
+    verify_site
+    remove_bad_symlinks
+    create_symlinks
+  end
+
   # ------------------------------------------ Individual Actions
 
   def add_to_database(name, git_path)
@@ -77,23 +83,31 @@ class TaprootProject
         if File.file?(file)
           filename = file.split('/').last
           if filename == '.symlink'
-            dest = File.read(file).strip.split('/')[0..-2].join('/')
+            dest = File.read(file).strip #.split('/')[0..-2].join('/')
             src = file.split('/')[0..-2].join('/')
-            unless File.exists?(dest)
-              system("ln -s #{src} #{dest}")
+            if File.exists?(dest)
+              FileUtils.rm(dest)
             end
+            create_parent_directories(dest)
+            system("ln -s #{src} #{dest}")
           elsif file.text?
             symlink = File.read(file).match(/rtsym\:(.*)[\n|\ ]/)
             unless symlink.nil?
               dest = symlink.to_s.gsub(/rtsym\:/, '').strip.split(' ').first
-              unless File.exists?(dest)
-                system("ln -s #{file} #{dest}")
+              if File.exists?(dest)
+                FileUtils.rm(dest)
               end
+              create_parent_directories(dest)
+              system("ln -s #{file} #{dest}")
             end
           end
         end
       end
     end
+  end
+
+  def create_parent_directories(path)
+    FileUtils.mkdir_p(path.split('/')[0..-2].join('/'))
   end
 
   def remove_files

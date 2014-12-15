@@ -81,7 +81,15 @@ class Builder::SitesController < BuilderController
       route([current_site], :show, 'builder'), 
       :notice => 'Database synced successfully!'
     )
-  end 
+  end
+
+  def symlink
+    TaprootProject.new(current_site).update_symlinks
+    redirect_to(
+      route([current_site], :show, 'builder'), 
+      :notice => 'Symlinked successfully!'
+    ) 
+  end
 
   private
 
