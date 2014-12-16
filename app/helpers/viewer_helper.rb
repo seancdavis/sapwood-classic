@@ -30,12 +30,15 @@ module ViewerHelper
         o = ''
         site_root_pages.each do |page|
           path = is_home_page?(page) ? viewer_home : viewer_page(page.slug)
+          active = (request.path.split('/').last == path.split('/').last)
           o += content_tag(
             :li, 
             link_to(
               page.slug.gsub(/\_/, ' ').titleize, 
-              path
-            )
+              path,
+              :class => "#{page.slug} #{'active' if active}"
+            ),
+            :class => page.slug
           )
         end
         o.html_safe
