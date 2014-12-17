@@ -173,8 +173,8 @@ class TaprootProject
 
     def git_url
       t = TaprootSetting
-      username = URI.escape(t.git.username, "!?='^")
-      password = URI.escape(t.git.password, "!?='^")
+      username = URI.escape(t.git.username, "!?='^@")
+      password = URI.escape(t.git.password, "!?='^@")
       o =  "#{t.git.protocol}://#{username}:#{password}"
       o += "@#{t.git.url}/#{@site.git_path}.git"
     end
