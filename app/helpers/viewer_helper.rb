@@ -24,9 +24,9 @@ module ViewerHelper
     )
   end
 
-  def viewer_main_nav
-    content_tag(:nav, :class => 'main') do
-      content_tag(:ul) do
+  def viewer_main_nav(options = {})
+    content_tag(:nav, :class => options[:nav_class]) do
+      content_tag(:ul, :class => options[:ul_class]) do
         o = ''
         site_root_pages.each do |page|
           path = is_home_page?(page) ? viewer_home : viewer_page(page.slug)
