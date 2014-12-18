@@ -26,11 +26,6 @@ class Builder::SitesController < BuilderController
       if params[:site][:new_repo].to_bool
         create_taproot_project
       end
-      SiteUser.create!(
-        :user => current_user, 
-        :site => current_site, 
-        :site_admin => true
-      )
       redirect_to(
         route([current_site], :edit, 'builder'), 
         :notice => t('notices.created', :item => "Site")
