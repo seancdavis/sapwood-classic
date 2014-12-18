@@ -1,21 +1,5 @@
-<section class="site-control">
-  <ul class="bottom-nav">
-    <% builder_site_nav.each do |item, attrs| %>
-      <li class="<%= attrs['classes'] %>">
-        <%= link_to(attrs['path']) do %>
-          <%= content_tag(:i, nil, :class => "icon-#{attrs['icon']}") %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-</section>
+<%= content_tag(:section, builder_site_nav, :class => 'site-nav') %>
 
-<section class="site-menu">
-  <ul class="site-nav">
-    <% builder_site_menu.each do |attrs, val| %>
-      <li class="<%= attrs['classes'] %>">
-        <%= link_to attrs['label'].upcase, attrs['path'] %>
-      </li>
-    <% end %>
-  </ul>
-</section>
+<% unless builder_site_subnav.nil? %>
+  <%= content_tag(:section, builder_site_subnav, :class => 'sub-nav') %>
+<% end %>

@@ -1,11 +1,7 @@
-# home:
-#   icon: home6
-#   path: builder_site_path
-#   controllers: ['site']
-page_types:
-  icon: stack
-  path: builder_site_page_types_path
-  controllers: ['page_types']
+pages:
+  icon: file
+  path: builder_site_path
+  controllers: ['pages']
 images:
   icon: image
   path: builder_site_images_path
@@ -14,6 +10,10 @@ forms:
   icon: clipboard3
   path: builder_site_forms_path
   controllers: ['forms']
+page_types:
+  icon: wrench
+  path: builder_site_page_types_path
+  controllers: ['page_types']
 users:
   icon: user2
   path: builder_site_users_path

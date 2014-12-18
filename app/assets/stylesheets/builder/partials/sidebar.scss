@@ -3,7 +3,7 @@ aside#sidebar {
   z-index: 99;
   font-size: 0;
 
-  .site-control {
+  .site-nav {
     display: inline-block;
     width: 50px;
     height: 100%;
@@ -44,7 +44,7 @@ aside#sidebar {
       }
     }
   }
-  .site-menu {
+  .sub-nav {
     display: inline-block;
     width: 200px;
     height: 100%;

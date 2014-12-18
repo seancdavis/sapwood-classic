@@ -33,33 +33,4 @@ module SitesHelper
     my_sites.first unless has_multiple_sites?
   end
 
-  def builder_site_menu
-    items = []
-    site_root_pages.in_position.each do |page|
-      items << {
-        'label' => page.slug.gsub(/\_/, ' '),
-        'path' => builder_route([page], :show),
-        'classes' => (
-          request.path.include?(
-            builder_route([page], :show)
-          ) || page == current_page_parent) && controller_name == 'pages' ? ' active' : nil
-      }
-    end
-    items
-  end
-
-  def builder_site_nav
-    file = "#{Rails.root}/config/taproot/builder_site_nav.yml"
-    return nil unless File.exists?(file)
-    nav = YAML.load_file(file)
-    nav.each do |item, attrs|
-      nav[item]['path'] = send(nav[item]['path'], current_site)
-      nav[item]['classes'] ||= ''
-      if attrs['controllers'].include?(controller_name) || 
-        request.path == nav[item]['path']
-          nav[item]['classes'] += ' active'
-      end
-    end
-  end
-
 end
