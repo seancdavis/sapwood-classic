@@ -60,6 +60,9 @@ a {
     @include rounded-button($color-primary, $color-primary-lighter);
     margin: 5px 0 10px 0;
   }
+  &.button-color-2 {
+    @include rounded-button($color-2, $color-2-lighter);
+  }
 }
 
 

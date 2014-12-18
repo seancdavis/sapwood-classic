@@ -19,4 +19,14 @@ module UsersHelper
     false
   end
 
+  def all_site_users
+    @all_site_users ||= (
+      current_site.users + User.admins
+    ).flatten.sort_by(&:last_name).unshift(current_user).uniq
+  end
+
+  def is_current_user?
+    @user == current_user
+  end
+
 end

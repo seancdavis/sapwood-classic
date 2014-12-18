@@ -116,6 +116,23 @@ module NavHelper
     items
   end
 
+  def builder_users_subnav
+    items = []
+    all_site_users.each do |user|
+      path = builder_route([user], :edit)
+      item = {
+        'label' => user.display_name,
+        'path' => path,
+        'classes' => ''
+      }
+      if request.path == builder_route([user], :edit)
+        item['classes'] = 'active'
+      end
+      items << item.to_ostruct
+    end
+    items
+  end
+
   def builder_settings_subnav
     items = []
     read_nav_config('builder_settings_subnav').each do |item, attrs|

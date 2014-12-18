@@ -3,7 +3,7 @@ class Builder::UsersController < BuilderController
   before_action :set_user, :except => [:index, :create]
 
   def index
-    @users = current_site.users.includes(:site_users)
+    redirect_to builder_route([current_user], :edit)
   end
 
   def new
@@ -26,6 +26,9 @@ class Builder::UsersController < BuilderController
     end
   end
 
+  def edit
+  end
+
   def destroy
     site_users = SiteUser.where(:user_id => params[:id])
     site_users.destroy_all
@@ -39,7 +42,10 @@ class Builder::UsersController < BuilderController
       if action_name == 'new'
         @user = User.new(params[:user] ? create_params : nil)
       else
-        @user = current_site.users.find_by_id(params[:id])
+        @user = User.find_by_id(params[:id])
+        unless @user.admin?
+          @user = current_site.users.find_by_id(params[:id])
+        end
       end
       not_found if @user.nil?
     end
