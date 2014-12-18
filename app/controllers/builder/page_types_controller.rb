@@ -1,5 +1,14 @@
 class Builder::PageTypesController < BuilderController
 
+  def index
+    if site_page_types.size > 0
+      path = builder_route([site_page_types], :new)
+    else
+      path = builder_route([site_page_types.first], :edit)
+    end
+    redirect_to(path)
+  end
+
   def new
     @current_page_type = PageType.new
   end
@@ -12,7 +21,7 @@ class Builder::PageTypesController < BuilderController
         PageTypeFieldGroup.where(:slug => delete_groups).destroy_all
       end
       redirect_to(
-        builder_route([site_page_types], :index), 
+        builder_route([current_page_type], :edit), 
         :notice => t(
           'notices.created', 
           :item => controller_name.humanize.titleize

@@ -70,4 +70,21 @@ module NavHelper
     items
   end
 
+  def builder_page_types_subnav
+    items = []
+    site_page_types.each do |page_type|
+      path = builder_route([page_type], :edit)
+      item = {
+        'label' => page_type.title,
+        'path' => path,
+        'classes' => ''
+      }
+      if request.path == builder_route([page_type], :edit)
+        item['classes'] = 'active'
+      end
+      items << item.to_ostruct
+    end
+    items
+  end
+
 end
