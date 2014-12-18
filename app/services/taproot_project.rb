@@ -80,7 +80,8 @@ class TaprootProject
   def create_symlinks
     verify_site
     Dir.glob("#{project_dir}/**/*", File::FNM_DOTMATCH).each do |file|
-      unless file.split('/').include?('.git')
+      path_arr = file.split('/')
+      unless path_arr.include?('.git') || path_arr.include?('middleman')
         if File.file?(file)
           filename = file.split('/').last
           if filename == '.symlink'
