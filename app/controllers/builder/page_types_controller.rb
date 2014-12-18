@@ -2,9 +2,9 @@ class Builder::PageTypesController < BuilderController
 
   def index
     if site_page_types.size > 0
-      path = builder_route([site_page_types], :new)
-    else
       path = builder_route([site_page_types.first], :edit)
+    else
+      path = builder_route([site_page_types], :new)
     end
     redirect_to(path)
   end

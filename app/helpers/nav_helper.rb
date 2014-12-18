@@ -84,6 +84,21 @@ module NavHelper
     items
   end
 
+  def builder_forms_subnav
+    items = []
+    site_forms.each do |form|
+      items << {
+        'label' => form.slug.gsub(/\_/, ' '),
+        'path' => builder_route([form], :edit),
+        # 'classes' => (
+        #   request.path.include?(
+        #     builder_route([form], :show)
+        #   ) || form == current_page_parent) && controller_name == 'pages' ? ' active' : nil
+      }.to_ostruct
+    end
+    items
+  end
+
   def builder_page_types_subnav
     items = []
     site_page_types.each do |page_type|

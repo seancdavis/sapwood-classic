@@ -2,6 +2,15 @@ class Builder::FormsController < BuilderController
 
   include FormsHelper
 
+  def index
+    if site_forms.size > 0
+      path = builder_route([site_forms.first], :edit)
+    else
+      path = builder_route([site_forms], :new)
+    end
+    redirect_to(path)
+  end
+
   def new
     @current_form = Form.new
   end

@@ -1,6 +1,9 @@
 <%= builder_page_title("Edit #{current_form.title}") do %>
-  <%= link_to('All Forms', builder_route([current_form], :index), 
-    :class => 'back') %>
+  <%= link_to(
+    'New Form', 
+    builder_route([site_forms], :new), 
+    :class => 'new'
+  ) %>
 <% end %>
 
 <%= render 'form' %>
