@@ -1,30 +1,3 @@
-<%= builder_page_title("#{current_site.title} Settings") do %>
-  <%= link_to(
-    'Import Repo', 
-    builder_site_import_path(current_site), 
-    :class => 'code',
-    :method => :post,
-    :data => { :confirm => 'Ready to import project?' }
-  ) %>
-  <%= link_to(
-    'Generate Symlinks', 
-    builder_site_symlink_path(current_site), 
-    :class => 'link',
-    :method => :post
-  ) %>
-  <%= link_to(
-    'Backup Database', 
-    builder_site_backup_path(current_site), 
-    :class => 'database',
-    :method => :post
-  ) if Rails.env.production? %>
-  <%= link_to(
-    'Sync Database', 
-    builder_site_sync_path(current_site), 
-    :class => 'database',
-    :method => :post,
-    :data => { :confirm => 'This is a destructive action. Proceed?' }
-  ) if Rails.env.development? %>
-<% end %>
+<%= builder_page_title("#{current_site.title} Settings") %>
 
 <%= render 'form' %>

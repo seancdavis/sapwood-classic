@@ -32,7 +32,7 @@ class Builder::SitesController < BuilderController
         :site_admin => true
       )
       redirect_to(
-        route([current_site], :show, 'builder'), 
+        route([current_site], :edit, 'builder'), 
         :notice => t('notices.created', :item => "Site")
       ) 
     else
@@ -69,7 +69,7 @@ class Builder::SitesController < BuilderController
     taproot = TaprootProject.new(current_site)
     taproot.import_site
     redirect_to(
-      route([current_site], :show, 'builder'), 
+      route([current_site], :edit, 'builder'), 
       :notice => 'Repo imported successfully!'
     ) 
   end
@@ -77,7 +77,7 @@ class Builder::SitesController < BuilderController
   def backup
     TaprootDatabase.new.backup
     redirect_to(
-      route([current_site], :show, 'builder'), 
+      route([current_site], :edit, 'builder'), 
       :notice => 'Database backed up successfully!'
     )
   end
@@ -85,7 +85,7 @@ class Builder::SitesController < BuilderController
   def sync
     TaprootDatabase.new.sync
     redirect_to(
-      route([current_site], :show, 'builder'), 
+      route([current_site], :edit, 'builder'), 
       :notice => 'Database synced successfully!'
     )
   end
@@ -93,7 +93,7 @@ class Builder::SitesController < BuilderController
   def symlink
     TaprootProject.new(current_site).update_symlinks
     redirect_to(
-      route([current_site], :show, 'builder'), 
+      route([current_site], :edit, 'builder'), 
       :notice => 'Symlinked successfully!'
     ) 
   end
