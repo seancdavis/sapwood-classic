@@ -27,6 +27,12 @@ module PagesHelper
     @current_page_template ||= current_page.template
   end
 
+  def current_page_template_class
+    slug = @current_page_template
+    slug = "_#{slug}" if slug[0] =~ /[0-9]/
+    slug
+  end
+
   def current_page_parent
     @current_page_parent ||= begin
       if current_page
