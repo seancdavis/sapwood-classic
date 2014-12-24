@@ -1,5 +1,13 @@
 class Builder::PagesController < BuilderController
 
+  def index
+    if site_root_pages.size > 0
+      redirect_to(builder_route([site_root_pages.first], :show))
+    else
+      redirect_to(builder_route([site_root_pages], :new))
+    end
+  end
+
   def show
     current_page
     unless page_type_children.size > 0
@@ -48,8 +56,15 @@ class Builder::PagesController < BuilderController
   def destroy
     parent_page = current_page.parent
     current_page.destroy
-    redirect_to(builder_route([parent_page], :show), 
-      :notice => t('notices.updated', :item => 'Page'))
+    if parent_page.nil?
+      path = builder_route([site_root_pages], :index)
+    else
+      path = builder_route([parent_page], :show)
+    end
+    redirect_to(
+      path, 
+      :notice => t('notices.updated', :item => 'Page')
+    )
   end
 
   private

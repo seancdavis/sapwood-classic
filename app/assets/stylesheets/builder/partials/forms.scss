@@ -128,7 +128,7 @@ form {
     @include rounded-button($color-primary, $color-primary-lighter);
   }
 
-  a.save, a.publish, a.draft, a.cancel {
+  a.save, a.publish, a.draft, a.cancel, a.delete {
     @include button;
     &:before {
       content: '';
@@ -140,7 +140,11 @@ form {
     margin-right: 10px;
   }
   a.save.draft {
+    @include rounded-button($color-secondary, $color-secondary-dark);
+  }
+  a.delete {
     @include rounded-button($color-danger, $color-danger-dark);
+    float: right;
   }
   a.cancel {
     float: right;
