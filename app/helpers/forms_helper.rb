@@ -59,7 +59,9 @@ module FormsHelper
         form.fields.each do |field|
           o += form_field_view(field, field_data)
         end
-        o += f.submit form.button_label
+        o += content_tag(:div, :class => 'submit') do
+          f.submit(form.button_label)
+        end
         o.html_safe
       end
     end
