@@ -2,7 +2,7 @@ pages:
   icon: files
   path: builder_site_path
   controllers: ['pages']
-images:
+library:
   icon: stack-play
   path: builder_site_documents_path
   controllers: ['images']

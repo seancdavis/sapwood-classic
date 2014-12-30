@@ -84,6 +84,16 @@ module NavHelper
     items
   end
 
+  def builder_library_subnav
+    items = [
+      {
+        'label' => 'All Files',
+        'path' => builder_route([site_files], :index),
+        'classes' => 'active'
+      }.to_ostruct
+    ]
+  end
+
   def builder_forms_subnav
     items = []
     site_forms.each do |form|
