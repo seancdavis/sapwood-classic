@@ -1,6 +1,6 @@
 <%= simple_form_for(
-  [:builder, current_image], 
-  :url => builder_site_image_crop_path(current_site, current_image)
+  [:builder, current_file], 
+  :url => builder_site_document_crop_path(current_site, current_file)
 ) do |f| %>
 
   <%= f.simple_fields_for :crop_data do |data| %>
@@ -11,11 +11,11 @@
           data-width="<%= cropping.width %>" 
           data-height="<%= cropping.height %>"
           data-ratio="<%= cropping.width.to_f / cropping.height.to_f %>"
-          data-img-width="<%= current_image.image.width %>"
-          data-img-height="<%= current_image.image.height %>">
+          data-img-width="<%= current_file.document.width %>"
+          data-img-height="<%= current_file.document.height %>">
           <%= content_tag(:h2, cropping.title) %>
-          <%= image_tag current_image.image.url %>
-          <% value = current_image.crop(cropping.slug) %>
+          <%= image_tag current_file.document.url %>
+          <% value = current_file.crop(cropping.slug) %>
           <% ['x','y','crop_width','crop_height'].each do |dim| %>
             <%= crop.input(
               dim.to_sym, 

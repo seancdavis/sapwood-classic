@@ -34,8 +34,8 @@
       <%= f.simple_fields_for(:image_croppings, croppings) do |crop| %>
         <%= crop.input :title %>
         <div class="half-row">
-          <%= crop.input :width, :label => 'Minimum Width (px)' %>
-          <%= crop.input :height, :label => 'Minimum Height (px)' %>
+          <%= crop.input :width, :label => 'Width (px)' %>
+          <%= crop.input :height, :label => 'Height (px)' %>
         </div>
         <%= content_tag(:hr) unless crop.object == croppings.last %>
       <% end %>

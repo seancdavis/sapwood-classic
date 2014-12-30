@@ -8,12 +8,12 @@ module DocumentsHelper
     site_documents
   end
 
-  def current_image
-    @current_image ||= begin
-      if controller_name == 'images'
-        current_site.images.find_by_idx(params[:idx])
+  def current_file
+    @current_file ||= begin
+      if controller_name == 'documents'
+        current_site.documents.find_by_idx(params[:idx])
       elsif controller_name == 'croppings'
-        current_site.images.find_by_idx(params[:image_idx])
+        current_site.documents.find_by_idx(params[:document_idx])
       end
     end
   end

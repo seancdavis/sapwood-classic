@@ -107,8 +107,8 @@ class Builder::SitesController < BuilderController
           :id, 
           :title,
           :ratio,
-          :min_width,
-          :min_height
+          :width,
+          :height
         ]
       )
     end
