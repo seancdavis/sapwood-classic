@@ -22,10 +22,10 @@ class Builder::PagesController < BuilderController
   end
 
   def create
-    process_images
+    process_files
     @current_page = Page.new(create_params)
     if current_page.save!
-      save_images
+      # save_files
       redirect_to(
         builder_route([current_page], :show), 
         :notice => t(
@@ -39,9 +39,9 @@ class Builder::PagesController < BuilderController
   end
 
   def update
-    process_images
+    process_files
     if current_page.update(update_params)
-      save_images
+      # save_files
       redirect_to(builder_route([current_page], :show),
         :notice => t(
           'notices.updated', 
@@ -108,32 +108,32 @@ class Builder::PagesController < BuilderController
       )
     end
 
-    def process_images
-      @images_to_save = {}
+    def process_files
+      @files_to_save = {}
       unless params[:page][:field_data].nil?
         keys = params[:page][:field_data].keys
         keys.each do |key|
           value = nil
-          if key.starts_with?('rtimage_')
-            clean_key = key.gsub(/rtimage\_/, '')
+          if key.starts_with?('rtfile_')
+            clean_key = key.gsub(/rtfile\_/, '')
             value = params[:page][:field_data][key.to_sym]
             params[:page][:field_data][clean_key.to_sym] = value
-            @images_to_save[clean_key] = value.to_i
+            @files_to_save[clean_key] = value.to_i
           end
         end
       end
     end
 
-    def save_images
-      images = current_site.images.where(:idx => @images_to_save.values)
-      @images_to_save.each do |field_name, idx|
-        image = images.select { |i| i.idx == idx }.first
-        PageImage.find_or_create_by(
-          :page => current_page,
-          :image => image,
-          :field_name => field_name
-        )
-      end
-    end
+    # def save_files
+    #   files = current_site.documents.where(:idx => @files_to_save.values)
+    #   @files_to_save.each do |field_name, idx|
+    #     image = files.select { |i| i.idx == idx }.first
+    #     PageImage.find_or_create_by(
+    #       :page => current_page,
+    #       :image => image,
+    #       :field_name => field_name
+    #     )
+    #   end
+    # end
 
 end

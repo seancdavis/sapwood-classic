@@ -18,13 +18,9 @@ module DocumentsHelper
     end
   end
 
-  def page_images
-    @page_images ||= current_page.images
-  end
-
   def find_page_thumb(idx)
-    image = page_images.select { |image| image.idx == idx.to_i }.first
-    return image.image.thumb('200x200#').url unless image.nil?
+    file = current_site.documents.find_by_idx(idx)
+    return file.thumbnail unless file.nil?
   end
 
   def cropped_image(image, version)

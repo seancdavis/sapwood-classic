@@ -64,10 +64,10 @@
               #   :value => current_page.field_data[field.slug.to_sym] 
               # } 
             ) %>
-          <% when 'image' %>
+          <% when 'image', 'file' %>
             <div class="upload-field">
               <%= fd.input(
-                :"rtimage_#{field.slug}", 
+                :"rtfile_#{field.slug}", 
                 :as => :hidden, 
                 :required => field.required, 
                 :label => field.title,
@@ -80,7 +80,7 @@
               ) unless current_page.field_data[field.slug].blank? %>
               <%= link_to(
                 "Add New #{field.title}", 
-                builder_site_images_path(current_site, :select => true), 
+                builder_site_documents_path(current_site, :select => true), 
                 :class => 'image-upload-trigger button' 
               ) %>
             </div>

@@ -32,8 +32,8 @@ module PageTypesHelper
       ['Checkboxes', 'check_boxes'],
       ['Radio Buttons', 'radio_buttons'],
       # ['Date & Time', 'datetime'],
-      # ['File Upload', 'file']
-      ['Image', 'image'],
+      ['File', 'file']
+      # ['Image', 'image'],
     ]
   end
 

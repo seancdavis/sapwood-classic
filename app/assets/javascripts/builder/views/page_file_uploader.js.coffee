@@ -1,4 +1,4 @@
-class App.Views.PageImageUploader extends Backbone.View
+class App.Views.PageFileUploader extends Backbone.View
 
   el: 'body'
   triggered: false
@@ -17,7 +17,7 @@ class App.Views.PageImageUploader extends Backbone.View
       @ajaxPage.openPage()
     else
       $.get $(e.target).attr('href'), (data) =>
-        @ajaxPage.loadContent('Images', data)
+        @ajaxPage.loadContent('Add File', data)
         $('.image a.select').click(@selectImage)
         @initUploader()
         @triggered = true
@@ -39,12 +39,17 @@ class App.Views.PageImageUploader extends Backbone.View
   initUploader: =>
     $('.upload-trigger').click (e) ->
       e.preventDefault()
-      $('#image_image').click()
+      $('#fileupload').find('#file').click()
     $('#fileupload').fileupload
       add: (e, data) ->
-        data.context = $(tmpl("template-upload", data.files[0]))
-        $('section.images-container').before(data.context)
-        data.submit()
+        types = /(\.|\/)(gif|jpe?g|png|pdf)$/i
+        file = data.files[0]
+        if types.test(file.type) || types.test(file.name)
+          data.context = $(tmpl("template-upload", file))
+          $('section.images-container').before(data.context)
+          data.submit()
+        else
+          alert "File must be an image or a PDF."
       progress: (e, data) ->
         if data.context
           progress = parseInt(data.loaded / data.total * 100, 10)
@@ -55,5 +60,6 @@ class App.Views.PageImageUploader extends Backbone.View
           $('section.images-container').html(data)
           $('.image a.select').click(@selectImage)
       fail: (e, data) ->
-        console.log 'FAIL'
+        alert "There was an error with your upload."
+        data.context.remove()
 

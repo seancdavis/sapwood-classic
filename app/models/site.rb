@@ -83,4 +83,8 @@ class Site < ActiveRecord::Base
     end
   end
 
+  def files
+    documents
+  end
+
 end
