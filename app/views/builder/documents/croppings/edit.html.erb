@@ -3,24 +3,27 @@
   :url => builder_site_document_crop_path(current_site, current_file)
 ) do |f| %>
 
+  <%= form_tabs site_image_croppings.collect(&:slug) %>
+
   <%= f.simple_fields_for :crop_data do |data| %>
     <% current_site.image_croppings.each do |cropping| %>
       <%= data.simple_fields_for cropping.slug do |crop| %>
 
-        <section class="cropper" data-slug="<%= cropping.slug %>" 
+        <section class="form tabbed cropper <%= cropping.slug %>" data-slug="<%= cropping.slug %>" 
           data-width="<%= cropping.width %>" 
           data-height="<%= cropping.height %>"
           data-ratio="<%= cropping.width.to_f / cropping.height.to_f %>"
           data-img-width="<%= current_file.document.width %>"
           data-img-height="<%= current_file.document.height %>">
-          <%= content_tag(:h2, cropping.title) %>
+          <%= content_tag(:h3, cropping.title) %>
           <%= image_tag current_file.document.url %>
           <% value = current_file.crop(cropping.slug) %>
           <% ['x','y','crop_width','crop_height'].each do |dim| %>
             <%= crop.input(
               dim.to_sym, 
-              :as => :hidden, 
+              :as => :string, 
               :wrapper => false,
+              :required => false,
               :input_html => { 
                 :value => value.nil? ? nil : value.send(dim),
                 :data => { :value => value.nil? ? 0 : value.send(dim), }

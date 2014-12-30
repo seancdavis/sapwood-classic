@@ -45,4 +45,8 @@ module DocumentsHelper
     end
   end
 
+  def site_image_croppings
+    @site_image_croppings ||= current_site.image_croppings
+  end
+
 end
