@@ -21,9 +21,10 @@ class App.Views.ImageCropper extends Backbone.View
 
   initCropper: (container) ->
     img = container.find('img').first()
+    c = @getFormCoords(container)
     @cropper = img.Jcrop
       aspectRatio: container.data('ratio')
-      # setSelect: [coords.x, coords.y, coords.w, coords.h]
+      setSelect: [c.x, c.y, c.x + c.w, c.y + c.h]
       onSelect: (coords) =>
         @setFormCoords(coords, img, container)
       onChange: (coords) =>
@@ -42,3 +43,10 @@ class App.Views.ImageCropper extends Backbone.View
       $("#{prefix}_crop_width").val    coords.w / img.width() * parent.data('img-width')
       $("#{prefix}_crop_height").val   coords.h / img.height() * parent.data('img-height')
 
+  getFormCoords: (parent) ->
+    prefix = "#document_crop_data_#{parent.data('slug')}"
+    coords =
+      x: parseFloat($("#{prefix}_x").val())
+      y: parseFloat($("#{prefix}_y").val())
+      w: parseFloat($("#{prefix}_crop_width").val())
+      h: parseFloat($("#{prefix}_crop_height").val())
