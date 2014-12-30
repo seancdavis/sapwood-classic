@@ -6,7 +6,7 @@
       '', 
       builder_site_document_cropper_path(current_site, file),
       :class => 'crop image-crop-trigger'
-    ) unless params[:select] %>
+    ) if !params[:select] && file.is_image? %>
     <%= link_to(
       '', 
       builder_route([file], :show), 

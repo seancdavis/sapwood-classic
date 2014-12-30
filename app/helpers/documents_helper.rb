@@ -8,14 +8,23 @@ module DocumentsHelper
     site_documents
   end
 
-  def current_file
-    @current_file ||= begin
+  def current_document
+    @current_document ||= begin
       if controller_name == 'documents'
         current_site.documents.find_by_idx(params[:idx])
       elsif controller_name == 'croppings'
         current_site.documents.find_by_idx(params[:document_idx])
       end
     end
+  end
+
+  def current_file
+    current_document
+  end
+
+  def current_image
+    not_found unless current_file.is_image?
+    current_file
   end
 
   def find_page_thumb(idx)
