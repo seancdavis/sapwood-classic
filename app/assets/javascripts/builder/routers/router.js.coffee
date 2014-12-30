@@ -15,7 +15,7 @@ class App.Routers.Router extends Backbone.Router
     'sites/:site_slug/page_types/:page_type_slug/edit': 'editPageType'
     'sites/:site_slug/pages/new': 'newPage'
     'sites/:site_slug/pages/:page_slug/edit': 'editPage'
-    'sites/:site_slug/images': 'images'
+    'sites/:site_slug/library': 'library'
 
   editPageType: (site_slug, page_type_slug) ->
     new App.Views.DeleteGroup
@@ -32,5 +32,5 @@ class App.Routers.Router extends Backbone.Router
       new App.Views.PageImageUploader
         site: site_slug
 
-  images: (site_slug) ->
-    new App.Views.ImageUploader
+  library: (site_slug) ->
+    new App.Views.FileUploader

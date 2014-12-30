@@ -1,4 +1,4 @@
-class App.Views.ImageUploader extends Backbone.View
+class App.Views.FileUploader extends Backbone.View
 
   el: 'body'
 
@@ -11,9 +11,15 @@ class App.Views.ImageUploader extends Backbone.View
   initUploader: ->
     $('#fileupload').fileupload
       add: (e, data) ->
-        data.context = $(tmpl("template-upload", data.files[0]))
-        $('section.images-container').before(data.context)
-        data.submit()
+        # types = /(\.|\/)(gif|jpe?g|png|pdf|xlsx?|docx?|pptx?|csv)$/i
+        types = /(\.|\/)(gif|jpe?g|png|pdf)$/i
+        file = data.files[0]
+        if types.test(file.type) || types.test(file.name)
+          data.context = $(tmpl("template-upload", file))
+          $('section.images-container').before(data.context)
+          data.submit()
+        else
+          alert "File must be an image or a PDF."
       progress: (e, data) ->
         if data.context
           progress = parseInt(data.loaded / data.total * 100, 10)
@@ -23,8 +29,9 @@ class App.Views.ImageUploader extends Backbone.View
         $.get $('#fileupload').data('reload-url'), (data) ->
           $('section.images-container').html(data)
       fail: (e, data) ->
-        console.log 'FAIL'
+        alert "There was an error with your upload."
+        data.context.remove()
 
   toggleForm: (e) ->
     e.preventDefault()
-    $('#image_image').click()
+    $('#fileupload').find('#file').click()

@@ -50,9 +50,10 @@ Rails.application.routes.draw do
       resources :page_types, :param => :slug, :except => [:show]
       resources :pages, :param => :slug
       resources :forms, :param => :slug, :except => [:show]
-      resources :images, :param => :idx, :except => [:show] do
-        get 'crop' => 'images/croppings#edit', :as => :cropper 
-        patch 'crop' => 'images/croppings#update', :as => :crop
+      resources :documents, :path => :library, :param => :idx, 
+        :except => [:show] do
+          get 'crop' => 'documents/croppings#edit', :as => :cropper 
+          patch 'crop' => 'documents/croppings#update', :as => :crop
       end
       resources :users, :except => [:show]
     end

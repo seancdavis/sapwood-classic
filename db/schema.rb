@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211163919) do
+ActiveRecord::Schema.define(version: 20141230151816) do
+
+  create_table "documents", force: true do |t|
+    t.integer  "site_id"
+    t.string   "document_uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "idx",           default: 0
+    t.text     "crop_data"
+    t.string   "document_site"
+    t.string   "document_name"
+  end
 
   create_table "form_fields", force: true do |t|
     t.integer  "form_id"
@@ -66,25 +77,6 @@ ActiveRecord::Schema.define(version: 20141211163919) do
     t.string   "title"
     t.string   "slug"
     t.boolean  "public",     default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "images", force: true do |t|
-    t.integer  "site_id"
-    t.string   "image_uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "idx",        default: 0
-    t.text     "crop_data"
-    t.string   "image_site"
-    t.string   "image_name"
-  end
-
-  create_table "page_images", force: true do |t|
-    t.integer  "page_id"
-    t.integer  "image_id"
-    t.string   "field_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

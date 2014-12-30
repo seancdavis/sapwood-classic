@@ -1,4 +1,4 @@
-class Builder::Images::CroppingsController < Builder::ImagesController
+class Builder::Documents::CroppingsController < Builder::DocumentsController
 
   def edit
     render(:layout => false) if request.xhr?

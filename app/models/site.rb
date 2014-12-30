@@ -37,7 +37,7 @@ class Site < ActiveRecord::Base
   has_many :page_type_fields, :through => :page_type_field_groups, 
     :source => :fields, :dependent => :destroy
   has_many :forms, :dependent => :destroy
-  has_many :images, :dependent => :destroy
+  has_many :documents, :dependent => :destroy
   has_many :image_croppings
 
   belongs_to :home_page, :class_name => 'Page'

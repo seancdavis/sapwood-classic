@@ -6,7 +6,7 @@ Dragonfly.app.configure do
 
   secret TaprootSetting.dragonfly.secret
 
-  url_format "/media/:site/images/:name"
+  url_format "/media/:job/:name"
 
   if Rails.env.production?
     datastore :s3,

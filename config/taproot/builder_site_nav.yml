@@ -1,10 +1,10 @@
 pages:
-  icon: file
+  icon: files
   path: builder_site_path
   controllers: ['pages']
 images:
-  icon: image
-  path: builder_site_images_path
+  icon: stack-play
+  path: builder_site_documents_path
   controllers: ['images']
 forms:
   icon: clipboard3

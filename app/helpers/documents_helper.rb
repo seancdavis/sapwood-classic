@@ -1,7 +1,11 @@
-module ImagesHelper
+module DocumentsHelper
 
-  def site_images
-    @site_images ||= current_site.images.by_idx
+  def site_documents
+    @site_documents ||= current_site.documents.by_idx
+  end
+
+  def site_files
+    site_documents
   end
 
   def current_image

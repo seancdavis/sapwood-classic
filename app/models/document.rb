@@ -1,23 +1,23 @@
 # == Schema Information
 #
-# Table name: images
+# Table name: documents
 #
-#  id         :integer          not null, primary key
-#  site_id    :integer
-#  image_uid  :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  idx        :integer          default(0)
-#  crop_data  :text
-#  image_site :string(255)
-#  image_name :string(255)
+#  id            :integer          not null, primary key
+#  site_id       :integer
+#  document_uid  :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  idx           :integer          default(0)
+#  crop_data     :text
+#  document_site :string(255)
+#  document_name :string(255)
 #
 
-class Image < ActiveRecord::Base
+class Document < ActiveRecord::Base
 
   # ------------------------------------------ Plugins
 
-  dragonfly_accessor :image
+  dragonfly_accessor :document
 
   # ------------------------------------------ Attributes
 
@@ -26,9 +26,6 @@ class Image < ActiveRecord::Base
   # ------------------------------------------ Associations
 
   belongs_to :site, :touch => true
-
-  has_many :page_images
-  has_many :pages, :through => :page_images
 
   # ------------------------------------------ Scopes
 
@@ -42,18 +39,10 @@ class Image < ActiveRecord::Base
 
   def cache_attrs
     update_columns(
-      :image_site => site.slug, 
-      :image_name => self.image.meta['name']
+      :document_site => site.slug, 
+      :document_name => self.document.meta['name']
     )
   end
-
-  # ------------------------------------------ Validations
-
-  validates_property(
-    :format, 
-    :of => :image, 
-    :in => ['jpeg', 'jpg', 'png', 'gif']
-  )
 
   # ------------------------------------------ Instance Methods
 
@@ -62,7 +51,7 @@ class Image < ActiveRecord::Base
   end
 
   def create_idx
-    last_obj = self.site.images.by_idx.last
+    last_obj = self.site.documents.by_idx.last
     idx = last_obj.idx + 1
     update_columns(:idx => idx)
   end
@@ -90,8 +79,31 @@ class Image < ActiveRecord::Base
     end
   end
 
-  def url_things
-    ['hello_world','beast'].join('/')
+  def is_image?
+    begin
+      document.mime_type.split('/').first == 'image'
+    rescue
+      false
+    end
+  end
+
+  def has_thumbnail?
+    begin
+      is_image? || document.ext == 'pdf'
+    rescue
+      false
+    end
+  end
+
+  def thumbnail
+    if document
+      size = '250'
+      if is_image?
+        document.thumb("#{size}x#{size}#").url
+      elsif document.ext == 'pdf'
+        document.thumb("#{size}x#{size}#", :format => 'png', :frame => 0).url
+      end
+    end
   end
 
 end

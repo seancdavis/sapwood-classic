@@ -1,5 +1,5 @@
-<%= builder_page_title('Images') do %>
-  <%= link_to 'New Image', builder_route([site_images], :new), 
+<%= builder_page_title('Media Library') do %>
+  <%= link_to 'New File', builder_route([site_files], :new), 
     :class => 'new upload-trigger' %>
   <%= render 'form' %>
 <% end %>

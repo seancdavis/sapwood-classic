@@ -34,9 +34,6 @@ class Page < ActiveRecord::Base
 
   belongs_to :page_type, :touch => true
 
-  has_many :page_images
-  has_many :images, :through => :page_images
-
   has_one :site, :through => :page_type
 
   # ------------------------------------------ Scopes
