@@ -47,31 +47,43 @@ module NavHelper
         return nil
       end
 
-      content_tag(:ul) do
-        output = ''
-        items.each do |attrs|
-          output += content_tag(:li, :class => attrs.classes) do
-            m = attrs.request_type.blank? ? :get : attrs.request_type.to_sym
-            if attrs.confirm.blank?
-              link_to(attrs.label.upcase, attrs.path, :method => m)
-            else
-              link_to(
-                attrs.label.upcase, 
-                attrs.path, 
-                :method => m,
-                :data => { :confirm => attrs.confirm }
-              )
-            end
-          end
-        end
-        output.html_safe
+      o = builder_site_subnav_list(items)
+
+      if @builder_nav_active_item == 'pages' && site_floating_root_pages.size > 0
+        o += content_tag(:h3, 'Not In Nav')
+        items = builder_pages_subnav(site_floating_root_pages)
+        o += builder_site_subnav_list(items)
       end
+
+      o.html_safe
     end
   end
 
-  def builder_pages_subnav
+  def builder_site_subnav_list(items)
+    content_tag(:ul) do
+      o = ''
+      items.each do |attrs|
+        o += content_tag(:li, :class => attrs.classes) do
+          m = attrs.request_type.blank? ? :get : attrs.request_type.to_sym
+          if attrs.confirm.blank?
+            link_to(attrs.label.upcase, attrs.path, :method => m)
+          else
+            link_to(
+              attrs.label.upcase, 
+              attrs.path, 
+              :method => m,
+              :data => { :confirm => attrs.confirm }
+            )
+          end
+        end
+      end
+      o.html_safe
+    end
+  end
+
+  def builder_pages_subnav(pages = site_nav_pages)
     items = []
-    site_root_pages.in_position.each do |page|
+    pages.each do |page|
       items << {
         'label' => page.slug.gsub(/\_/, ' '),
         'path' => builder_route([page], :show),

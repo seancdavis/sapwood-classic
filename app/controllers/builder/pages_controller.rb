@@ -85,6 +85,7 @@ class Builder::PagesController < BuilderController
         :position,
         :template,
         :parent_id,
+        :show_in_nav,
         :field_data => fields
       ).merge(
         :page_type => current_page_type,
@@ -103,6 +104,7 @@ class Builder::PagesController < BuilderController
         :published,
         :position,
         :parent_id,
+        :show_in_nav,
         :template,
         :field_data => fields
       )

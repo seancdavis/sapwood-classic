@@ -5,11 +5,15 @@ module PagesHelper
   end
 
   def site_root_pages
-    @site_root_pages ||= site_pages.roots
+    @site_root_pages ||= site_pages.roots.in_position
   end
 
   def site_nav_pages
     @site_nav_pages ||= site_root_pages.select(&:show_in_nav?)
+  end
+
+  def site_floating_root_pages
+    @site_floating_root_pages ||= site_root_pages.select { |p| !p.show_in_nav? }
   end
 
   def current_page

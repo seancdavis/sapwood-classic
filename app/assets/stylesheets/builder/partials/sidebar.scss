@@ -49,6 +49,15 @@ aside#sidebar {
     width: 200px;
     height: 100%;
     background: $color-light-dark;
+    h3 {
+      font-size: 14px;
+      line-height: 14px;
+      margin: 10px 15px 0 15px;
+      padding: 15px 0 5px 0;
+      // border-top: 1px solid $color-light-darkest;
+      font-style: italic;
+      font-weight: 200;
+    }
     ul {
       @include clear-list;
       width: 100%;
