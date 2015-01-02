@@ -28,7 +28,7 @@ module ViewerHelper
     content_tag(:nav, :class => options[:nav_class]) do
       content_tag(:ul, :class => options[:ul_class]) do
         o = ''
-        site_root_pages.each do |page|
+        site_nav_pages.each do |page|
           path = is_home_page?(page) ? viewer_home : viewer_page(page.slug)
           active = (request.path.split('/').last == path.split('/').last)
           o += content_tag(

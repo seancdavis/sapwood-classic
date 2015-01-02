@@ -16,6 +16,7 @@
 #  position     :integer          default(0)
 #  template     :string(255)
 #  order        :string(255)
+#  show_in_nav  :boolean          default(TRUE)
 #
 
 class Page < ActiveRecord::Base
@@ -42,6 +43,7 @@ class Page < ActiveRecord::Base
   scope :published, -> { where(:published => true) }
   scope :asc, -> { order('pages.order asc') }
   scope :desc, -> { order('pages.order desc') }
+  scope :navigatable, -> { where(:show_in_nav => true) }
 
   # ------------------------------------------ Validations
 

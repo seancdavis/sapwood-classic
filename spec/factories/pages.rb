@@ -16,6 +16,7 @@
 #  position     :integer          default(0)
 #  template     :string(255)
 #  order        :string(255)
+#  show_in_nav  :boolean          default(TRUE)
 #
 
 FactoryGirl.define do

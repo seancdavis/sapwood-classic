@@ -28,6 +28,9 @@ form {
         color: $color-primary;
       }
     }
+    input.boolean {
+      margin: 0;
+    }
     span.checkbox {
       display: block;
       margin: 5px 0;

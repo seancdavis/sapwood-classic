@@ -16,10 +16,13 @@
       <%= f.input :position unless current_page_parent %>
     </div>
     <%= f.input :description %>
-    <%= f.input :published, :as => :hidden %>
+    <div class="half-row">
+      <%= f.input :show_in_nav, :label => "Show in navigation menus?" %>
+    </div>
+    <%= f.input :published, :as => :hidden, :wrapper => false %>
     <%= f.input :page_type_id, :as => :hidden, :wrapper => false, 
       :input_html => { :value => current_page_type.id } %>
-    <%= f.input :parent_id, :as => :hidden, :input_html => { 
+    <%= f.input :parent_id, :as => :hidden, :wrapper => false, :input_html => { 
       :value => current_page_parent.id } unless current_page_parent.nil? %>
   </section>
 

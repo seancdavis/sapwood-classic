@@ -8,6 +8,10 @@ module PagesHelper
     @site_root_pages ||= site_pages.roots
   end
 
+  def site_nav_pages
+    @site_nav_pages ||= site_root_pages.select(&:show_in_nav?)
+  end
+
   def current_page
     @current_page ||= begin
       if controller_name == 'pages'

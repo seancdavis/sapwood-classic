@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141230151816) do
+ActiveRecord::Schema.define(version: 20150102204815) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 20141230151816) do
     t.integer  "position",     default: 0
     t.string   "template"
     t.string   "order"
+    t.boolean  "show_in_nav",  default: true
   end
 
   add_index "pages", ["ancestry"], name: "index_pages_on_ancestry", using: :btree
