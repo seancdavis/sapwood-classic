@@ -93,4 +93,20 @@
       }
     }
   }
+
+  nav.pagination {
+    text-align: right;
+    margin: 10px 0;
+    span {
+      margin: 0 3px;
+      font-size: 14px;
+      font-weight: 400;
+      vertical-align: top;
+      a {
+        font-size: 14px;
+        font-weight: 400;
+        vertical-align: top;
+      }
+    }
+  }
 }

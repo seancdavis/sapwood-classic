@@ -42,6 +42,33 @@ module PagesHelper
     end
   end
 
+  def current_page_children
+    @current_page_children ||= current_page.children.in_position
+  end
+
+  def current_page_children_paginated
+    @current_page_children ||= begin
+      current_page_children.page(params[:page]).per(10)
+    end
+  end
+
+  def paginate_links(collection, controller, action)
+    paginate(
+      collection, 
+      # :remote => true, 
+      :params => { 
+        :controller => controller, 
+        :action => action, 
+        :_ => nil, 
+        :_method => nil, 
+        :authenticity_token => nil, 
+        :store => nil, 
+        :commit => nil, 
+        :utf8 => nil
+      }
+    )
+  end
+
   def home_page
     @home_page ||= current_site.home_page
   end

@@ -4,4 +4,8 @@
   <%= new_page_children_links %>
 <% end %>
 
-<%= data_table(current_page.children, 'page') %>
+<%= data_table(current_page_children_paginated, 'page') %>
+
+<%= paginate_links(
+  current_page_children_paginated, 'builder/pages', 'show'
+) %>
