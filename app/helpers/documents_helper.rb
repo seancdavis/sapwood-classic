@@ -37,10 +37,10 @@ module DocumentsHelper
       c = image.crop(version)
       if c.nil?
         c = current_site.image_croppings.find_by_slug(version)
-        image_tag(image.image.thumb("#{c.width.to_i}x#{c.height.to_i}#").url)
+        image_tag(image.document.thumb("#{c.width.to_i}x#{c.height.to_i}#").url)
       else
         magic = "#{c.crop_width.to_i}x#{c.crop_height.to_i}+#{c.x.to_i}+#{c.y.to_i}"
-        image_tag(image.image.thumb(magic).thumb("#{c.width.to_i}x#{c.height.to_i}#").url)
+        image_tag(image.document.thumb(magic).thumb("#{c.width.to_i}x#{c.height.to_i}#").url)
       end
     end
   end
