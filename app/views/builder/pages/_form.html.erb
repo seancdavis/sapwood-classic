@@ -108,7 +108,7 @@
     :method => :delete, 
     :class => 'delete',
     :data => { :confirm => 'Are you sure?' }
-  ) %>
+  ) unless current_page.id.blank? %>
   <%#= link_to "Cancel",  builder_route([current_page_type])[:show], 
     :class => 'cancel', :data => { :confirm => 'Are you sure?' } %>
 
