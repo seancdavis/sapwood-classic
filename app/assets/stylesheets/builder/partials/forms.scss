@@ -49,13 +49,12 @@ form {
     margin: 0;
     font-size: 0;
     > div {
+      margin-right: 2%;
       display: inline-block;
       width: 48%;
       vertical-align: top;
-      &:first-child {
-        margin-right: 2%;
-      }
-      &:last-child {
+      & + div {
+        margin-right: 0;
         margin-left: 2%;
       }
     }

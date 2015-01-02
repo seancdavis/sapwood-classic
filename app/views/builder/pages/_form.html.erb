@@ -5,12 +5,15 @@
   <section class="form tabbed details">
     <div class="half-row">
       <%= f.input :title %>
-      <%= f.input :position %>
+      <%= f.input :slug, :label => 'URL Segment' %>
     </div>
     <div class="half-row">
-      <%= f.input :slug %>
-      <%= f.input :template, :collection => current_page_type.templates, 
-        :selected => current_page.template.blank? ? current_page_type.templates.first : current_page.template %>
+      <%= f.input(
+        :template, 
+        :collection => current_page_type.templates, 
+        :selected => current_page.template.blank? ? current_page_type.templates.first : current_page.template 
+      ) %>
+      <%= f.input :position unless current_page_parent %>
     </div>
     <%= f.input :description %>
     <%= f.input :published, :as => :hidden %>
