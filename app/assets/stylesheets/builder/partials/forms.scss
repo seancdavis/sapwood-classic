@@ -140,7 +140,7 @@ form {
     margin-right: 10px;
   }
   a.save.draft {
-    @include rounded-button($color-secondary, $color-secondary-dark);
+    @include rounded-button($color-dark-lightest, $color-dark-lighter);
   }
   a.delete {
     @include rounded-button($color-danger, $color-danger-dark);
