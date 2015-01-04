@@ -32,11 +32,12 @@
           width: 50%;
           max-height: 50%;
           overflow-y: scroll;
-          background-color: $color-light-darkest;
+          background-color: $color-light-darker;
           z-index: 99;
           @include transition(all 0.35s ease);
           &.active {
-            top: 68px;
+            // top: 68px;
+            top: 50px;
           }
           &.form {
             margin: 0;

@@ -6,12 +6,9 @@ class App.Views.MarkdownEditor extends Backbone.View
   imageTemplate: JST['admin/templates/image']
 
   # Elements
-  el: $('.ajax-page.markdown-editor')
-  # textarea: $('.ajax-page.markdown-editor').find('textarea')[0]
-  toolbars: 
-    main: $('div.toolbar')
-    link: $('div.toolbar.link')
-    image: $('div.toolbar.image')
+  el: 'body'
+  # other elements are referenced from the initElements() 
+  # method to ensure they wait until the page is loaded
 
   # Text / Parse Controls
   storedMarkdown: ''
@@ -33,11 +30,21 @@ class App.Views.MarkdownEditor extends Backbone.View
   busy: false
 
   initialize: (options) ->
+    @initElements(options)
+    @bindEvents()
+    @interval = setInterval(@parseMarkdown, @parseInterval)
+
+  initElements: (options) ->
+    @page = $('.ajax-page.markdown-editor')
     @wysiwygField = $(options.wysiwygField)
     @markdownField = $(options.markdownField)
-    @textarea = $('.ajax-page.markdown-editor').find('textarea')[0]
-    @interval = setInterval(@parseMarkdown, @parseInterval)
-    @initImageUploader()
+    @textareaJQ = @page.find('textarea')
+    @textarea = @textareaJQ[0]
+    # @initImageUploader()
+    @toolbars = 
+      main: @page.find('div.toolbar')
+      link: @page.find('div.toolbar.link')
+      image: @page.find('div.toolbar.image')
 
   # ------------------------------------------ Update Markdown
 
@@ -55,19 +62,13 @@ class App.Views.MarkdownEditor extends Backbone.View
 
   # ------------------------------------------ Event Controls
 
-  events:
-    'click .save-and-close': 'submitForm'
-    'keydown textarea': 'keydownControl'
-    'keyup textarea': 'keyupControl'
-    'mousedown textarea': 'mousedownControl'
-    'mouseup textarea': 'mouseupControl'
-
-  submitForm: (e) ->
-    e.preventDefault()
-    $('form').submit()
+  bindEvents: ->
+    @textareaJQ.on 'keydown', @keydownControl
+    @textareaJQ.on 'keyup', @keyupControl
+    @textareaJQ.on 'mousedown', @mousedownControl
+    @textareaJQ.on 'mouseup', @mouseupControl
 
   keydownControl: (e) =>
-    # console.log e.keyCode
     @meta = e.metaKey; @shift = e.shiftKey
     if @meta && @shift
       e.preventDefault() if @initMetaShiftShortcut(e.keyCode)
