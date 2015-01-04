@@ -22,6 +22,9 @@ class App.Views.EditorButtons extends Backbone.View
         new App.Views.MarkdownEditor
           markdownField: '#page_body_md'
           wysiwygField: '#page_body'
+        $('.right.half').find('.content').html """
+          <p class="text-center">Loading preview. Please wait ...</p>
+          """
 
   launchWysiwygEditor: (e) ->
     e.preventDefault()
