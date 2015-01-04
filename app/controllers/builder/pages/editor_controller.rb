@@ -1,6 +1,6 @@
 class Builder::Pages::EditorController < Builder::PagesController
 
-  include MarkdownHelper
+  include EditorHelper
 
   def edit
     if request.xhr?
@@ -14,6 +14,8 @@ class Builder::Pages::EditorController < Builder::PagesController
     case params[:editor]
     when 'markdown'
       render :json => { :html => parse_markdown(params[:page][:body_md]) }
+    when 'wysiwyg'
+      render :json => { :markdown => html_to_markdown(params[:page][:body]) }
     else
       fail "Couldn't find editor"
     end

@@ -55,7 +55,7 @@ class App.Views.MarkdownEditor extends Backbone.View
       @storedMarkdown = @textarea.value
       $.post url, data, (result) =>
         $('.right.half .content').html(result.html)
-        $('#last-saved > span').text(new Date().toLocaleTimeString())
+        # $('#last-saved > span').text(new Date().toLocaleTimeString())
         @markdownField.val(@textarea.value)
         @wysiwygField.val(result.html)
 

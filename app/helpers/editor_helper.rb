@@ -1,4 +1,4 @@
-module MarkdownHelper
+module EditorHelper
 
   class HTMLwithPygments < Redcarpet::Render::HTML
     def block_code(code, language)
@@ -33,6 +33,25 @@ module MarkdownHelper
       }
     )
     md.render(clean_md)
+  end
+
+  def html_to_markdown(html)
+    ReverseMarkdown.convert(html)
+  end
+
+  def wysihtml5_icon(cmd,icon = cmd,options = {})
+    options[:cmd] = "data-wysihtml5-command-value='#{options[:cmd]}'" unless options[:cmd] == ''
+    "<a data-wysihtml5-command='#{cmd}' #{options[:cmd]} id='#{options[:id]}' 
+      class='#{options[:class]}'>
+      <i class='icon-#{icon}'></i>
+    </a>".html_safe
+  end
+
+  def wysihtml5_link(cmd,val=cmd,options={})
+    options[:cmd] = "data-wysihtml5-command-value='#{options[:cmd]}'" unless options[:cmd] == ''
+    "<a data-wysihtml5-command='#{cmd}' #{options[:cmd]} id='#{options[:id]}' class='#{options[:class]}'>
+      #{val}
+    </a>".html_safe
   end
 
 end

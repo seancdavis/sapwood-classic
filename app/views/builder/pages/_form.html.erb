@@ -18,7 +18,11 @@
     <%= f.input :description %>
     <div class="body-buttons input">
       <label>Content / Body</label>
-      <%= link_to 'Launch Rich Text Editor', '#', :class => 'button wysiwyg' %>
+      <%= link_to(
+        'Launch Rich Text Editor', 
+        builder_site_page_editor_path(current_site, current_page, 'wysiwyg'), 
+        :class => 'button wysiwyg' 
+      ) %>
       <%= link_to(
         'Launch Markdown Editor', 
         builder_site_page_editor_path(current_site, current_page, 'markdown'), 

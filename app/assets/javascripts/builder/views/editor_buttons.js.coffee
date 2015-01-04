@@ -28,4 +28,11 @@ class App.Views.EditorButtons extends Backbone.View
 
   launchWysiwygEditor: (e) ->
     e.preventDefault()
-    @mdPage.loadContent('Hello', '123')
+    if $('form#wysiwyg_editor').length > 0
+      @wysiPage.openPage()
+    else
+      $.get $(e.target).attr('href'), (data) =>
+        @wysiPage.loadContent('Rich Text Editor', data)
+        new App.Views.WysiwygEditor
+          markdownField: '#page_body_md'
+          wysiwygField: '#page_body'

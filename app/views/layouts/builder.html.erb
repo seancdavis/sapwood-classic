@@ -14,7 +14,13 @@
     <%= javascript_include_tag "modernizr" %>
 
     <%= csrf_meta_tags %>
+
+    <script type="text/javascript">
+      var WYSIWYG_BASE_STYLES = "<%= stylesheet_path('wysiwyg') %>";
+      var WYSIWYG_CUSTOM_STYLES = "<%= stylesheet_path('builder/wysihtml5') %>";
+    </script>
   </head>
+
   <body class="<%= @options['body_classes'] %>">
 
     <%= render :partial => 'status' %>

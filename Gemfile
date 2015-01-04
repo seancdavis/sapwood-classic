@@ -21,7 +21,6 @@ gem 'backbone-on-rails'
 
 gem 'jbuilder'
 gem 'simple_form'
-gem 'wysihtml5-rails'
 gem 'pickadate-rails'
 gem 'jquery-fileupload-rails'
 gem 'jcrop-rails-v2'
@@ -41,6 +40,7 @@ gem 'kaminari'
 gem 'ruby-filemagic'
 gem 'redcarpet'
 gem 'pygments.rb'
+gem 'wysihtml5-rails'
 gem 'reverse_markdown'
 
 group :console do

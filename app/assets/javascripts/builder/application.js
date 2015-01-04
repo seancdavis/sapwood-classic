@@ -2,6 +2,8 @@
 //= require jquery_ujs
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
+//= require wysihtml5
+//= require builder/wysihtml5_custom
 //= require pickadate/picker
 //= require pickadate/picker.date
 //= require pickadate/picker.time
