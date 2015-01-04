@@ -1,20 +1,30 @@
 class App.Views.AjaxPage extends Backbone.View
 
-  el: '#ajax-page'
+  el: 'body'
+
+  template: JST['builder/templates/ajax_page']
+
+  initialize: ->
+    guid = @guid()
+    $('body').append(@template(klass: guid))
+    @page = $(".ajax-page.#{guid}").first()
 
   loadContent: (title, content) ->
-    $(@el).find('header > .title').html(title)
-    $(@el).find('.ajax-page-content').html(content)
-    $(@el).addClass('active')
-    $(@el).find('header a.close').click (e) =>
+    $(@page).find('header > .title').html(title)
+    $(@page).find('.ajax-page-content').html(content)
+    $(@page).addClass('active')
+    $(@page).find('header a.close').click (e) =>
       e.preventDefault()
       @closePage()
 
   clearContent: ->
-    $(@el).html('')
+    $(@page).html('')
 
   openPage: ->
-    $(@el).addClass('active')
+    $(@page).addClass('active')
 
   closePage: ->
-    $(@el).removeClass('active')
+    $(@page).removeClass('active')
+
+  guid: ->
+     "#{parseInt(Date.now())}-#{parseInt(Math.random() * 1000000)}"

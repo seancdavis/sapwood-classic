@@ -59,6 +59,12 @@ a {
   &.button {
     @include rounded-button($color-primary, $color-primary-lighter);
     margin: 5px 0 10px 0;
+    &.markdown, &.wysiwyg {
+      margin: 10px 10px 5px 0;
+      background: transparent;
+      border: 1px solid $color-1;
+      color: $color-1;
+    }
   }
   &.button-color-2 {
     @include rounded-button($color-2, $color-2-lighter);
@@ -66,7 +72,7 @@ a {
 }
 
 
-#ajax-page {
+.ajax-page {
   position: fixed;
   top: 100%;
   left: 0;
