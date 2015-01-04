@@ -4,9 +4,9 @@ class App.Views.AjaxPage extends Backbone.View
 
   template: JST['builder/templates/ajax_page']
 
-  initialize: ->
+  initialize: (options) ->
     guid = @guid()
-    $('body').append(@template(klass: guid))
+    $('body').append(@template(klass: guid, id: options.klass))
     @page = $(".ajax-page.#{guid}").first()
 
   loadContent: (title, content) ->

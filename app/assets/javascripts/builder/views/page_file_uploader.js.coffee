@@ -9,6 +9,7 @@ class App.Views.PageFileUploader extends Backbone.View
   initialize: (options) ->
     @site = options.site
     @ajaxPage = new App.Views.AjaxPage
+      klass: 'page-file-uploader'
 
   triggerUploader: (e) ->
     e.preventDefault()

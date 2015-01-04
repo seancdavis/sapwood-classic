@@ -48,7 +48,10 @@ Rails.application.routes.draw do
       post 'symlink' => 'sites#symlink', :as => :symlink
 
       resources :page_types, :param => :slug, :except => [:show]
-      resources :pages, :param => :slug
+      resources :pages, :param => :slug do
+        get 'edit/:editor' => 'pages/editor#edit', :as => :editor
+        patch 'edit/:editor' => 'pages/editor#parse', :as => :parser
+      end
       resources :forms, :param => :slug, :except => [:show]
       resources :documents, :path => :library, :param => :idx, 
         :except => [:show] do

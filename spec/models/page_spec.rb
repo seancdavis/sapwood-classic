@@ -17,6 +17,7 @@
 #  template     :string(255)
 #  order        :string(255)
 #  show_in_nav  :boolean          default(TRUE)
+#  body_md      :text
 #
 
 require 'rails_helper'

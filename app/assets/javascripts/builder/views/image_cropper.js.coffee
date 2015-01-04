@@ -7,6 +7,7 @@ class App.Views.ImageCropper extends Backbone.View
 
   initialize: ->
     @ajaxPage = new App.Views.AjaxPage
+      klass: 'image-cropper'
 
   showModal: (e) ->
     e.preventDefault()

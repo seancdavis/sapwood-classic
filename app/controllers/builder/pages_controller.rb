@@ -126,16 +126,4 @@ class Builder::PagesController < BuilderController
       end
     end
 
-    # def save_files
-    #   files = current_site.documents.where(:idx => @files_to_save.values)
-    #   @files_to_save.each do |field_name, idx|
-    #     image = files.select { |i| i.idx == idx }.first
-    #     PageImage.find_or_create_by(
-    #       :page => current_page,
-    #       :image => image,
-    #       :field_name => field_name
-    #     )
-    #   end
-    # end
-
 end

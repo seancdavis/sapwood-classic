@@ -39,6 +39,9 @@ gem 'koala'
 gem 'httpclient'
 gem 'kaminari'
 gem 'ruby-filemagic'
+gem 'redcarpet'
+gem 'pygments.rb'
+gem 'reverse_markdown'
 
 group :console do
   gem 'wirb'

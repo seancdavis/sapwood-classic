@@ -231,6 +231,10 @@ GEM
     pickadate-rails (3.5.4.0)
       railties (>= 3.1.0)
     polyglot (0.3.5)
+    posix-spawn (0.3.9)
+    pygments.rb (0.6.0)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.1.0)
     rack (1.5.2)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -261,8 +265,11 @@ GEM
       builder
       nokogiri (>= 1.4.1)
       trollop
+    redcarpet (3.2.2)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    reverse_markdown (0.6.0)
+      nokogiri
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -431,6 +438,7 @@ GEM
       paint (~> 0.8)
     wysihtml5-rails (0.0.4)
       railties (>= 3.1.0)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -464,9 +472,12 @@ DEPENDENCIES
   koala
   mysql2
   pickadate-rails
+  pygments.rb
   rack-cache
   rails (= 4.1.0)
   rails-console-tweaks
+  redcarpet
+  reverse_markdown
   rspec-rails
   ruby-filemagic
   sass-rails

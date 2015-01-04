@@ -1,0 +1,52 @@
+<section class="left half">
+  <%#= simple_form_for Image.new, :url => admin_images_path do |f| %>
+    <%#= f.input :image %>
+  <%# end %>
+  <%= simple_form_for(
+    [:builder, current_site, current_page],
+    :html => { 
+      :data => { 
+        :autosave =>  builder_site_page_parser_path(
+          current_site, current_page, 'markdown'
+        )
+      },
+      :id => 'markdown_editor'
+    } 
+  ) do |f| %>
+
+    <div class="link form toolbar">
+      <label for="link-url">URL</label>
+      <input type="text" id="link-url" placeholder="http://google.com">
+      <label for="link-text">Text</label>
+      <input type="text" id="link-text" placeholder="My Link">
+    </div>
+
+    <div class="image form toolbar">
+      <label for="image-url">URL</label>
+      <input type="text" id="image-url" placeholder="http://goo.gl/MD8ibv">
+      <label for="image-alt">Alt</label>
+      <input type="text" id="image-alt" placeholder="My Image">
+      <%#= link_to 'Upload Image', '#', :class => 'upload-image button-color-2' %>
+      <%#= link_to 'View Library', '#', :class => 'load-library button-color-2' %>
+      <div class="image-library"></div>
+    </div>
+
+    <div class="toolbar">
+      <ul>
+        <li>
+          <%#= link_to '#', :data => { :action => 'link' } do %>
+            <i class="icon-link"></i>
+          <%# end %>
+        </li>
+      </ul>
+    </div>
+    <%= f.input :body_md, :label => false, :wrapper => false, 
+      :autofocus => true %>
+  <% end %>
+</section>
+
+<section class="right half">
+  <div class="content">
+    <%#= @item.body.html_safe %>
+  </div>
+</section>

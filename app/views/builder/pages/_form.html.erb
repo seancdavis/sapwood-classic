@@ -16,6 +16,17 @@
       <%= f.input :position unless current_page_parent %>
     </div>
     <%= f.input :description %>
+    <div class="body-buttons input">
+      <label>Content / Body</label>
+      <%= link_to 'Launch Rich Text Editor', '#', :class => 'button wysiwyg' %>
+      <%= link_to(
+        'Launch Markdown Editor', 
+        builder_site_page_editor_path(current_site, current_page, 'markdown'), 
+        :class => 'button markdown' 
+      ) %>
+      <%= f.input :body_md, :as => :hidden, :wrapper => false %>
+      <%= f.input :body, :as => :hidden, :wrapper => false %>
+    </div>
     <div class="half-row">
       <%= f.input :show_in_nav, :label => "Show in navigation menus?" %>
     </div>
