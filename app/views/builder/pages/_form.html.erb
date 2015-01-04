@@ -1,8 +1,8 @@
 <%= simple_form_for [:builder, current_site, current_page] do |f| %>
 
-  <%= form_tabs ['details', 'content'] + current_page_type.groups.collect(&:slug) %>
+  <%= form_tabs(['details'] + page_type_tabs) if page_type_tabs.size > 0 %>
 
-  <section class="form tabbed details">
+  <section class="form details <%= 'tabbed' if page_type_tabs.size > 0 %>">
     <div class="half-row">
       <%= f.input :title %>
       <%= f.input :slug, :label => 'URL Segment' %>
@@ -26,12 +26,8 @@
       :value => current_page_parent.id } unless current_page_parent.nil? %>
   </section>
 
-  <section class="form tabbed content">
-    <%= f.input :body, :label => false %>
-  </section>
-
   <%= f.simple_fields_for :field_data, OpenStruct.new(f.object.field_data) do |fd| %>
-    <% current_page_type.groups.each do |group| %>
+    <% page_type_groups.each do |group| %>
       <section class="form tabbed <%= group.slug %>">
         <% group.fields.each do |field| %>
           <% case field.data_type %>

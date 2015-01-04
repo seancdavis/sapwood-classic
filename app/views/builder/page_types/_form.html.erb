@@ -1,6 +1,6 @@
 <%= simple_form_for([:builder, current_site, current_page_type]) do |f| %>
 
-  <%= form_tabs ['details'] + current_page_type.groups.collect(&:slug) + ['new-group'] %>
+  <%= form_tabs ['details'] + page_type_tabs + ['new-group'] %>
 
   <section class="form tabbed details">
     <div class="half-row">
@@ -28,7 +28,7 @@
   </section>
 
   <%= f.simple_fields_for :groups, 
-    (current_page_type.groups + [PageTypeFieldGroup.new]) do |group| %>
+    (page_type_groups + [PageTypeFieldGroup.new]) do |group| %>
     <section class="tabbed <%= group.object.title.nil? ? 'new-group' : 
       group.object.slug %>">
       <h3>Details</h3>

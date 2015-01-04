@@ -22,6 +22,14 @@ module PageTypesHelper
     end
   end
 
+  def page_type_groups
+    @page_type_groups ||= current_page_type.groups
+  end
+
+  def page_type_tabs
+    @page_type_tabs ||= page_type_groups.collect(&:slug)
+  end
+
   def page_type_field_options
     [
       ['String', 'string'],

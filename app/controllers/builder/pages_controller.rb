@@ -74,7 +74,7 @@ class Builder::PagesController < BuilderController
         params[:page][:page_type_id]
       )
       fields = []
-      current_page_type.groups.each { |g| fields << g.fields }
+      page_type_groups.each { |g| fields << g.fields }
       fields = fields.flatten.uniq.collect(&:slug).map { |f| f.to_sym }
       params.require(:page).permit(
         :title,
@@ -94,7 +94,7 @@ class Builder::PagesController < BuilderController
 
     def update_params
       fields = []
-      current_page_type.groups.each { |g| fields << g.fields }
+      page_type_groups.each { |g| fields << g.fields }
       fields = fields.flatten.uniq.collect(&:slug).map { |f| f.to_sym }
       params.require(:page).permit(
         :title,
