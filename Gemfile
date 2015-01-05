@@ -42,6 +42,7 @@ gem 'redcarpet'
 gem 'pygments.rb'
 gem 'wysihtml5-rails'
 gem 'reverse_markdown'
+gem 'sidekiq'
 
 group :console do
   gem 'wirb'

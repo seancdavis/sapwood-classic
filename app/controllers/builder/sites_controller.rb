@@ -55,9 +55,14 @@ class Builder::SitesController < BuilderController
     redirect_to(builder_sites_path, :notice => 'Site deleted successfully.')
   end
 
-  def git
-    # ISSUE #2
-    # TODO: Queue the site for pulling and restarting the server
+  def pull
+    if current_site
+      UpdateProjectWorker.perform_async(current_site.id)
+    end
+    redirect_to(
+      route([current_site], :edit, 'builder'), 
+      :notice => 'Working on the task behind the scenes.'
+    ) 
   end
 
   def import

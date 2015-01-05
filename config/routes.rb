@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   namespace :builder, :path => '' do
     resources :sites, :param => :slug do
       # Site Actions
-      post 'git' => 'sites#git', :as => :git
+      post 'pull' => 'sites#pull', :as => :pull
       post 'import' => 'sites#import', :as => :import
       post 'backup' => 'sites#backup', :as => :backup
       post 'sync' => 'sites#sync', :as => :sync

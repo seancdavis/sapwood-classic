@@ -25,106 +25,123 @@ class TaprootProject
     create_symlinks
   end
 
+  # WARNING: You can not run this task within an app request, as it
+  # will attempt to restart the server.
+  # 
+  def pull_site
+    git_pull
+    TaprootAction.new.reload if Rails.env.production?
+  end
+
   def update_symlinks
     verify_site
     remove_bad_symlinks
     create_symlinks
   end
 
-  # ------------------------------------------ Individual Actions
+  private
 
-  def add_to_database(name, git_path)
-    @site = Site.create!(
-      :title => name,
-      :git_path => git_path
-    )
-  end
+    # ------------------------------------------ Individual Actions
 
-  def create_default_site_files
-    verify_site
-    FileUtils.cp_r(default_project_dir, project_dir)
-    Dir.glob("#{project_dir}/**/*", File::FNM_DOTMATCH).each do |file|
-      if File.file?(file)
-        content = File.read(file)
-        content = content.gsub(/default\-site/, project_slug)
-        content = content.gsub(/default\_site/, project_class_file)
-        content = content.gsub(/DefaultSite/, project_class)
-        File.open(file, 'w+') { |f| f << content }
+    def add_to_database(name, git_path)
+      @site = Site.create!(
+        :title => name,
+        :git_path => git_path
+      )
+    end
+
+    def create_default_site_files
+      verify_site
+      FileUtils.cp_r(default_project_dir, project_dir)
+      Dir.glob("#{project_dir}/**/*", File::FNM_DOTMATCH).each do |file|
+        if File.file?(file)
+          content = File.read(file)
+          content = content.gsub(/default\-site/, project_slug)
+          content = content.gsub(/default\_site/, project_class_file)
+          content = content.gsub(/DefaultSite/, project_class)
+          File.open(file, 'w+') { |f| f << content }
+        end
       end
     end
-  end
 
-  def git_init
-    verify_site
-    verify_directory
-    system("cd #{project_dir}; git init")
-    system("cd #{project_dir}; git remote add origin #{git_url}")
-    system("cd #{project_dir}; git add .")
-    system("cd #{project_dir}; git commit -am 'init commit'")
-  end
+    def git_init
+      verify_site
+      verify_directory
+      system("cd #{project_dir}; git init")
+      system("cd #{project_dir}; git remote add origin #{git_url}")
+      system("cd #{project_dir}; git add .")
+      system("cd #{project_dir}; git commit -am 'init commit'")
+    end
 
-  def git_push
-    verify_site
-    verify_directory
-    system("cd #{project_dir}; git checkout master; git pull origin master")
-    system("cd #{project_dir}; git push origin master")
-  end
+    def git_push
+      verify_site
+      verify_directory
+      system("cd #{project_dir}; git checkout master; git pull origin master")
+      system("cd #{project_dir}; git push origin master")
+    end
 
-  def git_clone
-    verify_site
-    verify_no_directory
-    system("cd #{projects_dir}; git clone #{git_url} #{project_slug}")
-    system("cd #{Rails.root}")
-  end
+    def git_clone
+      verify_site
+      verify_no_directory
+      system("cd #{projects_dir}; git clone #{git_url} #{project_slug}")
+      system("cd #{Rails.root}")
+    end
 
-  def create_symlinks
-    verify_site
-    Dir.glob("#{project_dir}/**/*", File::FNM_DOTMATCH).each do |file|
-      path_arr = file.split('/')
-      unless path_arr.include?('.git') || path_arr.include?('middleman')
-        if File.file?(file)
-          filename = file.split('/').last
-          if filename == '.symlink'
-            dest = File.read(file).strip #.split('/')[0..-2].join('/')
-            src = file.split('/')[0..-2].join('/')
-            if File.exists?(dest)
-              FileUtils.rm(dest)
-            end
-            create_parent_directories(dest)
-            system("ln -s #{src} #{dest}")
-          elsif file.text?
-            symlink = File.read(file).match(/rtsym\:(.*)[\n|\ ]/)
-            unless symlink.nil?
-              dest = symlink.to_s.gsub(/rtsym\:/, '').strip.split(' ').first
+    def git_pull
+      verify_site
+      verify_directory
+      system("cd #{project_dir}; git checkout master")
+      system("cd #{project_dir}; git stash")
+      system("cd #{project_dir}; git pull origin master")
+      system("cd #{Rails.root}")
+    end
+
+    def create_symlinks
+      verify_site
+      Dir.glob("#{project_dir}/**/*", File::FNM_DOTMATCH).each do |file|
+        path_arr = file.split('/')
+        unless path_arr.include?('.git') || path_arr.include?('middleman')
+          if File.file?(file)
+            filename = file.split('/').last
+            if filename == '.symlink'
+              dest = File.read(file).strip #.split('/')[0..-2].join('/')
+              src = file.split('/')[0..-2].join('/')
               if File.exists?(dest)
                 FileUtils.rm(dest)
               end
               create_parent_directories(dest)
-              system("ln -s #{file} #{dest}")
+              system("ln -s #{src} #{dest}")
+            elsif file.text?
+              symlink = File.read(file).match(/rtsym\:(.*)[\n|\ ]/)
+              unless symlink.nil?
+                dest = symlink.to_s.gsub(/rtsym\:/, '').strip.split(' ').first
+                if File.exists?(dest)
+                  FileUtils.rm(dest)
+                end
+                create_parent_directories(dest)
+                system("ln -s #{file} #{dest}")
+              end
             end
           end
         end
       end
     end
-  end
 
-  def create_parent_directories(path)
-    FileUtils.mkdir_p(path.split('/')[0..-2].join('/'))
-  end
-
-  def remove_files
-    verify_site
-    if Dir.exists?(project_dir)
-      FileUtils.rm_r(project_dir)
+    def create_parent_directories(path)
+      FileUtils.mkdir_p(path.split('/')[0..-2].join('/'))
     end
-    remove_bad_symlinks
-  end
 
-  def remove_bad_symlinks
-    system("find #{Rails.root} -type l -exec sh -c \"file -b {} | grep -q ^broken\" \\; -delete")
-  end
+    def remove_files
+      verify_site
+      if Dir.exists?(project_dir)
+        FileUtils.rm_r(project_dir)
+      end
+      remove_bad_symlinks
+    end
 
-  private
+    def remove_bad_symlinks
+      system("find #{Rails.root} -type l -exec sh -c \"file -b {} | grep -q ^broken\" \\; -delete")
+    end
 
     # ------------------------------------------ Verification
 
