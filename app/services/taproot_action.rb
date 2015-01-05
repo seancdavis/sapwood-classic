@@ -34,6 +34,23 @@ class TaprootAction
     end
   end
 
+  def start_server
+    start if Rails.env.production?
+  end
+
+  def stop_server
+    stop if Rails.env.production?
+  end
+
+  def restart_server
+    restart if Rails.env.production?
+  end
+
+  def restart_sidekiq
+    stop_sidekiq
+    start_sidekiq
+  end
+
   private
 
     # ------------------------------------------ Rails Server
@@ -61,11 +78,6 @@ class TaprootAction
       unless pid.blank?
         system("kill -9 #{pid}")
       end
-    end
-
-    def restart_sidekiq
-      stop_sidekiq
-      start_sidekiq
     end
 
     # ------------------------------------------ Assets
