@@ -20,8 +20,7 @@ class TaprootAction
     if Rails.env.production?
       precompile_assets
       clean_assets
-      stop
-      start
+      restart
       restart_sidekiq
     end
   end
@@ -30,8 +29,7 @@ class TaprootAction
     if Rails.env.production?
       precompile_assets
       clean_assets
-      stop
-      start
+      restart
       restart_sidekiq
     end
   end
