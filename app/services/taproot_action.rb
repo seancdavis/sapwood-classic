@@ -22,6 +22,7 @@ class TaprootAction
       clean_assets
       stop
       start
+      restart_sidekiq
     end
   end
 
@@ -31,6 +32,7 @@ class TaprootAction
       clean_assets
       stop
       start
+      restart_sidekiq
     end
   end
 
@@ -48,6 +50,24 @@ class TaprootAction
 
     def restart
       system("service #{@service} restart")
+    end
+
+    # ------------------------------------------ Sidekiq
+
+    def start_sidekiq
+      system("cd #{Rails.root}; bundle exec sidekiq -d -q mailer,5 -q default -e production")
+    end
+
+    def stop_sidekiq
+      pid = `ps -ef | grep sidekiq | grep -v grep | awk '{print $2}'`
+      unless pid.blank?
+        system("kill -9 #{pid}")
+      end
+    end
+
+    def restart_sidekiq
+      stop_sidekiq
+      start_sidekiq
     end
 
     # ------------------------------------------ Assets
