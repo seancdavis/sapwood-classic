@@ -78,6 +78,9 @@ class Builder::SitesController < BuilderController
   end
 
   def sync
+    remote_url = TaprootSetting.remote.url
+    key = TaprootSetting.api.public_key
+    system("curl http://#{remote_url}/api/v1/database/dump?public_key=#{key}")
     TaprootDatabase.new.sync
     redirect_to(
       route([current_site], :edit, 'builder'), 

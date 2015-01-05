@@ -1,25 +1,14 @@
 Rails.application.routes.draw do
 
-  # ------------------------------------------ Domains
+  # ------------------------------------------ API
 
-  if ActiveRecord::Base.connection.table_exists?('sites')
-
-    Site.all.each do |site|
-      unless site.url.nil?
-        constraints DomainConstraint.new(site.url) do
-          get(
-            '/' => 'viewer/pages#home', 
-            :as => :"#{site.slug}_home"
-          )
-          get(
-            '/*page_path' => 'viewer/pages#show', 
-            :as => :"#{site.slug}_page"
-          )
-        end
-      end
+  namespace :api do
+    namespace :v1 do
+      resources :forms, :only => [:create]
+      get 'database/dump' => 'database#dump', :as => :dump_db
     end
-
   end
+  get 'api/*path' => 'api#missing', :as => :api_missing
 
   # ------------------------------------------ App Admin
 
@@ -62,12 +51,25 @@ Rails.application.routes.draw do
     end
   end
 
-  # ------------------------------------------ API
+  # ------------------------------------------ Domains
 
-  namespace :api do
-    namespace :v1 do
-      resources :forms, :only => [:create]
+  if ActiveRecord::Base.connection.table_exists?('sites')
+
+    Site.all.each do |site|
+      unless site.url.nil?
+        constraints DomainConstraint.new(site.url) do
+          get(
+            '/' => 'viewer/pages#home', 
+            :as => :"#{site.slug}_home"
+          )
+          get(
+            '/*page_path' => 'viewer/pages#show', 
+            :as => :"#{site.slug}_page"
+          )
+        end
+      end
     end
+
   end
 
   # ------------------------------------------ Viewer
