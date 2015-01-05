@@ -13,11 +13,11 @@ class TaprootAction
 
   # ------------------------------------------ Actions
 
-  def update_repo
+  def update_repo(restart = true)
     pull
     bundle
     migrate
-    if Rails.env.production?
+    if restart == true && Rails.env.production?
       precompile_assets
       clean_assets
       restart

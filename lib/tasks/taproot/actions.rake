@@ -5,6 +5,11 @@ namespace :taproot do
     TaprootAction.new.update_repo
   end
 
+  desc 'Pull repo without touching server'
+  task :update_repo_only => :environment do
+    TaprootAction.new.update_repo(false)
+  end
+
   desc 'Restart server (production)'
   task :restart_server => :environment do
     TaprootAction.new.restart_server
@@ -18,6 +23,11 @@ namespace :taproot do
   desc 'Start server (production)'
   task :start_server => :environment do
     TaprootAction.new.start_server
+  end
+
+  desc 'Precompile assets and reload server'
+  task :reload => :environment do
+    TaprootAction.new.reload
   end
 
   desc 'Restart sidekiq server (production)'
