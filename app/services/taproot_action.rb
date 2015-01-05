@@ -55,7 +55,7 @@ class TaprootAction
     # ------------------------------------------ Sidekiq
 
     def start_sidekiq
-      system("cd #{Rails.root}; bundle exec sidekiq -d -q mailer,5 -q default -e production")
+      system("cd #{Rails.root}; bundle exec sidekiq -d -L log/sidekiq.log -q mailer,5 -q default -e production")
     end
 
     def stop_sidekiq
