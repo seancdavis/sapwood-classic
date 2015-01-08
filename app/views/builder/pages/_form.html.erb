@@ -18,16 +18,23 @@
     <%= f.input :description %>
     <div class="body-buttons input">
       <label>Content / Body</label>
-      <%= link_to(
-        'Launch Rich Text Editor', 
-        builder_site_page_editor_path(current_site, current_page, 'wysiwyg'), 
-        :class => 'button wysiwyg' 
-      ) %>
-      <%= link_to(
-        'Launch Markdown Editor', 
-        builder_site_page_editor_path(current_site, current_page, 'markdown'), 
-        :class => 'button markdown' 
-      ) %>
+      <% if current_page.slug %>
+        <%= link_to(
+          'Launch Rich Text Editor', 
+          builder_site_page_editor_path(current_site, current_page, 'wysiwyg'), 
+          :class => 'button wysiwyg' 
+        ) %>
+        <%= link_to(
+          'Launch Markdown Editor', 
+          builder_site_page_editor_path(current_site, current_page, 'markdown'), 
+          :class => 'button markdown' 
+        ) %>
+      <% else %>
+        <p>
+          <em>Save the page to edit the content (we wouldn't want you to lose 
+          your work!).</em>
+        </p>
+      <% end %>
       <%= f.input :body_md, :as => :hidden, :wrapper => false %>
       <%= f.input :body, :as => :hidden, :wrapper => false %>
     </div>
