@@ -63,14 +63,3 @@
     font-weight: 600;
     font-style: italic;
 }
-
-@font-face {
-    font-family: 'Droid Sans Mono';
-    src: asset-url('droid-sans-mono/DroidSansMono-webfont.eot');
-    src: asset-url('droid-sans-mono/DroidSansMono-webfont.eot?#iefix') format('embedded-opentype'),
-         asset-url('droid-sans-mono/DroidSansMono-webfont.woff') format('woff'),
-         asset-url('droid-sans-mono/DroidSansMono-webfont.ttf') format('truetype'),
-         asset-url('droid-sans-mono/DroidSansMono-webfont.svg#droid_sans_monoregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
