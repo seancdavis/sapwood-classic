@@ -6,8 +6,8 @@
   ) %>
   <%= simple_format(page.description) unless page.description.blank? %>
   <div class="links">
-    <%= link_to('Edit',  builder_route([page], :edit), :class => 'edit') %>
-    <%= link_to('Delete',  builder_route([page], :show), 
+    <%#= link_to('Edit',  builder_route([page], :edit), :class => 'edit') %>
+    <%#= link_to('Delete',  builder_route([page], :show), 
       :method => :delete, :class => 'delete', :data => { 
         :confirm => 'Are you sure?' } ) %>
   </div>

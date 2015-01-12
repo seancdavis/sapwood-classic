@@ -85,12 +85,12 @@ module PagesHelper
     page == home_page
   end
 
-  def new_page_children_links
+  def new_page_children_links(prefix = "New")
     @new_page_children_links ||= begin
       output = ''
       page_type_children.each do |page_type|
         output += link_to(
-          "New #{page_type.label}", 
+          "#{prefix} #{page_type.label}", 
           new_builder_site_page_path(
             current_site, 
             :page_type => page_type.slug,

@@ -10,7 +10,7 @@ class Builder::PagesController < BuilderController
 
   def show
     current_page
-    unless page_type_children.size > 0
+    if page_type_children.size == 0 || current_page.children.size == 0
       redirect_to builder_route([current_page], :edit)
     end
   end
