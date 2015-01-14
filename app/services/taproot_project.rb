@@ -112,13 +112,13 @@ class TaprootProject
               create_parent_directories(dest)
               system("ln -s #{src} #{dest}")
             elsif file.text?
-              symlink = File.read(file).match(/rtsym\:(.*)[\n|\ ]/)
+              symlink = File.read(file).split("\n").first.match(/rtsym\:(.*)[\n|\ ]?/)
               unless symlink.nil?
                 dest = symlink.to_s.gsub(/rtsym\:/, '').strip.split(' ').first
+                create_parent_directories(dest)
                 if File.exists?(dest)
                   FileUtils.rm(dest)
                 end
-                create_parent_directories(dest)
                 system("ln -s #{file} #{dest}")
               end
             end
