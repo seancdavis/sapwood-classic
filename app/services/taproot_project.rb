@@ -43,13 +43,6 @@ class TaprootProject
 
     # ------------------------------------------ Individual Actions
 
-    def add_to_database(name, git_path)
-      @site = Site.create!(
-        :title => name,
-        :git_path => git_path
-      )
-    end
-
     def create_default_site_files
       verify_site
       FileUtils.cp_r(default_project_dir, project_dir)
@@ -190,15 +183,7 @@ class TaprootProject
     end
 
     def git_url
-      t = TaprootSetting
-      if Rails.env.production?
-        username = URI.escape(t.git.username, "!?='^@")
-        password = URI.escape(t.git.password, "!?='^@")
-        o =  "#{t.git.protocol}://#{username}:#{password}"
-        o += "@#{t.git.url}/#{@site.git_path}.git"
-      else
-        "git@#{t.git.url}:#{@site.git_path}.git"
-      end
+      @site.git_url
     end
 
 end

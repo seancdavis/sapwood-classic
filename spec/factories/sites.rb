@@ -10,8 +10,7 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  home_page_id :integer
-#  git_path     :string(255)
-#  local_repo   :string(255)
+#  git_url      :string(255)
 #
 
 FactoryGirl.define do

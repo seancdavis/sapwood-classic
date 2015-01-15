@@ -12,7 +12,7 @@
     </div>
     <% if current_site.id.nil? %>
       <div class="half-row">
-        <%= f.input :git_path, :as => :string, :label => 'Remote Git Path' %>
+        <%= f.input :git_url, :as => :string, :label => 'Remote Git Path' %>
         <%= f.input(
           :new_repo, 
           :as => :boolean, 
@@ -20,7 +20,7 @@
         ) if current_site.id.nil? %>
       </div>
     <% else %>
-      <%= f.input :git_path, :as => :string, :label => 'Remote Git Path' %>
+      <%= f.input :git_url, :as => :string, :label => 'Remote Git Path' %>
     <% end %>
     <%= f.input(:home_page_id, :collection => site_pages) if site_pages.size > 0 %>
     <%= f.input :description %>

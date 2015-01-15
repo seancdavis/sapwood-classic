@@ -10,8 +10,7 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  home_page_id :integer
-#  git_path     :string(255)
-#  local_repo   :string(255)
+#  git_url      :string(255)
 #
 
 class Site < ActiveRecord::Base
@@ -50,7 +49,7 @@ class Site < ActiveRecord::Base
 
   # ------------------------------------------ Validations
 
-  validates :title, :git_path, :presence => true
+  validates :title, :git_url, :presence => true
 
   validates_uniqueness_of :title
 

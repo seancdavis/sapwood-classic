@@ -109,8 +109,7 @@ class Builder::SitesController < BuilderController
         :url, 
         :description,
         :home_page_id,
-        :git_path,
-        :local_repo,
+        :git_url,
         :image_croppings_attributes => [
           :id, 
           :title,
