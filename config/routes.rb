@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  # ------------------------------------------ Robots
+
+  get 'robots.:format' => 'robots#show'
+
   # ------------------------------------------ API
 
   namespace :api do

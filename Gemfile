@@ -43,6 +43,8 @@ gem 'pygments.rb'
 gem 'wysihtml5-rails'
 gem 'reverse_markdown'
 gem 'sidekiq'
+gem 'sitemap_generator'
+gem 'whenever'
 
 group :console do
   gem 'wirb'
