@@ -2,15 +2,16 @@
 #
 # Table name: sites
 #
-#  id           :integer          not null, primary key
-#  title        :string(255)
-#  slug         :string(255)
-#  url          :string(255)
-#  description  :text
-#  created_at   :datetime
-#  updated_at   :datetime
-#  home_page_id :integer
-#  git_url      :string(255)
+#  id             :integer          not null, primary key
+#  title          :string(255)
+#  slug           :string(255)
+#  url            :string(255)
+#  description    :text
+#  created_at     :datetime
+#  updated_at     :datetime
+#  home_page_id   :integer
+#  git_url        :string(255)
+#  secondary_urls :text
 #
 
 class Site < ActiveRecord::Base
@@ -63,6 +64,14 @@ class Site < ActiveRecord::Base
     image_croppings.where("title = ''").destroy_all
   end
 
+  after_save :reload_routes
+
+  def reload_routes
+    if secondary_urls_changed? || url_changed?
+      Rails.application.reload_routes!
+    end
+  end
+
   # ------------------------------------------ Instance Method
 
   def croppers
@@ -84,6 +93,11 @@ class Site < ActiveRecord::Base
 
   def files
     documents
+  end
+
+  def redirect_domains
+    return [] if secondary_urls.blank?
+    secondary_urls.split("\n").collect(&:strip)
   end
 
 end

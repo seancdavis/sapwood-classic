@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115003606) do
+ActiveRecord::Schema.define(version: 20150117161157) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20150115003606) do
     t.datetime "updated_at"
     t.integer  "home_page_id"
     t.string   "git_url"
+    t.text     "secondary_urls"
   end
 
   create_table "users", force: true do |t|

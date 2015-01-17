@@ -67,6 +67,14 @@ Rails.application.routes.draw do
             :as => :"#{site.slug}_page"
           )
         end
+        site.redirect_domains.each do |domain|
+          constraints DomainConstraint.new(domain) do
+            get '/' => redirect("http://#{site.url}")
+            get '/*page_path', :to => redirect { |params, request|
+              "http://#{site.url}/#{params[:page_path]}"
+            }
+          end
+        end
       end
     end
 

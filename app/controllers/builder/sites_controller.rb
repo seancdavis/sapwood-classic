@@ -107,6 +107,7 @@ class Builder::SitesController < BuilderController
       params.require(:site).permit(
         :title, 
         :url, 
+        :secondary_urls,
         :description,
         :home_page_id,
         :git_url,
