@@ -54,5 +54,7 @@ config/sites/
 # Database backups/merges
 db/backups/
 
-# Sitemaps
-public/sitemaps/
+# Sitemaps & SEO
+/public/sitemaps/
+/public/Bing*
+/public/google*
