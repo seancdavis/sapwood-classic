@@ -73,7 +73,7 @@ Rails.application.routes.draw do
             :as => :"#{site.slug}_page"
           )
         end
-        if site.respond_to?(secondary_urls)
+        if site.respond_to?(:secondary_urls)
           site.redirect_domains.each do |domain|
             constraints DomainConstraint.new(domain) do
               get '/' => redirect("http://#{site.url}")
