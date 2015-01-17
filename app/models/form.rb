@@ -57,4 +57,8 @@ class Form < ActiveRecord::Base
     form_fields
   end
 
+  def submissions
+    form_submissions
+  end
+
 end

@@ -9,7 +9,7 @@ library:
 forms:
   icon: clipboard3
   path: builder_site_forms_path
-  controllers: ['forms']
+  controllers: ['forms', 'submissions']
 page_types:
   icon: wrench
   path: builder_site_page_types_path

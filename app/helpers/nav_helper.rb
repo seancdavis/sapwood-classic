@@ -111,7 +111,7 @@ module NavHelper
     site_forms.each do |form|
       items << {
         'label' => form.slug.gsub(/\_/, ' '),
-        'path' => builder_route([form], :edit),
+        'path' => builder_route([form], :show),
         'classes' => (
           request.path.include?(builder_route([form], :show)) ? ' active' : nil
         )

@@ -45,7 +45,9 @@ Rails.application.routes.draw do
         get 'edit/:editor' => 'pages/editor#edit', :as => :editor
         patch 'edit/:editor' => 'pages/editor#parse', :as => :parser
       end
-      resources :forms, :param => :slug, :except => [:show]
+      resources :forms, :param => :slug do
+        resources :submissions, :param => :idx, :only => [:show]
+      end
       resources :documents, :path => :library, :param => :idx, 
         :except => [:show] do
           get 'crop' => 'documents/croppings#edit', :as => :cropper 

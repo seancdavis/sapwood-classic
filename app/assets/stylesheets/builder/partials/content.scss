@@ -49,6 +49,14 @@
           margin: 8px 0 10px 0;
         }
       }
+      &.form-submission {
+        .date {
+          display: block;
+          float: none;
+          clear: none;
+          margin: 5px 0 0 0;
+        }
+      }
       h4 {
         margin: 10px 0 0 0;
         font-size: 22px;
@@ -90,6 +98,26 @@
         font-size: 14px;
         font-weight: 600;
         text-transform: uppercase;
+      }
+    }
+  }
+
+  section.form-submission {
+
+    dl {
+      dt {
+        display: block;
+        margin: 20px 0 5px 0;
+        font-size: 14px;
+        font-weight: 400;
+        color: $color-primary;
+        text-transform: uppercase;
+        &:first-child {
+          margin: 0;
+        }
+      }
+      dd {
+        margin: 0;
       }
     }
   }

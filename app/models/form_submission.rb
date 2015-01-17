@@ -24,4 +24,10 @@ class FormSubmission < ActiveRecord::Base
 
   belongs_to :form
 
+  # ------------------------------------------ Instance Methods
+
+  def title
+    field_data[field_data.keys.first]
+  end
+
 end

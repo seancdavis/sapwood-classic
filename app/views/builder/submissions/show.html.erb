@@ -1,0 +1,16 @@
+<%= builder_page_title("#{current_form_submission.title}") do %>
+  <%= link_to(
+    "#{current_form.title} Submissions", 
+    builder_route([current_form], :show),
+    :class => 'back' 
+  ) %>
+<% end %>
+
+<section class="form-submission">
+  <dl>
+    <% current_form_submission.field_data.each do |k,v| %>
+      <%= content_tag(:dt, k.humanize.titleize) %>
+      <%= content_tag(:dd, v) %>
+    <% end %>
+  </dl>
+</section>

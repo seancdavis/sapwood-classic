@@ -4,11 +4,17 @@ class Builder::FormsController < BuilderController
 
   def index
     if site_forms.size > 0
-      path = builder_route([site_forms.first], :edit)
+      path = builder_route([site_forms.first], :show)
     else
       path = builder_route([site_forms], :new)
     end
     redirect_to(path)
+  end
+
+  def show
+    # unless current_form_submissions.size > 0
+    #   redirect_to builder_route([current_form], :edit)
+    # end
   end
 
   def new

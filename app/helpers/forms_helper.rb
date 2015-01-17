@@ -11,6 +11,16 @@ module FormsHelper
     end
   end
 
+  def current_form_submissions
+    @current_form_submissions ||= current_form.submissions
+  end
+
+  def current_form_submission
+    @current_form_submission ||= begin
+      current_form.submissions.find_by_idx(params[:idx])
+    end
+  end
+
   def form_field_options
     [
       ['String', 'string'],
