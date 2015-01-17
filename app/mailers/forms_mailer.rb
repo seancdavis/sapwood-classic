@@ -1,7 +1,7 @@
 class FormsMailer < ActionMailer::Base
   default :from => TaprootSetting.mailer.default_from
 
-  if TaprootSetting.mailer.sendgrid.to_bool == true
+  if Rails.env.production? && TaprootSetting.mailer.sendgrid.to_bool == true
     include SendGrid
   end
 

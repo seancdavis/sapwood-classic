@@ -317,6 +317,8 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
+    sendgrid (1.2.0)
+      json
     sidekiq (3.3.0)
       celluloid (>= 0.16.0)
       connection_pool (>= 2.0.0)
@@ -532,6 +534,7 @@ DEPENDENCIES
   rspec-rails
   ruby-filemagic
   sass-rails
+  sendgrid
   sidekiq
   simple_form
   sitemap_generator
