@@ -91,7 +91,7 @@ Rails.application.routes.draw do
   # ------------------------------------------ Viewer
 
   namespace :viewer, :path => '' do
-    scope ':site_slug' do
+    scope '/preview/:site_slug' do
       get '/' => 'pages#home', :as => :home
       get '/*page_path' => 'pages#show', :as => :page
     end
