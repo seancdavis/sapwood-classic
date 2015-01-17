@@ -42,12 +42,15 @@ module PagesHelper
   end
 
   def current_page_parent
-    @current_page_parent ||= begin
-      if current_page
-        current_page.parent || 
-        current_site.pages.find_by_slug(params[:parent])
-      end
-    end
+    @current_page_parent ||= current_page_ancestors.last
+  end
+
+  def current_page_ancestors
+    @current_page_ancestors ||= current_page.ancestors
+  end
+
+  def has_ancestors?
+    @has_ancestors ||= current_page_ancestors.size > 0
   end
 
   def current_page_children
@@ -75,6 +78,27 @@ module PagesHelper
         :utf8 => nil
       }
     )
+  end
+
+  def current_page_breadcrumbs
+    if has_ancestors?
+      content_tag(:nav, :class => 'breadcrumbs') do
+        content_tag(:ul) do
+          o = ''
+          current_page_ancestors.each do |a|
+            o += content_tag(
+              :li, 
+              link_to(a.title, builder_route([a], :show))
+            )
+          end
+          o += content_tag(
+            :li, 
+            link_to(current_page.title, builder_route([current_page], :show))
+          )
+          o.html_safe
+        end
+      end
+    end
   end
 
   def home_page
