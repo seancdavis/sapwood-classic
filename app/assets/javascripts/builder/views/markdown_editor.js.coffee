@@ -23,13 +23,13 @@ class App.Views.MarkdownEditor extends Backbone.View
   shift: false
 
   # History Control
-  textHistory: [$('textarea')[0].value]
   caretStartHistory: [0]
   caretEndHistory: [0]
   historyControl: 0
   busy: false
 
   initialize: (options) ->
+    @textHistory = [$('textarea')[0].value]
     @initElements(options)
     @bindEvents()
     @interval = setInterval(@parseMarkdown, @parseInterval)

@@ -1,4 +1,4 @@
-p.notice {
+p.notice, p.alert {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,6 +10,10 @@ p.notice {
   font-size: 24px;
   line-height: 30px;
   z-index: 99999;
+}
+
+p.alert {
+  background: rgba($color-danger, 0.85);
 }
 
 .avatar-container {
