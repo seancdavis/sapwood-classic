@@ -112,10 +112,9 @@ module NavHelper
       items << {
         'label' => form.slug.gsub(/\_/, ' '),
         'path' => builder_route([form], :edit),
-        # 'classes' => (
-        #   request.path.include?(
-        #     builder_route([form], :show)
-        #   ) || form == current_page_parent) && controller_name == 'pages' ? ' active' : nil
+        'classes' => (
+          request.path.include?(builder_route([form], :show)) ? ' active' : nil
+        )
       }.to_ostruct
     end
     items
