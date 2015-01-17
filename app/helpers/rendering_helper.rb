@@ -31,7 +31,7 @@ module RenderingHelper
   end
 
   def em_p(text)
-    content_tag(:p) { content_tag(:em) { text } }
+    content_tag(:p, :class => 'note') { content_tag(:em) { text } }
   end
 
 end

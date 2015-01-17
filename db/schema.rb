@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150117161157) do
+ActiveRecord::Schema.define(version: 20150117232930) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -60,6 +60,9 @@ ActiveRecord::Schema.define(version: 20150117161157) do
     t.datetime "updated_at"
     t.string   "key"
     t.string   "button_label"
+    t.string   "email_subject"
+    t.text     "email_body"
+    t.integer  "email_to_id"
   end
 
   create_table "image_croppings", force: true do |t|

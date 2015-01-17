@@ -14,6 +14,9 @@
 #  updated_at          :datetime
 #  key                 :string(255)
 #  button_label        :string(255)
+#  email_subject       :string(255)
+#  email_body          :text
+#  email_to_id         :integer
 #
 
 require 'rails_helper'

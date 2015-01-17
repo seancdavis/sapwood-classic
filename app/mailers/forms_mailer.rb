@@ -15,4 +15,12 @@ class FormsMailer < ActionMailer::Base
     )
   end
 
+  def response_message(to, form)
+    @form = form
+    mail(
+      :to => to,
+      :subject => form.email_subject
+    )
+  end
+
 end

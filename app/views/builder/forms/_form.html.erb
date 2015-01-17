@@ -1,6 +1,6 @@
 <%= simple_form_for([:builder, current_site, current_form]) do |f| %>
 
-  <%= form_tabs(['details','thank-you','fields']) %>
+  <%= form_tabs(['details','response','fields']) %>
 
   <section class="form tabbed details">
     <%= f.input :title %>
@@ -10,8 +10,22 @@
     <p><em>Place each email address on a new line.</em></p>
   </section>
 
-  <section class="form tabbed thank-you">
+  <section class="form tabbed response">
     <%= f.input :thank_you_body, :label => 'Thank You Text' %>
+    <%= em_p("Content above replaces the form content after submission.") %>
+    <%= f.input :email_subject, :label => 'Response email subject', 
+      :as => :string %>
+    <%= f.input :email_body, :label => 'Response email body' %>
+    <%= em_p(
+      "If you want, you can send an email to the person who completes the form. 
+      You will have to select an item from the field below to do so."
+    ) %>
+    <%= em_p(
+      "We recommend you test this in another application to ensure it will 
+      render properly."
+    ) %>
+    <%= f.association :email_to, :collection => current_form.fields, 
+      :label => 'Form field to use for email address' %>
   </section>
 
   <section class="form tabbed fields">

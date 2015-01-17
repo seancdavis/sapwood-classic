@@ -14,6 +14,9 @@
 #  updated_at          :datetime
 #  key                 :string(255)
 #  button_label        :string(255)
+#  email_subject       :string(255)
+#  email_body          :text
+#  email_to_id         :integer
 #
 
 class Form < ActiveRecord::Base
@@ -25,6 +28,7 @@ class Form < ActiveRecord::Base
   # ------------------------------------------ Associations
 
   belongs_to :site, :touch => true
+  belongs_to :email_to, :class_name => FormField
 
   has_many :form_fields
   has_many :form_submissions

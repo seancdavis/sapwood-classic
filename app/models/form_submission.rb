@@ -24,6 +24,10 @@ class FormSubmission < ActiveRecord::Base
 
   belongs_to :form
 
+  # ------------------------------------------ Callbacks
+
+  after_create :send_response
+
   # ------------------------------------------ Instance Methods
 
   def title
@@ -35,6 +39,18 @@ class FormSubmission < ActiveRecord::Base
     return false if form.notification_emails.blank?
     emails = form.notification_emails.split("\n").collect(&:strip)
     FormsMailer.new_submission(self, emails).deliver
+  end
+
+  def send_response
+    form = self.form
+    if form.email_subject.present? && 
+      form.email_body.present? && 
+      form.email_to_id.present?
+        FormsMailer.response_message(
+          self.field_data[form.email_to.slug],
+          form
+        ).deliver
+    end
   end
 
 end

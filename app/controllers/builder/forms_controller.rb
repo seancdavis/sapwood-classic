@@ -56,6 +56,9 @@ class Builder::FormsController < BuilderController
         :body,
         :thank_you_body,
         :notification_emails,
+        :email_subject,
+        :email_body,
+        :email_to_id,
         :form_fields_attributes => [
           :id,
           :title,
