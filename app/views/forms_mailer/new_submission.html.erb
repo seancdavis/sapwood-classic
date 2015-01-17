@@ -1,0 +1,10 @@
+<p>There is a new message for <%= content_tag(:strong, @form.title) %>:</p>
+
+<dl>
+  <% @submission.field_data.each do |k,v| %>
+    <%= content_tag(:dt, k.humanize.titleize) %>
+    <%= content_tag(:dd, v) %>
+  <% end %>
+</dl>
+
+<p>// Tapbot</p>

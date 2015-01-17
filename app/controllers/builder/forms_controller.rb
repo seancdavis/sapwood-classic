@@ -34,7 +34,7 @@ class Builder::FormsController < BuilderController
   def update
     if current_form.update(form_params)
       redirect_to builder_route([current_form], :edit), 
-        :notice => t('notices.updates', :item => 'Form')
+        :notice => t('notices.updated', :item => 'Form')
     else
       render 'edit'
     end

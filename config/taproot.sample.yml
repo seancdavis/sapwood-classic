@@ -24,31 +24,39 @@
 #
 development: &default
   site:
-    title:              Taproot     # default title for the site
-    url:                ''          # the url at which you will run this application
+    title:              Taproot             # default title for the site
+    url:                ''                  # the url at which you will run this application
   design:
     colors:
-      primary:          099B77      # primary color
-      secondary:        34495E      # accent color (good contrast to primary)
-      dark:             363636      # for fonts and some grey accents
-      grey:             929E9E      # a medium or dark grey works well
-      light:            FFFFFF      # used to create other accent greys
+      primary:          099B77              # primary color
+      secondary:        34495E              # accent color (good contrast to primary)
+      dark:             363636              # for fonts and some grey accents
+      grey:             929E9E              # a medium or dark grey works well
+      light:            FFFFFF              # used to create other accent greys
   aws:
-    access_key_id:      ''          # amazon s3 api key
-    secret_access_key:  ''          # amazon s3 secret
-    bucket:             ''          # amazon s3 bucket name (in us standard region)
+    access_key_id:      ''                  # amazon s3 api key
+    secret_access_key:  ''                  # amazon s3 secret
+    bucket:             ''                  # amazon s3 bucket name (in us standard region)
   git:
-    protocol:           https       # http(s)
-    url:                ''          # git host url without protocol
-    username:           ''          # your git app username
-    password:           ''          # your git app password
+    protocol:           https               # http(s)
+    url:                ''                  # git host url without protocol
+    username:           ''                  # your git app username
+    password:           ''                  # your git app password
   dragonfly:
-    secret:             ''          # some random hash
+    secret:             ''                  # some random hash
   api:
-    public_key:         ''          # some random hash
+    public_key:         ''                  # some random hash
   remote:
-    url:                ''          # the url of your production app (e.g. cms.example.com)
-    db_backup_file:     ''          # reference to remote backup using ssh
+    url:                ''                  # the url of your production app (e.g. cms.example.com)
+    db_backup_file:     ''                  # reference to remote backup using ssh
+  mailer:
+    sendgrid:           false               # use sendgrid for sending emails?
+    user_name:          ''                  # email username
+    password:           ''                  # email password
+    domain:             ''                  # email domain
+    address:            smtp.gmail.com      # smtp address
+    port:               587                 # smtp port
+    default_from:       ''                  # address from which to send notifications
 
 test:
   <<: *default

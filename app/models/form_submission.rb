@@ -30,4 +30,11 @@ class FormSubmission < ActiveRecord::Base
     field_data[field_data.keys.first]
   end
 
+  def send_notification
+    form = self.form
+    return false if form.notification_emails.blank?
+    emails = form.notification_emails.split("\n").collect(&:strip)
+    FormsMailer.new_submission(self, emails).deliver
+  end
+
 end

@@ -46,6 +46,14 @@ gem 'sidekiq'
 gem 'sitemap_generator'
 gem 'whenever'
 
+group :development do
+  gem 'mailcatcher'
+end
+
+group :production do
+  gem 'sendgrid'
+end
+
 group :console do
   gem 'wirb'
   gem 'hirb'

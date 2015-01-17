@@ -25,6 +25,7 @@ class Api::V1::FormsController < ApplicationController
         end
 
         if submission.save
+          submission.send_notification
           redirect_to(
             "#{uri.path}?form=#{params[:key]}&result=success#{query_string}"
           )
