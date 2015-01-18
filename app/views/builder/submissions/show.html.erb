@@ -6,8 +6,6 @@
   ) %>
 <% end %>
 
-<%= sidebar('builder/forms/sidebar') %>
-
 <section class="form-submission" id="page-content">
   <dl>
     <% current_form_submission.field_data.each do |k,v| %>
@@ -16,3 +14,5 @@
     <% end %>
   </dl>
 </section>
+
+<%= sidebar('builder/forms/sidebar') %>

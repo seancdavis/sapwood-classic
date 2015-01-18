@@ -3,8 +3,6 @@
   to this site.") %>
 <% end %>
 
-<%= sidebar %>
-
 <section id="page-content">
 
   <%= simple_form_for [:builder, current_site, @user] do |f| %>
@@ -20,3 +18,5 @@
   <% end %>
 
 </section>
+
+<%= sidebar %>
