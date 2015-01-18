@@ -40,8 +40,10 @@ body {
 body.my-sites {
   #container {
     #content {
-      max-width: 1000px;
-      margin: $header-height 0 0 0;
+      #page-content {
+        width: 100%;
+        padding: 0;
+      }
     }
   }
 }
