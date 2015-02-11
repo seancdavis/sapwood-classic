@@ -11,7 +11,7 @@ Project Organization
 
 All the projects are actually [Git submodules](http://git-scm.com/book/en/v2/Git-Tools-Submodules) within taproot's `projects` directory. This is because taproot itself is a Git repository.
 
-Creating An Importing
+Creating And Importing
 ----------------
 
 It's important you following the [guide to creating and importing](/docs/creating_a_site), which essentially means you need to create or bring the project repo on to your machine via the app's interface (not on the command line).
