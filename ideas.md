@@ -1,6 +1,6 @@
 New ideas are always welcomed!
 
-There is no platform for adding or voting to ideas for now. At the moment, I am a one-man team managing the roadmap for taproot, which is being done [on GitHub](https://github.com/rocktree/taproot/issues).
+There is no platform for adding or voting to ideas for now. At the moment, I am a one-man team managing the roadmap for taproot, which is being done [on GitHub](https://github.com/rocktree/taproot/issues). This page explains how I handle new ideas at the moment.
 
 If you have a new idea, please [create an issue](https://github.com/rocktree/taproot/issues/new) and preface it with `Request: `. I'll either place it somewhere within the current roadmap or respond to your request.
 
@@ -19,5 +19,3 @@ Or, if you don't have the dough but gotta have the feature, why not add it yours
 Check out the [Contributing](/contributing) page to learn more.
 
 Thank you!
-
-Sean C Davis
