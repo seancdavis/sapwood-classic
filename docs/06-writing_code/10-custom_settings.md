@@ -7,7 +7,7 @@ The config file is of the [YAML](http://www.yaml.org/) file type, which has a st
 
 The settings are broken up by the current environment, so you can use different settings if you need.
 
-You should break your settings up as semantically as possible to keep it simple for you. You can use our [taproot settings file](https://github.com/rocktree/taproot/blob/master/config/taproot.sample.yml) as an example of how you might configure your settings file.
+You should break your settings up as semantically as possible to keep it simple for you. You can use our [taproot settings file](https://github.com/seancdavis/sapwood/blob/master/config/taproot.sample.yml) as an example of how you might configure your settings file.
 
 You should use this for values you may use throughout the site that you want to abstract into one location. One example is URLs for social sites. That way you don't have to dig through markup if one of your social URLs change.
 

@@ -25,7 +25,7 @@ To use Backbone, all you need to add to `application.js` are these two lines:
 //= require backbone
 ```
 
-We'll leave it up to you to set up your Backbone directory structure, but you can mimic [the builder's structure](https://github.com/rocktree/taproot/tree/master/app/assets/javascripts/builder) if you'd like.
+We'll leave it up to you to set up your Backbone directory structure, but you can mimic [the builder's structure](https://github.com/seancdavis/sapwood/tree/master/app/assets/javascripts/builder) if you'd like.
 
 Like CSS frameworks, we're not opposed to any others, but just haven't made them a priority because that's not what we use on a regular basis. Feel free to add others to taproot and create a pull request explaining why they are beneficial.
 
@@ -34,6 +34,6 @@ Like CSS frameworks, we're not opposed to any others, but just haven't made them
 Other Helpers
 ----------------
 
-You can keep an eye on [our Gemfile](https://github.com/rocktree/taproot/blob/master/Gemfile) to know what other helpers are already in the repo.
+You can keep an eye on [our Gemfile](https://github.com/seancdavis/sapwood/blob/master/Gemfile) to know what other helpers are already in the repo.
 
 And, again, feel free to add your own to taproot if you think users will find global benefit to it.

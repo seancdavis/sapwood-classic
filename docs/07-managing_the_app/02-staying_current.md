@@ -1,4 +1,4 @@
-The [taproot code](https://github.com/rocktree/taproot) is hosted publicly on GitHub. Its various branches are used for managing different segments or versions of the application.
+The [taproot code](https://github.com/seancdavis/sapwood) is hosted publicly on GitHub. Its various branches are used for managing different segments or versions of the application.
 
 Much of the organization of how we've approached this project was inspired by the way in which [GitLab](https://github.com/gitlabhq/gitlabhq) is setup, with some obvious differences simply because taproot is young and small(ish).
 

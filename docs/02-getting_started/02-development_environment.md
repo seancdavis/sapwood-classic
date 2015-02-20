@@ -30,7 +30,7 @@ Go into that directory and then clone the repository from GitHub.
 
 ```text
 $ cd /path/to/your/codes
-$ git clone https://github.com/rocktree/taproot.git -b v1-stable
+$ git clone https://github.com/seancdavis/sapwood.git -b v1-stable
 ```
 
 > Note: Notice here we are specifically cloning the `v1-stable` branch of the taproot repo. This will help us stay up to date with the most recent stable version of the code.

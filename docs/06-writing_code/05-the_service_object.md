@@ -164,7 +164,7 @@ Note here that you want to paginate after you have your results, otherwise you m
 Accessing the Methods
 ----------------
 
-An instance of the service object is stored in the [`viewer_service` method](https://github.com/rocktree/taproot/blob/master/app/helpers/viewer_helper.rb#L3-5) which instantiates a `@viewer_service` variable.
+An instance of the service object is stored in the [`viewer_service` method](https://github.com/seancdavis/sapwood/blob/master/app/helpers/viewer_helper.rb#L3-5) which instantiates a `@viewer_service` variable.
 
 And, because we already have the current site stored, everything happens nice and quick without hitting the database a million times.
 

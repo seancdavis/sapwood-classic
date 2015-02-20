@@ -1,6 +1,6 @@
 This lists the helpers available to you in when authoring templates for your sites. This list is not comprehensive of all the view helpers in taproot - just the ones we think you'd care about.
 
-> **Please note: The helpers are being organized per [this issue](https://github.com/rocktree/taproot/issues/36). Once complete, this page will become a full-blown API reference.**
+> **Please note: The helpers are being organized per [this issue](https://github.com/seancdavis/sapwood/issues/36). Once complete, this page will become a full-blown API reference.**
 >
 > In the meantime, here is a brief outline of the helper methods available to you. But, more importantly, if you have a question on how to get data, [ask](/support).
 

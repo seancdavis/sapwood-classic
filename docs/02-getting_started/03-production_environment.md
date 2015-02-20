@@ -132,7 +132,7 @@ Then you can clone the repo from GitHub. We're going to use the https url to clo
 
 ```text
 $ cd ~/apps
-$ git clone https://github.com/rocktree/taproot.git -b v1-stable
+$ git clone https://github.com/seancdavis/sapwood.git -b v1-stable
 ```
 
 > Note: Check to ensure there isn't a more recent version of the application
@@ -246,7 +246,7 @@ $ sudo service nginx restart
 Give It A Whirl
 ----------------
 
-At this point, you should be up and running in production. If you hit a bump along the way, [let us know](https://github.com/rocktree/taproot/issues/new). Otherwise, you're off to the races. Check out some of the other docs on how to use taproot.
+At this point, you should be up and running in production. If you hit a bump along the way, [let us know](https://github.com/seancdavis/sapwood/issues/new). Otherwise, you're off to the races. Check out some of the other docs on how to use taproot.
 
 THIS WAS A LOT!!
 ----------------

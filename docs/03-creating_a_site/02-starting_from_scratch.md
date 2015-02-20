@@ -30,11 +30,11 @@ This is reading the value from `REMOTE GIT PATH`. **This should be the PATH to y
 
 Confused? Okay. Let's say my empty repository is here:
 
-> https://github.com/rocktree/taproot.git
+> https://github.com/seancdavis/sapwood.git
 
 Using the path means we eliminate `https://github.com/`, and we're also going to leave off the `.git` at the end. So, my `REMOTE GIT PATH` would be:
 
-> rocktree/taproot
+> seancdavis/sapwood
 
 Following this practice helps the app know where to push the repo after it is created.
 
@@ -51,7 +51,7 @@ If something went wrong, before you report an issue, try these steps:
 
 If the code is present but you can't push, it is likely to do with your configuration. If the code is not there, then something went wrong during the process of creating the files.
 
-If you can't pinpoint or solve the issue, you should [report it](https://github.com/rocktree/taproot/issues/new).
+If you can't pinpoint or solve the issue, you should [report it](https://github.com/seancdavis/sapwood/issues/new).
 
 Moving On
 ----------------
