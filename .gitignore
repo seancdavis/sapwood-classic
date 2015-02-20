@@ -18,8 +18,8 @@ sass-cache
 esproj
 
 # Configuration for distributed copies
-config/database.yml
-config/taproot.yml
+config/*.yml
+!config/*.sample.yml
 config/unicorn.rb
 app/assets/images/logo.png
 
