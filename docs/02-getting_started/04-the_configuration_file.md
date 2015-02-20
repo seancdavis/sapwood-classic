@@ -1,4 +1,6 @@
-sapwood comes with a config file which helps surfaces both design and functional options for making your instance of this application unique to you.
+> *DEPRECATION NOTICE: The config file will be deprecated and built into the app in an upcoming release.*
+
+Sapwood comes with a config file which helps surfaces both design and functional options for making your instance of this application unique to you.
 
 The file is not tracked by Git, but a sample from which we work is located at `config/sapwood.sample.yml`.
 
@@ -7,7 +9,7 @@ How It Works
 
 You can see the settings are broken up by environment. While you likely aren't sharing this file between environments, this at least makes it possible. It then enables you to have one config file (not tracked by Git) that can hold your development and production values.
 
-This file is to get copied to `config/sapwood.yml` and then will become active.
+This file should be copied to `config/sapwood.yml`, and from there it becomes active.
 
 The values within the environment in which you are working are loaded into the `SapwoodSetting` constant as a recursive [`OpenStruct`](http://www.ruby-doc.org/stdlib-2.0/libdoc/ostruct/rdoc/OpenStruct.html). So, for example, if you entered "Sapwood" as the site title, you could access that setting via `SapwoodSetting.site.title`.
 
@@ -48,15 +50,6 @@ The options following the steps above.
 * `access_key_id`: API key.
 * `secret_access_key`: API secret key.
 * `bucket`: S3 bucket name.
-
-### Git
-
-This may go away as we work to using `ssh` URLs in the place of `https`, but for now this is necessary.
-
-* `protocol`: (default: `https`) http or https
-* `url`: Where you host your project repositories (without the protocol)
-* `username`: The username of the app you're using for repository storage.
-* `password`: The plain text password of your git app account. *Note: be sure to make this unique to other passwords*.
 
 ### Dragonfly
 

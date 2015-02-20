@@ -1,11 +1,3 @@
-Sapwood is based on a [communicative workflow](/docs/communicative_workflow) between a production server and potentially multiple development machines.
+Like your other rails apps, Sapwood has a production instance and (potentially) multiple development instances. But with Sapwood, these two environments communicate with one another, in striving to streamline your site-building process. The idea of Sapwood's environments working together is its [communicative workflow](/docs/communicative_workflow).
 
-We've detailed the full process for getting up and running with both environments. Be sure to have a read through all three of the sections in this chapter, for the setup and management of both environments, along with their configuration, is important to understand.
-
-### New to Rails?
-
-We make some assumptions in getting you up and running with Sapwood, the largest of which is that **you've run a Ruby on Rails project previously.** In other words, **we recommend that Sapwood is not your first use of Ruby on Rails.** While we've worked hard to make it intuitive and easy, it skips a lot of steps that are beneficial to learning.
-
-We suggest if you are new to Rails that you build a small Ruby on Rails project first to become familiar with how Rails works.
-
-If nothing else, just [give this article a read](http://guides.rubyonrails.org/getting_started.html) before you begin.
+If you already have a live, production instance of Sapwood, then you'll only need to reference [the development setup guide](/docs/getting_started/development_environment). If you are starting from scratch, you should have a look through both guides.
