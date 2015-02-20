@@ -1,6 +1,6 @@
 Depending on your project workflow, you might not want to start out of the gate with a dynamic site. Sometimes it can be useful for your client to see some static wireframes and/or designs before you go into dynamic mode.
 
-We have a dream to bring a static site design into the process of taproot, but that's way down the road. For now, we recommend you do it manually.
+We have a dream to bring a static site design into the process of sapwood, but that's way down the road. For now, we recommend you do it manually.
 
 An Example
 ----------------
@@ -34,7 +34,7 @@ To give a client a public view of this static site, we manually ssh into our pro
 
 ```text
 $ ssh me@my_server
-$ cd ~/apps/taproot/projects/[site_slug]
+$ cd ~/apps/sapwood/projects/[site_slug]
 $ git pull origin master
 $ cd middleman
 $ bundle install
@@ -59,7 +59,7 @@ and add this content:
 server {
   listen 80;
   server_name staging.google.com;
-  root /home/deploy/apps/taproot/projects/[site_slug]/middleman/build;
+  root /home/deploy/apps/sapwood/projects/[site_slug]/middleman/build;
 
   index index.html;
 
@@ -77,4 +77,4 @@ $ sudo service nginx restart
 
 ***
 
-> If you have other examples, send your process to us. We're looking for the best example to work into the typical taproot project workflow.
+> If you have other examples, send your process to us. We're looking for the best example to work into the typical sapwood project workflow.

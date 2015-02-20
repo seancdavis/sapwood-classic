@@ -1,4 +1,4 @@
-This lists the helpers available to you in when authoring templates for your sites. This list is not comprehensive of all the view helpers in taproot - just the ones we think you'd care about.
+This lists the helpers available to you in when authoring templates for your sites. This list is not comprehensive of all the view helpers in sapwood - just the ones we think you'd care about.
 
 > **Please note: The helpers are being organized per [this issue](https://github.com/seancdavis/sapwood/issues/36). Once complete, this page will become a full-blown API reference.**
 >

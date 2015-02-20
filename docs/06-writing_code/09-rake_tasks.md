@@ -1,6 +1,6 @@
-[Rake tasks](https://github.com/ruby/rake) are a great way to automate repeated tasks. We continue to add rake tasks to the taproot project to make it easier to work with.
+[Rake tasks](https://github.com/ruby/rake) are a great way to automate repeated tasks. We continue to add rake tasks to the sapwood project to make it easier to work with.
 
-> If you have an idea for a task that should be added to taproot, add it!
+> If you have an idea for a task that should be added to sapwood, add it!
 
 The `utilities/tasks.rake` file is for building site-specific rake tasks. And, frankly, that's about where this discussion ends. Anything you need to do for that site, add it to your `tasks.rake` file and voila!
 

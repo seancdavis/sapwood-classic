@@ -8,7 +8,7 @@ At this time, the permissions within a site are identical. The only difference i
 Creating Users
 ----------------
 
-Because users are technically *content* in your taproot app, **they should be created in production**.
+Because users are technically *content* in your sapwood app, **they should be created in production**.
 
 Admin Users
 ----------------

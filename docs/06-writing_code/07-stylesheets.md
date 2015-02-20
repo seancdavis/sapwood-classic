@@ -15,7 +15,7 @@ If you're going the Rails way and using Sass, then you should create a manifest 
 
 You can place vendor files and partials at any location within the stylesheets directory and they will be available to be imported into your project.
 
-> If you have a vendor file you believe would be useful to be available to all taproot projects, add it to the taproot repo, create a pull request and explain why it's useful.
+> If you have a vendor file you believe would be useful to be available to all sapwood projects, add it to the sapwood repo, create a pull request and explain why it's useful.
 
 Loading Stylesheets
 ----------------
@@ -35,14 +35,14 @@ Frameworks & Helpers
 
 ### Available Frameworks
 
-Revisiting the purpose of taproot, we're not attempting to create one-click websites. We want each and every site to be unique. Of course, you'll still share styles, and that's okay.
+Revisiting the purpose of sapwood, we're not attempting to create one-click websites. We want each and every site to be unique. Of course, you'll still share styles, and that's okay.
 
 That is the reason why we haven't added options to include [Bootstrap](http://getbootstrap.com/) or [Foundation](http://foundation.zurb.com/) in your projects. We're not against it, it's just not a priority
 
 If you must have these options, then we suggest one of two solutions:
 
 * Include the necessary files manually in your project.
-* Add the ability to add these files to taproot and create your pull request.
+* Add the ability to add these files to sapwood and create your pull request.
 
 We've created [Bones](https://github.com/rocktree/bones) with a similar philosophy, and that is available to be added to your project.
 
@@ -65,4 +65,4 @@ Last, in the `stylesheets/bones/bones.scss` file, replace all instances of `buil
 
 In addition, we've made the [Bourbon](https://github.com/thoughtbot/bourbon) and [Compass](https://github.com/compass/compass-rails) gems available for you to include in your project as needed.
 
-Like frameworks, feel free to open a pull request if you'd like to add a sass library to taproot.
+Like frameworks, feel free to open a pull request if you'd like to add a sass library to sapwood.

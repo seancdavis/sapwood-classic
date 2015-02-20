@@ -13,7 +13,7 @@ The URL
 
 The URL you define here is the URL for the site itself. This is really only for the production environment.
 
-For example, if your site's url is `taproot.rocktree.us`, then going to that URL will lead you to the home page of that site if:
+For example, if your site's url is `sapwood.rocktree.us`, then going to that URL will lead you to the home page of that site if:
 
 * you restart the server after you change it
 * the A-record for that domain is pointing the IP address of the production server

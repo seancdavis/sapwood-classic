@@ -1,13 +1,13 @@
-taproot is built around the idea of a Communicative Workflow. This workflow enables you to build unique and fully customized sites from the ground up, all while working in a team.
+sapwood is built around the idea of a Communicative Workflow. This workflow enables you to build unique and fully customized sites from the ground up, all while working in a team.
 
 Development vs. Production
 ----------------
 
 We'll use the difference between these two environments to explain how to work, so it's important you understand the difference. If you've developed and deployed a web project before, you probably already get it.
 
-In taproot, like most web development projects, a *develoment* environment means *an instance of the entire application that runs locally on your machine or one of your team member's machines*. There can be as many of these instances as you need -- likely equal to the number of members on your web team.
+In sapwood, like most web development projects, a *develoment* environment means *an instance of the entire application that runs locally on your machine or one of your team member's machines*. There can be as many of these instances as you need -- likely equal to the number of members on your web team.
 
-The *production* environment is *the one instance of taproot that hosts the final versions of your sites*. Production is accessible by the Internet and is likely tied to a specific domain name.
+The *production* environment is *the one instance of sapwood that hosts the final versions of your sites*. Production is accessible by the Internet and is likely tied to a specific domain name.
 
 And while we say *there is only one production environment*, you could have certainly deployed more than one, if necessary. But our goal is that you're bringing all your sites into one application to make it easier to manage.
 
@@ -37,4 +37,4 @@ This is explained much more fully in [Building Content](/docs/building_content).
 Future Versions
 ----------------
 
-Keep in mind that the primary goal of v2.0 of taproot will be to more closely intertwine the processes of writing code and writing content. [Let us know](mailto:sean@rocktree.us) if you'd like to contribute.
+Keep in mind that the primary goal of v2.0 of sapwood will be to more closely intertwine the processes of writing code and writing content. [Let us know](mailto:sean@rocktree.us) if you'd like to contribute.

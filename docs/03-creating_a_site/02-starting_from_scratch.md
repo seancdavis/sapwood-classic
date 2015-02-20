@@ -11,11 +11,11 @@ Let's get this out of the way first. Create a remote *and empty* repository.
 
 ### An Awesome Benefit!
 
-One awesome benefit of taproot is that the only files in your project repo are those unique to that project. Because of this, it's quite possible that you won't have any sensitive data in your files (and, really, you shouldn't track that with git anyways). And it's also unlikely that you're building some super secret app with taproot.
+One awesome benefit of sapwood is that the only files in your project repo are those unique to that project. Because of this, it's quite possible that you won't have any sensitive data in your files (and, really, you shouldn't track that with git anyways). And it's also unlikely that you're building some super secret app with sapwood.
 
 Because of this, it's *possible* that your code could be public. Obviously, there's no *functional* benefit to that (other than *cost*), but it's possible.
 
-> Note: If you are still looking for a good choice for hosting your code, the primary author of taproot has written an article [on just that topic](http://thepolymathlab.com/free-alternatives-to-github-for-private-git-hosting).
+> Note: If you are still looking for a good choice for hosting your code, the primary author of sapwood has written an article [on just that topic](http://thepolymathlab.com/free-alternatives-to-github-for-private-git-hosting).
 
 Create the Site
 ----------------
@@ -46,7 +46,7 @@ Troubleshooting
 If something went wrong, before you report an issue, try these steps:
 
 1. ssh into your production server.
-2. find and change into your project (inside `~/apps/taproot/projects/`)
+2. find and change into your project (inside `~/apps/sapwood/projects/`)
 3. try to push (`git push origin master`)
 
 If the code is present but you can't push, it is likely to do with your configuration. If the code is not there, then something went wrong during the process of creating the files.

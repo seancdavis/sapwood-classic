@@ -1,15 +1,15 @@
-taproot comes with a config file which helps surfaces both design and functional options for making your instance of this application unique to you.
+sapwood comes with a config file which helps surfaces both design and functional options for making your instance of this application unique to you.
 
-The file is not tracked by Git, but a sample from which we work is located at `config/taproot.sample.yml`.
+The file is not tracked by Git, but a sample from which we work is located at `config/sapwood.sample.yml`.
 
 How It Works
 ----------------
 
 You can see the settings are broken up by environment. While you likely aren't sharing this file between environments, this at least makes it possible. It then enables you to have one config file (not tracked by Git) that can hold your development and production values.
 
-This file is to get copied to `config/taproot.yml` and then will become active.
+This file is to get copied to `config/sapwood.yml` and then will become active.
 
-The values within the environment in which you are working are loaded into the `TaprootSetting` constant as a recursive [`OpenStruct`](http://www.ruby-doc.org/stdlib-2.0/libdoc/ostruct/rdoc/OpenStruct.html). So, for example, if you entered "Taproot" as the site title, you could access that setting via `TaprootSetting.site.title`.
+The values within the environment in which you are working are loaded into the `SapwoodSetting` constant as a recursive [`OpenStruct`](http://www.ruby-doc.org/stdlib-2.0/libdoc/ostruct/rdoc/OpenStruct.html). So, for example, if you entered "Sapwood" as the site title, you could access that setting via `SapwoodSetting.site.title`.
 
 Options
 ----------------
@@ -18,7 +18,7 @@ The options are grouped into semantic categories (which aren't really ordered in
 
 ### Site
 
-* `title`: (default: `Taproot`) The default title for the site. This is used when we don't have a dynamic title available.
+* `title`: (default: `Sapwood`) The default title for the site. This is used when we don't have a dynamic title available.
 * `url`: The URL at which you will run this application. In development, this is usually `localhost`, and in production it is whatever you are using as your domain. *Note: omit the protocol and just include the domain.
 
 ### Design
@@ -64,9 +64,9 @@ This may go away as we work to using `ssh` URLs in the place of `https`, but for
 
 * `secret`: Just some random hash.
 
-### Taproot API
+### Sapwood API
 
-Taproot has begun using an API so a development and production installation of the app can talk with each other. In other words, it's used for syncing content.
+Sapwood has begun using an API so a development and production installation of the app can talk with each other. In other words, it's used for syncing content.
 
 * `public_key`: Any random hash. It doesn't matter what it is, but **be sure this matches all other instances of this application that you want to talk with each other.**
 

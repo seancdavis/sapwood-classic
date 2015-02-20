@@ -1,6 +1,6 @@
-You collaborate on taproot code using [Git](http://git-scm.com/). If you're not familiar with it, you should become so. And not just for this project. It is an awesome program, and you should use it to track changes in all of your development projects, regardless of whether or not you work on a team.
+You collaborate on sapwood code using [Git](http://git-scm.com/). If you're not familiar with it, you should become so. And not just for this project. It is an awesome program, and you should use it to track changes in all of your development projects, regardless of whether or not you work on a team.
 
-> Check out a taproot author's [guide on getting started with git](http://thepolymathlab.com/learn-git-in-an-hour).
+> Check out a sapwood author's [guide on getting started with git](http://thepolymathlab.com/learn-git-in-an-hour).
 
 As mentioned in [creating a site from scratch](/docs/creating_a_site/starting_from_scratch), you need a remote repository. You really can use any service for this. Check out [this article](http://thepolymathlab.com/free-alternatives-to-github-for-private-git-hosting) if you're looking for free options.
 
@@ -9,7 +9,7 @@ That's as far as we'll go with any intro to Git. They rest is up to you.
 Project Organization
 ----------------
 
-All the projects are actually [Git submodules](http://git-scm.com/book/en/v2/Git-Tools-Submodules) within taproot's `projects` directory. This is because taproot itself is a Git repository.
+All the projects are actually [Git submodules](http://git-scm.com/book/en/v2/Git-Tools-Submodules) within sapwood's `projects` directory. This is because sapwood itself is a Git repository.
 
 Creating And Importing
 ----------------

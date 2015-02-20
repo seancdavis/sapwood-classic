@@ -1,4 +1,4 @@
-Given our handy-dandy [communicative workflow](/docs/communicative_workflow), your production environment is where your content will be generated. Let's look at how to setup your production server, and get taproot running on the server.
+Given our handy-dandy [communicative workflow](/docs/communicative_workflow), your production environment is where your content will be generated. Let's look at how to setup your production server, and get sapwood running on the server.
 
 Server Requirements
 ----------------
@@ -7,15 +7,15 @@ Server Requirements
 
 Since we are assuming you've run a Ruby on Rails project previously, we also assume you have *deployed* a Rails project.
 
-But, even if you have, you may have used a service like Heroku, or even a shared hosting environment like Bluehost. While both of these services have benefits, to run taproot we strongly recommend **a dedicated private server**.
+But, even if you have, you may have used a service like Heroku, or even a shared hosting environment like Bluehost. While both of these services have benefits, to run sapwood we strongly recommend **a dedicated private server**.
 
 If that sounds expensive, it's because it usually is. Fortunately, there are some awesome companies like [Digital Ocean](https://www.digitalocean.com/) popping up. Digital Ocean offers dedicated, virtual private servers [starting at $5 per month](https://www.digitalocean.com/pricing/).
 
 ### Operating System
 
-Taproot will work wherever you can run a Ruby on Rails project. For reference, we develop on Mac OS X machines, while our production servers are Ubuntu 14.04.
+Sapwood will work wherever you can run a Ruby on Rails project. For reference, we develop on Mac OS X machines, while our production servers are Ubuntu 14.04.
 
-**For this guide, we're going to assume you're working with an Ubuntu/Debian installation.** Obviously, you can use Taproot in production with other operating systems, but you'll have to find the equivalent packages.
+**For this guide, we're going to assume you're working with an Ubuntu/Debian installation.** Obviously, you can use Sapwood in production with other operating systems, but you'll have to find the equivalent packages.
 
 ### Minimum Specifications
 
@@ -29,9 +29,9 @@ The minimum specs for your server are somewhat open-ended. Obviously, the faster
 
 > While Rails is scalable, it takes some extra configuration with your web server and perhaps multiple machines. We aren't showing that here and we haven't yet tested a concurrency scenario.
 >
-> Therefore, if you have a high-traffic site you are going to build using taproot, we'd love to hear your story.
+> Therefore, if you have a high-traffic site you are going to build using sapwood, we'd love to hear your story.
 >
-> This also means we can't guarantee your mileage with taproot on high-traffic sites. But, rest assured we're building sites with taproot, so we'll be looking for solutions to this problem soon enough.
+> This also means we can't guarantee your mileage with sapwood on high-traffic sites. But, rest assured we're building sites with sapwood, so we'll be looking for solutions to this problem soon enough.
 
 Server Preparation
 ----------------
@@ -63,7 +63,7 @@ In addition, you need the following programs.
 
 ### Configure Git
 
-It's easiest if your server has its own Git identity. We recommend creating a unique key for each server that has a unique taproot installation, as it makes them easier to manage and it's a little more secure.
+It's easiest if your server has its own Git identity. We recommend creating a unique key for each server that has a unique sapwood installation, as it makes them easier to manage and it's a little more secure.
 
 First, ensure you don't already have a key.
 
@@ -116,7 +116,7 @@ manage your git repositories.
 Application Setup
 ----------------
 
-Now you have a working server and it's time to install taproot and configure some other items on your server.
+Now you have a working server and it's time to install sapwood and configure some other items on your server.
 
 ### Clone Repository
 
@@ -160,11 +160,11 @@ production:
   pool: 5
   username: root
   password: ********
-  database: taproot_production
+  database: sapwood_production
   socket: /var/run/mysqld/mysqld.sock
 ```
 
-Here, replace `root`, `********` and `taproot_production` with your values.
+Here, replace `root`, `********` and `sapwood_production` with your values.
 
 > Note: You're likely going to need to change the socket path from the default. If you're following this tutorial, then the socket path shown above should work fine.
 
@@ -173,8 +173,8 @@ Here, replace `root`, `********` and `taproot_production` with your values.
 Next, let's change the general application config.
 
 ```text
-$ cp config/taproot.sample.yml config/taproot.yml
-$ vim config/taproot.yml
+$ cp config/sapwood.sample.yml config/sapwood.yml
+$ vim config/sapwood.yml
 ```
 
 Add a value for all the blank values, and customize anything you wish. You can learn more about this file [here](/docs/getting_started/the_configuration_file).
@@ -209,29 +209,29 @@ $ RAILS_ENV=production bundle exec rake assets:precompile
 Move unicorn script to its proper location and update.
 
 ```text
-$ sudo cp lib/deploy/unicorn_init /etc/init.d/unicorn_taproot
+$ sudo cp lib/deploy/unicorn_init /etc/init.d/unicorn_sapwood
 $ sudo cp lib/deploy/unicorn.rb config/unicorn.rb
-$ sudo update-rc.d -f unicorn_taproot defaults
+$ sudo update-rc.d -f unicorn_sapwood defaults
 ```
 
 Start the unicorn workers (your rails server).
 
 ```text
 $ mkdir -p tmp/pids
-$ sudo service unicorn_taproot start
+$ sudo service unicorn_sapwood start
 ```
 
 Add and edit the nginx configuration.
 
 ```text
-$ sudo cp lib/deploy/nginx /etc/nginx/sites-enabled/taproot
+$ sudo cp lib/deploy/nginx /etc/nginx/sites-enabled/sapwood
 $ sudo rm /etc/nginx/sites-enabled/default
-$ sudo vim /etc/nginx/sites-enabled/taproot
+$ sudo vim /etc/nginx/sites-enabled/sapwood
 ```
 
 You'll want to change the following line to reflect the domain name you're going to use. Then uncomment the line (remove the `#`).
 
-[file:/etc/nginx/sites-enabled/taproot]
+[file:/etc/nginx/sites-enabled/sapwood]
 
 ```nginx
 # server_name cms.yourdomain.com;
@@ -246,7 +246,7 @@ $ sudo service nginx restart
 Give It A Whirl
 ----------------
 
-At this point, you should be up and running in production. If you hit a bump along the way, [let us know](https://github.com/seancdavis/sapwood/issues/new). Otherwise, you're off to the races. Check out some of the other docs on how to use taproot.
+At this point, you should be up and running in production. If you hit a bump along the way, [let us know](https://github.com/seancdavis/sapwood/issues/new). Otherwise, you're off to the races. Check out some of the other docs on how to use sapwood.
 
 THIS WAS A LOT!!
 ----------------

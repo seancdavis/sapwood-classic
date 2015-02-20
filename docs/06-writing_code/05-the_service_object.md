@@ -5,7 +5,7 @@ If you don't know about rails' service objects, they are pretty fantastic. If yo
 How it Works
 ----------------
 
-The service object is a ruby class named after your site. So, if your site is called *My Site*" then taproot would have auto-generated the slug `my-site` for it, and your service object would be called `MySiteViewer`.
+The service object is a ruby class named after your site. So, if your site is called *My Site*" then sapwood would have auto-generated the slug `my-site` for it, and your service object would be called `MySiteViewer`.
 
 By default it looks like this:
 
@@ -32,9 +32,9 @@ Pages are almost always going to be accessed through a page type. Because, if yo
 
 For example, let's saying we have a page displaying a listing of news articles, where the articles have a page type of *Article*.
 
-You wouldn't need to query the listing page at all, because taproot does that for you. What you need to query are the posts to display on that page. So, the first thing we need to do is give that method a name (let's say `articles`) and then query the page type.
+You wouldn't need to query the listing page at all, because sapwood does that for you. What you need to query are the posts to display on that page. So, the first thing we need to do is give that method a name (let's say `articles`) and then query the page type.
 
-Page types, like pages (and most other records in taproot) have a `slug` attribute that is unique to some other model it belongs to.
+Page types, like pages (and most other records in sapwood) have a `slug` attribute that is unique to some other model it belongs to.
 
 ```ruby
 def articles
@@ -75,7 +75,7 @@ Because our data types are dynamic, we don't create a physical database column f
 
 These are stored as a `string` type, so it may not be a super fast query, but it will work.
 
-> Remember, we're trying to solve for the problem of creating simple, unique sites quickly without duplicating effort. So, complex queries are not a forte of taproot (yet).
+> Remember, we're trying to solve for the problem of creating simple, unique sites quickly without duplicating effort. So, complex queries are not a forte of sapwood (yet).
 
 There are two scope helpers for ordering pages, and all they do is specify the direction by which to order the results.
 
@@ -94,7 +94,7 @@ The opposite of the `desc` scope is `asc`.
 Caching Results
 ----------------
 
-As we mentioned above (and explain [below](#accessing-the-methods)), an instance of the service object is stored in a variable by taproot. That means that you can cache query results here, too, so that you don't have to hit the database a second time if you are running the same query twice on one page.
+As we mentioned above (and explain [below](#accessing-the-methods)), an instance of the service object is stored in a variable by sapwood. That means that you can cache query results here, too, so that you don't have to hit the database a second time if you are running the same query twice on one page.
 
 We do this by setting an instance variable and initializing it the first time the method is run.
 
@@ -125,7 +125,7 @@ Alternatively, you could use a template to store and instance variable that call
 Pagination
 ----------------
 
-taproot uses [Kaminari](https://github.com/amatsuda/kaminari) for pagination. You should read Kaminari's docs to learn more about how you can paginate results.
+sapwood uses [Kaminari](https://github.com/amatsuda/kaminari) for pagination. You should read Kaminari's docs to learn more about how you can paginate results.
 
 In general, though, it's quite simple. If you wanted 10 articles per page on your list page (keeping the example going), you would have something like this:
 

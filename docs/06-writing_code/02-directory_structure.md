@@ -28,12 +28,12 @@ Typically, this includes images like the logos, icons, backgrounds, and so forth
 
 When hooked into rails, these files will go to `app/assets/images/viewer/[site_slug]`.
 
-Images are best accessed via taproot's [view helpers](/docs/api_reference/view_helpers).
+Images are best accessed via sapwood's [view helpers](/docs/api_reference/view_helpers).
 
 Javascripts
 ----------------
 
-This is where all your javascript files go, including any vendor files not otherwise available in taproot. [Learn more about javascripts in taproot](/docs/writing_code/javascripts).
+This is where all your javascript files go, including any vendor files not otherwise available in sapwood. [Learn more about javascripts in sapwood](/docs/writing_code/javascripts).
 
 Since this is rails, your javascript manifest file is called from your layout, which you can read about in the [templates](#templates) section.
 
@@ -42,7 +42,7 @@ When hooked into rails, these files will go to `app/assets/javascripts/viewer/[s
 Stylesheets
 ----------------
 
-This is where all your CSS files go, including any vendor files not otherwise available in taproot. [Learn more about stylesheets in taproot](/docs/writing_code/stylesheets).
+This is where all your CSS files go, including any vendor files not otherwise available in sapwood. [Learn more about stylesheets in sapwood](/docs/writing_code/stylesheets).
 
 Since this is rails, your CSS manifest file is called from your layout, which you can read about in the [templates](#templates) section.
 
@@ -71,7 +71,7 @@ While the files within this directory are symlinked, the layout is specifically 
 Utilities
 ----------------
 
-There are some floating files that are hooked into different locations throughout the taproot app. They are placed in a utilities directory by default just to make your repo a little easier to manage. You can rename the directory anything you'd like as long as the symlinks within the files do not change.
+There are some floating files that are hooked into different locations throughout the sapwood app. They are placed in a utilities directory by default just to make your repo a little easier to manage. You can rename the directory anything you'd like as long as the symlinks within the files do not change.
 
 We have three default utility files.
 
