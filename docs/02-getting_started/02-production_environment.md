@@ -1,25 +1,29 @@
-Given our handy-dandy [communicative workflow](/docs/communicative_workflow), your production environment is where your content will be generated. Let's look at how to setup your production server, and get sapwood running on the server.
+In the [communicative workflow](/docs/communicative_workflow) chapter, you will learn that all content revolves around one production instance of the app. It is both the place you build the content structure of your sites, but it is also the app that hosts the live versions of the sites you build.
+
+> This guide is really only for one developer on your team. You should only need one production instance of Sapwood, and therefore you only need to do this one time. If this is already setup for your team, then head over and get [your local environment up and running](/docs/getting_started/development_environment).
+
+Let's look at how to setup your production server, and get Sapwood running on the server.
+
+Like the rest of these guides, this assumes you know your way around a Ruby on Rails project. This section, in particular, assumes you've had to deploy a RoR project.
 
 Server Requirements
 ----------------
 
 ### Choosing A Server
 
-Since we are assuming you've run a Ruby on Rails project previously, we also assume you have *deployed* a Rails project.
+If your experience in deploying projects is strictly using Heroku or a shared environment like you have with Bluehost, then you'll need to change a bit here. This guide covers installing Sapwood on **a dedicated private server**. Shared servers and Heroku are not supported.
 
-But, even if you have, you may have used a service like Heroku, or even a shared hosting environment like Bluehost. While both of these services have benefits, to run sapwood we strongly recommend **a dedicated private server**.
-
-If that sounds expensive, it's because it usually is. Fortunately, there are some awesome companies like [Digital Ocean](https://www.digitalocean.com/) popping up. Digital Ocean offers dedicated, virtual private servers [starting at $5 per month](https://www.digitalocean.com/pricing/).
+If that sounds expensive, it's because it usually is. Fortunately, there are some awesome companies like [Digital Ocean](https://www.digitalocean.com) popping up. Digital Ocean offers dedicated, virtual private servers [starting at $5 per month](https://www.digitalocean.com/pricing).
 
 ### Operating System
 
-Sapwood will work wherever you can run a Ruby on Rails project. For reference, we develop on Mac OS X machines, while our production servers are Ubuntu 14.04.
+Sapwood will work wherever you can run a Ruby on Rails project. For reference, I develop on Mac OS X Yosemite, while my production servers run Ubuntu 14.04.
 
 **For this guide, we're going to assume you're working with an Ubuntu/Debian installation.** Obviously, you can use Sapwood in production with other operating systems, but you'll have to find the equivalent packages.
 
 ### Minimum Specifications
 
-The minimum specs for your server are somewhat open-ended. Obviously, the faster the better, but here's what we're running:
+The minimum specs for your server are somewhat open-ended. Obviously, the faster the better, but here's what I am running.
 
 * Ubuntu 14.04 x64
 * 1GB RAM
@@ -27,11 +31,11 @@ The minimum specs for your server are somewhat open-ended. Obviously, the faster
 * 30GB SSD Disk
 * 1 CPU
 
-> While Rails is scalable, it takes some extra configuration with your web server and perhaps multiple machines. We aren't showing that here and we haven't yet tested a concurrency scenario.
+> While Rails is scalable, it takes some extra configuration with your web server and perhaps multiple machines. This isn't shown here and a concurrency scenario hasn't yet been tested.
 >
-> Therefore, if you have a high-traffic site you are going to build using sapwood, we'd love to hear your story.
+> Therefore, if you have a high-traffic site you are going to build using Sapwood, I'd love to hear your story and the obstacles you overcame.
 >
-> This also means we can't guarantee your mileage with sapwood on high-traffic sites. But, rest assured we're building sites with sapwood, so we'll be looking for solutions to this problem soon enough.
+> This also means Sapwood doesn't guarantee mileage with high-traffic sites. One production instance of Sapwood is known to be running 5 small sites, and still performing (subjectively) well. Caching and concurrency are on the roadmap.
 
 Server Preparation
 ----------------
@@ -40,12 +44,12 @@ Server Preparation
 
 At this point, we're assuming you know how to prepare a production server.
 
-> If you've never done this sort of thing before, then check out our [one-command install script](https://github.com/rocktree/ripen).
+> If you've never done this sort of thing before, then check out my [one-command install script](https://github.com/rocktree/ripen).
 
 You will need the ensure the following is true on your machine.
 
 * `deploy` user with full `sudo` privileges
-* ssh access to the server
+* ssh access to the server on any port
 
 We need a handful of packages. You're probably best to just run this command:
 
@@ -73,7 +77,7 @@ $ ls -al ~/.ssh
 
 If you don't see an `id_rsa` and a `id_rsa.pub` file in there, then you're good to go.
 
-Following the GitHub tutorial, let's generate the key.
+Following [the GitHub tutorial](https://help.github.com/articles/generating-ssh-keys), let's generate the key.
 
 ```text
 $ ssh-keygen -t rsa -C [email_address]
@@ -100,7 +104,7 @@ Then it asks you to create a passphrase for the private key.
 Enter passphrase (empty for no passphrase):
 ```
 
-It's strongly recommended you create the passphrase, but you want to skip that step here so Git doesn't prompt us when we're running commands behind the scenes.
+> *NOTICE: While it is typically recommended you create the passphrase, you want to skip that step here so Git doesn't prompt us when we're running commands behind the scenes.*
 
 Next, you'll want to ensure your server's Git identity is configured. You just need a fake name and a fake email address. Something like the following will work.
 
@@ -113,10 +117,38 @@ The last thing you should do is add that key as a deploy key on your git
 server. This step could differ greatly depending on the application you use to
 manage your git repositories.
 
+Open MySQL
+----------------
+
+The communicative workflow is all about being able to talk with the production database from your development environment(s). To do that, we need to open up MySQL to allow for remote connections.
+
+First, connect to MySQL as an all-powerful user:
+
+```text
+$ mysql -u root -p
+```
+
+You'll need to change `root` to the name of your admin user, and then provide the password.
+
+In `mysql`, run this command:
+
+```text
+mysql> grant all on [db_name].* to [db_user]@'[your_dev_public_ip]' identified by '[db_pass]';
+```
+
+Be sure to replace all the values in brackets.
+
+> *SECURITY NOTE: To keep yourself safer, if you always develop from one IP address, or if you only want to keep one open at a time, you can use that specific IP address. Otherwise, you can use a `%` in place of any or all of the numbers in the IP address as a wildcard selector.*
+
+Next, note the port on which mysql is connecting and the path to the socket file. Both of these values should be listed in `/etc/mysql/my.cnf`. These values are essential to connecting a development instance.
+
+If you are using a firewall, be sure the port mysql is using is open.
+
+
 Application Setup
 ----------------
 
-Now you have a working server and it's time to install sapwood and configure some other items on your server.
+Now you have a working server and it's time to install Sapwood and configure some other items on your server.
 
 ### Clone Repository
 
@@ -126,17 +158,16 @@ First, let's make a directory for our application.
 $ mkdir ~/apps
 ```
 
-> **Beware! While you can place the project elsewhere if you know what you're doing, the location of the project is tied to a few of these steps.**
+> **WARNING: While you can place the project elsewhere if you know what you're doing, the location of the project is tied to a few of these steps.**
 
-Then you can clone the repo from GitHub. We're going to use the https url to clone. This is essential to ensure we can clone projects (submodules) without being logged into the server.
+Next, clone the repo from GitHub.
 
 ```text
 $ cd ~/apps
-$ git clone https://github.com/seancdavis/sapwood.git -b v1-stable
+$ git clone https://github.com/seancdavis/sapwood.git -b release
 ```
 
-> Note: Check to ensure there isn't a more recent version of the application
-> available.
+> Note: This is moving you directly to the `release` branch of the project. This is the latest stable release on the current major version.
 
 ### Configure Database
 
@@ -158,19 +189,21 @@ production:
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: root
-  password: ********
-  database: sapwood_production
+  username: [username]
+  password: [password]
+  database: [db_name]
   socket: /var/run/mysqld/mysqld.sock
 ```
 
-Here, replace `root`, `********` and `sapwood_production` with your values.
+Here, replace `[username]`, `[password]` and `[db_name]` with your values.
 
 > Note: You're likely going to need to change the socket path from the default. If you're following this tutorial, then the socket path shown above should work fine.
 
 ### Configure App Settings
 
 Next, let's change the general application config.
+
+> *DEPRECATION NOTICE: The config file will be deprecated and built into the app in an upcoming release.*
 
 ```text
 $ cp config/sapwood.sample.yml config/sapwood.yml
@@ -229,13 +262,15 @@ $ sudo rm /etc/nginx/sites-enabled/default
 $ sudo vim /etc/nginx/sites-enabled/sapwood
 ```
 
-You'll want to change the following line to reflect the domain name you're going to use. Then uncomment the line (remove the `#`).
+You'll want to change and uncomment the following line to reflect the domain name you're going to use.
 
 [file:/etc/nginx/sites-enabled/sapwood]
 
 ```nginx
 # server_name cms.yourdomain.com;
 ```
+
+> This is the domain name to the builder portion of the app, NOT a site you're going to create using Sapwood.
 
 Restart nginx.
 
@@ -251,8 +286,8 @@ At this point, you should be up and running in production. If you hit a bump alo
 THIS WAS A LOT!!
 ----------------
 
-It is a lot for us to write and maintain and it's a lot to ask of you to do manually to get this thing up and running. We'd love to simplify these docs to essentially enable our users to install with just a few commands.
+It is a lot to write and maintain and it's a lot to ask of you to do manually to get this thing up and running. I'd love to simplify these docs to essentially enable our users to install with just a few commands.
 
-If you're up for the challenge, we're looking to package the development and production installation processes into just a few scripts using a similar approach as we have with [Ripen](https://github.com/rocktree/ripen).
+If you're up for the challenge, I'm looking to package the development and production installation processes into just a few scripts using a similar approach as we have with [Ripen](https://github.com/rocktree/ripen).
 
 [Send me a note](mailto:sean@rocktree.us) if you're interested.

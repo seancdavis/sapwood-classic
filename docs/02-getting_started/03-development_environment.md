@@ -39,7 +39,7 @@ database.
 
 ### Database
 
-> **NOTICE: The communicative workflow is built around sharing your product database.** The [production setup guide](/docs/getting_started/production_environment) talks about how to open your production database to allow for remote connections.
+> *NOTICE: The communicative workflow is built around sharing your product database.* The [production setup guide](/docs/getting_started/production_environment) talks about how to open your production database to allow for remote connections.
 
 To get started, **copy** `config/database.sample.yml` to `config/database.yml`.
 
