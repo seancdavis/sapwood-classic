@@ -1,40 +1,38 @@
-sapwood is built around the idea of a Communicative Workflow. This workflow enables you to build unique and fully customized sites from the ground up, all while working in a team.
+Sapwood is built around the idea of a Communicative Workflow. This workflow enables you to build unique and fully customized sites from the ground up, all while working in a team.
 
 Development vs. Production
 ----------------
 
-We'll use the difference between these two environments to explain how to work, so it's important you understand the difference. If you've developed and deployed a web project before, you probably already get it.
+In Sapwood, like most web development projects, the *development* environment means *an instance of the entire application that runs locally on your machine or one of your team member's machines*. There can be as many of these instances as you need -- likely equal to the number of team members.
 
-In sapwood, like most web development projects, a *develoment* environment means *an instance of the entire application that runs locally on your machine or one of your team member's machines*. There can be as many of these instances as you need -- likely equal to the number of members on your web team.
+The *production* environment is *the one instance of Sapwood that hosts the final versions of your sites*. Production is accessible via a specific domain name.
 
-The *production* environment is *the one instance of sapwood that hosts the final versions of your sites*. Production is accessible by the Internet and is likely tied to a specific domain name.
-
-And while we say *there is only one production environment*, you could have certainly deployed more than one, if necessary. But our goal is that you're bringing all your sites into one application to make it easier to manage.
+And while *there is only one production environment*, you *could* create more than one. In that case, they would operate separately from each other.
 
 Content Flow
 ----------------
 
-Based on this setup, it then makes sense that **content flows downhill**. What we mean is that *any real content should be created **in the production environment***.
+Since v1.1, content does not *flow* at all. It simply *lives* in production. There is no more syncing or worrying about staying updated with production. If you connect your databases correctly, then you any content you interact with is live in production.
 
-By using content syncing methods, [explained here](/docs/communicative_workflow/syncing_content), you can easily bring your development instance up to date with production without having to run any command line tasks.
-
-Meanwhile, any *content created for testing code* would be created in your local development environment. At this time, this content *can not be shared with your team members, or with any other development environments*.
+Because of this, pages that are in *DRAFT* status are not viewable by the public in production. However, your development app will see them. It is for this reason that you can add sections to your site even after the site is live.
 
 Code Flow
 ----------------
 
-In contrast to content, **code flows uphill**. You should *write your code in development environments, and "deploy" to production*. Your teammates use your remote git repository to keep their development code up to date (part of which can be done through the app).
+The code flows as it normally would in a rails project. You develop and test locally, and then you *"deploy" to production*. You and your teammates use git, along with some features of the UI to stay up to date with the latest code (and to track your changes).
 
-The entire workflow is managed by using Git, which is explained in more detail in [this section](/docs/communicative_workflow/working_with_git).
+Git is explained in more detail in [this section](/docs/communicative_workflow/working_with_git).
 
 Content Determines Code
 ----------------
 
-Because content and code are not yet closely knit together, they rely on you understanding an expected behavior. In the most general sense, **content determines code**. In other words, the way in which you build the content determines the way in which you **must** build the code if you want the code to to work.
+**Content determines code**. That means the way in which you build the content determines how you **must** build the code if you want your site to be error-free.
 
 This is explained much more fully in [Building Content](/docs/building_content).
 
 Future Versions
 ----------------
 
-Keep in mind that the primary goal of v2.0 of sapwood will be to more closely intertwine the processes of writing code and writing content. [Let us know](mailto:sean@rocktree.us) if you'd like to contribute.
+A big part of building content effectively is to have full access to and knowledge of the Sapwood API. In this version of the docs, you can find the items you need to be able to build a site.
+
+That being said, the primary goal of v2.0 is to get more organized and provide a full API reference. [Let us know](mailto:sean@rocktree.us) if you'd like to contribute.
