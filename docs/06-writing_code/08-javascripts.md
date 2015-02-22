@@ -27,13 +27,13 @@ To use Backbone, all you need to add to `application.js` are these two lines:
 
 We'll leave it up to you to set up your Backbone directory structure, but you can mimic [the builder's structure](https://github.com/seancdavis/sapwood/tree/master/app/assets/javascripts/builder) if you'd like.
 
-Like CSS frameworks, we're not opposed to any others, but just haven't made them a priority because that's not what we use on a regular basis. Feel free to add others to sapwood and create a pull request explaining why they are beneficial.
+Like CSS frameworks, I'm not opposed to any others, but just haven't made them a priority because that's not what I use on a regular basis. Feel free to add others to Sapwood and create a pull request explaining why they are beneficial.
 
-> If you create a pull request to add a js framework, we're likely going to ask you to document how to use the library with sapwood.
+> If you create a pull request to add a js framework, we're likely going to ask you to document how to use the library with Sapwood.
 
 Other Helpers
 ----------------
 
 You can keep an eye on [our Gemfile](https://github.com/seancdavis/sapwood/blob/master/Gemfile) to know what other helpers are already in the repo.
 
-And, again, feel free to add your own to sapwood if you think users will find global benefit to it.
+And, again, feel free to add your own to Sapwood if you think users will find global benefit to it.

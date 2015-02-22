@@ -1,4 +1,4 @@
-While we plan to surface settings in the UI, at this time site-specific settings need to be added to your code. And that's where you `utilities/config.yml` file comes into play.
+While I plan to surface settings in the UI, at this time site-specific settings need to be added to your code. And that's where you `utilities/config.yml` file comes into play.
 
 Adding Settings
 ----------------
@@ -7,7 +7,7 @@ The config file is of the [YAML](http://www.yaml.org/) file type, which has a st
 
 The settings are broken up by the current environment, so you can use different settings if you need.
 
-You should break your settings up as semantically as possible to keep it simple for you. You can use our [sapwood settings file](https://github.com/seancdavis/sapwood/blob/master/config/sapwood.sample.yml) as an example of how you might configure your settings file.
+You should break your settings up as semantically as possible to keep it simple for you. You can use our [Sapwood settings file](https://github.com/seancdavis/sapwood/blob/master/config/sapwood.sample.yml) as an example of how you might configure your settings file.
 
 You should use this for values you may use throughout the site that you want to abstract into one location. One example is URLs for social sites. That way you don't have to dig through markup if one of your social URLs change.
 

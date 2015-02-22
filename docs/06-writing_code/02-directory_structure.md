@@ -28,21 +28,21 @@ Typically, this includes images like the logos, icons, backgrounds, and so forth
 
 When hooked into rails, these files will go to `app/assets/images/viewer/[site_slug]`.
 
-Images are best accessed via sapwood's [view helpers](/docs/api_reference/view_helpers).
+Images are best accessed via Sapwood's [view helpers](/docs/api_reference/view_helpers).
 
 Javascripts
 ----------------
 
-This is where all your javascript files go, including any vendor files not otherwise available in sapwood. [Learn more about javascripts in sapwood](/docs/writing_code/javascripts).
+This is where all your JavaScript files go, including any vendor files not otherwise available in Sapwood. [Learn more about JavaScript within sapwood](/docs/writing_code/javascripts).
 
-Since this is rails, your javascript manifest file is called from your layout, which you can read about in the [templates](#templates) section.
+Since this is rails, your JavaScript manifest file is called from your layout, which you can read about in the [templates](#templates) section.
 
 When hooked into rails, these files will go to `app/assets/javascripts/viewer/[site_slug]`.
 
 Stylesheets
 ----------------
 
-This is where all your CSS files go, including any vendor files not otherwise available in sapwood. [Learn more about stylesheets in sapwood](/docs/writing_code/stylesheets).
+This is where all your CSS files go, including any vendor files not otherwise available in sapwood. [Learn more about stylesheets in Sapwood](/docs/writing_code/stylesheets).
 
 Since this is rails, your CSS manifest file is called from your layout, which you can read about in the [templates](#templates) section.
 
@@ -63,7 +63,7 @@ The `templates` directory is symlinked to `app/views/viewer/[site_slug]`.
 
 At this time, you are only given one layout for your site. So, it should be as open-ended as possible, but you may need to add variables if you need to change content within your layout on the fly.
 
-The layout comes names `layout.html.erb`, but you can call it whatever you want. What is more important is how it is hooked into rails, which you can read about [here](/docs/writing_code/hooking_into_rails).
+The layout comes named `layout.html.erb`, but you can call it whatever you want. What is more important is how it is hooked into rails, which you can read about [here](/docs/writing_code/hooking_into_rails).
 
 While the files within this directory are symlinked, the layout is specifically symlinked to `app/views/layouts/viewer/[site_slug]`.
 
@@ -71,7 +71,7 @@ While the files within this directory are symlinked, the layout is specifically 
 Utilities
 ----------------
 
-There are some floating files that are hooked into different locations throughout the sapwood app. They are placed in a utilities directory by default just to make your repo a little easier to manage. You can rename the directory anything you'd like as long as the symlinks within the files do not change.
+There are some floating files that are hooked into different locations throughout the Sapwood app. They are placed in a utilities directory by default just to make your repo a little easier to manage. You can rename the directory anything you'd like as long as the symlinks within the files do not change.
 
 We have three default utility files.
 

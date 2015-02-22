@@ -1,16 +1,16 @@
-Once you [have some content](/docs/building_content) you can start writing building your site.
+Once you [have some content](/docs/building_content) you can start writing code for your site.
 
 Directory Structure
 ----------------
 
-We suggest you're familiar with building a rails app, as this will follow much of the same process. As you can see, the [directory structure](/docs/writing_code/directory_structure) of a site mimics a rails app. It simply strips out the code that is shared among most of the apps you create (which is the whole point of sapwood).
+We suggest you become familiar with building a rails app, as this will follow much of the same process. As you can see, the [directory structure](/docs/writing_code/directory_structure) of a site mimics portions of a rails app. It simply strips out the code that is shared among most of the apps you create (which is the whole point of sapwood).
 
 See [this section](/docs/writing_code/directory_structure) for an in-depth discussion on the directory structure of a site.
 
 How it Works
 ----------------
 
-sapwood really is one rails app. The sites are individual Git submodules under the `projects` directory that are hooked into the overall rails app via [*symlinks*](http://en.wikipedia.org/wiki/Symbolic_link).
+Sapwood is really just one rails app. Each site you build is an individual Git submodule within the `projects` directory that is hooked into the overall rails app via [*symlinks*](http://en.wikipedia.org/wiki/Symbolic_link).
 
 See [this section](/docs/writing_code/hooking_into_rails) for more information on hooking into the rails app.
 
@@ -34,4 +34,4 @@ Whenever we symlink directories, we use the actual slug, but when we refer to fi
 Moving On ...
 ----------------
 
-We suggest giving each of the sections in this chapter a read, as they are all important to understanding how the code works behind the scenes.
+Give each of the sections in this chapter a read, as they are all important to understanding how the code works behind the scenes.

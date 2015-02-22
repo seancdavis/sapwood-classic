@@ -5,7 +5,7 @@ If you don't know about rails' service objects, they are pretty fantastic. If yo
 How it Works
 ----------------
 
-The service object is a ruby class named after your site. So, if your site is called *My Site*" then sapwood would have auto-generated the slug `my-site` for it, and your service object would be called `MySiteViewer`.
+The service object is a ruby class named after your site. So, if your site is called *My Site*" then Sapwood would have auto-generated the slug `my-site` for it, and your service object would be called `MySiteViewer`.
 
 By default it looks like this:
 
@@ -26,15 +26,15 @@ Writing Queries
 
 You'd write queries in a similar way to how you'd write them in rails, but we need to alter them a bit. For instance, everything we do, we do within the context of a site (`@site`), which is set when the class is instantiated.
 
-### Pages & Page Types
+### Pages & Templates
 
-Pages are almost always going to be accessed through a page type. Because, if you recall from [our theory on content](/docs/building_content), page types take the place of otherwise static models. And because your queries are typically done by targeting specific models in an app, it makes sense that we'd usually start with a page type when attempting to get to a page, or a collection of pages.
+Pages are almost always going to be accessed through a template. Because, if you recall from [our theory on content](/docs/building_content), templates take the place of otherwise static models. And because your queries are typically done by targeting specific models in an app, it makes sense that we'd usually start with a template when attempting to get to a page, or a collection of pages.
 
-For example, let's saying we have a page displaying a listing of news articles, where the articles have a page type of *Article*.
+For example, let's saying we have a page displaying a listing of news articles, where the articles have a template of *Article*.
 
-You wouldn't need to query the listing page at all, because sapwood does that for you. What you need to query are the posts to display on that page. So, the first thing we need to do is give that method a name (let's say `articles`) and then query the page type.
+You wouldn't need to query the listing page at all, because Sapwood does that for you. What you need to query are the posts to display on that page. So, the first thing we need to do is give that method a name (let's say `articles`) and then query the template.
 
-Page types, like pages (and most other records in sapwood) have a `slug` attribute that is unique to some other model it belongs to.
+Templates, like pages (and most other records in Sapwood) have a `slug` attribute that is unique to some other model it belongs to.
 
 ```ruby
 def articles
@@ -42,9 +42,9 @@ def articles
 end
 ```
 
-Since we know we only have one page type within this site with a slug of `article`, and in know how the rails [`find_by_...` method](http://guides.rubyonrails.org/active_record_querying.html#find-by) works, we know what we have returned is a `PageType` object.
+Since we know we only have one template within this site with a slug of `article`, and in know how the rails [`find_by_...` method](http://guides.rubyonrails.org/active_record_querying.html#find-by) works, we know what we have returned is a `Template` object.
 
-We then need to go one step further so we can actually get to the pages from that page type.
+We then need to go one step further so we can actually get to the pages from that template.
 
 ```ruby
 def articles
@@ -52,7 +52,7 @@ def articles
 end
 ```
 
-And now we have all pages created with the page type *Article*.
+And now we have all pages created with the template *Article*.
 
 Read on below for other query helpers.
 
@@ -71,11 +71,11 @@ end
 Ordering Results
 ----------------
 
-Because our data types are dynamic, we don't create a physical database column for each data type - that would be ridiculous. But, we do cache one attribute of your choosing to order pages of a particular page type. This is accomplished on the page type's form.
+Because our data types are dynamic, we don't create a physical database column for each data type - that would be ridiculous. But, we do cache one attribute of your choosing to order pages of a particular template. This is accomplished on the template's form.
 
 These are stored as a `string` type, so it may not be a super fast query, but it will work.
 
-> Remember, we're trying to solve for the problem of creating simple, unique sites quickly without duplicating effort. So, complex queries are not a forte of sapwood (yet).
+> Remember, we're trying to solve for the problem of creating simple, unique sites quickly without duplicating effort. So, complex queries are not a forte of Sapwood (yet).
 
 There are two scope helpers for ordering pages, and all they do is specify the direction by which to order the results.
 
@@ -94,7 +94,7 @@ The opposite of the `desc` scope is `asc`.
 Caching Results
 ----------------
 
-As we mentioned above (and explain [below](#accessing-the-methods)), an instance of the service object is stored in a variable by sapwood. That means that you can cache query results here, too, so that you don't have to hit the database a second time if you are running the same query twice on one page.
+As we mentioned above (and explain [below](#accessing-the-methods)), an instance of the service object is stored in a variable by Sapwood. That means that you can cache query results here, too, so that you don't have to hit the database a second time if you are running the same query twice on one page.
 
 We do this by setting an instance variable and initializing it the first time the method is run.
 
@@ -125,7 +125,7 @@ Alternatively, you could use a template to store and instance variable that call
 Pagination
 ----------------
 
-sapwood uses [Kaminari](https://github.com/amatsuda/kaminari) for pagination. You should read Kaminari's docs to learn more about how you can paginate results.
+Sapwood uses [Kaminari](https://github.com/amatsuda/kaminari) for pagination. You should read Kaminari's docs to learn more about how you can paginate results.
 
 In general, though, it's quite simple. If you wanted 10 articles per page on your list page (keeping the example going), you would have something like this:
 
@@ -164,7 +164,7 @@ Note here that you want to paginate after you have your results, otherwise you m
 Accessing the Methods
 ----------------
 
-An instance of the service object is stored in the [`viewer_service` method](https://github.com/seancdavis/sapwood/blob/master/app/helpers/viewer_helper.rb#L3-5) which instantiates a `@viewer_service` variable.
+An instance of the service object is stored in the [`viewer_service` method](https://github.com/seancdavis/Sapwood/blob/master/app/helpers/viewer_helper.rb#L3-5) which instantiates a `@viewer_service` variable.
 
 And, because we already have the current site stored, everything happens nice and quick without hitting the database a million times.
 

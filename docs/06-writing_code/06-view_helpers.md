@@ -1,6 +1,6 @@
 This lists the helpers available to you in when authoring templates for your sites. This list is not comprehensive of all the view helpers in sapwood - just the ones we think you'd care about.
 
-> **Please note: The helpers are being organized per [this issue](https://github.com/seancdavis/sapwood/issues/36). Once complete, this page will become a full-blown API reference.**
+> **NOTICE: Sapwood v2's primary focus is to organize the Sapwood code and create a full API reference.**
 >
 > In the meantime, here is a brief outline of the helper methods available to you. But, more importantly, if you have a question on how to get data, [ask](/support).
 
@@ -8,13 +8,9 @@ This lists the helpers available to you in when authoring templates for your sit
 
 The cached `Page` object of the site being viewed.
 
-> *Note: The documentation around this object is being organized and will be available soon*.
-
 ### `current_site`
 
 The cached `Site` object of the site being viewed.
-
-> *Note: The documentation around this object is being organized and will be available soon*.
 
 ### `slug_title(slug)`
 

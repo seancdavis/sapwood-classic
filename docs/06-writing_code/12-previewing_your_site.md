@@ -4,9 +4,9 @@ At this point, you need to know your site's slug. When you're working in the bui
 
 > http://localhost:3000/sites/my-first-site/pages/home/edit
 
-To get to the preview, all you have to do is remove the `/sites` prefix, and then everything after your slug. The example above becomes:
+To get to the preview, all you have to do is replace the `sites` prefix with `preview`, and then everything after your slug. The example above becomes:
 
-> http://localhost:3000/my-first-site
+> http://localhost:3000/preview/my-first-site
 
 And that is the home page preview for your site.
 
