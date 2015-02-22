@@ -1,4 +1,4 @@
-Because taproot is currently a one-man project, I'm limited in the amount of support I can provide. Here are the guidelines:
+Because Sapwood is currently a one-man project, I'm limited in the amount of support I can provide. Here are the guidelines:
 
 Bugs & Issues
 --------------------
