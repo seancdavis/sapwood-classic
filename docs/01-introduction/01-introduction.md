@@ -13,3 +13,9 @@ If you are new to rails, I suggest you build at least a demo app before messing 
 ### Questions?
 
 The most important thing you should take away from these docs is *if you can't find an answer, [ask a question](https://github.com/seancdavis/sapwood/issues/new).*
+
+### Doc Version
+
+I try to keep up on the docs as best as I can, such that they reflect the most recent version of the code. Sometimes they are delayed after a release.
+
+**Current Docs Representing**: v1.1.2
