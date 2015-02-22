@@ -22,4 +22,4 @@ There are a couple quirks to consider here:
 Categorizing Files
 ----------------
 
-Currently, all files are lumped together and organized by upload date. This feature will be developed throughout minor revisions to v1.0.
+Currently, all files are lumped together and organized by upload date. This feature will be developed throughout a later v1 minor release.

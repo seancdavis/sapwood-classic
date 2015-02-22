@@ -1,6 +1,5 @@
 At this time, the site settings are the place from which items that affect the site as a whole are configured. It includes:
 
-* [syncing content](/docs/communicative_workflow/syncing_content)
 * [working with git](/docs/communicative_workflow/working_with_git)
 * [image croppers](/docs/building_content/media_library)
 
@@ -13,10 +12,7 @@ The URL
 
 The URL you define here is the URL for the site itself. This is really only for the production environment.
 
-For example, if your site's url is `sapwood.rocktree.us`, then going to that URL will lead you to the home page of that site if:
-
-* you restart the server after you change it
-* the A-record for that domain is pointing the IP address of the production server
+For example, if your site's url is `sapwood.org`, then going to that URL will lead you to the home page of that site if the A-record for that domain is pointing the IP address of the production server.
 
 This can be useful for using a staging URL if you are transitioning from an old site to a new site.
 
