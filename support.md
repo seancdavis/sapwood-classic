@@ -7,6 +7,16 @@ If you have an issue or have discovered a bug in the code, please [create an iss
 
 You may also fix the bug yourself and create a pull request.
 
+Questions
+--------------------
+
+If you have a question with anything related to Sapwood, please [ask via a GitHub issue](https://github.com/rocktree/taproot/issues/new).
+
+Doc Fixes
+--------------------
+
+The documentation touches on many aspects and nuances of Sapwood, but there is certainly more to be done. And it's possible some of it is out of date. If you find something confusing and you need clarification, or if you find a bug or grammatical error, please [create an issue on GitHub](https://github.com/rocktree/taproot/issues/new).
+
 Version Support
 --------------------
 
