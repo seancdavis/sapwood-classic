@@ -1,8 +1,6 @@
-The [sapwood code](https://github.com/seancdavis/sapwood) is hosted publicly on GitHub. Its various branches are used for managing different segments or versions of the application.
+The [Sapwood code](https://github.com/seancdavis/sapwood) is hosted publicly on GitHub. Its various branches are used for managing different segments or versions of the application.
 
-Much of the organization of how we've approached this project was inspired by the way in which [GitLab](https://github.com/gitlabhq/gitlabhq) is setup, with some obvious differences simply because sapwood is young and small(ish).
-
-If you have followed [this guide](/docs/getting_started/production_environment) to setting up your production environment, then you are likely working from the `v1-stable` branch (if you're not, you should be).
+If you have followed [this guide](/docs/getting_started/production_environment) to setting up your production environment, then you are likely working from the `release` branch (if you're not, you should be).
 
 Updating Production
 ----------------
@@ -13,7 +11,7 @@ Because the process of updating sapwood is somewhat involved, we've packaged up 
 $ RAILS_ENV=production bundle exec rake sapwood:update
 ```
 
-This will bring you app to the current version. It essentially just pulls the `v1-stable` branch, and then reloads everything it needs to reload.
+This will bring your app to the current version. It essentially just pulls the `release` branch, and then reloads everything it needs to reload.
 
 If you run in to problems here, you may have to manually restart some services.
 
