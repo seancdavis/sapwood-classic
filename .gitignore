@@ -48,6 +48,7 @@ app/views/layouts/viewer/
 app/views/viewer/
 app/viewer_services/
 lib/tasks/viewer/
+lib/viewer/
 config/viewer/
 config/sites/
 
