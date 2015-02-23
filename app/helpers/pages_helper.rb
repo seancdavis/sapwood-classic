@@ -58,12 +58,27 @@ module PagesHelper
   end
 
   def current_page_children
-    @current_page_children ||= current_page.children.in_position
+    @current_page_children ||= current_page.children.in_position.includes(:template)
   end
 
   def current_page_children_paginated
-    @current_page_children ||= begin
+    @current_page_children_paginated ||= begin
       current_page_children.page(params[:page]).per(10)
+    end
+  end
+
+  def current_page_children_filtered
+    @current_page_children_filtered ||= begin
+      template = current_site.templates
+        .find_by_slug(params[:template_slug] || params[:slug])
+      current_page_children.select { |p| p.template == template }
+    end
+  end
+
+  def current_page_children_filtered_paginated
+    @current_page_children_filtered_paginated ||= begin
+      Kaminari.paginate_array(current_page_children_filtered)
+        .page(params[:page]).per(10)
     end
   end
 
