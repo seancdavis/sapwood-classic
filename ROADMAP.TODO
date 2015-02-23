@@ -6,23 +6,23 @@ removed from this doc once they are added to GitHub.
 
 --- ✄ -----------------------
 
-_Tasks for v1.2_
+v1.2:
 
-Miscellaneous:
+  Miscellaneous:
 
  ☐ Make "New" buttons into dropdown menus where there is more than one option.
  ☐ Make the HTML title more dynamic and representative of what is on the current page
 
-App Settings:
+  App Settings:
 
  ☐ add google analytics setting for Sapwood builder
 
-Site Settings:
+  Site Settings:
 
  ☐ Be able to change a site name/slug (which would have to remove then re-add all the symlinks)
  ☐ Remove unnecessary items from the Actions menu in Site Settings
 
-Pages:
+  Pages:
 
  ☐ Make all children the menu item, but then have filters on that index page which filter by template
  ☐ updated dates to pages
@@ -32,14 +32,14 @@ Pages:
  ☐ Be able to reassign parent page from a listing of eligible parent pages
  ☐ Add a process to be able to change the template of a page
 
-Templates:
+  Templates:
 
  ☐ Some templates won't have show views. Some will have shows and partials. Only need to allow the ability to say a page has no show view, and instead of throwing a 500, we have a 404. And these also aren't tracked in the sitemap.
  ☐ Either use IDX field for identifying a particular template for your viewer, or add the call to the template (and its pages) to the developer help page.
  ☐ Surface more data in the index view, like how many pages and what templates can be children, and if they are maxed out, etc.
  ☐ Be able to create a template from an existing template
 
-Template Fields:
+  Template Fields:
 
  ☐ Be able to make protected attributes required (but not required and protected attributed un-required)
  ☐ Drag and drop to reorder fields and to move from one group to another
@@ -50,7 +50,7 @@ Template Fields:
  ☐ Add a note option to a field, which is basically a plain text paragraph that can further explain the purpose or nuances of a field
  ☐ Surface more information on each field, like hidden, half-width, required, data type
 
-Users:
+  Users:
 
  ☐ Site users don't have site listing if they only have one site
  ☐ Site users can get to other sites
