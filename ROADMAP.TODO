@@ -31,35 +31,36 @@ v1.2:
 
   Pages:
 
- ☐ Make all children the menu item, but then have filters on that index page which filter by template
- ☐ updated dates to pages
- ☐ Use a url/path as a page attribute. A page has a specific path to it, and it should only be accessible via that path. This will also help with building better breadcrumbs, but should be re-examined everytime the page (or one of its parents) is updated
- ☐ Need to be able to get to parent from page (better breadcrumbs)
- ☐ List template (and be able to get to template) in pages listing and in developer help
- ☐ Be able to reassign parent page from a listing of eligible parent pages
- ☐ Add a process to be able to change the template of a page
+   ☐ Make all children the menu item, but then have filters on that index page which filter by template
+   ☐ updated dates to pages
+   ☐ Use a url/path as a page attribute. A page has a specific path to it, and it should only be accessible via that path. This will also help with building better breadcrumbs, but should be re-examined everytime the page (or one of its parents) is updated
+   ☐ Need to be able to get to parent from page (better breadcrumbs)
+   ☐ List template (and be able to get to template) in pages listing and in developer help
+   ☐ Be able to reassign parent page from a listing of eligible parent pages
+   ☐ Add a process to be able to change the template of a page
+   ☐ If form tabs are going to be separate pages (they should be), then have the "Are you sure you want to leave" if content changed
 
   Templates:
 
- ☐ Some templates won't have show views. Some will have shows and partials. Only need to allow the ability to say a page has no show view, and instead of throwing a 500, we have a 404. And these also aren't tracked in the sitemap.
- ☐ Either use IDX field for identifying a particular template for your viewer, or add the call to the template (and its pages) to the developer help page.
- ☐ Surface more data in the index view, like how many pages and what templates can be children, and if they are maxed out, etc.
- ☐ Be able to create a template from an existing template
+   ☐ Some templates won't have show views. Some will have shows and partials. Only need to allow the ability to say a page has no show view, and instead of throwing a 500, we have a 404. And these also aren't tracked in the sitemap.
+   ☐ Either use IDX field for identifying a particular template for your viewer, or add the call to the template (and its pages) to the developer help page.
+   ☐ Surface more data in the index view, like how many pages and what templates can be children, and if they are maxed out, etc.
+   ☐ Be able to create a template from an existing template
 
   Template Fields:
 
- ☐ Be able to make protected attributes required (but not required and protected attributed un-required)
- ☐ Drag and drop to reorder fields and to move from one group to another
- ☐ Mark fields as hidden from the index view
- ☐ Add a half-width option so simple forms can get cleaned up. Don't necessarily need to display this visually on the index, but could have some indicator.
- ☐ Be able to delete groups and unprotected fields
- ☐ Fields should have a default value option
- ☐ Add a note option to a field, which is basically a plain text paragraph that can further explain the purpose or nuances of a field
- ☐ Surface more information on each field, like hidden, half-width, required, data type
+   ☐ Be able to make protected attributes required (but not required and protected attributed un-required)
+   ☐ Drag and drop to reorder fields and to move from one group to another
+   ☐ Mark fields as hidden from the index view
+   ☐ Add a half-width option so simple forms can get cleaned up. Don't necessarily need to display this visually on the index, but could have some indicator.
+   ☐ Be able to delete groups and unprotected fields
+   ☐ Fields should have a default value option
+   ☐ Add a note option to a field, which is basically a plain text paragraph that can further explain the purpose or nuances of a field
+   ☐ Surface more information on each field, like hidden, half-width, required, data type
 
   Users:
 
- ☐ Site users don't have site listing if they only have one site
- ☐ Site users can get to other sites
- ☐ Site users only see pages, form submissions and media library
- ☐ Site users don't see dev helpers or delete buttons
+   ☐ Site users don't have site listing if they only have one site
+   ☐ Site users can get to other sites
+   ☐ Site users only see pages, form submissions and media library
+   ☐ Site users don't see dev helpers or delete buttons
