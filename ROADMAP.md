@@ -9,11 +9,38 @@ To submit an idea, please [create an
 issue](https://github.com/seancdavis/taproot/issues/new) prepended with
 `Request: `.
 
-v1.2
+v1.2: Pages, Templates & Users (March 2015)
 -------------
 
-v1.2 focuses on separating developers from site users, while also adding some
-odds and ends to make the builder a little easier to use.
+*Further enhancements to pages and templates, while working to separate
+developers from site users. It is believed honing in on the page/template UI
+will make make other enhancements quicker and easier.*
+
+#### Quick File Improvements
+
+Uploading to Amazon S3 is nice because there is no max capacity. However,
+Sapwood isn't built to be a file management solution. And because of that,
+we're transitioning to local file storage. This will keep things much simpler
+and make Sapwood a little easier to work with for beginners.
+
+The plan is to also add a max file size, so you can adjust to your needs.
+
+#### Linking Pages and Templates
+
+As we use the new page and template sections of the site, we'll find some items
+we need to add to make them easier to navigate.
+
+#### Surfacing & Organizing Data
+
+There is a lot of data when it comes to pages, templates and template fields.
+Surfacing important data on index views will make knowing what you're looking
+at much easier to understand.
+
+#### Quick Edit for Template Fields
+
+To be able to move template fields around and edit some simplistic data without
+going into a form will save huge amounts of time in building out custom
+templates.
 
 #### Site User Focus
 
@@ -23,6 +50,11 @@ not see the builder nav, but will only be able to navigate pages.
 
 This separates the roles of developers and content editors, and can serve as a
 catch-all permission solution until there is a need for a more robust system.
+
+v1.3: Potpourri (April 2015)
+-------------
+
+*Adds some odds and ends to make the builder a little easier to use.*
 
 #### Custom Error Pages
 
@@ -35,11 +67,6 @@ will come packaged with these
 We have some small updates to make to our default template, including a better
 asset setup and some default template views.
 
-#### Linking Pages and Templates
-
-As we use the new page and template sections of the site, we'll find some items
-we need to add to make them easier to navigate.
-
 #### Developer Help Pages
 
 v1.1 added a couple developer help pages to read dynamic content and help
@@ -51,10 +78,10 @@ a little easier to use and to add more content to them.
 A few methods will be added to the API to enhance the workflow. This is likely
 only to include updating pages via a webhook.
 
-v1.3
+v1.4: Blogging (May 2015)
 -------------
 
-v1.3 focuses on enhancing the project for building blog sites.
+*Adds features to make it easier (possible) to build and manage blog sites.*
 
 #### Tags
 
@@ -74,10 +101,10 @@ Searching will be a necessary component of both the builder and the viewer. A
 search feature will be added to the builder, and methods will be made available
 for having a search results page through the viewer.
 
-v1.4
+v1.5: File Management (June 2015)
 -------------
 
-v1.4 dives into file management and works on enhancing the media library.
+*Dives into file management and works on enhancing the media library.*
 
 #### Galleries/Category
 
@@ -100,11 +127,10 @@ The file cropper settings are tucked away and difficult to find. They will be
 moved to the media library, and the process of cropping will be made a little
 cleaner.
 
-v1.5
+v1.6: Workflow Enhancements (July 2015)
 -------------
 
-v1.5 gets into workflow enhancements, and takes another steps at optimizing the
-building workflow.
+*Takes another steps at optimizing the site-building workflow.*
 
 #### Page & Template Workflow (TBD)
 
@@ -117,24 +143,30 @@ The rich text editor is going away, and the markdown editor will be
 significantly enhanced. More than likely, it will be wrapped up in a javascript
 library and plugged back in to the site.
 
+This will come with an embedded editor for quick edits, but with the option to
+launch the full-screen window.
+
+#### Markdown Editing for Dynamic Fields
+
+Sometimes you need more than one field for rich text editing on a given
+template. This will give you that option.
+
 #### App & Site Settings
 
 All settings will be brought into the database and managed from the production
 version of the application. This way installations will be similar throughout.
 
-### API Enhancements (TBD)
+#### API Enhancements (TBD)
 
 It is expected more API enhancements will be desired, and they will be packaged
 in this release.
 
-v1.6
+v1.7: Potpourri (August 2015)
 -------------
 
-v1.6 has a focus on adding features that help developers build sites quick and
-efficiently.
-
-*It's possible that this version be wrapped up in v1.5 if more features are not
-added to it.*
+This is a placeholder for odds and ends, at least until they are able to be
+separated or built. It's possible these features get implemented earlier. It's
+also possible they get pushed to post-2.0.
 
 #### Viewer Toolbar
 
@@ -142,7 +174,14 @@ The viewer will look for a developer to be logged in and will show a toolbar if
 so. That will contain useful information and links related to the
 `current_page` object.
 
-v2.0
+#### Form Enhancements
+
+With all other features of the builder being touched and transformed throughout
+v1, forms will feel out of place. While they aren't used nearly as much as the
+other sections, they should become more integrated in the workflow, and more
+tightly tied to pages and/or templates.
+
+v2.0 (2016)
 -------------
 
 v2.0 is the first non-backward-compatible release. It involves reorganization
