@@ -16,6 +16,15 @@ v1.2: Pages, Templates & Users (March 2015)
 developers from site users. It is believed honing in on the page/template UI
 will make make other enhancements quicker and easier.*
 
+#### Quick File Improvements
+
+Uploading to Amazon S3 is nice because there is no max capacity. However,
+Sapwood isn't built to be a file management solution. And because of that,
+we're transitioning to local file storage. This will keep things much simpler
+and make Sapwood a little easier to work with for beginners.
+
+The plan is to also add a max file size, so you can adjust to your needs.
+
 #### Linking Pages and Templates
 
 As we use the new page and template sections of the site, we'll find some items
