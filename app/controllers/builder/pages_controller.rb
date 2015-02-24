@@ -42,9 +42,11 @@ class Builder::PagesController < BuilderController
 
   def update
     process_files
+    slug = current_page.slug
     if current_page.update(update_params)
       # save_files
-      redirect_to(redirect_route,
+      route = redirect_route.gsub(/#{slug}/, current_page.slug)
+      redirect_to(route,
         :notice => t(
           'notices.updated', 
           :item => controller_name.humanize.titleize
