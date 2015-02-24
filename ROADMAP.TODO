@@ -10,17 +10,24 @@ v1.2:
 
   Miscellaneous:
 
- ☐ Make "New" buttons into dropdown menus where there is more than one option.
- ☐ Make the HTML title more dynamic and representative of what is on the current page
+   ☐ Make "New" buttons into dropdown menus where there is more than one option.
+   ☐ Make the HTML title more dynamic and representative of what is on the current page
 
   App Settings:
 
- ☐ add google analytics setting for Sapwood builder
+   ☐ add google analytics setting for Sapwood builder
 
   Site Settings:
 
- ☐ Be able to change a site name/slug (which would have to remove then re-add all the symlinks)
- ☐ Remove unnecessary items from the Actions menu in Site Settings
+   ☐ Be able to change a site name/slug (which would have to remove then re-add all the symlinks)
+   ☐ Remove unnecessary items from the Actions menu in Site Settings
+
+ File Management:
+
+   ☐ Use local file storage instead of Amazon
+       ☐ Write asset transition into upgrade script
+       ☐ Remove Amazon S3 bucket options
+   ☐ Add max upload file size as an option
 
   Pages:
 
