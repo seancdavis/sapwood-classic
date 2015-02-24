@@ -39,6 +39,7 @@ v1.2:
    ☐ Be able to reassign parent page from a listing of eligible parent pages
    ☐ Add a process to be able to change the template of a page
    ☐ If form tabs are going to be separate pages (they should be), then have the "Are you sure you want to leave" if content changed
+   ☐ Pages can have mutiple images (files) associated with them, which should be managed at the template level
 
   Templates:
 
