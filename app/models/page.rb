@@ -53,7 +53,7 @@ class Page < ActiveRecord::Base
 
   # ------------------------------------------ Callbacks
 
-  after_save :cache_order_by
+  after_commit :cache_order_by
 
   def cache_order_by
     order_by = self.template.order_method
