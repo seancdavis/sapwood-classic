@@ -76,6 +76,13 @@ a {
     &.published { color: $color-primary; }
     &.draft { color: $color-danger; }
   }
+  &.dropdown-trigger {
+    &:after {
+      font-family: 'Icomoon-Ultimate';
+      font-size: 10px;
+      margin-left: 5px;
+    }
+  }
   &.new:before { content: "\e35e"; }
   &.edit:before { content: "\e00f"; }
   &.back:before { content: "\e3b3"; }
@@ -92,6 +99,7 @@ a {
   &.preview:before { content: "\e2d9"; }
   &.publish:before { content: "\e367"; }
   &.unpublish:before { content: "\e357"; }
+  &.dropdown-trigger:after { content: "\e3b2"; }
 
   &.button {
     @include rounded-button($color-primary, $color-primary-lighter);

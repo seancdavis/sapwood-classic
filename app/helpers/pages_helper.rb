@@ -135,19 +135,39 @@ module PagesHelper
 
   def new_page_children_links(prefix = "New")
     @new_page_children_links ||= begin
-      output = ''
-      template_children.select { |t| !t.maxed_out? }.each do |template|
-        output += link_to(
-          "#{prefix} #{template.title}", 
-          new_builder_site_page_path(
-            current_site, 
-            :template => template.slug,
-            :parent => current_page.slug
-          ),
-          :class => 'new'
-        )
+      content_tag(:div, :class => 'new-buttons') do
+        if template_children.size > 1
+          o = link_to("New Page", '#', :class => 'new button dropdown-trigger')
+          o += content_tag(:ul) do
+            o2 = ''
+            template_children.select { |t| !t.maxed_out? }.each do |template|
+              o2 += content_tag(
+                :li, 
+                link_to(
+                  "#{prefix} #{template.title}", 
+                  new_builder_site_page_path(
+                    current_site, 
+                    :template => template.slug,
+                    :parent => current_page.slug
+                  )
+                )
+              )
+            end
+            o2.html_safe
+          end
+        elsif template_children.size > 0
+          template = template_children.first
+          link_to(
+            "#{prefix} #{template.title}", 
+            new_builder_site_page_path(
+              current_site, 
+              :template => template.slug,
+              :parent => current_page.slug
+            ),
+            :class => 'new button'
+          )
+        end
       end
-      output.html_safe
     end
   end
 
@@ -160,18 +180,38 @@ module PagesHelper
   end
 
   def new_root_page_links
-    o = ''
-    site_templates.not_maxed_out.can_be_root.each do |template|
-      o += link_to(
-        "New #{template.title}", 
-        new_builder_site_page_path(
-          current_site, 
-          :template => template.slug
-        ),
-        :class => 'new'
-      )
+    new_pages = site_templates.not_maxed_out.can_be_root
+    content_tag(:div, :class => 'new-buttons') do
+      if new_pages.size > 1
+        o = link_to("New Page", '#', :class => 'new button dropdown-trigger')
+        o += content_tag(:ul) do
+          o2 = ''
+          new_pages.each do |template|
+            o2 += content_tag(
+              :li, 
+              link_to(
+                template.title, 
+                new_builder_site_page_path(
+                  current_site, 
+                  :template => template.slug
+                )
+              )
+            )
+          end
+          o2.html_safe
+        end
+      elsif new_pages.size == 1
+        template = new_pages.first
+        link_to(
+          "New #{template.title}", 
+          new_builder_site_page_path(
+            current_site, 
+            :template => template.slug
+          ),
+          :class => 'new button'
+        )
+      end
     end
-    o.html_safe
   end
 
   def page_status(page)
