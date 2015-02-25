@@ -1,10 +1,7 @@
-<%= builder_page_title(current_page.title) do %>
+<%= builder_page_title(current_page_breadcrumbs, :class => 'breadcrumbs') do %>
   <%= new_page_children_links %>
-  <%= content_tag(:div, page_status(current_page)) %>
-  <%= subtitle("Here's a snapshot of the #{current_page.title} page. 
-  Use this as a reference when accessing this template while developing your 
-  site.") %>
 <% end %>
+<%#= content_tag(:div, page_status(current_page)) %>
 
 <section id="page-content" class="developer-help">
 

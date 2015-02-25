@@ -100,29 +100,22 @@ module PagesHelper
   end
 
   def current_page_breadcrumbs
-    content_tag(:nav, :class => 'breadcrumbs') do
-      content_tag(:ul) do
-        o = content_tag(
-          :li, 
-          link_to('All Pages', builder_route([site_pages], :index))
-        )
-        if current_page
-          if has_ancestors?
-            current_page_ancestors.each do |a|
-              o += content_tag(
-                :li, 
-                link_to(a.title, builder_route([a], :show))
-              )
-            end
-          end
-          o += content_tag(
-            :li, 
-            link_to(current_page.title, builder_route([current_page], :show))
-          )
-          o.html_safe
+    # slash separator between breadcrumbs
+    sep = content_tag(:span, '/', :class => 'separator')
+    # render the site url as the link to root pages    
+    o = link_to(current_site.url, builder_route([site_pages], :index))
+    # look for current pages and add each
+    if current_page
+      if has_ancestors?
+        current_page_ancestors.each do |a|
+          o += sep
+          o += link_to(a.slug, builder_route([a], :show))
         end
       end
+      o += sep
+      o += link_to(current_page.slug, builder_route([current_page], :show))
     end
+    o.html_safe
   end
 
   def home_page

@@ -1,7 +1,7 @@
 module RenderingHelper
 
-  def builder_page_title(title, &block)
-    content_tag(:section, :class => 'page-title') do
+  def builder_page_title(title, options = {}, &block)
+    content_tag(:section, :class => "page-title #{options[:class]}") do
       o = content_tag(:h1, title)
       o += capture(&block) if block_given?
       o.html_safe

@@ -4,11 +4,28 @@
     margin: 0 0 10px 0;
     padding: 0 0 10px 0;
     border-bottom: 1px solid $color-light-darker;
+    &.breadcrumbs {
+      h1 {
+        margin: 0 0 15px 0;
+        font-size: 28px;
+        line-height: 32px;
+      }
+    }
     h1 {
       display: inline-block;
       margin: 0;
       font-weight: 200;
       color: $color-grey;
+      > a {
+        font-size: inherit;
+        line-height: inherit;
+        font-weight: 400;
+      }
+      a + span {
+        margin: 0 7px;
+        font-size: inherit;
+        color: $color-grey-lightest;
+      }
     }
     > a {
       float: right;
