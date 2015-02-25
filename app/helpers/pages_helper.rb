@@ -1,7 +1,7 @@
 module PagesHelper
 
   def site_pages
-    @site_pages ||= current_site.webpages
+    @site_pages ||= current_site.webpages.includes(:template)
   end
 
   def site_root_pages
@@ -172,6 +172,14 @@ module PagesHelper
     end
   end
 
+  def page_quick_status(page)
+    if page.published?
+      content_tag(:a, '', :class => 'published disabled')
+    else
+      content_tag(:a, '', :class => 'draft disabled')
+    end
+  end
+
   def new_root_page_links
     new_pages = site_templates.not_maxed_out.can_be_root
     content_tag(:div, :class => 'new-buttons') do
@@ -218,6 +226,15 @@ module PagesHelper
         o = content_tag(:i, nil, :class => 'icon-notification')
         o += content_tag(:span, 'Draft')
       end
+    end
+  end
+
+  def page_last_edited(page)
+    date = page.updated_at.strftime("%h %d")
+    editor = "Sean Davis"
+    content_tag(:span, :class => 'last-edited') do
+      "Last edited #{content_tag(:span, date)} by 
+      #{content_tag(:span, editor)}".html_safe
     end
   end
 

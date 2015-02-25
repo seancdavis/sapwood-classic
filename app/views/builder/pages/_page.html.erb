@@ -1,7 +1,55 @@
-<article class="page arrow">
-  <%= link_to(builder_route([page], :show)) do %>
-    <%= content_tag(:h4, page.title, :class => 'title') %>
-    <%= page_status(page) %>
-    <%= simple_format(page.description) unless page.description.blank? %>
-  <% end %>
+<article class="page">
+  <%= content_tag(:span, page_quick_status(page), :class => 'status') %>
+  <div class="data">
+    <div class="top">
+      <%= content_tag(:h4, page.title, :class => 'title') %>
+      <%= content_tag(:span, page.slug, :class => 'path') %>
+    </div>
+    <div class="bottom">
+      <%= page_last_edited(page) %>
+      <%= link_to(
+        page.template.title,
+        builder_route([page.template], :show), 
+        :class => 'template'
+      ) %>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="top">
+      <%= link_to(
+        'Edit', 
+        builder_route([page], :edit), 
+        :class => 'edit'
+      ) %>
+    </div>
+    <div class="bottom">
+      <% if page.published? %>
+        <%= link_to(
+          "Unpublish", 
+          builder_site_page_unpublish_path(current_site, page, 
+            :redirect_route => request.path),
+          :method => :post, 
+          :class => 'unpublish',
+          :data => { :confirm => 'Are you sure?' } 
+        ) %>
+      <% else %>
+        <%= link_to(
+          "Publish", 
+          builder_site_page_publish_path(current_site, page, 
+            :redirect_route => request.path),
+          :method => :post, 
+          :class => 'publish',
+          :data => { :confirm => 'Are you sure?' }
+        ) %>
+      <% end %>
+      <%= link_to(
+        "Delete", 
+        builder_route([page], :show), 
+        :method => :delete, 
+        :class => 'delete',
+        :data => { :confirm => 'WARNING: This will destroy all pages and 
+          subpages. Are you sure you want to delete this page?' }
+      ) %>
+    </div>
+  </div>
 </article>

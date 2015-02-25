@@ -67,7 +67,8 @@ p.subtitle {
 
 a {
   &.new, &.edit, &.back, &.delete, &.dont-delete, &.published, &.draft, &.crop, 
-  &.download, &.code, &.database, &.link, &.build, &.preview, &.publish, &.unpublish {
+  &.download, &.code, &.database, &.link, &.build, &.preview, &.publish, 
+  &.unpublish, &.template {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
@@ -89,7 +90,7 @@ a {
   &.delete:before { content: "\e24f"; }
   &.dont-delete:before { content: "\e13b"; }
   &.published:before { content: "\e367"; }
-  &.draft:before { content: "\e365"; }
+  &.draft:before { content: "\e357"; }
   &.crop:before { content: "\e43c"; }
   &.download:before { content: "\e132"; }
   &.code:before { content: "\e480"; }
@@ -99,6 +100,7 @@ a {
   &.preview:before { content: "\e2d9"; }
   &.publish:before { content: "\e367"; }
   &.unpublish:before { content: "\e357"; }
+  &.template:before { content: "\e097"; }
   &.dropdown-trigger:after { content: "\e3b2"; }
 
   &.button {
@@ -199,11 +201,7 @@ ul.tabs, ul.list-tabs {
 span.page-status {
   display: inline-block;
   margin: 5px 0 0 0;
-  // padding: 3px 3px;
-  // border-radius: 3px;
-  // background: $color-success;
   &.draft {
-    // background: $color-danger;
     span {
       color: $color-danger;
     }

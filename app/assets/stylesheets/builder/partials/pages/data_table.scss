@@ -1,0 +1,116 @@
+> #page-content.pages {
+  section.data-table {
+    border: 1px solid $color-grey-lighter;
+    article.page {
+      position: relative;
+      padding: 10px 10px;
+      border-bottom-color: $color-grey-lighter;
+      &:last-child {
+        border-bottom: none;
+      }
+      &:hover {
+        background: $color-light-dark;
+        div.actions {
+          display: block;
+        }
+      }
+      .status {
+        display: inline-block;
+        width: 40px;
+        height: 100%;
+        vertical-align: top;
+        a {
+          font-size: 18px;
+          &:before {
+            margin-right: 0;
+            font-size: 18px;
+          }
+        }
+      }
+      > div {
+        display: inline-block;
+        vertical-align: top;
+        &.data {
+          > div {
+            display: block;
+            &.top {
+              .title {
+                display: inline-block;
+                font-size: 18px;
+                font-weight: 600;
+                margin: 0;
+                color: $color-dark-lighter;
+              }
+              .path {
+                display: inline-block;
+                margin: 2px 0 0 10px;
+                font-size: 14px;
+                font-weight: 200;
+                color: $color-grey-light;
+              }
+            }
+            &.bottom {
+              margin: 8px 0 0 0;
+              .last-edited {
+                display: inline-block;
+                margin: 0;
+                font-size: 14px;
+                color: $color-grey-dark;
+                line-height: 14px;
+                > span {
+                  display: inline-block;
+                  margin: -2.5px 0 0 0;
+                  font-size: inherit;
+                  line-height: inherit;
+                  color: inherit;
+                  font-weight: 400;
+                }
+              }
+              .template {
+                display: inline-block;
+                margin-left: 10px;
+                padding: 3px 5px;
+                font-size: 11px;
+                border-radius: 3px;
+                color: $color-light;
+                background: $color-primary;
+              }
+            }
+          }
+        }
+        &.actions {
+          display: none;
+          position: absolute;
+          top: 7px;
+          right: 7px;
+          > div {
+            display: block;
+            text-align: right;
+            &.bottom {
+              margin: 7px 0 0 0;
+            }
+          }
+          a {
+            @include rounded-button;
+            display: inline-block;
+            margin: 0 0 0 3px;
+            padding: 3px 10px;
+            font-size: 13px;
+            color: $color-primary;
+            background: white;
+            border: 1px solid $color-primary;
+            &:hover {
+              color: $color-primary;
+              background: $color-light-dark;
+              border: 1px solid $color-primary;
+            }
+            &.delete, &.unpublish {
+              color: $color-danger;
+              border-color: $color-danger;
+            }
+          }
+        }
+      }
+    }
+  }
+}
