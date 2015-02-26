@@ -59,4 +59,8 @@ module RenderingHelper
     content_tag(:p, :class => 'note') { content_tag(:em) { text } }
   end
 
+  def missing_content(text)
+    content_tag(:p, text, :class => 'missing-content')
+  end
+
 end

@@ -38,44 +38,8 @@
       @include transition-all;
     }
     div.new-buttons {
-      position: relative;
       float: right;
       text-align: right;
-      > a {
-        margin: 0;
-        &:focus {
-          background: $color-primary;
-        }
-        &:hover, &.active {
-          background: $color-primary-dark;
-        }
-      }
-      ul {
-        display: none;
-        position: absolute;
-        @include clear-list;
-        background: $color-light;
-        border: 1px solid $color-grey-lightest;
-        border-radius: 3px;
-        box-shadow: 0px 0px 3px $color-light-darkest;
-        z-index: 999;
-        &.active {
-          display: block;
-        }
-        li {
-          text-align: left;
-          overflow: hidden;
-          a {
-            display: block;
-            font-size: 14px;
-            padding: 5px 15px;
-            &:hover {
-              color: $color-light;
-              background: $color-primary;
-            }
-          }
-        }
-      }
     }
     .page-status {
       i {

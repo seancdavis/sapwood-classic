@@ -3,5 +3,12 @@
 <% end %>
 
 <section id="page-content" class="full-width pages">
-  <%= data_table(site_root_pages, 'page') %>
+  <%= render :partial => 'filters', :locals => { :pages => site_root_pages } %>
+  <% if @pages.size > 0 %>
+    <%= data_table(@pages, 'page') %>
+  <% elsif site_root_pages.size > 0 %>
+    <%= missing_content("No pages match your criteria.") %>
+  <% else %>
+    <%= missing_content("No pages here yet. Why don't you create one?") %>
+  <% end %>
 </section>

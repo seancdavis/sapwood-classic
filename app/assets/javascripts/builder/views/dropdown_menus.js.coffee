@@ -7,5 +7,8 @@ class App.Views.DropdownMenus extends Backbone.View
 
   toggleDropdown: (e) ->
     e.preventDefault()
-    $(e.target).siblings('ul').toggleClass('active')
+    if $(e.target).is('a')
+      $(e.target).siblings('ul').toggleClass('active')
+    else
+      $(e.target).parents('a').siblings('ul').toggleClass('active')
     $(e.target).toggleClass('active')

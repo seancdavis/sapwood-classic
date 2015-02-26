@@ -182,7 +182,7 @@ module PagesHelper
 
   def new_root_page_links
     new_pages = site_templates.not_maxed_out.can_be_root
-    content_tag(:div, :class => 'new-buttons') do
+    content_tag(:div, :class => 'new-buttons dropdown') do
       if new_pages.size > 1
         o = link_to("New Page", '#', :class => 'new button dropdown-trigger')
         o += content_tag(:ul) do
@@ -235,6 +235,62 @@ module PagesHelper
     content_tag(:span, :class => 'last-edited') do
       "Last edited #{content_tag(:span, date)} by 
       #{content_tag(:span, editor)}".html_safe
+    end
+  end
+
+  def page_publish_filters
+    o = ''
+    ['all', 'published', 'drafts'].each do |link|
+      o += link_to(
+        link.titleize, 
+        builder_site_pages_path(
+          current_site, 
+          :published => link.singularize, 
+          :template => params[:template]
+        ),
+        :class => "#{link.singularize} 
+          #{'active' if params[:published] == link.singularize}"
+      )
+    end
+    o.html_safe
+  end
+
+  def page_template_filter(pages)
+    templates = pages.collect(&:template).uniq.sort_by(&:title)
+    content_tag(:div, :class => 'dropdown template-filter') do
+      label = params[:template].blank? ? 'Any' : params[:template].titleize
+      o = link_to(
+        "Template: #{content_tag(:strong, label)}".html_safe, 
+        '#', 
+        :class => 'dropdown-trigger'
+      )
+      o += content_tag(:ul) do
+        o2 = content_tag(
+          :li, 
+          link_to(
+            'Any', 
+            builder_site_pages_path(
+              current_site, 
+              :template => 'any',
+              :published => params[:published]
+            ),
+          )
+        )
+        templates.each do |template|
+          o2 += content_tag(
+            :li, 
+            link_to(
+              template.title, 
+              builder_site_pages_path(
+                current_site, 
+                :template => template.slug,
+                :published => params[:published]
+              ),
+            )
+          )
+        end
+        o2.html_safe
+      end
     end
   end
 
