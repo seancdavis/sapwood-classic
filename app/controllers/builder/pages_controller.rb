@@ -28,9 +28,18 @@ class Builder::PagesController < BuilderController
   end
 
   def show
+    if params[:template].blank? || params[:published].blank?
+      t = params[:template] || 'any'
+      p = params[:published] || 'all'
+      redirect_to(
+        builder_site_page_path(
+          current_site, current_page, :published => p, :template => t
+        )
+      )
+    end
   end
 
-  def children
+  def help
   end
 
   def new

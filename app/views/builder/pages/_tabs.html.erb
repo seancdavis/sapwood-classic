@@ -1,0 +1,26 @@
+<nav class="page tabs">
+  <ul>
+    <%= content_tag(
+      :li, 
+      page_children_button(current_page)
+    )
+    %>
+    <%= content_tag(
+      :li, 
+      link_to(
+        "Edit #{current_page.title[0..15]} 
+          #{'...' if current_page.title.size > 16}", 
+        builder_route([current_page], :edit),
+        :class => "edit #{action_name == 'edit' ? 'active' : nil}"
+      )
+    ) %>
+    <%= content_tag(
+      :li, 
+      link_to(
+        'Developer Help', 
+        builder_route([current_page], :show),
+        :class => "help #{action_name == 'help' ? 'active' : nil}"
+      )
+    ) %>
+  </ul>
+</nav>

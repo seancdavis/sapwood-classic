@@ -58,7 +58,9 @@ module PagesHelper
   end
 
   def current_page_children
-    @current_page_children ||= current_page.children.in_position.includes(:template)
+    @current_page_children ||= begin
+      current_page.children.in_position.includes(:template)
+    end
   end
 
   def current_page_children_paginated
@@ -69,9 +71,16 @@ module PagesHelper
 
   def current_page_children_filtered
     @current_page_children_filtered ||= begin
-      template = current_site.templates
-        .find_by_slug(params[:template_slug] || params[:slug])
-      current_page_children.select { |p| p.template == template }
+      pages = current_page_children
+      if params[:template] && !['any'].include?(params[:template])
+        template = site_templates.select { |t| t.slug == params[:template] }
+          .first
+        pages = pages.select { |p| p.template == template }
+      end
+      if params[:published] && ['published','draft'].include?(params[:published])
+        pages = pages.select(&:"#{params[:published]}?")
+      end
+      pages
     end
   end
 
@@ -79,6 +88,23 @@ module PagesHelper
     @current_page_children_filtered_paginated ||= begin
       Kaminari.paginate_array(current_page_children_filtered)
         .page(params[:page]).per(10)
+    end
+  end
+
+  def page_children_button(page)
+    children = page.template.children.reject(&:blank?)
+    templates = site_templates.select { |t| children.include?(t.slug) }
+    if templates.size > 1
+      link_to('Pages', builder_route([page], :show), :class => 'pages')
+    elsif templates.size > 0
+      path = builder_site_page_path(current_site, page)
+      link_to(
+        templates.first.title.pluralize, 
+        path, 
+        :class => "pages #{request.path == path ? 'active' : nil}"
+      )
+    else
+      nil
     end
   end
 
@@ -128,16 +154,16 @@ module PagesHelper
 
   def new_page_children_links(prefix = "New")
     @new_page_children_links ||= begin
-      content_tag(:div, :class => 'new-buttons') do
+      content_tag(:div, :class => 'new-buttons dropdown') do
         if template_children.size > 1
-          o = link_to("New Page", '#', :class => 'new button dropdown-trigger')
+          o = link_to("New Page", '#', :class => 'new dropdown-trigger')
           o += content_tag(:ul) do
             o2 = ''
             template_children.select { |t| !t.maxed_out? }.each do |template|
               o2 += content_tag(
                 :li, 
                 link_to(
-                  "#{prefix} #{template.title}", 
+                  template.title, 
                   new_builder_site_page_path(
                     current_site, 
                     :template => template.slug,
@@ -241,13 +267,20 @@ module PagesHelper
   def page_publish_filters
     o = ''
     ['all', 'published', 'drafts'].each do |link|
+      p = link.singularize
+      t = params[:template]
+      if current_page
+        path = builder_site_page_path(
+          current_site, current_page, :published => p, :template => t
+        )
+      else
+        path = builder_site_pages_path(
+          current_site, current_page, :published => p, :template => t
+        )
+      end
       o += link_to(
         link.titleize, 
-        builder_site_pages_path(
-          current_site, 
-          :published => link.singularize, 
-          :template => params[:template]
-        ),
+        path,
         :class => "#{link.singularize} 
           #{'active' if params[:published] == link.singularize}"
       )
@@ -265,29 +298,34 @@ module PagesHelper
         :class => 'dropdown-trigger'
       )
       o += content_tag(:ul) do
-        o2 = content_tag(
-          :li, 
-          link_to(
-            'Any', 
-            builder_site_pages_path(
-              current_site, 
-              :template => 'any',
-              :published => params[:published]
-            ),
+        if current_page
+          path = builder_site_page_path(
+            current_site, 
+            current_page,
+            :template => 'any',
+            :published => params[:published]
           )
-        )
+        else
+          path = builder_site_pages_path(
+            current_site, 
+            :template => 'any',
+            :published => params[:published]
+          )
+        end
+        o2 = content_tag(:li, link_to('Any', path))
         templates.each do |template|
-          o2 += content_tag(
-            :li, 
-            link_to(
-              template.title, 
-              builder_site_pages_path(
-                current_site, 
-                :template => template.slug,
-                :published => params[:published]
-              ),
+          t = template.slug
+          p = params[:published]
+          if current_page
+            path = builder_site_page_path(
+              current_site, current_page, :template => t, :published => p
             )
-          )
+          else
+            path = builder_site_pages_path(
+              current_site, :template => t, :published => p
+            )
+          end
+          o2 += content_tag(:li, link_to(template.title, path))
         end
         o2.html_safe
       end

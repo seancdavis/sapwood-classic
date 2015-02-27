@@ -68,7 +68,7 @@ p.subtitle {
 a {
   &.new, &.edit, &.back, &.delete, &.dont-delete, &.published, &.draft, &.crop, 
   &.download, &.code, &.database, &.link, &.build, &.preview, &.publish, 
-  &.unpublish, &.template, &.all {
+  &.unpublish, &.template, &.all, &.help, &.pages {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
@@ -102,6 +102,8 @@ a {
   &.unpublish:before { content: "\e357"; }
   &.template:before { content: "\e097"; }
   &.all:before { content: "\e0f9"; }
+  &.help:before { content: "\e359"; }
+  &.pages:before { content: "\e079"; }
   &.dropdown-trigger:after { content: "\e3b2"; }
 
   &.button {
@@ -274,4 +276,43 @@ div.dropdown {
   color: $color-grey;
   font-weight: 400;
   font-style: italic;
+}
+
+nav.tabs {
+  margin: 10px 0 0 0;
+  padding: 0;
+  ul {
+    @include clear-list;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid $color-grey-lighter;
+    li {
+      a {
+        margin: 0 5px -1px 5px;
+        padding: 10px 10px;
+        font-size: 16px;
+        font-weight: 200;
+        line-height: 16px;
+        border: 1px solid $color-grey-lighter;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        color: $color-grey-dark;
+        z-index: -9;
+        &:before {
+          font-size: 12px;
+        }
+        &:hover {
+          color: $color-grey-dark;
+          background: $color-light-dark;
+        }
+        &.active {
+          z-index: 9;
+          border-bottom-color: white;
+          color: $color-dark;
+          background: transparent;
+          font-weight: 600;
+        }
+      }
+    }
+  }
 }

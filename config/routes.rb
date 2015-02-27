@@ -46,7 +46,7 @@ Rails.application.routes.draw do
         get 'settings/:slug' => 'pages#edit', :as => :settings
         get 'edit/:editor' => 'pages/editor#edit', :as => :editor
         patch 'edit/:editor' => 'pages/editor#parse', :as => :parser
-        get 'children/:slug' => 'pages#children', :as => :children
+        get 'help' => 'pages#help', :as => :help
         post 'publish' => 'pages#publish', :as => :publish
         post 'unpublish' => 'pages#unpublish', :as => :unpublish
       end

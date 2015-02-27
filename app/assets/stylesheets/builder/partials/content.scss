@@ -11,6 +11,9 @@
         line-height: 32px;
       }
     }
+    &.no-border {
+      border-bottom: none;
+    }
     h1 {
       display: inline-block;
       margin: 0;
@@ -238,6 +241,7 @@
     }
     pre {
       display: block;
+      max-width: 600px;
       padding: 15px;
       background: $color-light-dark;
       border: 1px solid $color-light-darker;
