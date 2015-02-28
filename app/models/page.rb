@@ -19,6 +19,7 @@
 #  show_in_nav      :boolean          default(TRUE)
 #  body_md          :text
 #  page_path        :string(255)
+#  last_editor_id   :integer
 #
 
 class Page < ActiveRecord::Base
@@ -36,6 +37,7 @@ class Page < ActiveRecord::Base
   # ------------------------------------------ Associations
 
   belongs_to :template, :touch => true
+  belongs_to :last_editor, :class_name => 'User'
 
   has_one :site, :through => :template
 

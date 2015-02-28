@@ -19,6 +19,7 @@
 #  show_in_nav      :boolean          default(TRUE)
 #  body_md          :text
 #  page_path        :string(255)
+#  last_editor_id   :integer
 #
 
 require 'rails_helper'

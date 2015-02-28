@@ -132,7 +132,7 @@ class Builder::PagesController < BuilderController
         :show_in_nav,
         :template,
         :field_data => []
-      ).merge(:template => current_template)
+      ).merge(:template => current_template, :last_editor => current_user)
     end
 
     def update_params
@@ -147,7 +147,7 @@ class Builder::PagesController < BuilderController
         :parent_id,
         :show_in_nav,
         :template
-      )
+      ).merge(:last_editor => current_user)
       unless params[:page][:field_data].blank?
         p = p.merge(
           :field_data => current_page.field_data.merge(params[:page][:field_data])

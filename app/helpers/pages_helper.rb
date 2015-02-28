@@ -1,7 +1,7 @@
 module PagesHelper
 
   def site_pages
-    @site_pages ||= current_site.webpages.includes(:template)
+    @site_pages ||= current_site.webpages.includes(:template, :last_editor)
   end
 
   def site_root_pages
@@ -262,10 +262,13 @@ module PagesHelper
 
   def page_last_edited(page)
     date = page.updated_at.strftime("%h %d")
-    editor = "Sean Davis"
+    if page.last_editor
+      editor = " by #{content_tag(:span, page.last_editor.display_name)}"
+    else
+      editor = ''
+    end
     content_tag(:span, :class => 'last-edited') do
-      "Last edited #{content_tag(:span, date)} by 
-      #{content_tag(:span, editor)}".html_safe
+      "Last edited #{content_tag(:span, date)}#{editor}".html_safe
     end
   end
 
