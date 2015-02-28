@@ -18,12 +18,14 @@ class App.Routers.Router extends Backbone.Router
     'sites/:site_slug/library': 'library'
 
   newPage: (site_slug) ->
+    new App.Views.UnloadCheck
     if $('.image-upload-trigger').length > 0
       new App.Views.PageFileUploader
         site: site_slug
 
   editPage: (site_slug, page_slug, slug) ->
     new App.Views.EditorButtons
+    new App.Views.UnloadCheck
     if $('.image-upload-trigger').length > 0
       new App.Views.PageFileUploader
         site: site_slug
