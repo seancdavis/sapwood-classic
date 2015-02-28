@@ -81,6 +81,12 @@ class Page < ActiveRecord::Base
     update_columns(:page_path => "/#{path.collect(&:slug).join('/')}")
   end
 
+  after_save :save_children, :if => :slug_changed?
+
+  def save_children
+    children.each(&:save!)
+  end
+
   # ------------------------------------------ Instance Methods
 
   def respond_to_fields
