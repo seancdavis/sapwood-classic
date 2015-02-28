@@ -3,7 +3,15 @@
   <div class="data">
     <div class="top">
       <%= content_tag(:h4, page.title, :class => 'title') %>
-      <%= content_tag(:span, page.slug, :class => 'path') %>
+      <%= content_tag(
+        :span, 
+        link_to(
+          page.page_path, 
+          preview_page_path(:page_path => page.page_path),
+          :target => :blank
+        ), 
+        :class => 'path'
+      ) %>
     </div>
     <div class="bottom">
       <%= page_last_edited(page) %>

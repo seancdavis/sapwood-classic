@@ -18,6 +18,7 @@
 #  order            :string(255)
 #  show_in_nav      :boolean          default(TRUE)
 #  body_md          :text
+#  page_path        :string(255)
 #
 
 class Page < ActiveRecord::Base
@@ -72,6 +73,12 @@ class Page < ActiveRecord::Base
       end
     end
     update_columns(:field_data => fd)
+  end
+
+  after_save :cache_page_path
+
+  def cache_page_path
+    update_columns(:page_path => "/#{path.collect(&:slug).join('/')}")
   end
 
   # ------------------------------------------ Instance Methods

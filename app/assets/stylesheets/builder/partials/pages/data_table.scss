@@ -45,8 +45,14 @@
                 display: inline-block;
                 margin: 2px 0 0 10px;
                 font-size: 14px;
-                font-weight: 200;
-                color: $color-grey-light;
+                a {
+                  font-size: inherit;
+                  font-weight: 200;
+                  color: $color-grey-light;
+                  &:hover {
+                    text-decoration: underline;
+                  }
+                }
               }
             }
             &.bottom {
