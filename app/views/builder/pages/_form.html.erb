@@ -1,3 +1,23 @@
+<div class="form-tabs">
+  <ul>
+    <% current_template_groups.each do |group| %>
+      <%= content_tag(
+        :li,
+        link_to(
+          group.title, 
+          builder_site_page_settings_path(
+            current_site, 
+            current_page, 
+            group.slug
+          ),
+          :class => (current_page.slug == params[:page_slug] && 
+            group.slug == params[:slug]) ? 'active' : nil
+        )
+      ) %>
+    <% end %>
+  </ul>
+</div>
+
 <%= simple_form_for [:builder, current_site, current_page] do |f| %>
 
   <%= f.simple_fields_for :field_data, OpenStruct.new(f.object.field_data) do |fd| %>

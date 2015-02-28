@@ -139,3 +139,35 @@ form {
     @include rounded-button($color-grey, $color-grey-darker);
   }
 }
+
+section#page-content.page.form {
+  border: 1px solid $color-light-darker;
+  .form-tabs {
+    background: $color-light-darker;
+    margin: 0;
+    padding: 13px 25px;
+    ul {
+      @include clear-list;
+      li {
+        display: inline-block;
+        font-size: 16px;
+        line-height: 16px;
+        a {
+          display: inline-block;
+          margin: 0 20px 2px 0;
+          color: $color-grey;
+          font-size: inherit;
+          line-height: inherit;
+          font-weight: 400;
+          &.active {
+            font-weight: 600;
+            color: $color-dark;
+          }
+        }
+      }
+    }
+  }
+  form {
+    padding: 10px 25px;
+  }
+}

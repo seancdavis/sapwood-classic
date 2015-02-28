@@ -1,12 +1,11 @@
-<%= current_page_breadcrumbs %>
-
-<%= builder_page_title("#{current_template_group.title} Settings: #{current_page.title}") do %>
+<%= builder_page_title(
+  current_page_breadcrumbs, 
+  :class => 'breadcrumbs no-border'
+) do %>
   <%= new_page_children_links %>
-  <%= subtitle("These are the #{current_template_group.title} settings for this 
-  page. You can jump to different settings sections using the menu in the 
-  sidebar.") %>
+  <%= render :partial => 'tabs' %>
 <% end %>
 
-<%= content_tag(:section, render('form'), :id => 'page-content') %>
-
-<%= sidebar %>
+<section class="page form" id="page-content">
+  <%= render 'form' %>
+</section>

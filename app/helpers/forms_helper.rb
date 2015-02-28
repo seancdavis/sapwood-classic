@@ -25,6 +25,7 @@ module FormsHelper
     f.input(
       :redirect_route, 
       :as => :hidden, 
+      :wrapper => false,
       :input_html => { :value => params[:redirect_route] || request.path }
     )
   end
