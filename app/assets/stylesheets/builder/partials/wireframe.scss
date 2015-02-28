@@ -20,7 +20,7 @@ body {
         width: 75%;
         vertical-align: top;
         padding: 0 25px 0 0;
-        &.full-width, &.page.form {
+        &.full-width, &.page.form, &.data-container {
           width: 100%;
           padding: 0;
         }

@@ -1,7 +1,7 @@
-> #page-content.pages {
+> #page-content.data-container {
   section.data-table {
     border: 1px solid $color-grey-lighter;
-    article.page {
+    article.page, article.template {
       position: relative;
       padding: 10px 10px;
       border-bottom-color: $color-grey-lighter;
@@ -70,6 +70,16 @@
                   line-height: inherit;
                   color: inherit;
                   font-weight: 400;
+                }
+              }
+              .description {
+                max-width: 500px;
+                font-size: 14px;
+                line-height: 20px;
+                margin: 0;
+                font-style: italic;
+                & + p {
+                  margin-top: 15px;
                 }
               }
               .template {
