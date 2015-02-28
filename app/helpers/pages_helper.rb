@@ -95,7 +95,12 @@ module PagesHelper
     children = page.template.children.reject(&:blank?)
     templates = site_templates.select { |t| children.include?(t.slug) }
     if templates.size > 1
-      link_to('Pages', builder_route([page], :show), :class => 'pages')
+      path = builder_route([page], :show)
+      link_to(
+        'Pages', 
+        path, 
+        :class => "pages #{request.path == path ? 'active' : nil}"
+      )
     elsif templates.size > 0
       path = builder_site_page_path(current_site, page)
       link_to(
