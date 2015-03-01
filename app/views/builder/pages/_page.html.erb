@@ -11,7 +11,7 @@
           :target => :blank
         ), 
         :class => 'path'
-      ) %>
+      ) if page.template.has_show_view? %>
     </div>
     <div class="bottom">
       <%= page_last_edited(page) %>

@@ -6,7 +6,7 @@
   <%= render :partial => 'tabs' %>
 <% end %>
 
-<section id="page-content" class="full-width pages">
+<section id="page-content" class="full-width pages data-container">
   <%= render :partial => 'filters', :locals => { 
     :pages => current_page_children } %>
   <% if current_page_children_filtered_paginated.size > 0 %>

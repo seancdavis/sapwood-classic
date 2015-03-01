@@ -82,6 +82,7 @@ class Builder::TemplatesController < BuilderController
         :order_direction,
         :limit_pages,
         :max_pages,
+        :has_show_view,
         :children => [],
       ).merge(:last_editor => current_user)
     end

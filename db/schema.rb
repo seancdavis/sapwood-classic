@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301193633) do
+ActiveRecord::Schema.define(version: 20150301205457) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 20150301193633) do
     t.integer  "max_pages",       default: 0
     t.boolean  "maxed_out",       default: false
     t.integer  "last_editor_id"
+    t.boolean  "has_show_view",   default: true
   end
 
   create_table "users", force: true do |t|

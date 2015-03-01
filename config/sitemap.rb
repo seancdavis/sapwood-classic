@@ -3,13 +3,11 @@ Site.all.each do |site|
     SitemapGenerator::Sitemap.default_host = "http://#{site.url}"
     SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/#{site.slug}"
     SitemapGenerator::Sitemap.create do
-      site_pages = site.pages
+      site_pages = site.pages.includes(:template)
       (site_pages - [site.home_page]).each do |page|
-        path = ''
-        page.ancestor_ids.each do |id|
-          path += site_pages.select { |p| p.id == id.to_i }.first.slug + '/'
+        if page.page_path.present? && page.template.has_show_view?
+          puts page.page_path
         end
-        add(path + page.slug)
       end
     end
   end

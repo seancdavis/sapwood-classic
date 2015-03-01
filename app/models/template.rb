@@ -18,6 +18,7 @@
 #  max_pages       :integer          default(0)
 #  maxed_out       :boolean          default(FALSE)
 #  last_editor_id  :integer
+#  has_show_view   :boolean          default(TRUE)
 #
 
 class Template < ActiveRecord::Base
