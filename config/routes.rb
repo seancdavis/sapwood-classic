@@ -52,9 +52,8 @@ Rails.application.routes.draw do
       end
 
       # Templates
-      get 'templates/:slug/settings' => 'templates#edit', :as => :template_settings
-      get 'templates/:slug/dev_settings' => 'templates#edit', :as => :template_dev_settings
-      resources :templates, :param => :slug do
+      resources :templates, :param => :slug, :path_names => { 
+        :edit => :settings } do
         resources :template_fields, :path => :fields, 
           :controller => 'templates/fields', :param => :slug
         resources :template_groups, :path => :groups, 

@@ -1,0 +1,14 @@
+<nav class="page tabs">
+  <ul>
+    <% current_template_actions.each do |t| %>
+      <%= content_tag(
+        :li, 
+        link_to(
+          t[:title], 
+          t[:path],
+          :class => "#{t[:class]} #{request.path == t[:path] ? 'active' : nil}"
+        )
+      ) %>
+    <% end %>
+  </ul>
+</nav>

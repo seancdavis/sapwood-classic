@@ -1,6 +1,6 @@
 <%= current_template_breadcrumbs %>
 
-<%= builder_page_title("Custom Fields") do %>
+<%= builder_page_title("Custom Fields", :class => 'no-border') do %>
   <%= link_to(
     'New Group',
     builder_route([current_template, current_template_groups], :new),
@@ -13,10 +13,9 @@
   ) %>
   <%= subtitle("The fields here appear on the form when you create or edit a 
   page that uses the #{current_template.title} template.") %>
+  <%= render :partial => 'builder/templates/tabs' %>
 <% end %>
 
-<section id="page-content">
+<section id="page-content" class="full-width">
   <%= data_table(current_template_groups, 'group') %>
 </section>
-
-<%= sidebar('builder/templates/sidebar') %>

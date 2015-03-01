@@ -31,14 +31,6 @@ class Builder::TemplatesController < BuilderController
   end
 
   def edit
-    form = request.path.split('/').last
-    if form == 'edit'
-      redirect_to(
-        builder_site_template_settings_path(current_site, current_template)
-      )
-    else
-      render request.path.split('/').last
-    end
   end
 
   def update

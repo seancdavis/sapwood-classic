@@ -1,18 +1,33 @@
 <%= current_template_breadcrumbs %>
 
-<%= builder_page_title("#{current_template.title} Developer Settings") do %>
+<%= builder_page_title(
+  "#{current_template.title} Developer Settings", 
+  :class => 'no-border'
+) do %>
   <%= subtitle("These settings affect the way in which you write your viewer 
   code and are able to access sapwood content.") %>
+  <%= render :partial => 'tabs' %>
 <% end %>
 
-<section id="page-content">
+<section id="page-content" class="full-width pages">
   <%= simple_form_for [:builder, current_site, current_template] do |f| %>
 
-    <%= f.input :slug, :label => 'Template Filename' %>
-    <%= em_p("This is the name of the template file that will be rendered for 
-    each page created using this template.") %>
-    <%= em_p("Note: You don't want to include any file extensions here. We'll 
-    figure that out for you.") %>
+    <div class="half-row">
+      <div class="input">
+        <%= f.input :title, :wrapper => false %>
+        <br>
+        <%= em_p("The title is just an arbitrary classification for this 
+          template.") %>
+      </div>
+      <div class="input">
+        <%= f.input :slug, :label => 'Template Filename', :wrapper => false %>
+        <br>
+        <%= em_p("The filename is the name of the template file that will be 
+          rendered for each page created using this template.") %>
+        <%= em_p("Note: You don't want to include any file extensions here. We'll 
+        figure that out for you.") %>
+      </div>
+    </div>
 
     <%= f.input :can_be_root, :label => 'Can have root pages?' %>
     <%= em_p("You only want ceratin types of pages to be created at the root 
@@ -49,5 +64,3 @@
     <%= f.submit "Save Settings" %>
   <% end %>
 </section>
-
-<%= sidebar %>

@@ -1,10 +1,11 @@
-<%= builder_page_title(current_template.title) do %>
+<%= builder_page_title(current_template.title, :class => 'no-border') do %>
   <%= subtitle("Here's a snapshot of the #{current_template.title} template. 
   Use this as a reference when accessing this template while developing your 
   site.") %>
+  <%= render :partial => 'tabs' %>
 <% end %>
 
-<section id="page-content" class="developer-help">
+<section id="page-content" class="developer-help full-width">
 
   <div class="methods">
     <h2>Rendering Views</h2>
@@ -47,5 +48,3 @@
     </ul>
   </div>
 </section>
-
-<%= sidebar %>

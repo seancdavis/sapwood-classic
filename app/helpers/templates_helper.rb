@@ -96,25 +96,25 @@ module TemplatesHelper
     t = current_template
     [
       {
-        :title => 'Developer Help', 
-        :path => builder_route([t], :show), 
-      },
-      {
         :title => 'Pages', 
         :path => builder_route([t, current_template_pages], :index), 
+        :class => 'pages'
       },
       {
         :title => 'Form Fields', 
         :path => builder_route([t, t.fields], :index), 
-        :controllers => ['fields', 'groups']
+        :controllers => ['fields', 'groups'],
+        :class => 'form'
       },
       {
-        :title => 'Display Settings', 
-        :path => builder_site_template_settings_path(s, t)
+        :title => 'Edit Template', 
+        :path => edit_builder_site_template_path(s, t),
+        :class => 'edit'
       },
       {
-        :title => 'Developer Settings', 
-        :path => builder_site_template_dev_settings_path(s, t)
+        :title => 'Developer Help', 
+        :path => builder_route([t], :show), 
+        :class => 'help'
       }
     ]
   end
