@@ -63,15 +63,19 @@ class Builder::TemplatesController < BuilderController
   def destroy
     if current_template.deletable?
       current_template.destroy
+      redirect_to builder_route([site_templates], :index), 
+        :notice => 'Template deleted successfully!'
+    else
+      redirect_to builder_route([site_templates], :index), 
+        :alert => 'You are not allowed to delete a template with pages.'
     end
-    redirect_to builder_route([site_templates], :index)
   end
 
   private
 
     def create_params
       params.require(:template).permit(:title, :description)
-        .merge(:site => current_site)
+        .merge(:site => current_site, :last_editor => current_user)
     end
 
     def update_params
@@ -87,7 +91,7 @@ class Builder::TemplatesController < BuilderController
         :limit_pages,
         :max_pages,
         :children => [],
-      )
+      ).merge(:last_editor => current_user)
     end
 
     def redirect_route

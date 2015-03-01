@@ -201,4 +201,16 @@ module TemplatesHelper
     o.html_safe
   end
 
+  def template_last_edited(template)
+    date = template.updated_at.strftime("%h %d")
+    if template.last_editor
+      editor = " by #{content_tag(:span, template.last_editor.display_name)}"
+    else
+      editor = ''
+    end
+    content_tag(:span, :class => 'last-edited') do
+      "Last edited #{content_tag(:span, date)}#{editor}".html_safe
+    end
+  end
+
 end

@@ -17,6 +17,7 @@
 #  limit_pages     :boolean          default(FALSE)
 #  max_pages       :integer          default(0)
 #  maxed_out       :boolean          default(FALSE)
+#  last_editor_id  :integer
 #
 
 class Template < ActiveRecord::Base
@@ -32,6 +33,7 @@ class Template < ActiveRecord::Base
   # ------------------------------------------ Associations
 
   belongs_to :site, :touch => true
+  belongs_to :last_editor, :class_name => 'User'
 
   has_many :webpages, :class_name => 'Page'
   has_many :template_groups, :dependent => :destroy

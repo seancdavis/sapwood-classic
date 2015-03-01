@@ -6,17 +6,35 @@
       <%= content_tag(:span, template.slug, :class => 'filename') %>
     </div>
     <div class="bottom">
-      <%= simple_format(template.description, :class => 'description') %>
+      <%= template_last_edited(template) %>
     </div>
   </div>
   <div class="actions">
     <div class="top">
       <%= link_to(
+        'Pages', 
+        builder_site_template_pages_path(current_site, template),
+        :class => 'pages'
+      ) %>
+      <%= link_to(
+        'Form Fields', 
+        builder_site_template_template_fields_path(current_site, template),
+        :class => 'form'
+      ) %>
+    </div>
+    <div class="bottom">
+      <%= link_to(
         'Edit', 
         builder_route([template], :edit), 
         :class => 'edit'
       ) %>
+      <%= link_to(
+        'Delete', 
+        builder_route([template], :show), 
+        :class => 'delete', 
+        :method => :delete, 
+        :data => { :confirm => 'Are you sure?' }
+      ) if template.deletable? %>
     </div>
-    <div class="bottom"></div>
   </div>
 </article>

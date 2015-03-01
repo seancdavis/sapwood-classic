@@ -3,12 +3,13 @@
     border: 1px solid $color-grey-lighter;
     article.page, article.template {
       position: relative;
+      min-height: 72px;
       padding: 10px 10px;
       border-bottom-color: $color-grey-lighter;
       &:last-child {
         border-bottom: none;
       }
-      &:hover {
+      &:hover, &:focus {
         background: $color-light-dark;
         div.actions {
           display: block;
