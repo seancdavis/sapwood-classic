@@ -281,6 +281,10 @@ module PagesHelper
         path = builder_site_page_path(
           current_site, current_page, :published => p, :template => t
         )
+      elsif current_template
+        path = builder_site_template_pages_path(
+          current_site, current_template, :published => p, :template => t
+        )
       else
         path = builder_site_pages_path(
           current_site, current_page, :published => p, :template => t
