@@ -1,12 +1,17 @@
 class Builder::TemplatesController < BuilderController
 
   def index
+    @templates = site_templates
+    if params[:tmpl_status] && params[:tmpl_status] != 'all'
+      @templates = @templates.select { |t| t.send("#{params[:tmpl_status]}?") }
+    elsif params[:tmpl_status] != 'all'
+      redirect_to(
+        builder_site_templates_path(current_site, :tmpl_status => 'all')
+      )
+    end
   end
 
   def show
-    # redirect_to(
-    #   builder_route([current_template, current_template_fields], :index)
-    # )
   end
 
   def new

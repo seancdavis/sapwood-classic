@@ -140,4 +140,12 @@ class Template < ActiveRecord::Base
     Rails.env.production? ? webpages.published : webpages
   end
 
+  def unlimited?
+    !limit_pages?
+  end
+
+  def not_maxed?
+    limit_pages? && !maxed_out?
+  end
+
 end

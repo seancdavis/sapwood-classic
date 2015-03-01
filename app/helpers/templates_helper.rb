@@ -164,4 +164,41 @@ module TemplatesHelper
     end
   end
 
+  def quick_template_status(template)
+    if !template.limit_pages?
+      link_to('', '#', :class => 'disabled unlimited')
+    elsif template.maxed_out?
+      link_to('', '#', :class => 'disabled maxed-out')
+    else
+      link_to('', '#', :class => 'disabled not-maxed')
+    end
+  end
+
+  def template_status_filters
+    o = link_to(
+      "All",
+      builder_site_templates_path(current_site, :tmpl_status => 'all'),
+      :class => params[:tmpl_status] == 'all' ? 'active' : nil
+    )
+    o += link_to(
+      "Unlimited",
+      builder_site_templates_path(current_site, :tmpl_status => 'unlimited'),
+      :class => "unlimited 
+        #{params[:tmpl_status] == 'unlimited' ? 'active' : nil}"
+    )
+    o += link_to(
+      "Not Maxed",
+      builder_site_templates_path(current_site, :tmpl_status => 'not_maxed'),
+      :class => "not-maxed 
+        #{params[:tmpl_status] == 'not_maxed' ? 'active' : nil}"
+    )
+    o += link_to(
+      "Maxed Out",
+      builder_site_templates_path(current_site, :tmpl_status => 'maxed_out'),
+      :class => "maxed-out 
+        #{params[:tmpl_status] == 'maxed_out' ? 'active' : nil}"
+    )
+    o.html_safe
+  end
+
 end

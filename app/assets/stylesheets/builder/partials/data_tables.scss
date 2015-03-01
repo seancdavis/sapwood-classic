@@ -41,14 +41,16 @@
                 margin: 0;
                 color: $color-dark-lighter;
               }
-              .path {
+              .path, .filename {
                 display: inline-block;
                 margin: 2px 0 0 10px;
                 font-size: 14px;
+                font-weight: 200;
+                color: $color-grey-light;
                 a {
                   font-size: inherit;
-                  font-weight: 200;
-                  color: $color-grey-light;
+                  font-weight: inherit;
+                  color: inherit;
                   &:hover {
                     text-decoration: underline;
                   }

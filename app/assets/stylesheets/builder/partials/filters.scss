@@ -12,6 +12,9 @@ div.filters {
       border: none;
       color: $color-dark;
       background: transparent;
+      &:before {
+        font-size: 13px;
+      }
       &:hover, &:focus {
         color: $color-dark;
         background: $color-light-dark;

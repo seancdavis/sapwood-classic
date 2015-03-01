@@ -68,14 +68,22 @@ p.subtitle {
 a {
   &.new, &.edit, &.back, &.delete, &.dont-delete, &.published, &.draft, &.crop, 
   &.download, &.code, &.database, &.link, &.build, &.preview, &.publish, 
-  &.unpublish, &.template, &.all, &.help, &.pages {
+  &.unpublish, &.template, &.all, &.help, &.pages, &.maxed-out, &.not-maxed, 
+  &.unlimited {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
       margin-right: 5px;
     }
-    &.published { color: $color-primary; }
-    &.draft { color: $color-danger; }
+    &.published, &.unlimited { 
+      color: $color-primary; 
+    }
+    &.not-maxed {
+      color: $color-warning;
+    }
+    &.draft, &.maxed-out { 
+      color: $color-danger; 
+    }
   }
   &.dropdown-trigger {
     &:after {
@@ -98,8 +106,9 @@ a {
   &.link:before { content: "\e2c9"; }
   &.build:before { content: "\e1e8"; }
   &.preview:before { content: "\e2d9"; }
-  &.publish:before { content: "\e367"; }
-  &.unpublish:before { content: "\e357"; }
+  &.publish:before, &.not-maxed:before { content: "\e367"; }
+  &.unpublish:before, &.maxed-out:before { content: "\e357"; }
+  &.unlimited:before { content: "\e439"; }
   &.template:before { content: "\e097"; }
   &.all:before { content: "\e0f9"; }
   &.help:before { content: "\e359"; }

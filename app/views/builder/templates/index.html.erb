@@ -14,5 +14,6 @@
 <% end %>
 
 <section id="page-content" class="data-container">
-  <%= data_table(site_templates, 'template') %>
+  <%= render :partial => 'filters' %>
+  <%= data_table(@templates, 'template') %>
 </section>

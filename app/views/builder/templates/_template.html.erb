@@ -1,8 +1,9 @@
 <article class="template">
-  <%= content_tag(:span, '', :class => 'status') %>
+  <%= content_tag(:span, quick_template_status(template), :class => 'status') %>
   <div class="data">
     <div class="top">
       <%= content_tag(:h4, template.title, :class => 'title') %>
+      <%= content_tag(:span, template.slug, :class => 'filename') %>
     </div>
     <div class="bottom">
       <%= simple_format(template.description, :class => 'description') %>
