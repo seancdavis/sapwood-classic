@@ -11,6 +11,7 @@ class App.Routers.Router extends Backbone.Router
     new App.Views.FieldForm if $('.field-data-type').length > 0
     new App.Views.ImageCropper if $('.image-crop-trigger').length > 0
     new App.Views.DropdownMenus if $('.dropdown-trigger').length > 0
+    new App.Views.DataToggle if $('.data-trigger').length > 0
 
   routes:
     'sites/:site_slug/pages/new': 'newPage'

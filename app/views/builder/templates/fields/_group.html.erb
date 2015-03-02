@@ -1,7 +1,9 @@
 <article class="template-group">
-  <div class="group-fields data-container">
+  <div class="group-fields data-container default-hidden">
     <header>
-      <%= content_tag(:h3, group.title, :class => 'title') %>
+      <%= content_tag(:h3, :class => 'title') do %>
+        <%= link_to(group.title, '#', :class => 'data-trigger') %>
+      <% end %>
       <div class="actions">
         <%= link_to(
           'Edit', 
