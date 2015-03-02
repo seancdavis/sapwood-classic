@@ -1,10 +1,15 @@
 <article class="template-group">
-  <div class="links">
-    <%= link_to 'Edit', builder_route([current_template, group], :edit), 
-      :class => 'edit' %>
-  </div>
-  <%= content_tag(:h3, group.title) %>
-  <div class="group-fields">
-    <%= render :partial => 'field', :collection => group.fields %>
+  <div class="group-fields data-container">
+    <header>
+      <%= content_tag(:h3, group.title, :class => 'title') %>
+      <div class="actions">
+        <%= link_to(
+          'Edit', 
+          builder_route([current_template, group], :edit), 
+          :class => 'edit'
+        ) %>
+      </div>
+    </header>
+    <%= data_table(group.fields, 'field') %>
   </div>
 </article>

@@ -17,5 +17,5 @@
 <% end %>
 
 <section id="page-content" class="full-width">
-  <%= data_table(current_template_groups, 'group') %>
+  <%= render :collection => current_template_groups, :partial => 'group' %>
 </section>
