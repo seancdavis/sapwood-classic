@@ -109,6 +109,9 @@
           cursor: move;
           cursor: -webkit-grabbing;
         } 
+        > span.status a.unprotected {
+          color: $color-grey;
+        }
         form.field-position {
           display: none;
         }
@@ -141,9 +144,9 @@
                 margin: 0;
                 color: $color-dark-lighter;
               }
-              .path, .filename {
+              .path, .filename, .method-name {
                 display: inline-block;
-                margin: 2px 0 0 10px;
+                margin: 2px 0 0 5px;
                 font-size: 14px;
                 font-weight: 200;
                 color: $color-grey-light;
@@ -184,14 +187,19 @@
                   margin-top: 15px;
                 }
               }
-              .template {
+              a {
                 display: inline-block;
                 margin-left: 10px;
                 padding: 3px 5px;
                 font-size: 11px;
+                line-height: 11px;
                 border-radius: 3px;
                 color: $color-light;
                 background: $color-primary;
+                &.hidden {
+                  margin-left: 5px;
+                  background: $color-warning;
+                }
               }
             }
           }

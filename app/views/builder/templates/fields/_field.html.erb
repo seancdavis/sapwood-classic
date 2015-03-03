@@ -1,8 +1,13 @@
 <article class="form-field" data-id="<%= field.id %>">
-  <%= content_tag(:span, '', :class => 'status') %>
+  <%= content_tag(
+    :span, 
+    quick_template_field_status(field), 
+    :class => 'status'
+  ) %>
   <div class="data">
     <div class="top">
       <%= content_tag(:h4, field.title, :class => 'title') %>
+      <%= content_tag(:span, field.slug, :class => 'method-name') %>
     </div>
     <%= simple_form_for(
       [:builder, current_site, current_template, field],
@@ -10,7 +15,18 @@
     ) do |f| %>
       <%= f.input :position, :input_html => { :class => 'position' } %>
     <% end %>
-    <div class="bottom"></div>
+    <div class="bottom">
+      <span class="last-edited">
+        Last edited <%= content_tag(
+          :span, 
+          field.updated_at.strftime("%h %d")
+        ) %>
+      </span>
+      <%= link_to('required', '#', :class => 'required disabled') if 
+        field.required? %>
+      <%= link_to('hidden', '#', :class => 'hidden disabled') if 
+        field.hidden? %>
+    </div>
   </div>
   <div class="actions">
     <div class="top">

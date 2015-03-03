@@ -69,7 +69,7 @@ a {
   &.new, &.edit, &.back, &.delete, &.dont-delete, &.published, &.draft, &.crop, 
   &.download, &.code, &.database, &.link, &.build, &.preview, &.publish, 
   &.unpublish, &.template, &.all, &.help, &.pages, &.maxed-out, &.not-maxed, 
-  &.unlimited, &.form, &.data-trigger, &.reorder {
+  &.unlimited, &.form, &.data-trigger, &.reorder, &.protected, &.unprotected {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
@@ -78,7 +78,7 @@ a {
     &.published, &.unlimited { 
       color: $color-primary; 
     }
-    &.not-maxed {
+    &.not-maxed, &.protected  {
       color: $color-warning;
     }
     &.draft, &.maxed-out { 
@@ -116,6 +116,8 @@ a {
   &.form:before { content: "\e013"; }
   &.reorder:before { content: "\e425"; }
   &.data-trigger:before { content: "\e3b2"; }
+  &.protected:before { content: "\e1d0"; }
+  &.unprotected:before { content: "\e1d4"; }
   &.dropdown-trigger:after { content: "\e3b2"; }
 
   &.button {
