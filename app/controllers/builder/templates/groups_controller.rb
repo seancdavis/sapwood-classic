@@ -17,10 +17,18 @@ class Builder::Templates::GroupsController < BuilderController
   end
 
   def update
-    if current_template_group.update(group_params)
-      redirect_to builder_route([t, t.fields], :index), :notice => 'Group saved!'
-    else
-      render 'edit'
+    respond_to do |format|
+      format.html do
+        if current_template_group.update(group_params)
+          redirect_to builder_route([t, t.fields], :index), :notice => 'Group saved!'
+        else
+          render 'edit'
+        end
+      end
+      format.json do
+        current_template_group.update!(group_params)
+        render :nothing => true
+      end
     end
   end
 

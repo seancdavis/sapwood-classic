@@ -1,8 +1,14 @@
-<article class="template-group">
+<article class="template-group" data-id="<%= group.id %>">
   <div class="group-fields data-container default-hidden">
     <header>
       <%= content_tag(:h3, :class => 'title') do %>
         <%= link_to(group.title, '#', :class => 'data-trigger') %>
+      <% end %>
+      <%= simple_form_for(
+        [:builder, current_site, current_template, group],
+        :html => { :class => 'group-position hidden' }
+      ) do |f| %>
+        <%= f.input :position, :input_html => { :class => 'position' } %>
       <% end %>
       <div class="actions">
         <%= link_to(

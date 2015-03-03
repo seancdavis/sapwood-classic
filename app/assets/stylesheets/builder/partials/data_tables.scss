@@ -9,8 +9,19 @@
     padding: 15px 15px;
     background: $color-light-dark;
     border: 1px solid $color-grey-lighter;
+    &:hover {
+      cursor: move;
+      cursor: -webkit-grab;
+    }
+    &:active {
+      cursor: move;
+      cursor: -webkit-grabbing;
+    }
     & + section.data-table {
       border-top: none;
+    }
+    form.hidden {
+      display: none;
     }
     .title {
       margin: 0;
@@ -56,7 +67,7 @@
 
   &.default-hidden {
     section.data-table {
-      // display: none;
+      display: none;
       &.active {
         display: block;
       }
