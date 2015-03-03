@@ -5,6 +5,11 @@ class App.Views.DataToggle extends Backbone.View
   events:
     'click a.data-trigger': 'toggleDataTable'
 
+  initialize: ->
+    $('a.data-trigger').parents('.data-container').find('.data-table')
+      .addClass('active')
+    $('a.data-trigger').addClass('active')
+
   toggleDataTable: (e) ->
     e.preventDefault()
     $(e.target).toggleClass('active')
