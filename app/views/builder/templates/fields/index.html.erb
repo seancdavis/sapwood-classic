@@ -1,16 +1,25 @@
 <%= current_template_breadcrumbs %>
 
 <%= builder_page_title("Custom Fields", :class => 'no-border') do %>
-  <%= link_to(
-    'New Group',
-    builder_route([current_template, current_template_groups], :new),
-    :class => 'new'
-  ) %>
-  <%= link_to(
-    'New Field',
-    builder_route([current_template, current_template_fields], :new),
-    :class => 'new'
-  ) %>
+  <div class="new-buttons dropdown">
+    <%= link_to 'New', '#', :class => 'dropdown-trigger new' %>
+    <ul>
+      <%= content_tag(
+        :li,
+        link_to(
+          'Grouping',
+          builder_route([current_template, current_template_groups], :new)
+        )
+      ) %>
+      <%= content_tag(
+        :li,
+        link_to(
+          'Field',
+          builder_route([current_template, current_template_fields], :new)
+        )
+      ) %>
+    </ul>
+  </div>
   <%= subtitle("The fields here appear on the form when you create or edit a 
   page that uses the #{current_template.title} template.") %>
   <%= render :partial => 'builder/templates/tabs' %>
