@@ -69,7 +69,7 @@ a {
   &.new, &.edit, &.back, &.delete, &.dont-delete, &.published, &.draft, &.crop, 
   &.download, &.code, &.database, &.link, &.build, &.preview, &.publish, 
   &.unpublish, &.template, &.all, &.help, &.pages, &.maxed-out, &.not-maxed, 
-  &.unlimited, &.form, &.data-trigger {
+  &.unlimited, &.form, &.data-trigger, &.reorder {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
@@ -114,6 +114,7 @@ a {
   &.help:before { content: "\e359"; }
   &.pages:before { content: "\e079"; }
   &.form:before { content: "\e013"; }
+  &.reorder:before { content: "\e425"; }
   &.data-trigger:before { content: "\e3b2"; }
   &.dropdown-trigger:after { content: "\e3b2"; }
 

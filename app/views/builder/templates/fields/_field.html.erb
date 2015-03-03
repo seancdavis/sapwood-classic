@@ -1,9 +1,15 @@
-<article class="form-field">
+<article class="form-field" data-id="<%= field.id %>">
   <%= content_tag(:span, '', :class => 'status') %>
   <div class="data">
     <div class="top">
       <%= content_tag(:h4, field.title, :class => 'title') %>
     </div>
+    <%= simple_form_for(
+      [:builder, current_site, current_template, field],
+      :html => { :class => 'field-position' }
+    ) do |f| %>
+      <%= f.input :position, :input_html => { :class => 'position' } %>
+    <% end %>
     <div class="bottom"></div>
   </div>
   <div class="actions">

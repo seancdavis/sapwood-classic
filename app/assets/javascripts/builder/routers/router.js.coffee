@@ -17,6 +17,7 @@ class App.Routers.Router extends Backbone.Router
     'sites/:site_slug/pages/new': 'newPage'
     'sites/:site_slug/pages/:page_slug/settings/:slug': 'editPage'
     'sites/:site_slug/library': 'library'
+    'sites/:site_slug/templates/:template_slug/fields': 'templateFields'
 
   newPage: (site_slug) ->
     new App.Views.UnloadCheck
@@ -33,3 +34,6 @@ class App.Routers.Router extends Backbone.Router
 
   library: (site_slug) ->
     new App.Views.FileUploader
+
+  templateFields: (site_slug, template_slug) ->
+    new App.Views.FieldSorter

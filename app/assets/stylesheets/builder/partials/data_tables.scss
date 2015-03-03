@@ -56,7 +56,7 @@
 
   &.default-hidden {
     section.data-table {
-      display: none;
+      // display: none;
       &.active {
         display: block;
       }
@@ -79,6 +79,30 @@
           display: block;
         }
       }
+      &.sortable-dragging {
+        background: transparent;
+        border-bottom: none;
+        div.actions {
+          display: none;
+        }
+      }
+
+      // ------------------------ Extra styles for sortable lists
+
+      &.form-field {
+        &:hover {
+          cursor: move;
+          cursor: -webkit-grab;
+        }
+        &:active {
+          cursor: move;
+          cursor: -webkit-grabbing;
+        } 
+        form.field-position {
+          display: none;
+        }
+      }
+
       .status {
         display: inline-block;
         width: 40px;
@@ -196,4 +220,9 @@
       }
     }
   }
+}
+
+.sortable-placeholder {
+  height: 72px;
+  background: rgba($color-primary, 0.25);
 }
