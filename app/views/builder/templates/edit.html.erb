@@ -1,11 +1,7 @@
-<%= current_template_breadcrumbs %>
-
 <%= builder_page_title(
-  "#{current_template.title} Developer Settings", 
-  :class => 'no-border'
+  current_template_breadcrumbs, 
+  :class => 'breadcrumbs no-border'
 ) do %>
-  <%= subtitle("These settings affect the way in which you write your viewer 
-  code and are able to access sapwood content.") %>
   <%= render :partial => 'tabs' %>
 <% end %>
 

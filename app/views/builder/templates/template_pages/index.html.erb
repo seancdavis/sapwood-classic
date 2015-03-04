@@ -1,11 +1,7 @@
 <%= builder_page_title(
-  "#{current_template.title} Pages",
-  :class => 'no-border'
+  current_template_breadcrumbs, 
+  :class => 'breadcrumbs no-border'
 ) do %>
-  <%= subtitle("These are the pages using the #{current_template.title} 
-  template. Clicking on one of these will launch you to that page.") %>
-  <%= subtitle("Note: You can't delete this template while it has at least one 
-  page.") %>
   <%= render :partial => 'builder/templates/tabs' %>
 <% end %>
 

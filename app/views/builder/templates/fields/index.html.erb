@@ -1,6 +1,7 @@
-<%= current_template_breadcrumbs %>
-
-<%= builder_page_title("Custom Fields", :class => 'no-border') do %>
+<%= builder_page_title(
+  current_template_breadcrumbs, 
+  :class => 'breadcrumbs no-border'
+) do %>
   <div class="new-buttons dropdown">
     <%= link_to 'New', '#', :class => 'dropdown-trigger new' %>
     <ul>
@@ -20,8 +21,6 @@
       ) %>
     </ul>
   </div>
-  <%= subtitle("The fields here appear on the form when you create or edit a 
-  page that uses the #{current_template.title} template.") %>
   <%= render :partial => 'builder/templates/tabs' %>
 <% end %>
 

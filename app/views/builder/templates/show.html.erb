@@ -1,7 +1,7 @@
-<%= builder_page_title(current_template.title, :class => 'no-border') do %>
-  <%= subtitle("Here's a snapshot of the #{current_template.title} template. 
-  Use this as a reference when accessing this template while developing your 
-  site.") %>
+<%= builder_page_title(
+  current_template_breadcrumbs, 
+  :class => 'breadcrumbs no-border'
+) do %>
   <%= render :partial => 'tabs' %>
 <% end %>
 
