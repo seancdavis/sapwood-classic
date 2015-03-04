@@ -179,7 +179,15 @@ module TemplatesHelper
   def current_template_breadcrumbs
     o = link_to("all templates", builder_route([current_template], :index))
     o += content_tag(:span, '/', :class => 'separator')
-    o += link_to(current_template.slug, builder_route([current_template], :show))
+    o += link_to(
+      current_template.slug, 
+      builder_route([current_template], :show)
+    )
+    if current_template_field
+      o += content_tag(:span, '/', :class => 'separator')
+      o += link_to(current_template_field.slug, '#', :class => 'disabled')
+    end
+    o.html_safe
   end
 
 end
