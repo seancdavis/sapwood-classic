@@ -38,6 +38,16 @@ class Builder::Templates::FieldsController < BuilderController
     end
   end
 
+  def hide
+    current_template_field.update!(:hidden => true)
+    redirect_to(builder_route([t, t.fields], :index))
+  end
+
+  def show
+    current_template_field.update!(:hidden => false)
+    redirect_to(builder_route([t, t.fields], :index))
+  end
+
   private
 
     def field_params

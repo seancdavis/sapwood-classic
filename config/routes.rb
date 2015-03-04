@@ -55,7 +55,10 @@ Rails.application.routes.draw do
       resources :templates, :param => :slug, :path_names => { 
         :edit => :settings } do
         resources :template_fields, :path => :fields, 
-          :controller => 'templates/fields', :param => :slug
+          :controller => 'templates/fields', :param => :slug do
+            post 'hide' => 'templates/fields#hide', :as => :hide
+            post 'show' => 'templates/fields#show', :as => :show
+        end
         resources :template_groups, :path => :groups, 
           :controller => 'templates/groups', :param => :slug
         resources :pages, :controller => 'templates/template_pages', 

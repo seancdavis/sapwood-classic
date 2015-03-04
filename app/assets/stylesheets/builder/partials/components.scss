@@ -69,7 +69,8 @@ a {
   &.new, &.edit, &.back, &.delete, &.dont-delete, &.published, &.draft, &.crop, 
   &.download, &.code, &.database, &.link, &.build, &.preview, &.publish, 
   &.unpublish, &.template, &.all, &.help, &.pages, &.maxed-out, &.not-maxed, 
-  &.unlimited, &.form, &.data-trigger, &.reorder, &.protected, &.unprotected {
+  &.unlimited, &.form, &.data-trigger, &.reorder, &.protected, &.unprotected, 
+  &.hidden, &.hide, &.visible, &.show {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
@@ -118,6 +119,10 @@ a {
   &.data-trigger:before { content: "\e3b2"; }
   &.protected:before { content: "\e1d0"; }
   &.unprotected:before { content: "\e1d4"; }
+  &.hidden:before { content: "\e2da"; }
+  &.hide:before { content: "\e2da"; }
+  &.visible:before { content: "\e2d9"; }
+  &.show:before { content: "\e2d9"; }
   &.dropdown-trigger:after { content: "\e3b2"; }
 
   &.button {

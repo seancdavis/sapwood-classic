@@ -36,6 +36,30 @@
         :class => 'edit'
       ) %>
     </div>
-    <div class="bottom"></div>
+    <div class="bottom">
+      <% if field.hidden? %>
+        <%= link_to(
+          'Show',
+          builder_site_template_template_field_show_path(
+            current_site, 
+            current_template,
+            field
+          ),
+          :method => :post,
+          :class => 'show'
+        ) %>
+      <% else %>
+        <%= link_to(
+          'Hide',
+          builder_site_template_template_field_hide_path(
+            current_site, 
+            current_template,
+            field
+          ),
+          :method => :post,
+          :class => 'hide'
+        ) %>
+      <% end %>
+    </div>
   </div>
 </article>

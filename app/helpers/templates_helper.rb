@@ -45,7 +45,8 @@ module TemplatesHelper
 
   def current_template_field
     @current_template_field ||= begin
-      current_template_fields.select { |f| f.slug == params[:slug] }.first
+      slug = params[:template_field_slug] || params[:slug]
+      current_template_fields.select { |f| f.slug == slug }.first
     end
   end
 
