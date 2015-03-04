@@ -52,6 +52,10 @@ class TemplateField < ActiveRecord::Base
 
   # ------------------------------------------ Instance Methods
 
+  def optional?
+    !required?
+  end
+
   def option_values
     options.gsub(/\r/, '').split("\n") unless options.blank?
   end

@@ -200,6 +200,15 @@
                   margin-left: 5px;
                   background: $color-warning;
                 }
+                &.required {
+                  margin-left: 5px;
+                }
+                &.database {
+                  margin-left: 5px;
+                  font-weight: 400;
+                  background: $color-light-darker;
+                  color: $color-dark-lighter;
+                }
               }
             }
           }

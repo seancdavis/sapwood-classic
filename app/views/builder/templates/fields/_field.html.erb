@@ -22,15 +22,16 @@
           field.updated_at.strftime("%h %d")
         ) %>
       </span>
-      <%= link_to('required', '#', :class => 'required disabled') if 
+      <%= link_to(field.data_type, '', :class => 'database disabled') %>
+      <%= link_to('required', '', :class => 'required disabled') if 
         field.required? %>
-      <%= link_to('hidden', '#', :class => 'hidden disabled') if 
+      <%= link_to('hidden', '', :class => 'hidden disabled') if 
         field.hidden? %>
     </div>
   </div>
   <div class="actions">
     <div class="top">
-      <% if field.hidden? %>
+      <% if field.hidden? && field.optional? %>
         <%= link_to(
           'Show',
           builder_site_template_template_field_show_path(
@@ -41,7 +42,7 @@
           :method => :post,
           :class => 'show'
         ) %>
-      <% else %>
+      <% elsif field.optional? %>
         <%= link_to(
           'Hide',
           builder_site_template_template_field_hide_path(
