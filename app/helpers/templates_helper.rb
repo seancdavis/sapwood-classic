@@ -170,9 +170,11 @@ module TemplatesHelper
 
   def quick_template_field_status(field)
     if field.protected?
-      link_to('', '#', :class => 'disabled protected')
+      link_to('', '#', :class => 'disabled protected', 
+        :title => 'Protected')
     else
-      link_to('', '#', :class => 'disabled unprotected')
+      link_to('', '#', :class => 'disabled unprotected', 
+        :title => 'Fully Editable')
     end
   end
 
