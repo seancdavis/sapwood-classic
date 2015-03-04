@@ -6,7 +6,7 @@
         link_to(
           t[:title], 
           t[:path],
-          :class => "#{t[:class]} #{request.path == t[:path] ? 'active' : nil}"
+          :class => "#{t[:class]} #{tab_active?(t) ? 'active' : nil}"
         )
       ) %>
     <% end %>

@@ -44,4 +44,8 @@ module NavHelper
       request.path == item[:path] 
   end
 
+  def tab_active?(item)
+    sidebar_item_active?(item)
+  end
+
 end

@@ -119,51 +119,6 @@ module TemplatesHelper
     ]
   end
 
-  # def current_template_breadcrumbs
-  #   content_tag(:nav, :class => 'breadcrumbs') do
-  #     content_tag(:ul) do
-  #       o = content_tag(
-  #         :li, 
-  #         link_to('All Templates', builder_route([site_templates], :index))
-  #       )
-  #       if current_template.id
-  #         o += content_tag(
-  #           :li, 
-  #           link_to(
-  #             current_template.title, 
-  #             builder_route([current_template], :show)
-  #           )
-  #         )
-  #         if ['fields','groups'].include?(controller_name)
-  #           o += content_tag(
-  #             :li, 
-  #             link_to(
-  #               'Form Fields', 
-  #               builder_route(
-  #                 [current_template, current_template_fields], 
-  #                 :index
-  #               )
-  #             )
-  #           )
-  #           o += content_tag(
-  #             :li, 
-  #             link_to(
-  #               "#{action_name.titleize} #{controller_name.singularize.titleize}", 
-  #               request.path
-  #             )
-  #           ) unless action_name == 'index'
-  #         else
-  #           o += content_tag(
-  #             :li, 
-  #             link_to(request.path.split('/').last.titleize, request.path)
-  #           ) unless action_name == 'index'
-  #         end
-  #         o.html_safe
-  #       end
-  #     end
-  #   end
-  # end
-
   def quick_template_status(template)
     if !template.limit_pages?
       link_to('', '#', :class => 'disabled unlimited')
