@@ -30,13 +30,6 @@
   </div>
   <div class="actions">
     <div class="top">
-      <%= link_to(
-        'Edit',
-        builder_route([current_template, field], :edit),
-        :class => 'edit'
-      ) %>
-    </div>
-    <div class="bottom">
       <% if field.hidden? %>
         <%= link_to(
           'Show',
@@ -60,6 +53,20 @@
           :class => 'hide'
         ) %>
       <% end %>
+      <%= link_to(
+        'Edit',
+        builder_route([current_template, field], :edit),
+        :class => 'edit'
+      ) %>
+    </div>
+    <div class="bottom">
+      <%= link_to(
+        'Delete',
+        builder_route([current_template, field], :show),
+        :method => :delete,
+        :class => 'delete',
+        :data => { :confirm => 'Are you sure you want to delete this field?' }
+      ) unless field.protected? %>
     </div>
   </div>
 </article>

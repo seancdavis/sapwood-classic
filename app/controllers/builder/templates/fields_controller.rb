@@ -38,6 +38,11 @@ class Builder::Templates::FieldsController < BuilderController
     end
   end
 
+  def destroy
+    current_template_field.destroy!
+    redirect_to(builder_route([t, t.fields], :index))
+  end
+
   def hide
     current_template_field.update!(:hidden => true)
     redirect_to(builder_route([t, t.fields], :index))
