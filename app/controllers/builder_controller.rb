@@ -9,7 +9,8 @@ class BuilderController < ActionController::Base
     UsersHelper, 
     SitesHelper, 
     TemplatesHelper, 
-    PagesHelper
+    PagesHelper,
+    ErrorsHelper
   )
 
   before_filter :authenticate_user!

@@ -1,5 +1,7 @@
 class Builder::PagesController < BuilderController
 
+  before_filter :verify_current_page, :except => [:index, :new, :create]
+
   def index
     @pages = site_root_pages
     if params[:published] 
@@ -43,7 +45,7 @@ class Builder::PagesController < BuilderController
   end
 
   def new
-    redirect_to current_site unless params[:template]
+    redirect_to builder_site_path(current_site) unless params[:template]
     @current_template = site_templates.find_by_slug(params[:template])
     @current_page = Page.new
   end

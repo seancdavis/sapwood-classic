@@ -1,5 +1,7 @@
 class Builder::TemplatesController < BuilderController
 
+  before_filter :verify_current_template, :except => [:index, :new, :create]
+
   def index
     @templates = site_templates
     if params[:tmpl_status] && params[:tmpl_status] != 'all'

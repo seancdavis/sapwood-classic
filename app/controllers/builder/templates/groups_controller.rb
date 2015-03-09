@@ -1,5 +1,7 @@
 class Builder::Templates::GroupsController < BuilderController
 
+  before_filter :verify_current_template
+
   def new
     @current_template_group = TemplateGroup.new
   end

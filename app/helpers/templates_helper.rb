@@ -15,6 +15,10 @@ module TemplatesHelper
     end
   end
 
+  def verify_current_template
+    not_found if current_template.nil?
+  end
+
   def current_template_pages
     @current_template_pages ||= current_template.webpages.alpha
   end

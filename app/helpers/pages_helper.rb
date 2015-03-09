@@ -21,12 +21,16 @@ module PagesHelper
       if controller_name == 'pages' || controller_name == 'editor'
         p = params[:page_slug] || params[:slug]
         page = current_site.webpages.find_by_slug(p)
-        return nil if page.nil?
+        nil if page.nil?
         page
       else
         nil
       end
     end
+  end
+
+  def verify_current_page
+    not_found if current_page.nil?
   end
 
   def current_page_template

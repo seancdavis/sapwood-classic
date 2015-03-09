@@ -1,5 +1,7 @@
 class Builder::Templates::FieldsController < BuilderController
 
+  before_filter :verify_current_template
+
   def index
   end
 
