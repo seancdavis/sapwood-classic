@@ -1,11 +1,9 @@
-<%= current_template_breadcrumbs %>
-
-<%= builder_page_title("New Template") do %>
-  <%= subtitle("There is a lot to configure with a template, but let's just 
-  start with the basics.") %>
-<% end %>
+<%= builder_page_title(current_template_breadcrumbs, :class => 'breadcrumbs') %>
 
 <section id="page-content" class="full-width templates">
+  <%= em_p(
+    "Give your template a title, then we'll give you some more options."
+  ) %>
   <%= simple_form_for [:builder, current_site, current_template] do |f| %>
     <%= f.input :title %>
     <%= redirect_field(f) %>
