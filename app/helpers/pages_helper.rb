@@ -149,7 +149,10 @@ module PagesHelper
       end
       o += sep
       if current_page.title.blank?
-        o += link_to("new", builder_route([current_page], :new))
+        o += link_to(
+          "new #{current_template.title.downcase}", 
+          builder_route([current_page], :new)
+        )
       else
         o += link_to(current_page.slug, builder_route([current_page], :show))
       end
