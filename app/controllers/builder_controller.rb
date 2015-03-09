@@ -15,6 +15,7 @@ class BuilderController < ActionController::Base
 
   before_filter :authenticate_user!
   before_filter :init_options
+  before_filter :builder_html_title
 
   def home
     if has_sites? || admin?

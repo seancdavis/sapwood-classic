@@ -182,4 +182,19 @@ class Builder::PagesController < BuilderController
       end
     end
 
+    def builder_html_title
+      @builder_html_title ||= begin
+        case action_name
+        when 'help', 'edit'
+          "#{action_name.titleize} >> #{current_page.title}"
+        when 'index'
+          "#{current_site.title} Pages"
+        when 'new'
+          params[:template] ? "New #{params[:template].titleize}" : "New Page"
+        else
+          current_page.title
+        end
+      end
+    end
+
 end

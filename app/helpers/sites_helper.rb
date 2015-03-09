@@ -33,4 +33,8 @@ module SitesHelper
     my_sites.first unless has_multiple_sites?
   end
 
+  def builder_html_title
+    @builder_html_title ||= SapwoodSetting.site.title
+  end
+
 end

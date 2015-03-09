@@ -16,4 +16,10 @@ class Builder::Templates::TemplatePagesController < BuilderController
     @paginated_pages = Kaminari.paginate_array(@pages).page(params[:page]).per(10)
   end
 
+  private
+
+    def builder_html_title
+      @builder_html_title ||= "Pages >> #{current_template.title}"
+    end
+
 end

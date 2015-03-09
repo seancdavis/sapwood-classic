@@ -130,4 +130,15 @@ class Builder::SitesController < BuilderController
       sapwood.create_site
     end
 
+    def builder_html_title
+      @builder_html_title ||= begin
+        case action_name
+        when 'index'
+          "My Sites"
+        when 'edit'
+          "Settings >> #{current_site.title}"
+        end
+      end
+    end
+
 end

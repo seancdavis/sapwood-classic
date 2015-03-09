@@ -55,4 +55,18 @@ class Builder::UsersController < BuilderController
         :password_confirmation)
     end
 
+    def builder_html_title
+      @builder_html_title ||= begin
+        case action_name
+        when 'index'
+          "Users >> #{current_site.title}"
+        when 'edit'
+          set_user
+          "Edit >> #{@user.display_name}"
+        when 'new'
+          "New User"
+        end
+      end
+    end
+
 end

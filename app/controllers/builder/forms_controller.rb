@@ -77,4 +77,19 @@ class Builder::FormsController < BuilderController
       )
     end
 
+    def builder_html_title
+      @builder_html_title ||= begin
+        case action_name
+        when 'index'
+          "Forms >> #{current_site.title}"
+        when 'edit'
+          "Edit #{current_form.title}"
+        when 'new'
+          "New Form"
+        when 'show'
+          "Submissions >> #{current_form.title}"
+        end
+      end
+    end
+
 end

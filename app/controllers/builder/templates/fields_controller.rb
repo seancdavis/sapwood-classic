@@ -76,4 +76,17 @@ class Builder::Templates::FieldsController < BuilderController
       current_template
     end
 
+    def builder_html_title
+      @builder_html_title ||= begin
+        case action_name
+        when 'index'
+          "Form Fields >> #{current_template.title}"
+        when 'edit'
+          "Edit #{current_template_field.title} >> #{current_template.title}"
+        when 'new'
+          "New Form Field >> #{current_template.title}"
+        end
+      end
+    end
+
 end

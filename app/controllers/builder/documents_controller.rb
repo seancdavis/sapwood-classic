@@ -29,4 +29,8 @@ class Builder::DocumentsController < BuilderController
       params.require(:document).permit(:document).merge(:site => current_site)
     end
 
+    def builder_html_title
+      @builder_html_title ||= "Media >> #{current_site.title}"
+    end
+
 end
