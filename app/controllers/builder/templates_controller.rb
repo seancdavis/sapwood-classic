@@ -21,10 +21,33 @@ class Builder::TemplatesController < BuilderController
   end
 
   def create
-    @current_template = Template.new(create_params)
+    if params[:template][:existing_template].blank?
+      @current_template = Template.new(create_params)
+    else
+      existing_template = site_templates.select { |t| 
+        t.id == params[:template][:existing_template].to_i }.first
+      if existing_template.blank?
+        fail "Could not find template."
+      end
+      @current_template = existing_template.dup
+      @current_template.title = params[:template][:title]
+      @current_template.slug = nil
+      current_template.save!
+      current_template.template_groups.each(&:destroy)
+      existing_template.template_groups.each do |group|
+        new_group = group.dup
+        new_group.template = current_template
+        new_group.save!
+        group.template_fields.each do |field|
+          new_field = field.dup
+          new_field.template_group = new_group
+          new_field.save!
+        end
+      end
+    end
     if current_template.save
       redirect_to(
-        builder_site_template_dev_settings_path(current_site, current_template), 
+        builder_route([current_template], :edit), 
         :notice => 'Template created! Now, add your developer settings.'
       )
     else

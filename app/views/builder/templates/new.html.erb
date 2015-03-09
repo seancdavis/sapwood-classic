@@ -5,7 +5,19 @@
     "Give your template a title, then we'll give you some more options."
   ) %>
   <%= simple_form_for [:builder, current_site, current_template] do |f| %>
-    <%= f.input :title %>
+    <div class="half-row">
+      <%= f.input :title %>
+      <div class="input">
+        <%= f.input :existing_template, :collection => site_templates, 
+          :wrapper => false %>
+        <br>
+        <%= em_p("Selecting a template here will duplicate that template with 
+        your new name.") %>
+      </div>
+    </div>
+    <div class="half-row">
+      
+    </div>
     <%= redirect_field(f) %>
     <%= f.submit "Create Template" %>
   <% end %>

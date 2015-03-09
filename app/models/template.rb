@@ -31,6 +31,8 @@ class Template < ActiveRecord::Base
 
   serialize :children, Array
 
+  attr_accessor :existing_template
+
   # ------------------------------------------ Associations
 
   belongs_to :site, :touch => true
