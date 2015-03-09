@@ -8,11 +8,11 @@ Dragonfly.app.configure do
 
   url_format "/media/:job/:name"
 
-  datastore :s3,
-    :bucket_name          => SapwoodSetting.aws.bucket,
-    :access_key_id        => SapwoodSetting.aws.access_key_id,
-    :secret_access_key    => SapwoodSetting.aws.secret_access_key,
-    :url_scheme           => 'https'
+  url_host SapwoodSetting.dragonfly.host
+
+  datastore :file,
+    root_path: Rails.root.join('public/system/dragonfly', Rails.env),
+    server_root: Rails.root.join('public')
 
 end
 

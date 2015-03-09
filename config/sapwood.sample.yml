@@ -2,25 +2,25 @@
 # Sapwood Settings
 # =================
 # 
-# This file is for storing your personal settings to make Sapwood work properly
-# for you.
+# This file is for storing your personal settings to make
+# Sapwood work properly for you.
 # 
 # Replace the values here with your config, then copy to: 
 # 
 #     config/sapwood.yml
 # 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
-# If you need to use any of the values here, you can get to them through the
-# SapwoodSetting class. For example, you can access your aws bucket name like
-# this:
+# If you need to use any of the values here, you can get to
+# them through the SapwoodSetting class. For example, you
+# can access your app title like this:
 # 
-#     SapwoodSetting.aws.bucket
+#     SapwoodSetting.site.title
 # 
-# This file is not tracked by git, so these settings are only present in this
-# file on this machine.
+# This file is not tracked by git, so these settings are
+# only present in this file on this machine.
 # 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 development: &default
   site:
@@ -33,12 +33,9 @@ development: &default
       dark:             363636              # for fonts and some grey accents
       grey:             929E9E              # a medium or dark grey works well
       light:            FFFFFF              # used to create other accent greys
-  aws:
-    access_key_id:      ''                  # amazon s3 api key
-    secret_access_key:  ''                  # amazon s3 secret
-    bucket:             ''                  # amazon s3 bucket name (in us standard region)
   dragonfly:
     secret:             ''                  # some random hash
+    host:               ''                  # your asset host (with protocol)
   api:
     public_key:         ''                  # some random hash
   remote:

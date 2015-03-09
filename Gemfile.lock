@@ -109,9 +109,6 @@ GEM
       addressable (~> 2.3)
       multi_json (~> 1.0)
       rack
-    dragonfly-s3_data_store (1.0.4)
-      dragonfly (~> 1.0)
-      fog
     eco (1.0.0)
       coffee-script
       eco-source
@@ -515,7 +512,6 @@ DEPENDENCIES
   dbsync
   devise
   dragonfly
-  dragonfly-s3_data_store
   exception_notification
   factory_girl_rails
   faker
