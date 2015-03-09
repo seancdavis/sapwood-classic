@@ -1,9 +1,9 @@
-<%= builder_page_title("New #{current_template.title}") do %>
-  <%= subtitle("These are all the required fields for creating a new page with 
-  the #{current_template.title} template.") %>
-<% end %>
+<%= builder_page_title(current_page_breadcrumbs, :class => 'breadcrumbs') %>
 
 <div id="page-content">
+
+  <%= em_p("First, fill in all the required fields, then you can move on to 
+  the optional ones.") %>
 
   <%= simple_form_for [:builder, current_site, current_page] do |f| %>
 

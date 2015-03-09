@@ -148,7 +148,11 @@ module PagesHelper
         end
       end
       o += sep
-      o += link_to(current_page.slug, builder_route([current_page], :show))
+      if current_page.title.blank?
+        o += link_to("new", builder_route([current_page], :new))
+      else
+        o += link_to(current_page.slug, builder_route([current_page], :show))
+      end
     end
     o.html_safe
   end
