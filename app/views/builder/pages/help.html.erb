@@ -7,6 +7,14 @@
 <% end %>
 
 <section id="page-content" class="developer-help full-width">
+  <div class="template">
+    <h2>Template</h2>
+    <p>This page uses the <%= content_tag(:strong, current_template.title) %> 
+    template. Visit <%= link_to(
+      "this template's help page", 
+      builder_route([current_template], :show)
+    ) %> for more information on this template.</p>
+  </div>
 
   <div class="methods">
     <h2>Attributes</h2>
