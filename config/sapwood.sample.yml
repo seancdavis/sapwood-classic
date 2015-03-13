@@ -42,6 +42,8 @@ development: &default
   remote:
     url:                ''                  # the url of your production app (e.g. cms.example.com)
     db_backup_file:     ''                  # reference to remote backup using ssh
+  google:
+    analytics_id:       ''                  # google analytics ID (for builder traffic only)
 
 test:
   <<: *default
