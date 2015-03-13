@@ -1,5 +1,5 @@
 <%= builder_page_title(
-  current_page_breadcrumbs, 
+  current_page_breadcrumbs,
   :class => 'breadcrumbs no-border'
 ) do %>
   <%= new_page_children_links %>
@@ -7,13 +7,11 @@
 <% end %>
 
 <section id="page-content" class="full-width pages data-container">
-  <%= render :partial => 'filters', :locals => { 
+  <%= render :partial => 'filters', :locals => {
     :pages => current_page_children } %>
   <% if current_page_children_filtered_paginated.size > 0 %>
     <%= data_table(current_page_children_filtered_paginated, 'page') %>
-    <%= paginate_links(
-      current_page_children_filtered_paginated, 'builder/pages', 'children'
-    ) %>
+    <%= paginate(current_page_children_filtered_paginated) %>
   <% elsif current_page_children.size > 0 %>
     <%= missing_content("No pages match your criteria.") %>
   <% else %>
