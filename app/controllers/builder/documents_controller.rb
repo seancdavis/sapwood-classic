@@ -19,8 +19,14 @@ class Builder::DocumentsController < BuilderController
 
   def destroy
     current_document.destroy
-    redirect_to builder_route([site_documents], :index), 
+    redirect_to builder_route([site_documents], :index),
       :notice => t('notices.deleted', :item => 'Image')
+  end
+
+  def max_file_size
+    respond_to do |format|
+      format.json { render :text => SapwoodSetting.dragonfly.max_file_size }
+    end
   end
 
   private

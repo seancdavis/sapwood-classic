@@ -5,19 +5,24 @@ class App.Views.FileUploader extends Backbone.View
   events:
     'click .upload-trigger': 'toggleForm'
 
-  initialize: ->
+  initialize: (options) ->
+    $.get "/sites/#{options.slug}/library/max_file_size.json", (data) =>
+      @maxFileSize = parseFloat(data)
     @initUploader()
 
   initUploader: ->
     $('#fileupload').fileupload
-      add: (e, data) ->
-        # types = /(\.|\/)(gif|jpe?g|png|pdf|xlsx?|docx?|pptx?|csv)$/i
+      add: (e, data) =>
         types = /(\.|\/)(gif|jpe?g|png|pdf)$/i
         file = data.files[0]
-        if types.test(file.type) || types.test(file.name)
+        kb = file.size / 1000
+        mb = kb / 1000
+        if (types.test(file.type) || types.test(file.name)) && mb <= @maxFileSize
           data.context = $(tmpl("template-upload", file))
           $('section.images-container').before(data.context)
           data.submit()
+        else if mb > @maxFileSize
+          alert "File must be less than #{@maxFileSize} MB."
         else
           alert "File must be an image or a PDF."
       progress: (e, data) ->

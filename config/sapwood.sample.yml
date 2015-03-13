@@ -1,26 +1,26 @@
-# 
+#
 # Sapwood Settings
 # =================
-# 
+#
 # This file is for storing your personal settings to make
 # Sapwood work properly for you.
-# 
-# Replace the values here with your config, then copy to: 
-# 
+#
+# Replace the values here with your config, then copy to:
+#
 #     config/sapwood.yml
-# 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # If you need to use any of the values here, you can get to
 # them through the SapwoodSetting class. For example, you
 # can access your app title like this:
-# 
+#
 #     SapwoodSetting.site.title
-# 
+#
 # This file is not tracked by git, so these settings are
 # only present in this file on this machine.
-# 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 development: &default
   site:
@@ -36,6 +36,7 @@ development: &default
   dragonfly:
     secret:             ''                  # some random hash
     host:               ''                  # your asset host (with protocol)
+    max_file_size:      4.0                 # maximum size (in MB) for upload
   api:
     public_key:         ''                  # some random hash
   remote:

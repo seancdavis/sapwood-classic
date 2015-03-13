@@ -52,16 +52,16 @@ Rails.application.routes.draw do
       end
 
       # Templates
-      resources :templates, :param => :slug, :path_names => { 
+      resources :templates, :param => :slug, :path_names => {
         :edit => :settings } do
-        resources :template_fields, :path => :fields, 
+        resources :template_fields, :path => :fields,
           :controller => 'templates/fields', :param => :slug do
             post 'hide' => 'templates/fields#hide', :as => :hide
             post 'show' => 'templates/fields#show', :as => :show
         end
-        resources :template_groups, :path => :groups, 
+        resources :template_groups, :path => :groups,
           :controller => 'templates/groups', :param => :slug
-        resources :pages, :controller => 'templates/template_pages', 
+        resources :pages, :controller => 'templates/template_pages',
           :param => :slug, :only => [:index]
       end
 
@@ -71,9 +71,10 @@ Rails.application.routes.draw do
       end
 
       # Files
-      resources :documents, :path => :library, :param => :idx, 
+      get 'library/max_file_size' => 'documents#max_file_size'
+      resources :documents, :path => :library, :param => :idx,
         :except => [:show] do
-          get 'crop' => 'documents/croppings#edit', :as => :cropper 
+          get 'crop' => 'documents/croppings#edit', :as => :cropper
           patch 'crop' => 'documents/croppings#update', :as => :crop
       end
 
@@ -100,11 +101,11 @@ Rails.application.routes.draw do
       unless site.url.nil?
         constraints DomainConstraint.new(site.url) do
           get(
-            '/' => 'viewer/pages#home', 
+            '/' => 'viewer/pages#home',
             :as => :"#{site.slug}_home"
           )
           get(
-            '/*page_path' => 'viewer/pages#show', 
+            '/*page_path' => 'viewer/pages#show',
             :as => :"#{site.slug}_page"
           )
         end

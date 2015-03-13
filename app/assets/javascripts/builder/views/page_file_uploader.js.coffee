@@ -8,6 +8,8 @@ class App.Views.PageFileUploader extends Backbone.View
 
   initialize: (options) ->
     @site = options.site
+    $.get "/sites/#{options.site}/library/max_file_size.json", (data) =>
+      @maxFileSize = parseFloat(data)
     @ajaxPage = new App.Views.AjaxPage
       klass: 'page-file-uploader'
 
@@ -33,22 +35,26 @@ class App.Views.PageFileUploader extends Backbone.View
     @ajaxPage.closePage()
 
   # This can be refactored. It shares much with image_uploader.js.coffee
-  # 
+  #
   # The big difference is it rebinds the click events after the file is
   # uploaded.
-  # 
+  #
   initUploader: =>
     $('.upload-trigger').click (e) ->
       e.preventDefault()
       $('#fileupload').find('#file').click()
     $('#fileupload').fileupload
-      add: (e, data) ->
+      add: (e, data) =>
         types = /(\.|\/)(gif|jpe?g|png|pdf)$/i
         file = data.files[0]
-        if types.test(file.type) || types.test(file.name)
+        kb = file.size / 1000
+        mb = kb / 1000
+        if (types.test(file.type) || types.test(file.name)) && mb <= @maxFileSize
           data.context = $(tmpl("template-upload", file))
           $('section.images-container').before(data.context)
           data.submit()
+        else if mb > @maxFileSize
+          alert "File must be less than #{@maxFileSize} MB."
         else
           alert "File must be an image or a PDF."
       progress: (e, data) ->
