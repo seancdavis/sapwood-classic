@@ -120,8 +120,8 @@ class Page < ActiveRecord::Base
   end
 
   def missing_fields
-    template.fields.collect(&:slug) - 
-      ['title','description','body','show_in_nav','slug','position'] - 
+    template.fields.collect(&:slug) -
+      ['title','description','body','show_in_nav','slug','position'] -
       field_data.keys
   end
 
