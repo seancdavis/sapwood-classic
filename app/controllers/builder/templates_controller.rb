@@ -24,7 +24,7 @@ class Builder::TemplatesController < BuilderController
     if params[:template][:existing_template].blank?
       @current_template = Template.new(create_params)
     else
-      existing_template = site_templates.select { |t| 
+      existing_template = site_templates.select { |t|
         t.id == params[:template][:existing_template].to_i }.first
       if existing_template.blank?
         fail "Could not find template."
@@ -47,7 +47,7 @@ class Builder::TemplatesController < BuilderController
     end
     if current_template.save
       redirect_to(
-        builder_route([current_template], :edit), 
+        builder_route([current_template], :edit),
         :notice => 'Template created! Now, add your developer settings.'
       )
     else
@@ -63,9 +63,9 @@ class Builder::TemplatesController < BuilderController
       if redirect_route.split('/').last == 'dev_settings'
         redirect_to(
           builder_site_template_dev_settings_path(
-            current_site, 
+            current_site,
             current_template
-          ), 
+          ),
           :notice => 'Template saved!'
         )
       else
@@ -80,10 +80,10 @@ class Builder::TemplatesController < BuilderController
   def destroy
     if current_template.deletable?
       current_template.destroy
-      redirect_to builder_route([site_templates], :index), 
+      redirect_to builder_route([site_templates], :index),
         :notice => 'Template deleted successfully!'
     else
-      redirect_to builder_route([site_templates], :index), 
+      redirect_to builder_route([site_templates], :index),
         :alert => 'You are not allowed to delete a template with pages.'
     end
   end
@@ -98,7 +98,7 @@ class Builder::TemplatesController < BuilderController
     def update_params
       params.require(:template).permit(
         # Template Settings
-        :title, 
+        :title,
         :description,
         # Developer Settings
         :slug,

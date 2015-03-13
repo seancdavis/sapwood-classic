@@ -234,7 +234,7 @@
             color: $color-grey-darker;
             background: white;
             border: 1px solid $color-grey-darker;
-            &:hover {
+            &:hover, &:focus {
               color: $color-grey-darker;
               background: $color-light-dark;
               border: 1px solid $color-grey-darker;

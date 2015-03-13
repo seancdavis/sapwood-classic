@@ -12,27 +12,27 @@
   <div class="actions">
     <div class="top">
       <%= link_to(
-        'Pages', 
+        "#{template.pages.size} Pages",
         builder_site_template_pages_path(current_site, template),
         :class => 'pages'
       ) %>
       <%= link_to(
-        'Form Fields', 
+        'Form Fields',
         builder_site_template_template_fields_path(current_site, template),
         :class => 'form'
       ) %>
     </div>
     <div class="bottom">
       <%= link_to(
-        'Edit', 
-        builder_route([template], :edit), 
+        'Edit',
+        builder_route([template], :edit),
         :class => 'edit'
       ) %>
       <%= link_to(
-        'Delete', 
-        builder_route([template], :show), 
-        :class => 'delete', 
-        :method => :delete, 
+        'Delete',
+        builder_route([template], :show),
+        :class => 'delete',
+        :method => :delete,
         :data => { :confirm => 'Are you sure?' }
       ) if template.deletable? %>
     </div>

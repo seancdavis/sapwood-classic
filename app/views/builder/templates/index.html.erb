@@ -1,15 +1,15 @@
 <%= builder_page_title("Templates") do %>
   <%= content_tag(
-    :div, 
+    :div,
     link_to(
-      'New Template', 
-      builder_route([site_templates], :new), 
-      :class => 'new' 
-    ), 
-    :class => 'new-buttons dropdown' 
+      'New Template',
+      builder_route([site_templates], :new),
+      :class => 'new'
+    ),
+    :class => 'new-buttons dropdown'
   ) %>
-  <%= subtitle("Page templates define the fields available when creating a 
-  particular page. They also help you rigidly structure the relationship 
+  <%= subtitle("Page templates define the fields available when creating a
+  particular page. They also help you rigidly structure the relationship
   among pages on your site.") %>
 <% end %>
 

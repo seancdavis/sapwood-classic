@@ -101,24 +101,24 @@ module TemplatesHelper
     t = current_template
     [
       {
-        :title => 'Pages', 
-        :path => builder_route([t, current_template_pages], :index), 
+        :title => "#{current_template_pages.size} Pages",
+        :path => builder_route([t, current_template_pages], :index),
         :class => 'pages'
       },
       {
-        :title => 'Form Fields', 
-        :path => builder_route([t, t.fields], :index), 
+        :title => 'Form Fields',
+        :path => builder_route([t, t.fields], :index),
         :controllers => ['fields', 'groups'],
         :class => 'form'
       },
       {
-        :title => 'Edit Template', 
+        :title => 'Edit Template',
         :path => edit_builder_site_template_path(s, t),
         :class => 'edit'
       },
       {
-        :title => 'Developer Help', 
-        :path => builder_route([t], :show), 
+        :title => 'Developer Help',
+        :path => builder_route([t], :show),
         :class => 'help'
       }
     ]
@@ -143,19 +143,19 @@ module TemplatesHelper
     o += link_to(
       "Unlimited",
       builder_site_templates_path(current_site, :tmpl_status => 'unlimited'),
-      :class => "unlimited 
+      :class => "unlimited
         #{params[:tmpl_status] == 'unlimited' ? 'active' : nil}"
     )
     o += link_to(
       "Not Maxed",
       builder_site_templates_path(current_site, :tmpl_status => 'not_maxed'),
-      :class => "not-maxed 
+      :class => "not-maxed
         #{params[:tmpl_status] == 'not_maxed' ? 'active' : nil}"
     )
     o += link_to(
       "Maxed Out",
       builder_site_templates_path(current_site, :tmpl_status => 'maxed_out'),
-      :class => "maxed-out 
+      :class => "maxed-out
         #{params[:tmpl_status] == 'maxed_out' ? 'active' : nil}"
     )
     o.html_safe
@@ -175,10 +175,10 @@ module TemplatesHelper
 
   def quick_template_field_status(field)
     if field.protected?
-      link_to('', '#', :class => 'disabled protected', 
+      link_to('', '#', :class => 'disabled protected',
         :title => 'Protected')
     else
-      link_to('', '#', :class => 'disabled unprotected', 
+      link_to('', '#', :class => 'disabled unprotected',
         :title => 'Fully Editable')
     end
   end
@@ -188,12 +188,12 @@ module TemplatesHelper
     o += content_tag(:span, '/', :class => 'separator')
     if current_template.title.blank?
       o += link_to(
-        "new", 
+        "new",
         builder_route([current_template], :new)
       )
     else
       o += link_to(
-        current_template.slug, 
+        current_template.slug,
         builder_route([current_template], :show)
       )
     end
