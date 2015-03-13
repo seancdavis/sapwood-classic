@@ -37,3 +37,4 @@ class App.Routers.Router extends Backbone.Router
 
   templateFields: (site_slug, template_slug) ->
     new App.Views.FieldSorter
+    new App.Views.GroupEditor

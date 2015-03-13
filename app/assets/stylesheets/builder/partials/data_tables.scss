@@ -49,6 +49,26 @@
           outline: none;
         }
       }
+      form {
+        display: none;
+        margin: 0;
+        &.active {
+          display: inline-block;
+        }
+        div.input {
+          width: 300px;
+          margin: 0;
+          input {
+            width: 100%;
+            margin: 0;
+          }
+        }
+        input[type=submit] {
+          display: inline-block;
+          margin: 0 0 0 5px;
+          padding: 0.7em 1em;
+        }
+      }
     }
     .actions {
       position: absolute;
@@ -56,7 +76,7 @@
       right: 15px;
       a {
         display: inline-block;
-        margin: 0 0 10px 0;
+        margin: 0 0 10px 10px;
         color: $color-dark-lighter;
         font-size: 16px;
         line-height: 16px;

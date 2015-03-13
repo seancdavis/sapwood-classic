@@ -34,6 +34,11 @@ class Builder::Templates::GroupsController < BuilderController
     end
   end
 
+  def destroy
+    current_template_group.destroy!
+    redirect_to builder_route([t, t.fields], :index), :notice => 'Group deleted!'
+  end
+
   private
 
     def group_params

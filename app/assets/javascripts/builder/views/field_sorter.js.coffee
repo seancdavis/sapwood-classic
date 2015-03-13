@@ -31,8 +31,18 @@ class App.Views.FieldSorter extends Backbone.View
         placeholder: 'sortable-placeholder'
         toArray:
           attribute: "data-id"
+        create: (e, ui) ->
+          ids = $(this).sortable('toArray', { attribute: 'data-id' })
+          if ids.length > 1
+            $(this).siblings('header').find('a.delete').hide()
+          else
+            $(this).siblings('header').find('a.delete').show()
         update: (e, ui) ->
           ids = $(this).sortable('toArray', { attribute: 'data-id' })
+          if ids.length > 1
+            $(this).siblings('header').find('a.delete').hide()
+          else
+            $(this).siblings('header').find('a.delete').show()
           for id, idx in ids
             if id
               form = $("article.form-field[data-id='#{id}']")

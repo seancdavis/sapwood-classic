@@ -3,6 +3,13 @@
     <header>
       <%= content_tag(:h3, :class => 'title') do %>
         <%= link_to(group.title, '#', :class => 'data-trigger') %>
+        <%= simple_form_for(
+          [:builder, current_site, current_template, group],
+          :html => { :class => 'edit-title' }
+        ) do |f| %>
+          <%= f.input :title, :label => false %>
+          <%= f.submit "Save" %>
+        <% end %>
       <% end %>
       <%= simple_form_for(
         [:builder, current_site, current_template, group],
@@ -15,6 +22,13 @@
           'Edit',
           builder_route([current_template, group], :edit),
           :class => 'edit'
+        ) %>
+        <%= link_to(
+          'Delete',
+          builder_route([current_template, group], :show),
+          :class => 'delete',
+          :method => :delete,
+          :data => { :confirm => 'Are you sure?' }
         ) %>
       </div>
     </header>

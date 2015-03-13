@@ -66,24 +66,24 @@ p.subtitle {
 }
 
 a {
-  &.new, &.edit, &.back, &.delete, &.dont-delete, &.published, &.draft, &.crop, 
-  &.download, &.code, &.database, &.link, &.build, &.preview, &.publish, 
-  &.unpublish, &.template, &.all, &.help, &.pages, &.maxed-out, &.not-maxed, 
-  &.unlimited, &.form, &.data-trigger, &.reorder, &.protected, &.unprotected, 
+  &.new, &.edit, &.back, &.delete, &.dont-delete, &.published, &.draft, &.crop,
+  &.download, &.code, &.database, &.link, &.build, &.preview, &.publish,
+  &.unpublish, &.template, &.all, &.help, &.pages, &.maxed-out, &.not-maxed,
+  &.unlimited, &.form, &.data-trigger, &.reorder, &.protected, &.unprotected,
   &.hidden, &.hide, &.visible, &.show {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
       margin-right: 5px;
     }
-    &.published, &.unlimited { 
-      color: $color-primary; 
+    &.published, &.unlimited {
+      color: $color-primary;
     }
     &.not-maxed, &.protected  {
       color: $color-warning;
     }
-    &.draft, &.maxed-out { 
-      color: $color-danger; 
+    &.draft, &.maxed-out {
+      color: $color-danger;
     }
   }
   &.dropdown-trigger {
