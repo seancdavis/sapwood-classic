@@ -2,9 +2,9 @@
   <ul>
     <% current_template_actions.each do |t| %>
       <%= content_tag(
-        :li, 
+        :li,
         link_to(
-          t[:title], 
+          t[:title],
           t[:path],
           :class => "#{t[:class]} #{tab_active?(t) ? 'active' : nil}"
         )
