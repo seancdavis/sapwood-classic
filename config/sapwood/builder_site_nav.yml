@@ -10,7 +10,7 @@ page_types:
   controllers: ['templates','groups','fields','template_pages']
 library:
   icon: stack-play
-  label: Media Library
+  label: Media
   path: builder_site_documents_path
   controllers: ['images']
 forms:
