@@ -12,12 +12,21 @@
       <% end %>
       <div class="actions">
         <%= link_to(
-          'Edit', 
-          builder_route([current_template, group], :edit), 
+          'Edit',
+          builder_route([current_template, group], :edit),
           :class => 'edit'
         ) %>
       </div>
     </header>
-    <%= data_table(group.fields, 'field') %>
+    <% fields = group.fields %>
+    <% if fields.size > 0 %>
+      <%= data_table(fields, 'field') do %>
+        <article class="form-field empty"></article>
+      <% end %>
+    <% else %>
+      <section class="data-table active ui-sortable">
+        <article class="form-field empty"></article>
+      </section>
+    <% end %>
   </div>
 </article>

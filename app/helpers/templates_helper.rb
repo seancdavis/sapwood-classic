@@ -199,7 +199,25 @@ module TemplatesHelper
     end
     if current_template_field
       o += content_tag(:span, '/', :class => 'separator')
-      o += link_to(current_template_field.slug, '#', :class => 'disabled')
+      o += link_to(
+        "fields",
+        builder_route([current_template, current_template_fields], :index)
+      )
+      if action_name == 'new'
+        o += content_tag(:span, '/', :class => 'separator')
+        o += link_to("new field", '#', :class => 'disabled')
+      else
+        o += content_tag(:span, '/', :class => 'separator')
+        o += link_to(current_template_field.slug, '#', :class => 'disabled')
+      end
+    elsif controller_name == 'groups'
+      o += content_tag(:span, '/', :class => 'separator')
+      o += link_to(
+        "fields",
+        builder_route([current_template, current_template_fields], :index)
+      )
+      o += content_tag(:span, '/', :class => 'separator')
+      o += link_to("new group", '#', :class => 'disabled')
     end
     o.html_safe
   end

@@ -97,6 +97,14 @@
           display: none;
         }
       }
+      &.empty {
+        height: 5px;
+        min-height: 0;
+        padding: 0;
+        // background: $color-grey-lightest;
+        background: transparent;
+        border: none;
+      }
 
       // ------------------------ Extra styles for sortable lists
 

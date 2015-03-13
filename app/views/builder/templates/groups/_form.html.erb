@@ -3,9 +3,9 @@
 ) do |f| %>
   <div class="half-row">
     <%= f.input :title %>
-    <%= f.input :position, :as => :string %>
-    <%= em_p("This is the label and position for the sidebar menu item that 
-      will appear when a user is creating or editing a page using the 
+    <%#= f.input :position, :as => :string %>
+    <%#= em_p("This is the label and position for the sidebar menu item that
+      will appear when a user is creating or editing a page using the
       #{current_template.title} template.") %>
   </div>
   <%= f.submit "Save Form Group" %>

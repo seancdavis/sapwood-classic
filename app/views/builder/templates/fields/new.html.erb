@@ -1,12 +1,5 @@
-<%= current_template_breadcrumbs %>
+<%= builder_page_title(current_template_breadcrumbs, :class => 'breadcrumbs') %>
 
-<%= builder_page_title("New Form Field") do %>
-  <%= subtitle("Create a new field for the form shown when a page is created 
-  using the #{current_template.title} template.") %>
-<% end %>
-
-<section id="page-content">
+<section id="page-content" class="full-width">
   <%= render 'form' %>
 </section>
-
-<%= sidebar('builder/templates/sidebar') %>

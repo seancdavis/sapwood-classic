@@ -1,7 +1,7 @@
 <article class="form-field" data-id="<%= field.id %>">
   <%= content_tag(
-    :span, 
-    quick_template_field_status(field), 
+    :span,
+    quick_template_field_status(field),
     :class => 'status'
   ) %>
   <div class="data">
@@ -19,14 +19,14 @@
     <div class="bottom">
       <span class="last-edited">
         Last edited <%= content_tag(
-          :span, 
+          :span,
           field.updated_at.strftime("%h %d")
         ) %>
       </span>
       <%= link_to(field.data_type, '', :class => 'database disabled') %>
-      <%= link_to('required', '', :class => 'required disabled') if 
+      <%= link_to('required', '', :class => 'required disabled') if
         field.required? %>
-      <%= link_to('hidden', '', :class => 'hidden disabled') if 
+      <%= link_to('hidden', '', :class => 'hidden disabled') if
         field.hidden? %>
     </div>
   </div>
@@ -36,7 +36,7 @@
         <%= link_to(
           'Show',
           builder_site_template_template_field_show_path(
-            current_site, 
+            current_site,
             current_template,
             field
           ),
@@ -47,7 +47,7 @@
         <%= link_to(
           'Hide',
           builder_site_template_template_field_hide_path(
-            current_site, 
+            current_site,
             current_template,
             field
           ),
