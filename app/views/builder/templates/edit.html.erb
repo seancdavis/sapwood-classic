@@ -1,5 +1,5 @@
 <%= builder_page_title(
-  current_template_breadcrumbs, 
+  current_template_breadcrumbs,
   :class => 'breadcrumbs no-border'
 ) do %>
   <%= render :partial => 'tabs' %>
@@ -12,53 +12,53 @@
       <div class="input">
         <%= f.input :title, :wrapper => false %>
         <br>
-        <%= em_p("The title is just an arbitrary classification for this 
+        <%= em_p("The title is just an arbitrary classification for this
           template.") %>
       </div>
       <div class="input">
         <%= f.input :slug, :label => 'Template Filename', :wrapper => false %>
         <br>
-        <%= em_p("The filename is the name of the template file that will be 
+        <%= em_p("The filename is the name of the template file that will be
           rendered for each page created using this template.") %>
-        <%= em_p("Note: You don't want to include any file extensions here. We'll 
+        <%= em_p("Note: You don't want to include any file extensions here. We'll
         figure that out for you.") %>
       </div>
     </div>
 
     <%= f.input :can_be_root, :label => 'Can have root pages?' %>
-    <%= em_p("You only want ceratin types of pages to be created at the root 
-    level of your site. For example, you probably would rather have 'Posts' 
+    <%= em_p("You only want ceratin types of pages to be created at the root
+    level of your site. For example, you probably would rather have 'Posts'
     nested under another template.") %>
 
-    <%= f.input :children, :label => 'Child Templates', :as => :check_boxes, 
+    <%= f.input :children, :label => 'Child Templates', :as => :check_boxes,
       :value_method => :slug,
       :collection => site_templates.reject(&:blank?) %>
-    <%= em_p("Templates are restricted from being created only where you 
-    allow them. This setting drives that permission. When you check a box here, 
-    it allows a page with the selected template to be created under this 
+    <%= em_p("Templates are restricted from being created only where you
+    allow them. This setting drives that permission. When you check a box here,
+    it allows a page with the selected template to be created under this
     page.") %>
-    <%= em_p("For example, if this is an 'Article' (or 'Post') template, you 
+    <%= em_p("For example, if this is an 'Article' (or 'Post') template, you
     probably want to allow it to be created from a 'News' (or 'Posts') page.") %>
 
     <div class="half-row">
       <%= f.input :order_method, :as => :select, :collection => order_by_fields %>
-      <%= f.input :order_direction, :as => :select, 
+      <%= f.input :order_direction, :as => :select,
         :collection => ['asc','desc'] %>
-      <%= em_p("This determines the default order in which pages created from 
-      this template are ordered. It makes querying a little easier if this is 
+      <%= em_p("This determines the default order in which pages created from
+      this template are ordered. It makes querying a little easier if this is
       predictable for this template.") %>
     </div>
 
     <div class="half-row">
       <%= f.input :limit_pages, :label => 'Limit pages?' %>
       <%= f.input :max_pages, :as => :string %>
-      <%= em_p("If you want, you can set a limit on the number of pages created 
+      <%= em_p("If you want, you can set a limit on the number of pages created
       with this template. For example, you probably only want one 'Home' page.") %>
     </div>
 
     <%= f.input :has_show_view %>
-    <%= em_p("If your template doesn't have a show view, then none of the pages 
-    built with it have their own URL. However, your selected home page will 
+    <%= em_p("If your template doesn't have a show view, then none of the pages
+    built with it have their own URL. However, your selected home page will
     always be available at the root of your site.") %>
 
     <%= redirect_field(f) %>

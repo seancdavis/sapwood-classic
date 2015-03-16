@@ -36,7 +36,8 @@
   <div class="half-row">
     <div class="input optional">
       <%= f.input :required, :wrapper => false,
-        :disabled => current_template_field.protected? ? true : false %>
+        :disabled => (current_template_field.protected? &&
+          current_template_field.slug == 'title') ? true : false %>
       <br style="content:' ';margin-top:10px;display:block;">
       <%= em_p("Checking this box requires a user to enter data for this field for
       every page using this template.") %>
