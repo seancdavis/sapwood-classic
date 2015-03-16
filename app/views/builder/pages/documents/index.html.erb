@@ -11,7 +11,7 @@
   <%= link_to(
     'New Document',
     builder_site_documents_path(current_site, :select => true),
-    :class => 'new float-right button image-upload-trigger' 
+    :class => 'new button-color-2 image-upload-trigger'
   ) %>
   <section class="images-container">
     <%= render :partial => 'file', :collection => current_page_documents %>

@@ -4,7 +4,7 @@
   <header class="<%= 'select' if params[:select] %>">
     <%= link_to(
       '',
-      builder_route([file], :show),
+      builder_route([current_page, file], :show),
       :class => 'delete',
       :method => :delete,
       :data => { :confirm => 'Are you sure?' }
