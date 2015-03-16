@@ -41,6 +41,9 @@ class Page < ActiveRecord::Base
 
   has_one :site, :through => :template
 
+  has_many :page_documents
+  has_many :documents, :through => :page_documents
+
   # ------------------------------------------ Scopes
 
   scope :in_position, -> { order('position asc') }

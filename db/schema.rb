@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316160058) do
+ActiveRecord::Schema.define(version: 20150316163701) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -80,6 +80,13 @@ ActiveRecord::Schema.define(version: 20150316160058) do
     t.string   "title"
     t.string   "slug"
     t.boolean  "public",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "page_documents", force: true do |t|
+    t.integer  "page_id"
+    t.integer  "document_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -39,7 +39,7 @@ class Document < ActiveRecord::Base
 
   def cache_attrs
     update_columns(
-      :document_site => site.slug, 
+      :document_site => site.slug,
       :document_name => self.document.meta['name']
     )
   end

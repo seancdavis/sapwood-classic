@@ -16,6 +16,7 @@ class App.Routers.Router extends Backbone.Router
   routes:
     'sites/:site_slug/pages/new': 'newPage'
     'sites/:site_slug/pages/:page_slug/settings/:slug': 'editPage'
+    'sites/:site_slug/pages/:page_slug/library': 'pageMedia'
     'sites/:site_slug/library': 'library'
     'sites/:site_slug/templates/:template_slug/fields': 'templateFields'
 
@@ -31,6 +32,11 @@ class App.Routers.Router extends Backbone.Router
     if $('.image-upload-trigger').length > 0
       new App.Views.PageFileUploader
         site: site_slug
+
+  pageMedia: (site_slug, page_slug) ->
+    new App.Views.PageMediaUploader
+      site: site_slug
+      page: page_slug
 
   library: (site_slug) ->
     new App.Views.FileUploader

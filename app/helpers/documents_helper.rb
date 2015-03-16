@@ -8,22 +8,22 @@ module DocumentsHelper
     site_documents
   end
 
-  def current_document
-    @current_document ||= begin
-      if controller_name == 'documents'
-        current_site.documents.find_by_idx(params[:idx])
-      elsif controller_name == 'croppings'
-        current_site.documents.find_by_idx(params[:document_idx])
-      end
-    end
-  end
-
   def current_page_documents
     @current_page_documents ||= begin
       if current_page
         current_page.documents
       else
         nil
+      end
+    end
+  end
+
+  def current_document
+    @current_document ||= begin
+      if controller_name == 'documents'
+        current_site.documents.find_by_idx(params[:idx])
+      elsif controller_name == 'croppings'
+        current_site.documents.find_by_idx(params[:document_idx])
       end
     end
   end

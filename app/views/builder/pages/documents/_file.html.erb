@@ -4,20 +4,10 @@
   <header class="<%= 'select' if params[:select] %>">
     <%= link_to(
       '',
-      builder_site_document_cropper_path(current_site, file),
-      :class => 'crop image-crop-trigger'
-    ) if !params[:select] && file.is_image? %>
-    <%= link_to(
-      '',
       builder_route([file], :show),
       :class => 'delete',
       :method => :delete,
       :data => { :confirm => 'Are you sure?' }
     ) unless params[:select] %>
-    <%= link_to(
-      'Add This File',
-      '#',
-      :class => 'select',
-    ) if params[:select] %>
   </header>
 </article>

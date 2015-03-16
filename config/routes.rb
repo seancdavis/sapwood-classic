@@ -43,8 +43,8 @@ Rails.application.routes.draw do
 
       # Pages
       resources :pages, :param => :slug do
-        resources :documents, :only => [:index],
-          :controller => 'pages/documents'
+        resources :documents, :only => [:index, :create],
+          :controller => 'pages/documents', :path => :library
         get 'settings/:slug' => 'pages#edit', :as => :settings
         get 'edit/:editor' => 'pages/editor#edit', :as => :editor
         patch 'edit/:editor' => 'pages/editor#parse', :as => :parser
