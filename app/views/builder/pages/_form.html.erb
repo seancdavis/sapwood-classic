@@ -33,7 +33,13 @@
       <% end %>
 
       <% if ['title','slug','position','description','show_in_nav'].include?(field.slug) %>
-        <%= f.input(field.slug.to_sym, :label => field.label) unless field.hidden? %>
+        <%= f.input(
+          field.slug.to_sym,
+          :label => field.label,
+          :input_html => {
+            :value => current_page.send(field.slug) || field.default_value
+          }
+        ) unless field.hidden? %>
       <% elsif field.slug == 'body' && !field.hidden? %>
         <div class="body-buttons input">
           <label>Content / Body</label>
@@ -64,7 +70,8 @@
           :required => field.required,
           :wrapper => false,
           :input_html => {
-            :value => current_page.field_data[field.slug.to_sym]
+            :value => current_page.field_data[field.slug.to_sym] ||
+              field.default_value
           }
         ) %>
       <% else %>
@@ -96,7 +103,8 @@
             :collection => field.option_values,
             :required => field.required,
             :label => field.title,
-            :checked => current_page.field_data[field.slug]
+            :checked => current_page.field_data[field.slug] ||
+              field.default_value
           ) %>
         <% when 'image', 'file' %>
           <div class="upload-field">
@@ -125,7 +133,8 @@
             :required => field.required,
             :label => field.title,
             :input_html => {
-              :value => current_page.field_data[field.slug.to_sym]
+              :value => current_page.field_data[field.slug.to_sym] ||
+                field.default_value
             }
           ) %>
         <% end %>
