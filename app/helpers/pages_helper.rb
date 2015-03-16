@@ -18,7 +18,10 @@ module PagesHelper
 
   def current_page
     @current_page ||= begin
-      if controller_name == 'pages' || controller_name == 'editor'
+      if(
+        controller_name == 'pages' ||
+        ['editor','documents'].include?(controller_name)
+      )
         p = params[:page_slug] || params[:slug]
         page = current_site.webpages.find_by_slug(p)
         nil if page.nil?

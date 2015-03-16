@@ -56,10 +56,21 @@
       with this template. For example, you probably only want one 'Home' page.") %>
     </div>
 
-    <%= f.input :has_show_view %>
-    <%= em_p("If your template doesn't have a show view, then none of the pages
-    built with it have their own URL. However, your selected home page will
-    always be available at the root of your site.") %>
+    <div class="half-row">
+      <div class="input optional">
+        <%= f.input :has_show_view, :wrapper => false %>
+        <%= em_p("If your template doesn't have a show view, then none of the pages
+        built with it have their own URL. However, your selected home page will
+        always be available at the root of your site.") %>
+      </div>
+      <div class="input optional">
+        <%= f.input :can_have_documents, :wrapper => false %>
+        <%= em_p("Instead of adding documents to a page as a bunch of individual
+          attributes, or instead of creating sub-pages that are just documents,
+          you can allow a page to be linked with documents from your site's
+          library.") %>
+      </div>
+    </div>
 
     <%= redirect_field(f) %>
     <%= f.submit "Save Settings" %>

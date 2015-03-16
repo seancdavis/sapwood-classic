@@ -108,6 +108,7 @@ class Builder::TemplatesController < BuilderController
         :limit_pages,
         :max_pages,
         :has_show_view,
+        :can_have_documents,
         :children => [],
       ).merge(:last_editor => current_user)
     end

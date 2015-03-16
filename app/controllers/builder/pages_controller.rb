@@ -4,7 +4,7 @@ class Builder::PagesController < BuilderController
 
   def index
     @pages = site_root_pages
-    if params[:published] 
+    if params[:published]
       if ['published','draft'].include?(params[:published])
         @pages = @pages.select { |p| p.send("#{params[:published]}?") }
       end
@@ -12,7 +12,7 @@ class Builder::PagesController < BuilderController
       redirect = true
       params[:published] = 'all'
     end
-    if params[:template] 
+    if params[:template]
       if params[:template] != 'all'
         @pages = @pages.select { |p| p.template.slug == params[:template] }
       end
@@ -56,9 +56,9 @@ class Builder::PagesController < BuilderController
     if current_page.save!
       # save_files
       redirect_to(
-        builder_route([current_page], :edit), 
+        builder_route([current_page], :edit),
         :notice => t(
-          'notices.created', 
+          'notices.created',
           :item => controller_name.humanize.titleize
         )
       )
@@ -68,7 +68,7 @@ class Builder::PagesController < BuilderController
   end
 
   def edit
-    if current_template_group.nil?
+    if current_template_group.nil? && params[:slug] != 'media'
       redirect_to builder_site_page_settings_path(
         current_site, current_page, current_template_groups.first
       )
@@ -83,7 +83,7 @@ class Builder::PagesController < BuilderController
       route = redirect_route.gsub(/#{slug}/, current_page.slug)
       redirect_to(route,
         :notice => t(
-          'notices.updated', 
+          'notices.updated',
           :item => controller_name.humanize.titleize
         )
       )
@@ -111,7 +111,7 @@ class Builder::PagesController < BuilderController
       path = builder_route([parent_page], :show)
     end
     redirect_to(
-      path, 
+      path,
       :notice => t('notices.updated', :item => 'Page')
     )
   end
@@ -124,9 +124,9 @@ class Builder::PagesController < BuilderController
       )
       p = params.require(:page).permit(
         :title,
-        :slug,  
-        :description, 
-        :body, 
+        :slug,
+        :description,
+        :body,
         :body_md,
         :published,
         :position,
@@ -140,9 +140,9 @@ class Builder::PagesController < BuilderController
     def update_params
       p = params.require(:page).permit(
         :title,
-        :slug,  
-        :description, 
-        :body, 
+        :slug,
+        :description,
+        :body,
         :body_md,
         :published,
         :position,
