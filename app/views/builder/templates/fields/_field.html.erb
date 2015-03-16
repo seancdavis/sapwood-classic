@@ -24,6 +24,8 @@
         ) %>
       </span>
       <%= link_to(field.data_type, '', :class => 'database disabled') %>
+      <%= link_to('half width', '', :class => 'half-width disabled') if
+        field.half_width? %>
       <%= link_to('required', '', :class => 'required disabled') if
         field.required? %>
       <%= link_to('hidden', '', :class => 'hidden disabled') if

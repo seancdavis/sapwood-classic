@@ -70,7 +70,7 @@ a {
   &.download, &.code, &.database, &.link, &.build, &.preview, &.publish,
   &.unpublish, &.template, &.all, &.help, &.pages, &.maxed-out, &.not-maxed,
   &.unlimited, &.form, &.data-trigger, &.reorder, &.protected, &.unprotected,
-  &.hidden, &.hide, &.visible, &.show {
+  &.hidden, &.hide, &.visible, &.show, &.half-width {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
@@ -123,6 +123,7 @@ a {
   &.hide:before { content: "\e2da"; }
   &.visible:before { content: "\e2d9"; }
   &.show:before { content: "\e2d9"; }
+  &.half-width:before { content: "\e43f"; }
   &.dropdown-trigger:after { content: "\e3b2"; }
 
   &.button {

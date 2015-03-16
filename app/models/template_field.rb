@@ -16,6 +16,8 @@
 #  protected         :boolean          default(FALSE)
 #  hidden            :boolean          default(FALSE)
 #  can_be_hidden     :boolean          default(TRUE)
+#  default_value     :string(255)
+#  half_width        :boolean          default(FALSE)
 #
 
 class TemplateField < ActiveRecord::Base

@@ -26,14 +26,14 @@ class Builder::Templates::FieldsController < BuilderController
       format.html do
         if current_template_field.update(field_params)
           redirect_to(
-            builder_route([t, t.fields], :index), 
+            builder_route([t, t.fields], :index),
             :notice => 'Field saved!'
           )
         else
           render 'edit'
         end
       end
-      format.json do 
+      format.json do
         current_template_field.update!(field_params)
         render :nothing => true
       end
@@ -59,7 +59,7 @@ class Builder::Templates::FieldsController < BuilderController
 
     def field_params
       params.require(:template_field).permit(
-        :title, 
+        :title,
         :position,
         :template_group_id,
         :slug,
@@ -68,7 +68,10 @@ class Builder::Templates::FieldsController < BuilderController
         :options,
         :required,
         :position,
-        :hidden
+        :hidden,
+        :default_value,
+        :note,
+        :half_width
       )
     end
 
