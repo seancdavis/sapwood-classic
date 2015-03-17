@@ -20,9 +20,9 @@ class Builder::SitesController < BuilderController
         create_sapwood_project
       end
       redirect_to(
-        route([current_site], :edit, 'builder'), 
+        route([current_site], :edit, 'builder'),
         :notice => t('notices.created', :item => "Site")
-      ) 
+      )
     else
       render('new')
     end
@@ -34,8 +34,8 @@ class Builder::SitesController < BuilderController
 
   def update
     if current_site.update(update_params)
-      redirect_to(route([current_site], :edit, 'builder'), 
-        :notice => t('notices.updated', :item => "Site")) 
+      redirect_to(route([current_site], :edit, 'builder'),
+        :notice => t('notices.updated', :item => "Site"))
     else
       render('edit')
     end
@@ -53,24 +53,24 @@ class Builder::SitesController < BuilderController
       UpdateProjectWorker.perform_async(current_site.id)
     end
     redirect_to(
-      route([current_site], :edit, 'builder'), 
+      route([current_site], :edit, 'builder'),
       :notice => 'Working on the task behind the scenes.'
-    ) 
+    )
   end
 
   def import
     sapwood = SapwoodProject.new(current_site)
     sapwood.import_site
     redirect_to(
-      route([current_site], :edit, 'builder'), 
+      route([current_site], :edit, 'builder'),
       :notice => 'Repo imported successfully!'
-    ) 
+    )
   end
 
   def backup
     SapwoodDatabase.new.backup
     redirect_to(
-      route([current_site], :edit, 'builder'), 
+      route([current_site], :edit, 'builder'),
       :notice => 'Database backed up successfully!'
     )
   end
@@ -81,7 +81,7 @@ class Builder::SitesController < BuilderController
     system("curl http://#{remote_url}/api/v1/database/dump?public_key=#{key}")
     SapwoodDatabase.new.sync
     redirect_to(
-      route([current_site], :edit, 'builder'), 
+      route([current_site], :edit, 'builder'),
       :notice => 'Database synced successfully!'
     )
   end
@@ -89,23 +89,23 @@ class Builder::SitesController < BuilderController
   def symlink
     SapwoodProject.new(current_site).update_symlinks
     redirect_to(
-      route([current_site], :edit, 'builder'), 
+      route([current_site], :edit, 'builder'),
       :notice => 'Symlinked successfully!'
-    ) 
+    )
   end
 
   private
 
     def create_params
       params.require(:site).permit(
-        :title, 
-        :url, 
+        :title,
+        :url,
         :secondary_urls,
         :description,
         :home_page_id,
         :git_url,
         :image_croppings_attributes => [
-          :id, 
+          :id,
           :title,
           :ratio,
           :width,
