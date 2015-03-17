@@ -30,14 +30,18 @@ class Builder::PagesController < BuilderController
   end
 
   def show
-    if params[:template].blank? || params[:published].blank?
-      t = params[:template] || 'any'
-      p = params[:published] || 'all'
-      redirect_to(
-        builder_site_page_path(
-          current_site, current_page, :published => p, :template => t
+    if template_children.size > 0
+      if params[:template].blank? || params[:published].blank?
+        t = params[:template] || 'any'
+        p = params[:published] || 'all'
+        redirect_to(
+          builder_site_page_path(
+            current_site, current_page, :published => p, :template => t
+          )
         )
-      )
+      end
+    else
+      redirect_to builder_route([current_page], :edit)
     end
   end
 
