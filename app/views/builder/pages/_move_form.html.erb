@@ -1,0 +1,21 @@
+<%= simple_form_for [:builder, current_site, current_page] do |f| %>
+
+  <div class="half-row">
+    <%= f.input :parent_id, :collection => eligible_parents(current_page) %>
+    <%= em_p("This will move this page (and any pages below it) under a new
+    page.") %>
+    <%= em_p(" Note: Only eligible parents are shown here.") %>
+  </div>
+
+  <div class="half-row">
+    <%= f.input :template_id, :collection => eligible_templates(current_page) %>
+    <%= em_p("This will change the template of this page.") %>
+    <%= em_p("WARNING: Any fields in this page not in the other template will
+    be deleted.") %>
+  </div>
+
+  <%= redirect_field(f) %>
+
+  <%= f.submit "Save Page" %>
+
+<% end %>

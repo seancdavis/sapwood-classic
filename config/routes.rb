@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       resources :pages, :param => :slug do
         resources :documents, :only => [:index, :create, :destroy],
           :controller => 'pages/documents', :path => :library, :param => :idx
+        get 'move' => 'pages#move', :as => :move
         get 'settings/:slug' => 'pages#edit', :as => :settings
         get 'edit/:editor' => 'pages/editor#edit', :as => :editor
         patch 'edit/:editor' => 'pages/editor#parse', :as => :parser

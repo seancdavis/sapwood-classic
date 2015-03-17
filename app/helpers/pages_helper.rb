@@ -70,6 +70,15 @@ module PagesHelper
     end
   end
 
+  def eligible_parents(page)
+    @eligible_parents ||= begin
+      templates = site_templates.select {
+        |t| t.children.include?(page.template.slug)
+      }
+      site_pages.select { |p| templates.collect(&:id).include?(p.template_id) }
+    end
+  end
+
   def current_page_children_paginated
     @current_page_children_paginated ||= begin
       current_page_children.page(params[:page]).per(10)

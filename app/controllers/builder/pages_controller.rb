@@ -75,6 +75,9 @@ class Builder::PagesController < BuilderController
     end
   end
 
+  def move
+  end
+
   def update
     process_files
     slug = current_page.slug
@@ -147,6 +150,7 @@ class Builder::PagesController < BuilderController
         :published,
         :position,
         :parent_id,
+        :template_id,
         :show_in_nav,
         :template
       ).merge(:last_editor => current_user)

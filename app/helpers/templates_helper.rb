@@ -212,4 +212,22 @@ module TemplatesHelper
     o.html_safe
   end
 
+  def eligible_templates(page)
+    @eligible_templates ||= begin
+      children = current_template.children.reject(&:blank?)
+      # Start with templates that have the same allowable
+      # children as the current template
+      templates = site_templates { |t| t.children.reject(&:blank?) == children }
+      # Get rid of any templates that don't have room for
+      # more pages
+      templates = templates.reject(&:maxed_out?)
+      # If it's a root page, we don't allow templates that
+      # can't be a root page
+      if current_page.parent_id.blank?
+        templates = templates.select(&:can_be_root?)
+      end
+      (templates + [current_template]).uniq
+    end
+  end
+
 end
