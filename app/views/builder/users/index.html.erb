@@ -1,4 +1,4 @@
-<%= builder_page_title('Users') do %>
+<%= builder_page_title(users_breadcrumbs, :class => 'breadcrumbs') do %>
   <%= content_tag(
     :div,
     link_to(
@@ -8,8 +8,6 @@
     ),
     :class => 'new-buttons dropdown'
   ) %>
-  <%= subtitle("This is a list of all users who have access to the builder for
-  this site.") %>
 <% end %>
 
 <section id="page-content" class="data-container">

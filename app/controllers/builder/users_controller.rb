@@ -33,6 +33,25 @@ class Builder::UsersController < BuilderController
     end
   end
 
+  def update
+    @user = User.find_by_email(params[:user][:email])
+    p ||= create_params
+    if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
+      p = create_params.except("password", "password_confirmation")
+    end
+    if @user.update(p)
+      if @user == current_user && p[:password].present?
+        sign_in(@user, :bypass => true)
+      end
+      redirect_to(
+        builder_route([@user], :index),
+        :notice => t('notices.updated', :item => "User")
+      )
+    else
+      render 'edit'
+    end
+  end
+
   def edit
   end
 
@@ -58,8 +77,13 @@ class Builder::UsersController < BuilderController
     end
 
     def create_params
-      params.require(:user).permit(:name, :email, :password,
-        :password_confirmation)
+      params.require(:user).permit(
+        :name,
+        :email,
+        :password,
+        :password_confirmation,
+        :admin
+      )
     end
 
     def builder_html_title

@@ -58,4 +58,23 @@ module UsersHelper
     o.html_safe
   end
 
+  def users_breadcrumbs
+    o = link_to("all users", builder_route([all_site_users], :index))
+    if @user
+      o += content_tag(:span, '/', :class => 'separator')
+      if @user.email.blank?
+        o += link_to(
+          "new user",
+          builder_route([@user], :new)
+        )
+      else
+        o += link_to(
+          @user.display_name.downcase,
+          builder_route([@user], :edit)
+        )
+      end
+    end
+    o.html_safe
+  end
+
 end

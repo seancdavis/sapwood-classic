@@ -1,0 +1,27 @@
+<%= simple_form_for [:builder, current_site, @user] do |f| %>
+
+  <% if current_user.admin? %>
+    <section class="form">
+      <div class="half-row">
+        <%= f.input :name %>
+        <%= f.input :email %>
+        <%= em_p("Changing settings here changes them for this user in any
+          site within this application.") %>
+      </div>
+      <div class="half-row">
+        <%= f.input :password %>
+        <%= f.input :password_confirmation %>
+        <%= em_p("Submitting both password fields will reset this user's
+        password.") %>
+      </div>
+      <div class="half-row">
+        <%= f.input :admin %>
+        <%= em_p("This grants this user access to every site within this
+        application.") %>
+      </div>
+    </section>
+  <% end %>
+
+  <%= f.submit %>
+
+<% end %>
