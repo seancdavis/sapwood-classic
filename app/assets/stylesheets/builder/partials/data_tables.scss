@@ -150,6 +150,9 @@
         width: 40px;
         height: 100%;
         vertical-align: top;
+        &.avatar {
+          margin-right: 10px;
+        }
         a {
           font-size: 18px;
           &:before {
@@ -158,6 +161,15 @@
           }
           &.admin {
             color: $color-dark-lightest;
+          }
+        }
+        .avatar-container {
+          width: 40px;
+          height: 40px;
+          border-radius: 5px;
+          overflow: visible;
+          img {
+            border-radius: 5px;
           }
         }
       }

@@ -1,5 +1,9 @@
 <article class="user">
-  <%= content_tag(:span, quick_user_status(user), :class => 'status') %>
+  <%= content_tag(
+    :span,
+    avatar(user, 64, "grey small #{'admin' if user.admin?}"),
+    :class => 'status avatar'
+  ) %>
   <div class="data">
     <div class="top">
       <%= content_tag(:h4, user.display_name, :class => 'title') %>
