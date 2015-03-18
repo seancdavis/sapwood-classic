@@ -3,6 +3,9 @@ class Builder::SitesController < BuilderController
   before_filter :set_layout_options
 
   def index
+    if !current_user.admin? && !has_multiple_sites?
+      redirect_to(builder_site_path(only_site))
+    end
   end
 
   def show
