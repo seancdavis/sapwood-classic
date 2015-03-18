@@ -1,6 +1,7 @@
 class Builder::UsersController < BuilderController
 
   before_action :set_user, :except => [:index, :create]
+  before_filter :verify_admin
 
   def index
     @users = all_site_users

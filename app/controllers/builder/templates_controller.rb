@@ -1,6 +1,7 @@
 class Builder::TemplatesController < BuilderController
 
   before_filter :verify_current_template, :except => [:index, :new, :create]
+  before_filter :verify_admin
 
   def index
     @templates = site_templates

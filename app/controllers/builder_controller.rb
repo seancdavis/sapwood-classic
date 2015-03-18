@@ -36,7 +36,13 @@ class BuilderController < ActionController::Base
     end
 
     def verify_site
-      not_found if current_site.nil?
+      if current_site.nil? && request.path != builder_sites_path
+        not_found
+      end
+    end
+
+    def verify_admin
+      not_found unless current_user.admin?
     end
 
 end

@@ -1,6 +1,7 @@
 class Builder::Templates::FieldsController < BuilderController
 
   before_filter :verify_current_template
+  before_filter :verify_admin
 
   def index
   end

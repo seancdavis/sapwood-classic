@@ -13,14 +13,17 @@ module NavHelper
   end
 
   def builder_site_nav
-    content_tag(:ul) do
+    content_tag(:ul, :class => current_user.admin? ? 'admin' : nil) do
       items = ''
       builder_site_nav_config.each do |item, attrs|
-        path = send(attrs.path, current_site)
-        items += content_tag(
-          :li,
-          :class => builder_nav_active?(item, path, attrs.controllers) ? 'active' : nil
-        ) { link_to(attrs.label, path) }
+        unless attrs.admin.present? && attrs.admin.to_bool == true &&
+          current_user.site_user?
+          path = send(attrs.path, current_site)
+          items += content_tag(
+            :li,
+            :class => builder_nav_active?(item, path, attrs.controllers) ? 'active' : nil
+          ) { link_to(attrs.label, path) }
+        end
       end
       items.html_safe
     end
@@ -41,7 +44,7 @@ module NavHelper
 
   def sidebar_item_active?(item)
     (item[:controllers] && item[:controllers].include?(controller_name)) ||
-      request.path == item[:path] 
+      request.path == item[:path]
   end
 
   def tab_active?(item)
