@@ -1,5 +1,9 @@
 <%= builder_page_title('My Sites') do %>
-  <%= link_to('New Site',  new_builder_site_path, :class => 'new') %>
+  <%= content_tag(
+    :div,
+    link_to('New Site',  new_builder_site_path, :class => 'new'),
+    :class => 'new-buttons dropdown'
+  ) %>
 <% end %>
 
 <%= content_tag(:section, data_table(my_sites, 'site'), :id => 'page-content') %>
