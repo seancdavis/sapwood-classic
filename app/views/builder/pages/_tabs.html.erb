@@ -29,7 +29,7 @@
         builder_site_page_move_path(current_site, current_page),
         :class => "move #{action_name == 'move' ? 'active' : nil}"
       )
-    ) %>
+    ) if current_user.admin? %>
     <%= content_tag(
       :li,
       link_to(
@@ -37,6 +37,6 @@
         builder_site_page_help_path(current_site, current_page),
         :class => "help #{action_name == 'help' ? 'active' : nil}"
       )
-    ) %>
+    ) if current_user.admin? %>
   </ul>
 </nav>

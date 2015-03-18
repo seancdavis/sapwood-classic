@@ -1,6 +1,7 @@
 class Builder::PagesController < BuilderController
 
   before_filter :verify_current_page, :except => [:index, :new, :create]
+  before_filter :verify_admin, :except => [:index, :show, :edit, :update]
 
   def index
     @pages = site_root_pages
