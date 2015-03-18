@@ -4,12 +4,12 @@
     <div class="top">
       <%= content_tag(:h4, page.title, :class => 'title') %>
       <%= content_tag(
-        :span, 
+        :span,
         link_to(
-          page.page_path, 
+          page.page_path,
           preview_page_path(:page_path => page.page_path),
           :target => :blank
-        ), 
+        ),
         :class => 'path'
       ) if page.template.has_show_view? %>
     </div>
@@ -17,7 +17,7 @@
       <%= page_last_edited(page) %>
       <%= link_to(
         page.template.title,
-        builder_route([page.template], :show), 
+        builder_route([page.template], :show),
         :class => 'template'
       ) %>
     </div>
@@ -26,37 +26,42 @@
     <div class="top">
       <%= page_children_button(page) %>
       <%= link_to(
-        'Edit', 
-        builder_route([page], :edit), 
+        'Move',
+        builder_site_page_move_path(current_site, page),
+        :class => 'move'
+      ) %>
+      <%= link_to(
+        'Edit',
+        builder_route([page], :edit),
         :class => 'edit'
       ) %>
     </div>
     <div class="bottom">
       <% if page.published? %>
         <%= link_to(
-          "Unpublish", 
-          builder_site_page_unpublish_path(current_site, page, 
+          "Unpublish",
+          builder_site_page_unpublish_path(current_site, page,
             :redirect_route => request.path),
-          :method => :post, 
+          :method => :post,
           :class => 'unpublish',
-          :data => { :confirm => 'Are you sure?' } 
+          :data => { :confirm => 'Are you sure?' }
         ) %>
       <% else %>
         <%= link_to(
-          "Publish", 
-          builder_site_page_publish_path(current_site, page, 
+          "Publish",
+          builder_site_page_publish_path(current_site, page,
             :redirect_route => request.path),
-          :method => :post, 
+          :method => :post,
           :class => 'publish',
           :data => { :confirm => 'Are you sure?' }
         ) %>
       <% end %>
       <%= link_to(
-        "Delete", 
-        builder_route([page], :show), 
-        :method => :delete, 
+        "Delete",
+        builder_route([page], :show),
+        :method => :delete,
         :class => 'delete',
-        :data => { :confirm => 'WARNING: This will destroy all pages and 
+        :data => { :confirm => 'WARNING: This will destroy all pages and
           subpages. Are you sure you want to delete this page?' }
       ) %>
     </div>
