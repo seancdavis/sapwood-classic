@@ -4,16 +4,17 @@ class BuilderController < ActionController::Base
   protect_from_forgery with: :exception
 
   include(
-    ApplicationHelper, 
-    RoutingHelper, 
-    UsersHelper, 
-    SitesHelper, 
-    TemplatesHelper, 
+    ApplicationHelper,
+    RoutingHelper,
+    UsersHelper,
+    SitesHelper,
+    TemplatesHelper,
     PagesHelper,
     ErrorsHelper
   )
 
   before_filter :authenticate_user!
+  before_filter :verify_site
   before_filter :init_options
   before_filter :builder_html_title
 
@@ -32,6 +33,10 @@ class BuilderController < ActionController::Base
         'sidebar' => true,
         'body_classes' => ''
       }
+    end
+
+    def verify_site
+      not_found if current_site.nil?
     end
 
 end
