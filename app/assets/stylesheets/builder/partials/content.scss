@@ -101,25 +101,6 @@
           }
         }
       }
-      &.user {
-        .admin {
-          margin-left: 44px;
-          i, span {
-            color: $color-primary;
-            font-size: 14px;
-            text-transform: uppercase;
-            font-weight: 600;
-          }
-        }
-        .avatar-container {
-          margin-right: 10px;
-        }
-        h4 {
-          display: inline-block;
-          font-size: 18px;
-          margin: 8px 0 10px 0;
-        }
-      }
       &.form-submission {
         .date {
           display: block;

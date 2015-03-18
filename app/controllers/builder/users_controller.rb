@@ -3,7 +3,14 @@ class Builder::UsersController < BuilderController
   before_action :set_user, :except => [:index, :create]
 
   def index
-    redirect_to builder_route([current_user], :edit)
+    @users = all_site_users
+    if params[:user_status] && params[:user_status] != 'all'
+      @users = @users.select { |t| t.send("#{params[:user_status]}?") }
+    elsif params[:user_status] != 'all'
+      redirect_to(
+        builder_site_users_path(current_site, :user_status => 'all')
+      )
+    end
   end
 
   def new
@@ -13,10 +20,10 @@ class Builder::UsersController < BuilderController
     @user = User.find_by_email(params[:user][:email])
     @user = User.create!(create_params) if @user.nil?
     if @user.save
-      @site_user = SiteUser.create!(:user => @user, 
+      @site_user = SiteUser.create!(:user => @user,
         :site => current_site)
       if @site_user.save
-        redirect_to(builder_route([@user], :index), 
+        redirect_to(builder_route([@user], :index),
           :notice => t('notices.created', :item => "User"))
       else
         render 'new'
@@ -32,7 +39,7 @@ class Builder::UsersController < BuilderController
   def destroy
     site_users = SiteUser.where(:user_id => params[:id])
     site_users.destroy_all
-    redirect_to(builder_route([@user], :index), 
+    redirect_to(builder_route([@user], :index),
       :notice => t('notices.deleted', :item => "User"))
   end
 
@@ -51,7 +58,7 @@ class Builder::UsersController < BuilderController
     end
 
     def create_params
-      params.require(:user).permit(:name, :email, :password, 
+      params.require(:user).permit(:name, :email, :password,
         :password_confirmation)
     end
 

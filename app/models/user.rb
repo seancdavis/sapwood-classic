@@ -62,4 +62,8 @@ class User < ActiveRecord::Base
     name.split(' ').last
   end
 
+  def site_user?
+    !admin?
+  end
+
 end

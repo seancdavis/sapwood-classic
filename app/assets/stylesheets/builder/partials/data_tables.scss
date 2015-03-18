@@ -96,7 +96,7 @@
 
   section.data-table {
     border: 1px solid $color-grey-lighter;
-    article.page, article.template, article.form-field {
+    article.page, article.template, article.form-field, article.user {
       position: relative;
       min-height: 72px;
       padding: 10px 10px;
@@ -155,6 +155,9 @@
           &:before {
             margin-right: 0;
             font-size: 18px;
+          }
+          &.admin {
+            color: $color-dark-lightest;
           }
         }
       }
