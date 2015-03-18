@@ -18,14 +18,15 @@
         :class => 'edit'
       ) %>
     </div>
-    <div class="bottom"></div>
+    <div class="bottom">
+      <%= link_to(
+        'Remove',
+        builder_route([user], :show),
+        :method => :delete,
+        :class => 'delete',
+        :data => { :confirm => 'This will remove this user from this project.
+          Are you sure?' }
+      ) if user != current_user && user.site_user? %>
+    </div>
   </div>
-  <%#= content_tag(:div, :class => 'admin') {
-    o = content_tag(:i, nil, :class => 'icon-user4')
-    o+= content_tag(:span, 'Admin') } if site_admin?(user) %>
-  <%#= avatar(user, 64, "grey small") %>
-  <%#= content_tag(:h4, user.display_name) %>
-    <%#= link_to('Delete', builder_route([user], :show), :method => :delete,
-      :class => 'delete', :data => { :confirm => 'Are you sure?' } ) unless
-      user == current_user%>
 </article>

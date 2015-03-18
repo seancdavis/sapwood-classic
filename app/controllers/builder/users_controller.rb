@@ -34,7 +34,7 @@ class Builder::UsersController < BuilderController
   end
 
   def update
-    @user = User.find_by_email(params[:user][:email])
+    @user = User.find_by_id(params[:id])
     p ||= create_params
     if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
       p = create_params.except("password", "password_confirmation")
