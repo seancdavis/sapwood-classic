@@ -184,30 +184,32 @@ module TemplatesHelper
   end
 
   def current_template_breadcrumbs
-    o = link_to("all templates", builder_route([current_template], :index))
-    o += content_tag(:span, '/', :class => 'separator')
-    if current_template.title.blank?
-      o += link_to(
-        "new",
-        builder_route([current_template], :new)
-      )
-    else
-      o += link_to(
-        current_template.slug,
-        builder_route([current_template, current_template_pages], :index)
-      )
-    end
-    if current_template_field
-      if action_name == 'new'
-        o += content_tag(:span, '/', :class => 'separator')
-        o += link_to("new field", '#', :class => 'disabled')
-      else
-        o += content_tag(:span, '/', :class => 'separator')
-        o += link_to(current_template_field.slug, '#', :class => 'disabled')
-      end
-    elsif controller_name == 'groups'
+    o = link_to("all templates", builder_route([site_templates], :index))
+    if current_template
       o += content_tag(:span, '/', :class => 'separator')
-      o += link_to("new group", '#', :class => 'disabled')
+      if current_template.title.blank?
+        o += link_to(
+          "new",
+          builder_route([current_template], :new)
+        )
+      else
+        o += link_to(
+          current_template.slug,
+          builder_route([current_template, current_template_pages], :index)
+        )
+      end
+      if current_template_field
+        if action_name == 'new'
+          o += content_tag(:span, '/', :class => 'separator')
+          o += link_to("new field", '#', :class => 'disabled')
+        else
+          o += content_tag(:span, '/', :class => 'separator')
+          o += link_to(current_template_field.slug, '#', :class => 'disabled')
+        end
+      elsif controller_name == 'groups'
+        o += content_tag(:span, '/', :class => 'separator')
+        o += link_to("new group", '#', :class => 'disabled')
+      end
     end
     o.html_safe
   end

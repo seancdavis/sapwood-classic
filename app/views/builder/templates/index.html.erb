@@ -1,4 +1,7 @@
-<%= builder_page_title("Templates") do %>
+<%= builder_page_title(
+  current_template_breadcrumbs,
+  :class => 'breadcrumbs'
+) do %>
   <%= content_tag(
     :div,
     link_to(
@@ -8,9 +11,6 @@
     ),
     :class => 'new-buttons dropdown'
   ) %>
-  <%= subtitle("Page templates define the fields available when creating a
-  particular page. They also help you rigidly structure the relationship
-  among pages on your site.") %>
 <% end %>
 
 <section id="page-content" class="data-container">
