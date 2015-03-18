@@ -1,6 +1,7 @@
 class Builder::SitesController < BuilderController
 
   before_filter :set_layout_options
+  before_filter :verify_admin, :except => [:index, :show]
 
   def index
     if !current_user.admin? && !has_multiple_sites?
@@ -32,7 +33,9 @@ class Builder::SitesController < BuilderController
   end
 
   def edit
-    current_site = current_site
+    unless current_user.admin?
+      redirect_to(builder_site_path(current_site))
+    end
   end
 
   def update
@@ -98,6 +101,10 @@ class Builder::SitesController < BuilderController
   end
 
   private
+
+    def verify_admin
+      not_found unless current_user.admin?
+    end
 
     def create_params
       params.require(:site).permit(

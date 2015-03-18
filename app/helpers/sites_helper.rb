@@ -37,4 +37,23 @@ module SitesHelper
     @builder_html_title ||= SapwoodSetting.site.title
   end
 
+  def my_sites_breadcrumbs
+    o = link_to("my sites", builder_sites_path)
+    if current_site
+      o += content_tag(:span, '/', :class => 'separator')
+      if current_site.title.blank?
+        o += link_to(
+          "new site",
+          new_builder_site_path
+        )
+      else
+        o += link_to(
+          my_sites.slug,
+          edit_builder_site_path(current_site)
+        )
+      end
+    end
+    o.html_safe
+  end
+
 end

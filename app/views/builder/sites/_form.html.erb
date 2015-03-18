@@ -12,15 +12,15 @@
     </div>
     <%= f.input :secondary_urls, :label => 'Seconday domains (no http://)' %>
     <%= em_p(
-      "Note: Place each domain on a new line. Any domain here will redirect to 
-      your primary domain." 
+      "Note: Place each domain on a new line. Any domain here will redirect to
+      your primary domain."
     ) %>
     <% if current_site.id.nil? %>
       <div class="half-row">
         <%= f.input :git_url, :as => :string, :label => 'Remote Git Path' %>
         <%= f.input(
-          :new_repo, 
-          :as => :boolean, 
+          :new_repo,
+          :as => :boolean,
           :label => 'Create and push new repo?'
         ) if current_site.id.nil? %>
       </div>

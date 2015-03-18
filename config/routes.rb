@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   # ------------------------------------------ Builder
 
   namespace :builder, :path => '' do
-    resources :sites, :param => :slug do
+    resources :sites, :param => :slug, :path_names => { :edit => :settings } do
 
       # Site Actions
       post 'pull' => 'sites#pull', :as => :pull
