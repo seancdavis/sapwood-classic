@@ -61,7 +61,7 @@ class FormSubmission < ActiveRecord::Base
     begin
       super
     rescue
-      if field_data[method.downcase.to_s].present?
+      if !field_data[method.downcase.to_s].nil?
         field_data[method.downcase.to_s]
       else
         super

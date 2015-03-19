@@ -2,6 +2,17 @@
   current_form_breadcrumbs,
   :class => 'breadcrumbs no-border'
 ) do %>
+  <%= content_tag(
+    :div,
+    link_to(
+      'Export to CSV',
+      builder_site_form_form_submissions_path(
+        current_site, current_form, :format => :csv
+      ),
+      :class => 'download'
+    ),
+    :class => 'new-buttons dropdown'
+  ) %>
   <%= render :partial => 'builder/forms/tabs' %>
 <% end %>
 

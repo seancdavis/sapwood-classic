@@ -3,6 +3,10 @@ class Builder::Forms::SubmissionsController < BuilderController
   include FormsHelper
 
   def index
+    respond_to do |format|
+      format.html
+      format.csv { send_data current_form.to_csv }
+    end
   end
 
   def show
