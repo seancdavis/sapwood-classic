@@ -43,6 +43,14 @@ class Builder::Forms::FieldsController < BuilderController
     end
   end
 
+  def destroy
+    current_form_field.destroy
+    redirect_to(
+      builder_route([current_form, current_form_field], :index),
+      :notice => 'Field deleted successfully!'
+    )
+  end
+
   private
 
     def position_params

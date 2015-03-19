@@ -3,6 +3,7 @@
   <div class="data">
     <div class="top">
       <%= content_tag(:h4, field.title, :class => 'title') %>
+      <%= content_tag(:span, field.slug, :class => 'method-name') %>
     </div>
     <%= simple_form_for(
       [:builder, current_site, current_form, field],
@@ -18,6 +19,9 @@
         )}".html_safe,
         :class => 'last-edited'
       ) %>
+      <%= link_to(field.data_type, '', :class => 'database disabled') %>
+      <%= link_to('required', '', :class => 'required disabled') if
+        field.required? %>
     </div>
   </div>
   <div class="actions">
@@ -28,6 +32,14 @@
         :class => 'edit'
       ) %>
     </div>
-    <div class="bottom"></div>
+    <div class="bottom">
+      <%= link_to(
+        'Delete',
+        builder_route([current_form, field], :show),
+        :method => :delete,
+        :class => 'delete',
+        :data => { :confirm => 'Are you sure?' }
+      ) %>
+    </div>
   </div>
 </article>
