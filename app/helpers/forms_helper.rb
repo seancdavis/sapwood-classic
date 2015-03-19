@@ -165,7 +165,7 @@ module FormsHelper
           )
         else
           o += link_to(
-            current_form_field.title,
+            current_form_field.slug,
             builder_route([current_form, current_form_field], :edit),
             :class => 'disabled'
           )
