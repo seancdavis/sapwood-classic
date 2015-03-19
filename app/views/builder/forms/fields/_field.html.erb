@@ -1,0 +1,27 @@
+<article class="form-field" data-id="<%= field.id %>">
+  <%= content_tag(:span, '', :class => 'status') %>
+  <div class="data">
+    <div class="top">
+      <%= content_tag(:h4, field.title, :class => 'title') %>
+    </div>
+    <%= simple_form_for(
+      [:builder, current_site, current_form, field],
+      :html => { :class => 'field-position' }
+    ) do |f| %>
+      <%= f.input :position, :input_html => { :class => 'position' } %>
+    <% end %>
+    <div class="bottom">
+      <%= content_tag(
+        :span,
+        "Last edited #{content_tag(
+          :span, field.updated_at.strftime("%h %d")
+        )}".html_safe,
+        :class => 'last-edited'
+      ) %>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="top"></div>
+    <div class="bottom"></div>
+  </div>
+</article>

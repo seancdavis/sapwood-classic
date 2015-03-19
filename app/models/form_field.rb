@@ -28,6 +28,10 @@ class FormField < ActiveRecord::Base
 
   belongs_to :form, :touch => true
 
+  # ------------------------------------------ Scopes
+
+  scope :in_position, -> { order('position asc') }
+
   # ------------------------------------------ Instance Methods
 
   def option_values

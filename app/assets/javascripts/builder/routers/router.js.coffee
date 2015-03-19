@@ -14,11 +14,16 @@ class App.Routers.Router extends Backbone.Router
     new App.Views.DataToggle if $('.data-trigger').length > 0
 
   routes:
+    # Pages
     'sites/:site_slug/pages/new': 'newPage'
     'sites/:site_slug/pages/:page_slug/settings/:slug': 'editPage'
     'sites/:site_slug/pages/:page_slug/library': 'pageMedia'
-    'sites/:site_slug/library': 'library'
+    # Templates
     'sites/:site_slug/templates/:template_slug/fields': 'templateFields'
+    # Media
+    'sites/:site_slug/library': 'library'
+    # Forms
+    'sites/:site_slug/forms/:form_slug/fields': 'formFields'
 
   newPage: (site_slug) ->
     new App.Views.UnloadCheck
@@ -45,3 +50,6 @@ class App.Routers.Router extends Backbone.Router
   templateFields: (site_slug, template_slug) ->
     new App.Views.FieldSorter
     new App.Views.GroupEditor
+
+  formFields: (site_slug, form_slug) ->
+    new App.Views.FormFieldSorter

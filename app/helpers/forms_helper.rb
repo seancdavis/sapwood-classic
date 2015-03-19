@@ -21,6 +21,17 @@ module FormsHelper
     end
   end
 
+  def current_form_fields
+    @current_form_fields ||= current_form.fields.in_position
+  end
+
+  def current_form_field
+    @current_form_field ||= begin
+      slug = params[:form_field_slug] || params[:slug]
+      current_form_fields.select { |f| f.slug == slug }.first
+    end
+  end
+
   def redirect_field(f)
     f.input(
       :redirect_route,
@@ -162,8 +173,8 @@ module FormsHelper
       },
       {
         :title => 'Fields',
-        :path => '#',
-        # :controllers => ['fields', 'groups'],
+        :path => builder_route([current_form, current_form_fields], :index),
+        :controllers => ['fields'],
         :class => 'form'
       },
       {

@@ -1,0 +1,14 @@
+<%= builder_page_title(
+  current_form_breadcrumbs,
+  :class => 'breadcrumbs no-border'
+) do %>
+  <%= render :partial => 'builder/forms/tabs' %>
+<% end %>
+
+<section id="page-content" class="data-container">
+  <% if current_form_fields.size > 0 %>
+    <%= data_table(current_form_fields, 'field') %>
+  <% else %>
+    <%= missing_content("No fields yet! Mayhaps you should add one?") %>
+  <% end %>
+</section>
