@@ -9,49 +9,30 @@ To submit an idea, please [create an
 issue](https://github.com/seancdavis/taproot/issues/new) prepended with
 `Request: `.
 
-v1.2: Pages, Templates & Users (March 2015)
+v1.3: Blogging (April 2015)
 -------------
 
-*Further enhancements to pages and templates, while working to separate
-developers from site users. It is believed honing in on the page/template UI
-will make make other enhancements quicker and easier.*
+*Adds features to make it easier (possible) to build and manage blog sites.*
 
-#### Quick File Improvements
+#### Tags
 
-Uploading to Amazon S3 is nice because there is no max capacity. However,
-Sapwood isn't built to be a file management solution. And because of that,
-we're transitioning to local file storage. This will keep things much simpler
-and make Sapwood a little easier to work with for beginners.
+Tags are crucial to using this project as a blog site builder and manager. Tags
+will be managed at a site level, but created on the fly with an autocomplete
+feature.
 
-The plan is to also add a max file size, so you can adjust to your needs.
+#### Related Content
 
-#### Linking Pages and Templates
+What can also be helpful in a blog site is the ability to link related content.
+We'll start very simplistically in this release, with plans to enhance in the
+future.
 
-As we use the new page and template sections of the site, we'll find some items
-we need to add to make them easier to navigate.
+#### Searching
 
-#### Surfacing & Organizing Data
+Searching will be a necessary component of both the builder and the viewer. A
+search feature will be added to the builder, and methods will be made available
+for having a search results page through the viewer.
 
-There is a lot of data when it comes to pages, templates and template fields.
-Surfacing important data on index views will make knowing what you're looking
-at much easier to understand.
-
-#### Quick Edit for Template Fields
-
-To be able to move template fields around and edit some simplistic data without
-going into a form will save huge amounts of time in building out custom
-templates.
-
-#### Site User Focus
-
-Site users will have a narrower focus within the app. If they only have one
-site, they will be take to that site. And then, when within a site, they will
-not see the builder nav, but will only be able to navigate pages.
-
-This separates the roles of developers and content editors, and can serve as a
-catch-all permission solution until there is a need for a more robust system.
-
-v1.3: Potpourri (April 2015)
+v1.4: Potpourri (May 2015)
 -------------
 
 *Adds some odds and ends to make the builder a little easier to use.*
@@ -77,29 +58,6 @@ a little easier to use and to add more content to them.
 
 A few methods will be added to the API to enhance the workflow. This is likely
 only to include updating pages via a webhook.
-
-v1.4: Blogging (May 2015)
--------------
-
-*Adds features to make it easier (possible) to build and manage blog sites.*
-
-#### Tags
-
-Tags are crucial to using this project as a blog site builder and manager. Tags
-will be managed at a site level, but created on the fly with an autocomplete
-feature.
-
-#### Related Content
-
-What can also be helpful in a blog site is the ability to link related content.
-We'll start very simplistically in this release, with plans to enhance in the
-future.
-
-#### Searching
-
-Searching will be a necessary component of both the builder and the viewer. A
-search feature will be added to the builder, and methods will be made available
-for having a search results page through the viewer.
 
 v1.5: File Management (June 2015)
 -------------
