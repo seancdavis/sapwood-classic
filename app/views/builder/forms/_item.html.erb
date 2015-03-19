@@ -15,7 +15,12 @@
         :class => 'view'
       ) %>
       <%= link_to(
-        'Edit',
+        'Fields',
+        builder_site_form_form_fields_path(current_site, item),
+        :class => 'form'
+      ) %>
+      <%= link_to(
+        'Settings',
         builder_route([item], :edit),
         :class => 'edit'
       ) %>
