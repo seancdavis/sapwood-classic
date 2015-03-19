@@ -1,7 +1,7 @@
 module FormsHelper
 
   def site_forms
-    @site_forms ||= current_site.forms
+    @site_forms ||= current_site.forms.includes(:form_submissions)
   end
 
   def current_form
@@ -23,8 +23,8 @@ module FormsHelper
 
   def redirect_field(f)
     f.input(
-      :redirect_route, 
-      :as => :hidden, 
+      :redirect_route,
+      :as => :hidden,
       :wrapper => false,
       :input_html => { :value => params[:redirect_route] || request.path }
     )
@@ -44,34 +44,34 @@ module FormsHelper
 
   def form_view(form)
     unless form.nil?
-      if params[:form] && params[:form] == form.key 
-        if params[:result] && params[:result] == 'success' 
-          form.thank_you_body.html_safe 
-        elsif form 
+      if params[:form] && params[:form] == form.key
+        if params[:result] && params[:result] == 'success'
+          form.thank_you_body.html_safe
+        elsif form
           o = content_tag(
-            :p, 
+            :p,
             'There was an error with your submission.',
             :class => 'error'
           )
-          o += form_markup(form) 
+          o += form_markup(form)
           o.html_safe
-        else 
-          form_markup(form) 
-        end 
-      else 
-        form_markup(form) 
-      end 
+        else
+          form_markup(form)
+        end
+      else
+        form_markup(form)
+      end
     end
   end
 
   def form_markup(form)
     simple_form_for(
-      FormSubmission.new, 
+      FormSubmission.new,
       :url => api_v1_forms_path(:key => form.key)
-    ) do |f|  
+    ) do |f|
       f.simple_fields_for :field_data do |field_data|
         o = f.input(
-          :redirect_url, 
+          :redirect_url,
           :as => :hidden,
           :input_html => { :value => request.url }
         )
@@ -120,6 +120,25 @@ module FormsHelper
         }
       )
     end
+  end
+
+  def current_form_breadcrumbs
+    o = link_to("all forms", builder_route([site_forms], :index))
+    if current_form
+      o += content_tag(:span, '/', :class => 'separator')
+      if current_form.title.blank?
+        o += link_to(
+          "new form",
+          builder_route([current_form], :new)
+        )
+      else
+        o += link_to(
+          current_form.slug,
+          builder_route([current_form], :edit)
+        )
+      end
+    end
+    o.html_safe
   end
 
 end

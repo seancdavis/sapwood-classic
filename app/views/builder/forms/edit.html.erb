@@ -1,11 +1,9 @@
 <%= builder_page_title("Edit #{current_form.title}") do %>
   <%= link_to(
-    'New Form', 
-    builder_route([site_forms], :new), 
+    'New Form',
+    builder_route([site_forms], :new),
     :class => 'new'
   ) %>
 <% end %>
 
 <%= content_tag(:section, render('form'), :id => 'page-content') %>
-
-<%= sidebar %>

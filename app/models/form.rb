@@ -30,8 +30,8 @@ class Form < ActiveRecord::Base
   belongs_to :site, :touch => true
   belongs_to :email_to, :class_name => FormField
 
-  has_many :form_fields
-  has_many :form_submissions
+  has_many :form_fields, :dependent => :destroy
+  has_many :form_submissions, :dependent => :destroy
 
   accepts_nested_attributes_for :form_fields
 

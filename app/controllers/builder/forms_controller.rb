@@ -3,18 +3,9 @@ class Builder::FormsController < BuilderController
   include FormsHelper
 
   def index
-    if site_forms.size > 0
-      path = builder_route([site_forms.first], :show)
-    else
-      path = builder_route([site_forms], :new)
-    end
-    redirect_to(path)
   end
 
   def show
-    # unless current_form_submissions.size > 0
-    #   redirect_to builder_route([current_form], :edit)
-    # end
   end
 
   def new
@@ -24,7 +15,7 @@ class Builder::FormsController < BuilderController
   def create
     @current_form = Form.new(form_params)
     if current_form.save
-      redirect_to builder_route([current_form], :index), 
+      redirect_to builder_route([current_form], :index),
         :notice => t('notices.created', :item => 'Form')
     else
       render 'new'
@@ -33,7 +24,7 @@ class Builder::FormsController < BuilderController
 
   def update
     if current_form.update(form_params)
-      redirect_to builder_route([current_form], :edit), 
+      redirect_to builder_route([current_form], :edit),
         :notice => t('notices.updated', :item => 'Form')
     else
       render 'edit'
@@ -42,7 +33,7 @@ class Builder::FormsController < BuilderController
 
   def destroy
     current_form.destroy
-    redirect_to builder_route([site_forms], :index), 
+    redirect_to builder_route([site_forms], :index),
       :notice => t('notices.deleted', :item => 'Form')
   end
 

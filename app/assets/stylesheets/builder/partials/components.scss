@@ -91,7 +91,7 @@ a {
   &.unpublish, &.template, &.all, &.help, &.pages, &.maxed-out, &.not-maxed,
   &.unlimited, &.form, &.data-trigger, &.reorder, &.protected, &.unprotected,
   &.hidden, &.hide, &.visible, &.show, &.half-width, &.media, &.move, &.admin,
-  &.user, &.star {
+  &.user, &.star, &.view {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
@@ -151,6 +151,7 @@ a {
   &.unpublish:before,
   &.maxed-out:before      { content: "\e357"; }
   &.user:before           { content: "\e185"; }
+  &.view:before           { content: "\e2d9"; }
   &.visible:before        { content: "\e2d9"; }
 
   &.dropdown-trigger:after { content: "\e3b2"; }

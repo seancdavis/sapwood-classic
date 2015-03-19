@@ -96,7 +96,8 @@
 
   section.data-table {
     border: 1px solid $color-grey-lighter;
-    article.page, article.template, article.form-field, article.user {
+    article.page, article.template, article.form-field, article.user,
+    article.form {
       position: relative;
       min-height: 72px;
       padding: 10px 10px;
@@ -187,7 +188,7 @@
                 margin: 0;
                 color: $color-dark-lighter;
               }
-              .path, .filename, .method-name {
+              .path, .filename, .slug, .method-name {
                 display: inline-block;
                 margin: 2px 0 0 5px;
                 font-size: 14px;

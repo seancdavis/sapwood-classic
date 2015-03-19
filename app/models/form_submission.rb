@@ -22,7 +22,7 @@ class FormSubmission < ActiveRecord::Base
 
   # ------------------------------------------ Associations
 
-  belongs_to :form
+  belongs_to :form, :touch => true
 
   # ------------------------------------------ Scopes
 
@@ -47,8 +47,8 @@ class FormSubmission < ActiveRecord::Base
 
   def send_response
     form = self.form
-    if form.email_subject.present? && 
-      form.email_body.present? && 
+    if form.email_subject.present? &&
+      form.email_body.present? &&
       form.email_to_id.present?
         FormsMailer.response_message(
           self.field_data[form.email_to.slug],
