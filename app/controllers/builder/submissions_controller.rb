@@ -2,6 +2,9 @@ class Builder::SubmissionsController < BuilderController
 
   include FormsHelper
 
+  def index
+  end
+
   def show
   end
 
@@ -9,7 +12,12 @@ class Builder::SubmissionsController < BuilderController
 
     def builder_html_title
       @builder_html_title ||= begin
-        "#{current_form_submission.field_data.first.last} >> #{current_form.title}"
+        if current_form_submission
+          t = current_form_submission.field_data.first.last
+          t += " >> #{current_form.title}"
+        else
+          "Submissions >> #{current_form.title}"
+        end
       end
     end
 

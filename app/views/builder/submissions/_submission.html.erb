@@ -1,0 +1,29 @@
+<article class="form-submission">
+  <%= content_tag(:span, '', :class => 'status') %>
+  <div class="data">
+    <div class="top">
+      <%= content_tag(:h4, submission.title, :class => 'title') %>
+    </div>
+    <div class="bottom">
+      <%= content_tag(
+        :span,
+        "Last edited #{content_tag(
+          :span, submission.updated_at.strftime("%h %d")
+        )}".html_safe,
+        :class => 'last-edited'
+      ) %>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="top">
+      <%= link_to(
+        'View',
+        builder_site_form_submission_path(
+          current_site, current_form, submission
+        ),
+        :class => 'view'
+      ) %>
+    </div>
+    <div class="bottom"></div>
+  </div>
+</article>

@@ -70,7 +70,7 @@ Rails.application.routes.draw do
 
       # Forms
       resources :forms, :param => :slug do
-        resources :submissions, :param => :idx, :only => [:show]
+        resources :submissions, :param => :idx, :only => [:index, :show]
       end
 
       # Files

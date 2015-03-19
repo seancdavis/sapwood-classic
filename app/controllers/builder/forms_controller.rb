@@ -6,6 +6,7 @@ class Builder::FormsController < BuilderController
   end
 
   def show
+    redirect_to(builder_site_form_submissions_path(current_site, current_form))
   end
 
   def new
