@@ -32,6 +32,10 @@ class FormField < ActiveRecord::Base
 
   scope :in_position, -> { order('position asc') }
 
+  # ------------------------------------------ Validations
+
+  validates :title, :data_type, :presence => true
+
   # ------------------------------------------ Instance Methods
 
   def option_values

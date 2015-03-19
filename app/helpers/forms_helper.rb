@@ -155,6 +155,21 @@ module FormsHelper
           builder_route([current_form, current_form_submission], :show),
           :class => 'disabled'
         )
+      elsif current_form_field
+        o += content_tag(:span, '/', :class => 'separator')
+        if current_form_field.title.blank?
+          o += link_to(
+            "new field",
+            builder_route([current_form, current_form_fields], :new),
+            :class => 'disabled'
+          )
+        else
+          o += link_to(
+            current_form_field.title,
+            builder_route([current_form, current_form_field], :edit),
+            :class => 'disabled'
+          )
+        end
       end
     end
     o.html_safe
