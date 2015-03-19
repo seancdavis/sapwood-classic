@@ -18,7 +18,7 @@ forms:
   icon: clipboard3
   label: Forms
   path: builder_site_forms_path
-  controllers: ['forms', 'submissions']
+  controllers: ['forms', 'submissions', 'fields']
 users:
   icon: user2
   label: Users

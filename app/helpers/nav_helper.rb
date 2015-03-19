@@ -30,7 +30,11 @@ module NavHelper
   end
 
   def builder_nav_active?(item, path, controllers = [])
-    if controllers.include?(controller_name) || request.path == path
+    if(
+      request.path =~ /^#{path}/ && (
+        controllers.include?(controller_name) || request.path == path
+      )
+    )
       @builder_nav_active_item = item
       true
     else
