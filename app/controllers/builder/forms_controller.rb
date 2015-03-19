@@ -1,5 +1,7 @@
 class Builder::FormsController < BuilderController
 
+  before_filter :verify_admin, :except => [:index, :show]
+
   include FormsHelper
 
   def index

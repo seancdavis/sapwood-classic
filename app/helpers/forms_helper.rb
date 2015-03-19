@@ -211,30 +211,28 @@ module FormsHelper
     s = current_site
     f = current_form
     subs = current_form_submissions
-    [
+    actions = [
       {
         :title => "#{current_form_submissions.size} Submissions",
         :path => builder_route([f, subs], :index),
         :class => 'view',
         :controllers => ['submissions']
-      },
-      {
+      }
+    ]
+    if current_user.admin?
+      actions << {
         :title => 'Fields',
         :path => builder_route([current_form, current_form_fields], :index),
         :controllers => ['fields'],
         :class => 'form'
-      },
-      {
+      }
+      actions << {
         :title => 'Settings',
         :path => builder_route([f], :edit),
         :class => 'edit'
-      },
-      # {
-      #   :title => 'Developer Help',
-      #   :path => builder_route([t], :show),
-      #   :class => 'help'
-      # }
-    ]
+      }
+    end
+    actions
   end
 
 end

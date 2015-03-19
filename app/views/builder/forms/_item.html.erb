@@ -18,12 +18,12 @@
         'Fields',
         builder_site_form_form_fields_path(current_site, item),
         :class => 'form'
-      ) %>
+      ) if current_user.admin? %>
       <%= link_to(
         'Settings',
         builder_route([item], :edit),
         :class => 'edit'
-      ) %>
+      ) if current_user.admin? %>
     </div>
     <div class="bottom">
       <%= link_to(
@@ -32,7 +32,7 @@
         :method => :delete,
         :class => 'delete',
         :data => { :confirm => 'This will remove this form from this project. It will also delete all of its fields and submissions. Are you sure?' }
-      ) %>
+      ) if current_user.admin? %>
     </div>
   </div>
 </article>

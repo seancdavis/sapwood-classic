@@ -1,5 +1,7 @@
 class Builder::Forms::FieldsController < BuilderController
 
+  before_filter :verify_admin
+
   include FormsHelper
 
   def index

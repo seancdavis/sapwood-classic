@@ -7,7 +7,7 @@
       :class => 'new'
     ),
     :class => 'new-buttons dropdown'
-  ) %>
+  ) if current_user.admin? %>
 <% end %>
 
 <section id="page-content" class="data-container">
