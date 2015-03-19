@@ -16,6 +16,7 @@
 #  placeholder   :string(255)
 #  default_value :string(255)
 #  show_label    :boolean          default(TRUE)
+#  hidden        :boolean          default(FALSE)
 #
 
 FactoryGirl.define do

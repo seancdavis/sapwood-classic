@@ -50,8 +50,15 @@
   </div>
 
   <div class="half-row">
-    <%= f.input :required %>
-    <%= em_p("Should we force the user to fill out this field?") %>
+    <div class="input boolean optional">
+      <%= f.input :required, :wrapper => false %>
+      <%= em_p("Should we force the user to fill out this field?") %>
+    </div>
+    <div class="input boolean optional">
+      <%= f.input :hidden, :wrapper => false %>
+      <%= em_p("We can hide the field, which will remove it from being displayed
+        on your site, but will be editable in the builder.") %>
+    </div>
   </div>
 
   <%= f.submit "Save Form Field" %>

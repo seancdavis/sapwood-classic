@@ -72,7 +72,8 @@ class Builder::Forms::FieldsController < BuilderController
         :label,
         :placeholder,
         :default_value,
-        :show_label
+        :show_label,
+        :hidden
       )
     end
 

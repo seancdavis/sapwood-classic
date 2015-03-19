@@ -22,6 +22,8 @@
       <%= link_to(field.data_type, '', :class => 'database disabled') %>
       <%= link_to('required', '', :class => 'required disabled') if
         field.required? %>
+      <%= link_to('hidden', '', :class => 'hidden disabled') if
+        field.hidden? %>
     </div>
   </div>
   <div class="actions">

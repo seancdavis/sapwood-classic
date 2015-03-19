@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316163701) do
+ActiveRecord::Schema.define(version: 20150319162741) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150316163701) do
     t.string   "placeholder"
     t.string   "default_value"
     t.boolean  "show_label",    default: true
+    t.boolean  "hidden",        default: false
   end
 
   create_table "form_submissions", force: true do |t|

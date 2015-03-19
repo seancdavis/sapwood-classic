@@ -86,7 +86,7 @@ module FormsHelper
           :as => :hidden,
           :input_html => { :value => request.url }
         )
-        form.fields.each do |field|
+        form.fields.visible.each do |field|
           o += form_field_view(field, field_data)
         end
         o += content_tag(:div, :class => 'submit') do
