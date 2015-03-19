@@ -57,4 +57,16 @@ class FormSubmission < ActiveRecord::Base
     end
   end
 
+  def method_missing(method, *arguments, &block)
+    begin
+      super
+    rescue
+      if field_data[method.downcase.to_s].present?
+        field_data[method.downcase.to_s]
+      else
+        super
+      end
+    end
+  end
+
 end

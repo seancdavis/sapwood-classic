@@ -71,7 +71,7 @@ Rails.application.routes.draw do
       # Forms
       resources :forms, :param => :slug do
         resources :form_submissions, :path => :submissions, :param => :idx,
-          :controller => 'forms/submissions', :only => [:index, :show]
+          :controller => 'forms/submissions', :except => [:new, :create]
         resources :form_fields, :path => :fields,
           :controller => 'forms/fields', :param => :slug
       end

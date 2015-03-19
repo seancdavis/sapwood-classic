@@ -8,7 +8,22 @@ class Builder::Forms::SubmissionsController < BuilderController
   def show
   end
 
+  def update
+    if current_form_submission.update!(update_params)
+      redirect_to(
+        builder_route([current_form, current_form_submission], :index),
+        :notice => 'Submission updated successfully!'
+      )
+    else
+      render 'edit'
+    end
+  end
+
   private
+
+    def update_params
+      params.require(:form_submission).permit!
+    end
 
     def builder_html_title
       @builder_html_title ||= begin

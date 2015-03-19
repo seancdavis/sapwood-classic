@@ -133,6 +133,38 @@ module FormsHelper
     end
   end
 
+  def builder_form_field_view(field, form, submission)
+    case field.data_type
+    when 'select', 'check_boxes', 'radio_buttons'
+      form.input(
+        field.slug.to_sym,
+        :as => field.data_type,
+        :collection => field.option_values,
+        :required => field.required,
+        :selected => submission.send(field.slug) || field.default_value
+      )
+    when 'boolean'
+      form.input(
+        field.slug.to_sym,
+        :as => field.data_type,
+        :collection => field.option_values,
+        :required => field.required,
+        :input_html => {
+          :checked => submission.send(field.slug).to_bool
+        }
+      )
+    else
+      form.input(
+        field.slug.to_sym,
+        :as => field.data_type,
+        :required => field.required,
+        :input_html => {
+          :value => submission.send(field.slug) || field.default_value
+        }
+      )
+    end
+  end
+
   def current_form_breadcrumbs
     o = link_to("all forms", builder_route([site_forms], :index))
     if current_form
