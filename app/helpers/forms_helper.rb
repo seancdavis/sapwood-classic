@@ -134,11 +134,39 @@ module FormsHelper
       else
         o += link_to(
           current_form.slug,
-          builder_route([current_form], :edit)
+          builder_route([current_form], :show)
         )
       end
     end
     o.html_safe
+  end
+
+  def current_form_actions
+    s = current_site
+    f = current_form
+    [
+      {
+        :title => "#{current_form_submissions.size} Submissions",
+        :path => builder_route([f], :show),
+        :class => 'view'
+      },
+      {
+        :title => 'Fields',
+        :path => '#',
+        # :controllers => ['fields', 'groups'],
+        :class => 'form'
+      },
+      {
+        :title => 'Settings',
+        :path => builder_route([f], :edit),
+        :class => 'edit'
+      },
+      # {
+      #   :title => 'Developer Help',
+      #   :path => builder_route([t], :show),
+      #   :class => 'help'
+      # }
+    ]
   end
 
 end

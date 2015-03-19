@@ -1,9 +1,8 @@
-<%= builder_page_title("Edit #{current_form.title}") do %>
-  <%= link_to(
-    'New Form',
-    builder_route([site_forms], :new),
-    :class => 'new'
-  ) %>
+<%= builder_page_title(
+  current_form_breadcrumbs,
+  :class => 'breadcrumbs no-border'
+) do %>
+  <%= render :partial => 'tabs' %>
 <% end %>
 
 <%= content_tag(:section, render('form'), :id => 'page-content') %>
