@@ -14,7 +14,7 @@ class BuilderController < ActionController::Base
   )
 
   before_filter :authenticate_user!
-  before_filter :verify_site
+  before_filter :verify_site, :except => [:home]
   before_filter :init_options
   before_filter :builder_html_title
 
