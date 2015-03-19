@@ -18,9 +18,7 @@
     <div class="top">
       <%= link_to(
         'View',
-        builder_site_form_submission_path(
-          current_site, current_form, submission
-        ),
+        builder_route([current_form, submission], :show),
         :class => 'view'
       ) %>
     </div>

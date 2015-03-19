@@ -141,9 +141,7 @@ module FormsHelper
         o += content_tag(:span, '/', :class => 'separator')
         o += link_to(
           current_form_submission.title.downcase,
-          builder_site_form_submission_path(
-            current_site, current_form, current_form_submission
-          ),
+          builder_route([current_form, current_form_submission], :show),
           :class => 'disabled'
         )
       end
@@ -154,10 +152,11 @@ module FormsHelper
   def current_form_actions
     s = current_site
     f = current_form
+    subs = current_form_submissions
     [
       {
         :title => "#{current_form_submissions.size} Submissions",
-        :path => builder_site_form_submissions_path(current_site, current_form),
+        :path => builder_route([f, subs], :index),
         :class => 'view',
         :controllers => ['submissions']
       },
