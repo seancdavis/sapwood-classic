@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150214155901) do
+ActiveRecord::Schema.define(version: 20150319162741) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150214155901) do
     t.string   "placeholder"
     t.string   "default_value"
     t.boolean  "show_label",    default: true
+    t.boolean  "hidden",        default: false
   end
 
   create_table "form_submissions", force: true do |t|
@@ -84,6 +85,13 @@ ActiveRecord::Schema.define(version: 20150214155901) do
     t.datetime "updated_at"
   end
 
+  create_table "page_documents", force: true do |t|
+    t.integer  "page_id"
+    t.integer  "document_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pages", force: true do |t|
     t.integer  "template_id"
     t.string   "title"
@@ -100,6 +108,8 @@ ActiveRecord::Schema.define(version: 20150214155901) do
     t.string   "order"
     t.boolean  "show_in_nav",      default: true
     t.text     "body_md"
+    t.string   "page_path"
+    t.integer  "last_editor_id"
   end
 
   add_index "pages", ["ancestry"], name: "index_pages_on_ancestry", using: :btree
@@ -138,6 +148,8 @@ ActiveRecord::Schema.define(version: 20150214155901) do
     t.boolean  "protected",         default: false
     t.boolean  "hidden",            default: false
     t.boolean  "can_be_hidden",     default: true
+    t.string   "default_value"
+    t.boolean  "half_width",        default: false
   end
 
   create_table "template_groups", force: true do |t|
@@ -160,10 +172,13 @@ ActiveRecord::Schema.define(version: 20150214155901) do
     t.text     "children"
     t.string   "order_method"
     t.string   "order_direction"
-    t.boolean  "can_be_root",     default: false
-    t.boolean  "limit_pages",     default: false
-    t.integer  "max_pages",       default: 0
-    t.boolean  "maxed_out",       default: false
+    t.boolean  "can_be_root",        default: false
+    t.boolean  "limit_pages",        default: false
+    t.integer  "max_pages",          default: 0
+    t.boolean  "maxed_out",          default: false
+    t.integer  "last_editor_id"
+    t.boolean  "has_show_view",      default: true
+    t.boolean  "can_have_documents", default: false
   end
 
   create_table "users", force: true do |t|

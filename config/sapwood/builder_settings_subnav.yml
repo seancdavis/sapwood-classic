@@ -21,10 +21,10 @@ backup:
   classes: database
   request_type: post
   env: production
-sync:
-  label: Sync Database
-  path: builder_site_sync_path
-  classes: database
-  request_type: post
-  confirm: This is a destructive action. Proceed?
-  env: development
+# sync:
+#   label: Sync Database
+#   path: builder_site_sync_path
+#   classes: database
+#   request_type: post
+#   confirm: This is a destructive action. Proceed?
+#   env: development

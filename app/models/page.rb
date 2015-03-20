@@ -18,6 +18,8 @@
 #  order            :string(255)
 #  show_in_nav      :boolean          default(TRUE)
 #  body_md          :text
+#  page_path        :string(255)
+#  last_editor_id   :integer
 #
 
 class Page < ActiveRecord::Base
@@ -35,8 +37,12 @@ class Page < ActiveRecord::Base
   # ------------------------------------------ Associations
 
   belongs_to :template, :touch => true
+  belongs_to :last_editor, :class_name => 'User'
 
   has_one :site, :through => :template
+
+  has_many :page_documents
+  has_many :documents, :through => :page_documents
 
   # ------------------------------------------ Scopes
 
@@ -74,6 +80,18 @@ class Page < ActiveRecord::Base
     update_columns(:field_data => fd)
   end
 
+  after_save :cache_page_path
+
+  def cache_page_path
+    update_columns(:page_path => "/#{path.collect(&:slug).join('/')}")
+  end
+
+  after_save :save_children, :if => :slug_changed?
+
+  def save_children
+    children.each(&:save!)
+  end
+
   # ------------------------------------------ Instance Methods
 
   def respond_to_fields
@@ -105,8 +123,8 @@ class Page < ActiveRecord::Base
   end
 
   def missing_fields
-    template.fields.collect(&:slug) - 
-      ['title','description','body','show_in_nav','slug','position'] - 
+    template.fields.collect(&:slug) -
+      ['title','description','body','show_in_nav','slug','position'] -
       field_data.keys
   end
 

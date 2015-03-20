@@ -1,11 +1,14 @@
-<%= current_page_breadcrumbs %>
-
-<%= builder_page_title("Pages") do %>
+<%= builder_page_title(current_page_breadcrumbs, :class => 'breadcrumbs') do %>
   <%= new_root_page_links %>
-  <%= subtitle("These are the root pages for your site. You can create a 
-  new root page, or drill down from here.") %>
 <% end %>
 
-<section id="page-content full-width">
-  <%= data_table(site_root_pages, 'page') %>
+<section id="page-content" class="data-container">
+  <%= render :partial => 'filters', :locals => { :pages => site_root_pages } %>
+  <% if @pages.size > 0 %>
+    <%= data_table(@pages, 'page') %>
+  <% elsif site_root_pages.size > 0 %>
+    <%= missing_content("No pages match your criteria.") %>
+  <% else %>
+    <%= missing_content("No pages here yet. Why don't you create one?") %>
+  <% end %>
 </section>

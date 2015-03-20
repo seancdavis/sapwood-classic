@@ -1,0 +1,38 @@
+<article class="form">
+  <%= content_tag(:span, '', :class => 'status') %>
+  <div class="data">
+    <div class="top">
+      <%= content_tag(:h4, item.title, :class => 'title') %>
+      <%= content_tag(:span, item.slug, :class => 'slug') %>
+    </div>
+    <div class="bottom"></div>
+  </div>
+  <div class="actions">
+    <div class="top">
+      <%= link_to(
+        "#{item.form_submissions.size} Submissions",
+        builder_route([item], :show),
+        :class => 'view'
+      ) %>
+      <%= link_to(
+        'Fields',
+        builder_site_form_form_fields_path(current_site, item),
+        :class => 'form'
+      ) if current_user.admin? %>
+      <%= link_to(
+        'Settings',
+        builder_route([item], :edit),
+        :class => 'edit'
+      ) if current_user.admin? %>
+    </div>
+    <div class="bottom">
+      <%= link_to(
+        'Delete',
+        builder_route([item], :show),
+        :method => :delete,
+        :class => 'delete',
+        :data => { :confirm => 'This will remove this form from this project. It will also delete all of its fields and submissions. Are you sure?' }
+      ) if current_user.admin? %>
+    </div>
+  </div>
+</article>

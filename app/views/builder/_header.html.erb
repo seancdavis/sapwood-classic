@@ -2,7 +2,7 @@
   <div class="site-title">
     <%= content_tag(:h1) {
       link_to(
-        current_site.title, 
+        current_site.title,
         builder_site_path(current_site)
       )
     } if current_site.id %>
@@ -12,7 +12,7 @@
 
 <div class="user">
   <%= link_to('#', :class => 'user-menu-trigger') do %>
-    <%= content_tag(:span, current_user.display_name.upcase, 
+    <%= content_tag(:span, current_user.display_name.upcase,
       :class => 'name') %>
     <%= avatar(current_user, 84) %>
   <% end %>

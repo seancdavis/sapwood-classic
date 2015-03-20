@@ -1,16 +1,56 @@
 class Builder::PagesController < BuilderController
 
+  before_filter :verify_current_page, :except => [:index, :new, :create]
+  before_filter :verify_admin, :except => [:index, :show, :edit, :update]
+
   def index
+    @pages = site_root_pages
+    if params[:published]
+      if ['published','draft'].include?(params[:published])
+        @pages = @pages.select { |p| p.send("#{params[:published]}?") }
+      end
+    else
+      redirect = true
+      params[:published] = 'all'
+    end
+    if params[:template]
+      if params[:template] != 'all'
+        @pages = @pages.select { |p| p.template.slug == params[:template] }
+      end
+    else
+      redirect = true
+      params[:template] = 'all'
+    end
+    if redirect
+      redirect_to builder_site_pages_path(
+        current_site,
+        :published => params[:published],
+        :template => params[:template]
+      )
+    end
   end
 
   def show
+    if template_children.size > 0
+      if params[:template].blank? || params[:published].blank?
+        t = params[:template] || 'any'
+        p = params[:published] || 'all'
+        redirect_to(
+          builder_site_page_path(
+            current_site, current_page, :published => p, :template => t
+          )
+        )
+      end
+    else
+      redirect_to builder_route([current_page], :edit)
+    end
   end
 
-  def children
+  def help
   end
 
   def new
-    redirect_to current_site unless params[:template]
+    redirect_to builder_site_path(current_site) unless params[:template]
     @current_template = site_templates.find_by_slug(params[:template])
     @current_page = Page.new
   end
@@ -21,9 +61,9 @@ class Builder::PagesController < BuilderController
     if current_page.save!
       # save_files
       redirect_to(
-        builder_route([current_page], :edit), 
+        builder_route([current_page], :edit),
         :notice => t(
-          'notices.created', 
+          'notices.created',
           :item => controller_name.humanize.titleize
         )
       )
@@ -33,11 +73,14 @@ class Builder::PagesController < BuilderController
   end
 
   def edit
-    if current_template_group.nil?
+    if current_template_group.nil? && params[:slug] != 'media'
       redirect_to builder_site_page_settings_path(
         current_site, current_page, current_template_groups.first
       )
     end
+  end
+
+  def move
   end
 
   def update
@@ -48,7 +91,7 @@ class Builder::PagesController < BuilderController
       route = redirect_route.gsub(/#{slug}/, current_page.slug)
       redirect_to(route,
         :notice => t(
-          'notices.updated', 
+          'notices.updated',
           :item => controller_name.humanize.titleize
         )
       )
@@ -76,7 +119,7 @@ class Builder::PagesController < BuilderController
       path = builder_route([parent_page], :show)
     end
     redirect_to(
-      path, 
+      path,
       :notice => t('notices.updated', :item => 'Page')
     )
   end
@@ -89,9 +132,9 @@ class Builder::PagesController < BuilderController
       )
       p = params.require(:page).permit(
         :title,
-        :slug,  
-        :description, 
-        :body, 
+        :slug,
+        :description,
+        :body,
         :body_md,
         :published,
         :position,
@@ -99,22 +142,23 @@ class Builder::PagesController < BuilderController
         :show_in_nav,
         :template,
         :field_data => []
-      ).merge(:template => current_template)
+      ).merge(:template => current_template, :last_editor => current_user)
     end
 
     def update_params
       p = params.require(:page).permit(
         :title,
-        :slug,  
-        :description, 
-        :body, 
+        :slug,
+        :description,
+        :body,
         :body_md,
         :published,
         :position,
         :parent_id,
+        :template_id,
         :show_in_nav,
         :template
-      )
+      ).merge(:last_editor => current_user)
       unless params[:page][:field_data].blank?
         p = p.merge(
           :field_data => current_page.field_data.merge(params[:page][:field_data])
@@ -144,6 +188,21 @@ class Builder::PagesController < BuilderController
         params[:page][:redirect_route] || builder_site_pages(current_site)
       else
         params[:redirect_route] || builder_site_pages(current_site)
+      end
+    end
+
+    def builder_html_title
+      @builder_html_title ||= begin
+        case action_name
+        when 'help', 'edit'
+          "#{action_name.titleize} >> #{current_page.title}"
+        when 'index'
+          "#{current_site.title} Pages"
+        when 'new'
+          params[:template] ? "New #{params[:template].titleize}" : "New Page"
+        else
+          current_page.title
+        end
       end
     end
 

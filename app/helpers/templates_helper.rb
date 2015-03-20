@@ -15,6 +15,10 @@ module TemplatesHelper
     end
   end
 
+  def verify_current_template
+    not_found if current_template.nil?
+  end
+
   def current_template_pages
     @current_template_pages ||= current_template.webpages.alpha
   end
@@ -45,7 +49,8 @@ module TemplatesHelper
 
   def current_template_field
     @current_template_field ||= begin
-      current_template_fields.select { |f| f.slug == params[:slug] }.first
+      slug = params[:template_field_slug] || params[:slug]
+      current_template_fields.select { |f| f.slug == slug }.first
     end
   end
 
@@ -96,71 +101,134 @@ module TemplatesHelper
     t = current_template
     [
       {
-        :title => 'Developer Help', 
-        :path => builder_route([t], :show), 
+        :title => "#{current_template_pages.size} Pages",
+        :path => builder_route([t, current_template_pages], :index),
+        :class => 'pages'
       },
       {
-        :title => 'Pages', 
-        :path => builder_route([t, current_template_pages], :index), 
+        :title => 'Form Fields',
+        :path => builder_route([t, t.fields], :index),
+        :controllers => ['fields', 'groups'],
+        :class => 'form'
       },
       {
-        :title => 'Form Fields', 
-        :path => builder_route([t, t.fields], :index), 
-        :controllers => ['fields', 'groups']
+        :title => 'Edit Template',
+        :path => edit_builder_site_template_path(s, t),
+        :class => 'edit'
       },
       {
-        :title => 'Display Settings', 
-        :path => builder_site_template_settings_path(s, t)
-      },
-      {
-        :title => 'Developer Settings', 
-        :path => builder_site_template_dev_settings_path(s, t)
+        :title => 'Developer Help',
+        :path => builder_route([t], :show),
+        :class => 'help'
       }
     ]
   end
 
+  def quick_template_status(template)
+    if !template.limit_pages?
+      link_to('', '#', :class => 'disabled unlimited')
+    elsif template.maxed_out?
+      link_to('', '#', :class => 'disabled maxed-out')
+    else
+      link_to('', '#', :class => 'disabled not-maxed')
+    end
+  end
+
+  def template_status_filters
+    o = link_to(
+      "All",
+      builder_site_templates_path(current_site, :tmpl_status => 'all'),
+      :class => params[:tmpl_status] == 'all' ? 'active' : nil
+    )
+    o += link_to(
+      "Unlimited",
+      builder_site_templates_path(current_site, :tmpl_status => 'unlimited'),
+      :class => "unlimited
+        #{params[:tmpl_status] == 'unlimited' ? 'active' : nil}"
+    )
+    o += link_to(
+      "Not Maxed",
+      builder_site_templates_path(current_site, :tmpl_status => 'not_maxed'),
+      :class => "not-maxed
+        #{params[:tmpl_status] == 'not_maxed' ? 'active' : nil}"
+    )
+    o += link_to(
+      "Maxed Out",
+      builder_site_templates_path(current_site, :tmpl_status => 'maxed_out'),
+      :class => "maxed-out
+        #{params[:tmpl_status] == 'maxed_out' ? 'active' : nil}"
+    )
+    o.html_safe
+  end
+
+  def template_last_edited(template)
+    date = template.updated_at.strftime("%h %d")
+    if template.last_editor
+      editor = " by #{content_tag(:span, template.last_editor.display_name)}"
+    else
+      editor = ''
+    end
+    content_tag(:span, :class => 'last-edited') do
+      "Last edited #{content_tag(:span, date)}#{editor}".html_safe
+    end
+  end
+
+  def quick_template_field_status(field)
+    if field.protected?
+      link_to('', '#', :class => 'disabled protected',
+        :title => 'Protected')
+    else
+      link_to('', '#', :class => 'disabled unprotected',
+        :title => 'Fully Editable')
+    end
+  end
+
   def current_template_breadcrumbs
-    content_tag(:nav, :class => 'breadcrumbs') do
-      content_tag(:ul) do
-        o = content_tag(
-          :li, 
-          link_to('All Templates', builder_route([site_templates], :index))
+    o = link_to("all templates", builder_route([site_templates], :index))
+    if current_template
+      o += content_tag(:span, '/', :class => 'separator')
+      if current_template.title.blank?
+        o += link_to(
+          "new",
+          builder_route([current_template], :new)
         )
-        if current_template.id
-          o += content_tag(
-            :li, 
-            link_to(
-              current_template.title, 
-              builder_route([current_template], :show)
-            )
-          )
-          if ['fields','groups'].include?(controller_name)
-            o += content_tag(
-              :li, 
-              link_to(
-                'Form Fields', 
-                builder_route(
-                  [current_template, current_template_fields], 
-                  :index
-                )
-              )
-            )
-            o += content_tag(
-              :li, 
-              link_to(
-                "#{action_name.titleize} #{controller_name.singularize.titleize}", 
-                request.path
-              )
-            ) unless action_name == 'index'
-          else
-            o += content_tag(
-              :li, 
-              link_to(request.path.split('/').last.titleize, request.path)
-            ) unless action_name == 'index'
-          end
-          o.html_safe
-        end
+      else
+        o += link_to(
+          current_template.slug,
+          builder_route([current_template, current_template_pages], :index)
+        )
       end
+      if current_template_field
+        if action_name == 'new'
+          o += content_tag(:span, '/', :class => 'separator')
+          o += link_to("new field", '#', :class => 'disabled')
+        else
+          o += content_tag(:span, '/', :class => 'separator')
+          o += link_to(current_template_field.slug, '#', :class => 'disabled')
+        end
+      elsif controller_name == 'groups'
+        o += content_tag(:span, '/', :class => 'separator')
+        o += link_to("new group", '#', :class => 'disabled')
+      end
+    end
+    o.html_safe
+  end
+
+  def eligible_templates(page)
+    @eligible_templates ||= begin
+      children = current_template.children.reject(&:blank?)
+      # Start with templates that have the same allowable
+      # children as the current template
+      templates = site_templates { |t| t.children.reject(&:blank?) == children }
+      # Get rid of any templates that don't have room for
+      # more pages
+      templates = templates.reject(&:maxed_out?)
+      # If it's a root page, we don't allow templates that
+      # can't be a root page
+      if current_page.parent_id.blank?
+        templates = templates.select(&:can_be_root?)
+      end
+      (templates + [current_template]).uniq
     end
   end
 

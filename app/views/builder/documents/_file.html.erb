@@ -1,23 +1,23 @@
-<article class="image" data-src="<%= file.document.url %>" 
+<article class="image" data-src="<%= file.document.url %>"
   data-idx="<%= file.idx %>">
   <%= image_tag file.thumbnail %>
   <header class="<%= 'select' if params[:select] %>">
     <%= link_to(
-      '', 
+      '',
       builder_site_document_cropper_path(current_site, file),
       :class => 'crop image-crop-trigger'
     ) if !params[:select] && file.is_image? %>
     <%= link_to(
-      '', 
-      builder_route([file], :show), 
-      :class => 'delete', 
-      :method => :delete, 
-      :data => { :confirm => 'Are you sure?' } 
+      '',
+      builder_route([file], :show),
+      :class => 'delete',
+      :method => :delete,
+      :data => { :confirm => 'Are you sure?' }
     ) unless params[:select] %>
     <%= link_to(
-      'Add This File', 
-      '#', 
-      :class => 'select', 
+      'Add This File',
+      '#',
+      :class => 'select',
     ) if params[:select] %>
   </header>
 </article>

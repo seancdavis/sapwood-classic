@@ -2,21 +2,24 @@
 #
 # Table name: templates
 #
-#  id              :integer          not null, primary key
-#  site_id         :integer
-#  title           :string(255)
-#  slug            :string(255)
-#  description     :text
-#  created_at      :datetime
-#  updated_at      :datetime
-#  page_templates  :text
-#  children        :text
-#  order_method    :string(255)
-#  order_direction :string(255)
-#  can_be_root     :boolean          default(FALSE)
-#  limit_pages     :boolean          default(FALSE)
-#  max_pages       :integer          default(0)
-#  maxed_out       :boolean          default(FALSE)
+#  id                 :integer          not null, primary key
+#  site_id            :integer
+#  title              :string(255)
+#  slug               :string(255)
+#  description        :text
+#  created_at         :datetime
+#  updated_at         :datetime
+#  page_templates     :text
+#  children           :text
+#  order_method       :string(255)
+#  order_direction    :string(255)
+#  can_be_root        :boolean          default(FALSE)
+#  limit_pages        :boolean          default(FALSE)
+#  max_pages          :integer          default(0)
+#  maxed_out          :boolean          default(FALSE)
+#  last_editor_id     :integer
+#  has_show_view      :boolean          default(TRUE)
+#  can_have_documents :boolean          default(FALSE)
 #
 
 class Template < ActiveRecord::Base
@@ -29,9 +32,12 @@ class Template < ActiveRecord::Base
 
   serialize :children, Array
 
+  attr_accessor :existing_template
+
   # ------------------------------------------ Associations
 
   belongs_to :site, :touch => true
+  belongs_to :last_editor, :class_name => 'User'
 
   has_many :webpages, :class_name => 'Page'
   has_many :template_groups, :dependent => :destroy
@@ -138,6 +144,14 @@ class Template < ActiveRecord::Base
 
   def pages
     Rails.env.production? ? webpages.published : webpages
+  end
+
+  def unlimited?
+    !limit_pages?
+  end
+
+  def not_maxed?
+    limit_pages? && !maxed_out?
   end
 
 end

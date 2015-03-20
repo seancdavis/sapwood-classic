@@ -1,6 +1,40 @@
-<article class="template arrow">
-  <%= link_to(builder_route([template], :show)) do %>
-    <%= content_tag(:h4, template.title, :class => 'title') %>
-    <%= simple_format(template.description) unless template.description.blank? %>
-  <% end %>
+<article class="template">
+  <%= content_tag(:span, quick_template_status(template), :class => 'status') %>
+  <div class="data">
+    <div class="top">
+      <%= content_tag(:h4, template.title, :class => 'title') %>
+      <%= content_tag(:span, template.slug, :class => 'filename') %>
+    </div>
+    <div class="bottom">
+      <%= template_last_edited(template) %>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="top">
+      <%= link_to(
+        "#{template.pages.size} Pages",
+        builder_site_template_pages_path(current_site, template),
+        :class => 'pages'
+      ) %>
+      <%= link_to(
+        'Form Fields',
+        builder_site_template_template_fields_path(current_site, template),
+        :class => 'form'
+      ) %>
+    </div>
+    <div class="bottom">
+      <%= link_to(
+        'Edit',
+        builder_route([template], :edit),
+        :class => 'edit'
+      ) %>
+      <%= link_to(
+        'Delete',
+        builder_route([template], :show),
+        :class => 'delete',
+        :method => :delete,
+        :data => { :confirm => 'Are you sure?' }
+      ) if template.deletable? %>
+    </div>
+  </div>
 </article>

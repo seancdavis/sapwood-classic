@@ -1,9 +1,8 @@
-<%= builder_page_title("#{current_form_submission.title}") do %>
-  <%= link_to(
-    "#{current_form.title} Submissions", 
-    builder_route([current_form], :show),
-    :class => 'back' 
-  ) %>
+<%= builder_page_title(
+  current_form_breadcrumbs,
+  :class => 'breadcrumbs no-border'
+) do %>
+  <%= render :partial => 'builder/forms/tabs' %>
 <% end %>
 
 <section class="form-submission" id="page-content">
@@ -14,5 +13,3 @@
     <% end %>
   </dl>
 </section>
-
-<%= sidebar('builder/forms/sidebar') %>

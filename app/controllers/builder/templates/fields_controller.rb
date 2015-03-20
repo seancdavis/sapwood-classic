@@ -1,5 +1,8 @@
 class Builder::Templates::FieldsController < BuilderController
 
+  before_filter :verify_current_template
+  before_filter :verify_admin
+
   def index
   end
 
@@ -20,18 +23,44 @@ class Builder::Templates::FieldsController < BuilderController
   end
 
   def update
-    if current_template_field.update(field_params)
-      redirect_to builder_route([t, t.fields], :index), :notice => 'Field saved!'
-    else
-      render 'edit'
+    respond_to do |format|
+      format.html do
+        if current_template_field.update(field_params)
+          redirect_to(
+            builder_route([t, t.fields], :index),
+            :notice => 'Field saved!'
+          )
+        else
+          render 'edit'
+        end
+      end
+      format.json do
+        current_template_field.update!(field_params)
+        render :nothing => true
+      end
     end
+  end
+
+  def destroy
+    current_template_field.destroy!
+    redirect_to(builder_route([t, t.fields], :index))
+  end
+
+  def hide
+    current_template_field.update!(:hidden => true)
+    redirect_to(builder_route([t, t.fields], :index))
+  end
+
+  def show
+    current_template_field.update!(:hidden => false)
+    redirect_to(builder_route([t, t.fields], :index))
   end
 
   private
 
     def field_params
       params.require(:template_field).permit(
-        :title, 
+        :title,
         :position,
         :template_group_id,
         :slug,
@@ -40,12 +69,28 @@ class Builder::Templates::FieldsController < BuilderController
         :options,
         :required,
         :position,
-        :hidden
+        :hidden,
+        :default_value,
+        :note,
+        :half_width
       )
     end
 
     def t
       current_template
+    end
+
+    def builder_html_title
+      @builder_html_title ||= begin
+        case action_name
+        when 'index'
+          "Form Fields >> #{current_template.title}"
+        when 'edit'
+          "Edit #{current_template_field.title} >> #{current_template.title}"
+        when 'new'
+          "New Form Field >> #{current_template.title}"
+        end
+      end
     end
 
 end

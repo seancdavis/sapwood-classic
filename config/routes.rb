@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   # ------------------------------------------ Builder
 
   namespace :builder, :path => '' do
-    resources :sites, :param => :slug do
+    resources :sites, :param => :slug, :path_names => { :edit => :settings } do
 
       # Site Actions
       post 'pull' => 'sites#pull', :as => :pull
@@ -43,35 +43,44 @@ Rails.application.routes.draw do
 
       # Pages
       resources :pages, :param => :slug do
+        resources :documents, :only => [:index, :create, :destroy],
+          :controller => 'pages/documents', :path => :library, :param => :idx
+        get 'move' => 'pages#move', :as => :move
         get 'settings/:slug' => 'pages#edit', :as => :settings
         get 'edit/:editor' => 'pages/editor#edit', :as => :editor
         patch 'edit/:editor' => 'pages/editor#parse', :as => :parser
-        get 'children/:slug' => 'pages#children', :as => :children
+        get 'help' => 'pages#help', :as => :help
         post 'publish' => 'pages#publish', :as => :publish
         post 'unpublish' => 'pages#unpublish', :as => :unpublish
       end
 
       # Templates
-      get 'templates/:slug/settings' => 'templates#edit', :as => :template_settings
-      get 'templates/:slug/dev_settings' => 'templates#edit', :as => :template_dev_settings
-      resources :templates, :param => :slug do
-        resources :template_fields, :path => :fields, 
-          :controller => 'templates/fields', :param => :slug
-        resources :template_groups, :path => :groups, 
+      resources :templates, :param => :slug, :path_names => {
+        :edit => :settings } do
+        resources :template_fields, :path => :fields,
+          :controller => 'templates/fields', :param => :slug do
+            post 'hide' => 'templates/fields#hide', :as => :hide
+            post 'show' => 'templates/fields#show', :as => :show
+        end
+        resources :template_groups, :path => :groups,
           :controller => 'templates/groups', :param => :slug
-        resources :pages, :controller => 'templates/template_pages', 
+        resources :pages, :controller => 'templates/template_pages',
           :param => :slug, :only => [:index]
       end
 
       # Forms
       resources :forms, :param => :slug do
-        resources :submissions, :param => :idx, :only => [:show]
+        resources :form_submissions, :path => :submissions, :param => :idx,
+          :controller => 'forms/submissions', :except => [:new, :create]
+        resources :form_fields, :path => :fields,
+          :controller => 'forms/fields', :param => :slug
       end
 
       # Files
-      resources :documents, :path => :library, :param => :idx, 
+      get 'library/max_file_size' => 'documents#max_file_size'
+      resources :documents, :path => :library, :param => :idx,
         :except => [:show] do
-          get 'crop' => 'documents/croppings#edit', :as => :cropper 
+          get 'crop' => 'documents/croppings#edit', :as => :cropper
           patch 'crop' => 'documents/croppings#update', :as => :crop
       end
 
@@ -98,11 +107,11 @@ Rails.application.routes.draw do
       unless site.url.nil?
         constraints DomainConstraint.new(site.url) do
           get(
-            '/' => 'viewer/pages#home', 
+            '/' => 'viewer/pages#home',
             :as => :"#{site.slug}_home"
           )
           get(
-            '/*page_path' => 'viewer/pages#show', 
+            '/*page_path' => 'viewer/pages#show',
             :as => :"#{site.slug}_page"
           )
         end

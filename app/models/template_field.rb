@@ -16,6 +16,8 @@
 #  protected         :boolean          default(FALSE)
 #  hidden            :boolean          default(FALSE)
 #  can_be_hidden     :boolean          default(TRUE)
+#  default_value     :string(255)
+#  half_width        :boolean          default(FALSE)
 #
 
 class TemplateField < ActiveRecord::Base
@@ -51,6 +53,10 @@ class TemplateField < ActiveRecord::Base
   end
 
   # ------------------------------------------ Instance Methods
+
+  def optional?
+    !required?
+  end
 
   def option_values
     options.gsub(/\r/, '').split("\n") unless options.blank?

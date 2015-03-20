@@ -4,16 +4,19 @@ class BuilderController < ActionController::Base
   protect_from_forgery with: :exception
 
   include(
-    ApplicationHelper, 
-    RoutingHelper, 
-    UsersHelper, 
-    SitesHelper, 
-    TemplatesHelper, 
-    PagesHelper
+    ApplicationHelper,
+    RoutingHelper,
+    UsersHelper,
+    SitesHelper,
+    TemplatesHelper,
+    PagesHelper,
+    ErrorsHelper
   )
 
   before_filter :authenticate_user!
+  before_filter :verify_site, :except => [:home]
   before_filter :init_options
+  before_filter :builder_html_title
 
   def home
     if has_sites? || admin?
@@ -30,6 +33,16 @@ class BuilderController < ActionController::Base
         'sidebar' => true,
         'body_classes' => ''
       }
+    end
+
+    def verify_site
+      if current_site.nil? && request.path != builder_sites_path
+        not_found
+      end
+    end
+
+    def verify_admin
+      not_found unless current_user.admin?
     end
 
 end

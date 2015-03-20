@@ -109,9 +109,6 @@ GEM
       addressable (~> 2.3)
       multi_json (~> 1.0)
       rack
-    dragonfly-s3_data_store (1.0.4)
-      dragonfly (~> 1.0)
-      fog
     eco (1.0.0)
       coffee-script
       eco-source
@@ -211,6 +208,8 @@ GEM
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (5.0.3)
+      railties (>= 3.2.16)
     json (1.8.1)
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
@@ -513,7 +512,6 @@ DEPENDENCIES
   dbsync
   devise
   dragonfly
-  dragonfly-s3_data_store
   exception_notification
   factory_girl_rails
   faker
@@ -524,6 +522,7 @@ DEPENDENCIES
   jcrop-rails-v2
   jquery-fileupload-rails
   jquery-rails
+  jquery-ui-rails
   kaminari
   koala
   mailcatcher

@@ -1,10 +1,46 @@
-<article class="template-group">
-  <div class="links">
-    <%= link_to 'Edit', builder_route([current_template, group], :edit), 
-      :class => 'edit' %>
-  </div>
-  <%= content_tag(:h3, group.title) %>
-  <div class="group-fields">
-    <%= render :partial => 'field', :collection => group.fields %>
+<article class="template-group" data-id="<%= group.id %>">
+  <div class="group-fields data-container default-hidden">
+    <header>
+      <%= content_tag(:h3, :class => 'title') do %>
+        <%= link_to(group.title, '#', :class => 'data-trigger') %>
+        <%= simple_form_for(
+          [:builder, current_site, current_template, group],
+          :html => { :class => 'edit-title' }
+        ) do |f| %>
+          <%= f.input :title, :label => false %>
+          <%= f.submit "Save" %>
+        <% end %>
+      <% end %>
+      <%= simple_form_for(
+        [:builder, current_site, current_template, group],
+        :html => { :class => 'group-position hidden' }
+      ) do |f| %>
+        <%= f.input :position, :input_html => { :class => 'position' } %>
+      <% end %>
+      <div class="actions">
+        <%= link_to(
+          'Edit',
+          builder_route([current_template, group], :edit),
+          :class => 'edit'
+        ) %>
+        <%= link_to(
+          'Delete',
+          builder_route([current_template, group], :show),
+          :class => 'delete',
+          :method => :delete,
+          :data => { :confirm => 'Are you sure?' }
+        ) %>
+      </div>
+    </header>
+    <% fields = group.fields %>
+    <% if fields.size > 0 %>
+      <%= data_table(fields, 'field') do %>
+        <article class="form-field empty"></article>
+      <% end %>
+    <% else %>
+      <section class="data-table active ui-sortable">
+        <article class="form-field empty"></article>
+      </section>
+    <% end %>
   </div>
 </article>

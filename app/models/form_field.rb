@@ -16,6 +16,7 @@
 #  placeholder   :string(255)
 #  default_value :string(255)
 #  show_label    :boolean          default(TRUE)
+#  hidden        :boolean          default(FALSE)
 #
 
 class FormField < ActiveRecord::Base
@@ -27,6 +28,15 @@ class FormField < ActiveRecord::Base
   # ------------------------------------------ Associations
 
   belongs_to :form, :touch => true
+
+  # ------------------------------------------ Scopes
+
+  scope :in_position, -> { order('position asc') }
+  scope :visible, -> { where(:hidden => false) }
+
+  # ------------------------------------------ Validations
+
+  validates :title, :data_type, :presence => true
 
   # ------------------------------------------ Instance Methods
 

@@ -16,7 +16,7 @@ class Viewer::PagesController < ViewerController
       slug = params[:page_path].split('/').last
       @current_page = current_site.pages.find_by_slug(slug)
     end
-    not_found if current_page.nil?
+    not_found if current_page.nil? || !current_template.has_show_view?
     resolve_layout
     render(
       "viewer/#{current_site.slug}/#{current_page_template}", 

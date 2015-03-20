@@ -1,65 +1,38 @@
 <%= simple_form_for([:builder, current_site, current_form]) do |f| %>
 
-  <%= form_tabs(['details','response','fields']) %>
-
-  <section class="form tabbed details">
-    <%= f.input :title %>
-    <%= f.input :description %>
+    <div class="half-row">
+      <%= f.input :title %>
+      <%= f.input :description, :as => :string %>
+    </div>
     <%= f.input :button_label, :label => 'Submit Button Label' %>
+    <%= em_p("Custom text for the button that will trigger a form
+      submission.") %>
     <%= f.input :notification_emails %>
-    <p><em>Place each email address on a new line.</em></p>
-  </section>
+    <%= em_p("This will send a Sapwood notification when a new form submission
+      is created. Place each email address on a new line.") %>
 
-  <section class="form tabbed response">
+    <hr>
+
+    <h3>Page Response</h3>
     <%= f.input :thank_you_body, :label => 'Thank You Text' %>
-    <%= em_p("Content above replaces the form content after submission.") %>
-    <%= f.input :email_subject, :label => 'Response email subject', 
-      :as => :string %>
-    <%= f.input :email_body, :label => 'Response email body' %>
-    <%= em_p(
-      "If you want, you can send an email to the person who completes the form. 
-      You will have to select an item from the field below to do so."
-    ) %>
-    <%= em_p(
-      "We recommend you test this in another application to ensure it will 
-      render properly."
-    ) %>
-    <%= f.association :email_to, :collection => current_form.fields, 
-      :label => 'Form field to use for email address' %>
-  </section>
+    <%= em_p("This is the text that replaces the form when the user submits
+      the form successfully.") %>
 
-  <section class="form tabbed fields">
-    <%= f.simple_fields_for(
-      :form_fields, 
-      (current_form.form_fields + [FormField.new])
-    ) do |field| %>
-      <div class="field">
-        <div class="half-row">
-          <%= field.input :title %>
-          <%= field.input :slug, :label => 'Name' %>
-        </div>
-        <div class="half-row">
-          <%= field.input :label %>
-          <%= field.input :show_label %>
-        </div>
-        <div class="half-row">
-          <%= field.input :data_type, :collection => form_field_options, 
-            :input_html => { :class => 'field-data-type' } %>
-          <%= field.input :required %>
-        </div>
-        <div class="half-row">
-          <%= field.input :placeholder %>
-          <%= field.input :default_value %>
-        </div>
-        <div class="half-row">
-          <%= field.input :position %>
-          <%= field.input :options, :wrapper_html => { 
-            :class => 'field-options input' } %>
-        </div>
-        <hr>
-      </div>
-    <% end %>
-  </section>
+    <hr>
+
+    <h3>Custom Email Response</h3>
+    <%= em_p("If you'd like, you can send an email to the user who fills out
+      the form. This will only send if you populate each of the three following
+      fields.") %>
+    <div class="half-row">
+      <%= f.input :email_subject, :label => 'Response email subject',
+        :as => :string %>
+      <%= f.association :email_to, :collection => current_form.fields,
+        :label => 'Form field to use for email address' %>
+    </div>
+    <%= f.input :email_body, :label => 'Response email body' %>
+    <%= em_p("This will render HTML. Make sure to test this to ensure it will
+      render properly.") %>
 
   <%= f.submit %>
 

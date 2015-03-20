@@ -1,20 +1,14 @@
 class Builder::FormsController < BuilderController
 
+  before_filter :verify_admin, :except => [:index, :show]
+
   include FormsHelper
 
   def index
-    if site_forms.size > 0
-      path = builder_route([site_forms.first], :show)
-    else
-      path = builder_route([site_forms], :new)
-    end
-    redirect_to(path)
   end
 
   def show
-    # unless current_form_submissions.size > 0
-    #   redirect_to builder_route([current_form], :edit)
-    # end
+    redirect_to(builder_route([current_form, current_form_submissions], :index))
   end
 
   def new
@@ -24,7 +18,7 @@ class Builder::FormsController < BuilderController
   def create
     @current_form = Form.new(form_params)
     if current_form.save
-      redirect_to builder_route([current_form], :index), 
+      redirect_to builder_route([current_form], :index),
         :notice => t('notices.created', :item => 'Form')
     else
       render 'new'
@@ -33,7 +27,7 @@ class Builder::FormsController < BuilderController
 
   def update
     if current_form.update(form_params)
-      redirect_to builder_route([current_form], :edit), 
+      redirect_to builder_route([current_form], :edit),
         :notice => t('notices.updated', :item => 'Form')
     else
       render 'edit'
@@ -42,7 +36,7 @@ class Builder::FormsController < BuilderController
 
   def destroy
     current_form.destroy
-    redirect_to builder_route([site_forms], :index), 
+    redirect_to builder_route([site_forms], :index),
       :notice => t('notices.deleted', :item => 'Form')
   end
 
@@ -75,6 +69,21 @@ class Builder::FormsController < BuilderController
       ).merge(
         :site => current_site
       )
+    end
+
+    def builder_html_title
+      @builder_html_title ||= begin
+        case action_name
+        when 'index'
+          "Forms >> #{current_site.title}"
+        when 'edit'
+          "Edit #{current_form.title}"
+        when 'new'
+          "New Form"
+        when 'show'
+          "Submissions >> #{current_form.title}"
+        end
+      end
     end
 
 end

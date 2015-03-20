@@ -1,18 +1,20 @@
-<%= builder_page_title("#{current_template.title} Pages") do %>
-  <%= subtitle("These are the pages using the #{current_template.title} 
-  template. Clicking on one of these will launch you to that page.") %>
-  <%= subtitle("Note: You can't delete this template while it has at least one 
-  page.") %>
+<%= builder_page_title(
+  current_template_breadcrumbs, 
+  :class => 'breadcrumbs no-border'
+) do %>
+  <%= render :partial => 'builder/templates/tabs' %>
 <% end %>
 
-<section id="page-content">
-  <% if current_template_pages.size > 0 %>
-    <%= data_table(current_template_pages_paginated, 'builder/pages/page') %>
-    <%= paginate(current_template_pages_paginated) %>
+<section id="page-content" class="full-width data-container">
+  <%= render :partial => 'filters' %>
+  <% if @pages.size > 0 %>
+    <%= data_table(@paginated_pages, 'builder/pages/page') %>
+    <%= paginate(@paginated_pages) %>
+  <% elsif current_template_pages.size > 0 %>
+    <%= missing_content("No pages match your criteria.") %>
   <% else %>
-    <p><em>No pages here yet. You have to <%= link_to 'go to the pages section', 
-      builder_route([current_template_pages], :index) %> to create pages.</em></p>
+    <%= missing_content("No pages here yet. You have to #{link_to(
+      'go to the pages section', 
+      builder_route([current_template_pages], :index))} to create pages.") %>
   <% end %>
 </section>
-
-<%= sidebar 'builder/templates/sidebar' %>

@@ -1,30 +1,20 @@
-<%= builder_page_title(current_page.title) do %>
+<%= builder_page_title(
+  current_page_breadcrumbs,
+  :class => 'breadcrumbs no-border'
+) do %>
   <%= new_page_children_links %>
-  <%= content_tag(:div, page_status(current_page)) %>
-  <%= subtitle("Here's a snapshot of the #{current_page.title} page. 
-  Use this as a reference when accessing this template while developing your 
-  site.") %>
+  <%= render :partial => 'tabs' %>
 <% end %>
 
-<section id="page-content" class="developer-help">
-
-  <div class="methods">
-    <h2>Attributes</h2>
-    <p>These are the methods available on this <code>Page</code> object, 
-    along with the results they would currently return. So, for example, if you 
-    wanted the title and your object was stored in a <code>current_page</code> 
-    variable, then you would call <code>current_page.title</code> to get 
-    <%= content_tag(:em, current_page.title) %></p>
-    <% current_template.fields.alpha.each do |field| %>
-      <%= content_tag(:h3, :class => 'code') { 
-        content_tag(:code, field.slug) } %>
-        <% unless current_page.respond_to?(field.slug.to_sym) %>
-          <% current_page.save! %>
-          <% current_page.reload %>
-        <% end %>
-        <%= content_tag(:pre, current_page.send(field.slug)) %>
-    <% end %>
-  </div>
+<section id="page-content" class="full-width pages data-container">
+  <%= render :partial => 'filters', :locals => {
+    :pages => current_page_children } %>
+  <% if current_page_children_filtered_paginated.size > 0 %>
+    <%= data_table(current_page_children_filtered_paginated, 'page') %>
+    <%= paginate(current_page_children_filtered_paginated) %>
+  <% elsif current_page_children.size > 0 %>
+    <%= missing_content("No pages match your criteria.") %>
+  <% else %>
+    <%= missing_content("No pages here yet. Why don't you create one?") %>
+  <% end %>
 </section>
-
-<%= sidebar %>

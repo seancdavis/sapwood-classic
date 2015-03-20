@@ -1,22 +1,29 @@
-<%= current_template_breadcrumbs %>
-
-<%= builder_page_title("Custom Fields") do %>
-  <%= link_to(
-    'New Group',
-    builder_route([current_template, current_template_groups], :new),
-    :class => 'new'
-  ) %>
-  <%= link_to(
-    'New Field',
-    builder_route([current_template, current_template_fields], :new),
-    :class => 'new'
-  ) %>
-  <%= subtitle("The fields here appear on the form when you create or edit a 
-  page that uses the #{current_template.title} template.") %>
+<%= builder_page_title(
+  current_template_breadcrumbs,
+  :class => 'breadcrumbs no-border'
+) do %>
+  <div class="new-buttons dropdown">
+    <%= link_to 'New', '#', :class => 'dropdown-trigger new' %>
+    <ul>
+      <%= content_tag(
+        :li,
+        link_to(
+          'Grouping',
+          builder_route([current_template, current_template_groups], :new)
+        )
+      ) %>
+      <%= content_tag(
+        :li,
+        link_to(
+          'Field',
+          builder_route([current_template, current_template_fields], :new)
+        )
+      ) %>
+    </ul>
+  </div>
+  <%= render :partial => 'builder/templates/tabs' %>
 <% end %>
 
-<section id="page-content">
-  <%= data_table(current_template_groups, 'group') %>
+<section id="page-content" class="full-width">
+  <%= render :collection => current_template_groups, :partial => 'group' %>
 </section>
-
-<%= sidebar('builder/templates/sidebar') %>

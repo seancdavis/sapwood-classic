@@ -1,3 +1,5 @@
-<%= builder_page_title('New Form') %>
-<%= content_tag(:section, render('form'), :id => 'page-content') %>
-<%= sidebar %>
+<%= builder_page_title(current_form_breadcrumbs, :class => 'breadcrumbs') %>
+
+<section id="page-content" class="full-width">
+  <%= render 'form' %>
+</section>

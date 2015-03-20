@@ -1,0 +1,42 @@
+<nav class="page tabs">
+  <ul>
+    <%= content_tag(
+      :li,
+      page_children_button(current_page)
+    )
+    %>
+    <%= content_tag(
+      :li,
+      link_to(
+        "Media",
+        builder_route([current_page, Document.new], :index),
+        :class => "media #{controller_name == 'documents' ? 'active' : nil}"
+      )
+    ) %>
+    <%= content_tag(
+      :li,
+      link_to(
+        "Edit #{current_page.title[0..15]}
+          #{'...' if current_page.title.size > 16}",
+        builder_route([current_page], :edit),
+        :class => "edit #{action_name == 'edit' ? 'active' : nil}"
+      )
+    ) %>
+    <%= content_tag(
+      :li,
+      link_to(
+        "Move",
+        builder_site_page_move_path(current_site, current_page),
+        :class => "move #{action_name == 'move' ? 'active' : nil}"
+      )
+    ) if current_user.admin? %>
+    <%= content_tag(
+      :li,
+      link_to(
+        'Developer Help',
+        builder_site_page_help_path(current_site, current_page),
+        :class => "help #{action_name == 'help' ? 'active' : nil}"
+      )
+    ) if current_user.admin? %>
+  </ul>
+</nav>

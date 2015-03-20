@@ -1,0 +1,47 @@
+<article class="form-field" data-id="<%= field.id %>">
+  <%= content_tag(:span, '', :class => 'status') %>
+  <div class="data">
+    <div class="top">
+      <%= content_tag(:h4, field.title, :class => 'title') %>
+      <%= content_tag(:span, field.slug, :class => 'method-name') %>
+    </div>
+    <%= simple_form_for(
+      [:builder, current_site, current_form, field],
+      :html => { :class => 'field-position' }
+    ) do |f| %>
+      <%= f.input :position, :input_html => { :class => 'position' } %>
+    <% end %>
+    <div class="bottom">
+      <%= content_tag(
+        :span,
+        "Last edited #{content_tag(
+          :span, field.updated_at.strftime("%h %d")
+        )}".html_safe,
+        :class => 'last-edited'
+      ) %>
+      <%= link_to(field.data_type, '', :class => 'database disabled') %>
+      <%= link_to('required', '', :class => 'required disabled') if
+        field.required? %>
+      <%= link_to('hidden', '', :class => 'hidden disabled') if
+        field.hidden? %>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="top">
+      <%= link_to(
+        'Edit',
+        builder_route([current_form, field], :edit),
+        :class => 'edit'
+      ) %>
+    </div>
+    <div class="bottom">
+      <%= link_to(
+        'Delete',
+        builder_route([current_form, field], :show),
+        :method => :delete,
+        :class => 'delete',
+        :data => { :confirm => 'Are you sure?' }
+      ) %>
+    </div>
+  </div>
+</article>

@@ -8,10 +8,15 @@
   ul {
     @include clear-list;
     width: 100%;
+    &.admin {
+      li {
+        width: 16.666%;
+      }
+    }
     li {
       position: relative;
       display: inline-block;
-      width: 16.666%;
+      width: 33.3333%;
       &.active {
         a {
           border-bottom-color: $color-primary;

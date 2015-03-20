@@ -1,12 +1,10 @@
-<%= current_template_breadcrumbs %>
-
-<%= builder_page_title("Edit #{current_template_field.title}") do %>
-  <%= subtitle("Edit the attributes for the #{current_template_field.title} 
-  field.") %>
+<%= builder_page_title(
+  current_template_breadcrumbs, 
+  :class => 'breadcrumbs no-border'
+) do %>
+  <%= render :partial => 'builder/templates/tabs' %>
 <% end %>
 
-<section id="page-content">
+<section id="page-content" class="full-width">
   <%= render 'form' %>
 </section>
-
-<%= sidebar('builder/templates/sidebar') %>
