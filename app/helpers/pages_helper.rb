@@ -76,6 +76,7 @@ module PagesHelper
         |t| t.children.include?(page.template.slug)
       }
       site_pages.select { |p| templates.collect(&:id).include?(p.template_id) }
+        .sort_by(&:title)
     end
   end
 
