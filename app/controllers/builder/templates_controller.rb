@@ -121,13 +121,13 @@ class Builder::TemplatesController < BuilderController
     def builder_html_title
       @builder_html_title ||= begin
         case action_name
-        when 'edit'
+        when 'edit', 'update'
           "Edit >> #{current_template.title}"
         when 'show'
           "Help >> #{current_template.title}"
         when 'index'
           "#{current_site.title} Templates"
-        when 'new'
+        when 'new', 'create'
           "New Template"
         end
       end

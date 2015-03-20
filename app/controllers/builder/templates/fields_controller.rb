@@ -85,9 +85,9 @@ class Builder::Templates::FieldsController < BuilderController
         case action_name
         when 'index'
           "Form Fields >> #{current_template.title}"
-        when 'edit'
+        when 'edit', 'update'
           "Edit #{current_template_field.title} >> #{current_template.title}"
-        when 'new'
+        when 'new', 'create'
           "New Form Field >> #{current_template.title}"
         end
       end
