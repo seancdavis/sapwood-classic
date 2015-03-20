@@ -145,7 +145,7 @@ class Builder::SitesController < BuilderController
         case action_name
         when 'index'
           "My Sites"
-        when 'edit'
+        when 'edit', 'update'
           "Settings >> #{current_site.title}"
         end
       end

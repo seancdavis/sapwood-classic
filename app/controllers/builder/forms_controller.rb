@@ -76,9 +76,9 @@ class Builder::FormsController < BuilderController
         case action_name
         when 'index'
           "Forms >> #{current_site.title}"
-        when 'edit'
+        when 'edit', 'update'
           "Edit #{current_form.title}"
-        when 'new'
+        when 'new', 'create'
           "New Form"
         when 'show'
           "Submissions >> #{current_form.title}"

@@ -92,10 +92,10 @@ class Builder::UsersController < BuilderController
         case action_name
         when 'index'
           "Users >> #{current_site.title}"
-        when 'edit'
+        when 'edit', 'update'
           set_user
           "Edit >> #{@user.display_name}"
-        when 'new'
+        when 'new', 'create'
           "New User"
         end
       end
