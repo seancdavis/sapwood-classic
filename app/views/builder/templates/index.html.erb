@@ -14,6 +14,10 @@
 <% end %>
 
 <section id="page-content" class="data-container">
-  <%= render :partial => 'filters' %>
-  <%= data_table(@templates, 'template') %>
+  <% if @templates.size > 0 %>
+    <%= render :partial => 'filters' %>
+    <%= data_table(@templates, 'template') %>
+  <% else %>
+    <%= missing_content("No templates yet! Perhaps you should create one.") %>
+  <% end %>
 </section>
