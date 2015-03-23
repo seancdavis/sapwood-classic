@@ -1,5 +1,7 @@
 class Builder::Pages::DocumentsController < Builder::PagesController
 
+  before_filter :verify_has_docs
+
   def index
   end
 
@@ -28,5 +30,11 @@ class Builder::Pages::DocumentsController < Builder::PagesController
       builder_site_page_documents_path(current_site, current_page)
     )
   end
+
+  private
+
+    def verify_has_docs
+      not_found unless current_template.can_have_documents?
+    end
 
 end
