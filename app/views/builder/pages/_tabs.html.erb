@@ -12,7 +12,7 @@
         builder_route([current_page, Document.new], :index),
         :class => "media #{controller_name == 'documents' ? 'active' : nil}"
       )
-    ) %>
+    ) if current_template.can_have_documents? %>
     <%= content_tag(
       :li,
       link_to(
