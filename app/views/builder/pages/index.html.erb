@@ -3,11 +3,15 @@
 <% end %>
 
 <section id="page-content" class="data-container">
-  <%= render :partial => 'filters', :locals => { :pages => site_root_pages } %>
   <% if @pages.size > 0 %>
+    <%= render :partial => 'filters', :locals => { :pages => site_root_pages } %>
     <%= data_table(@pages, 'page') %>
   <% elsif site_root_pages.size > 0 %>
+    <%= render :partial => 'filters', :locals => { :pages => site_root_pages } %>
     <%= missing_content("No pages match your criteria.") %>
+  <% elsif site_templates.size == 0 && current_user.admin? %>
+    <%= missing_content("You need to create a template before you can create a
+    page.") %>
   <% else %>
     <%= missing_content("No pages here yet. Why don't you create one?") %>
   <% end %>

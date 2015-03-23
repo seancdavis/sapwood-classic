@@ -134,7 +134,10 @@ module PagesHelper
     # slash separator between breadcrumbs
     sep = content_tag(:span, '/', :class => 'separator')
     # render the site url as the link to root pages
-    o = link_to(current_site.url, builder_route([site_pages], :index))
+    o = link_to(
+      current_site.url.blank? ? current_site.slug : current_site.url,
+      builder_route([site_pages], :index)
+    )
     # look for current pages and add each
     if current_page
       if has_ancestors?
