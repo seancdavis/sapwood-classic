@@ -46,9 +46,10 @@ module RoutingHelper
 
   def viewer_page(page_path)
     if request.host == SapwoodSetting.site.url
-      preview_page_path(:page_path => page_path)
+      preview_page_path(:page_path => page_path).gsub(/\/+/, '/')
     else
       send("#{current_site.slug.underscore}_page_path", :page_path => page_path)
+        .gsub(/\/+/, '/')
     end
   end
 
