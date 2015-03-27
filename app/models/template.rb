@@ -139,7 +139,7 @@ class Template < ActiveRecord::Base
   end
 
   def deletable?
-    pages.size == 0 
+    pages.size == 0
   end
 
   def pages
