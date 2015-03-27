@@ -140,9 +140,14 @@ class Builder::PagesController < BuilderController
         :position,
         :parent_id,
         :show_in_nav,
-        :template,
-        :field_data => []
+        :template
       ).merge(:template => current_template, :last_editor => current_user)
+      unless params[:page][:field_data].blank?
+        p = p.merge(
+          :field_data => params[:page][:field_data]
+        )
+      end
+      p
     end
 
     def update_params
