@@ -81,7 +81,7 @@
             :"#{field.slug}",
             :as => :string,
             :required => field.required,
-            :label => field.title,
+            :label => field.label,
             :input_html => {
               :class => 'date-js',
               :value => current_page.field_data[field.slug.to_sym]
@@ -93,7 +93,7 @@
             :as => :"#{field.data_type}",
             :collection => field.option_values,
             :required => field.required,
-            :label => field.title,
+            :label => field.label,
             :selected => current_page.field_data[field.slug],
           ) %>
         <% when 'check_boxes', 'radio_buttons' %>
@@ -102,7 +102,7 @@
             :as => :"#{field.data_type}",
             :collection => field.option_values,
             :required => field.required,
-            :label => field.title,
+            :label => field.label,
             :checked => current_page.field_data[field.slug] ||
               field.default_value
           ) %>
@@ -112,7 +112,7 @@
               :"rtfile_#{field.slug}",
               :as => :hidden,
               :required => field.required,
-              :label => field.title,
+              :label => field.label,
               :input_html => {
                 :value => current_page.field_data[field.slug]
               }
@@ -131,7 +131,7 @@
             :"#{field.slug}",
             :as => :"#{field.data_type}",
             :required => field.required,
-            :label => field.title,
+            :label => field.label,
             :input_html => {
               :value => current_page.field_data[field.slug.to_sym] ||
                 field.default_value
