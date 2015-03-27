@@ -60,21 +60,12 @@ class Builder::TemplatesController < BuilderController
   end
 
   def update
+    slug = current_template.slug
     if current_template.update(update_params)
-      if redirect_route.split('/').last == 'dev_settings'
-        redirect_to(
-          builder_site_template_dev_settings_path(
-            current_site,
-            current_template
-          ),
-          :notice => 'Template saved!'
-        )
-      else
-        redirect_to(redirect_route, :notice => 'Template saved!')
-      end
+      route = redirect_route.gsub(/\/#{slug}\//, "/#{current_template.slug}/")
+      redirect_to(route, :notice => 'Template saved!')
     else
-      params[:redirect_route] = redirect_route
-      render redirect_route.split('/').last
+      render 'edit'
     end
   end
 
