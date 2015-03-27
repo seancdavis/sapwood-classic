@@ -1,18 +1,29 @@
 Roadmap
 =============
 
-For now, we're going to keep the roadmap packaged with the project. The purpose
+For now, I'm going to keep the roadmap packaged with the project. The purpose
 of this file is to keep from building out the nuances of each minor release in
 the issue tracker until they are going to be worked on.
 
+This document is in constant flux, and no feature mentioned is guaranteed to be
+included at any point, and the timing is simply an estimate.
+
 To submit an idea, please [create an
-issue](https://github.com/seancdavis/taproot/issues/new) prepended with
-`Request: `.
+issue](https://github.com/seancdavis/sapwood/issues/new) and prepend it with
+`[request]`.
 
 v1.3: Blogging (April 2015)
 -------------
 
 *Adds features to make it easier (possible) to build and manage blog sites.*
+
+#### HABTM
+
+Occasionally we need the ability to link pages to one another with no affect on
+the physical structure of the site. In other words, pages need the ability to
+have a `has_and_belongs_to_many` relationship in addition to their typical
+`has_many` association. The association would have no added data, nor would it
+create new pages or URLs.
 
 #### Tags
 
