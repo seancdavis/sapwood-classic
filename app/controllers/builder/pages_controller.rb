@@ -111,6 +111,7 @@ class Builder::PagesController < BuilderController
   end
 
   def destroy
+    current_template
     parent_page = current_page.parent
     current_page.destroy
     if parent_page.nil?
@@ -118,6 +119,7 @@ class Builder::PagesController < BuilderController
     else
       path = builder_route([parent_page], :show)
     end
+    current_template.save
     redirect_to(
       path,
       :notice => t('notices.updated', :item => 'Page')
