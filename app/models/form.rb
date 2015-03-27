@@ -19,6 +19,8 @@
 #  email_to_id         :integer
 #
 
+require 'csv'
+
 class Form < ActiveRecord::Base
 
   # ------------------------------------------ Plugins
