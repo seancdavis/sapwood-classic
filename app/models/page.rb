@@ -92,6 +92,12 @@ class Page < ActiveRecord::Base
     children.each(&:save!)
   end
 
+  after_save :check_template_maxed
+
+  def check_template_maxed
+    template.check_maxed_out
+  end
+
   # ------------------------------------------ Instance Methods
 
   def respond_to_fields

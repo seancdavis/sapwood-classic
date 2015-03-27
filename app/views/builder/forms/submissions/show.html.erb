@@ -7,9 +7,13 @@
 
 <section class="form-submission" id="page-content">
   <dl>
-    <% current_form_submission.field_data.each do |k,v| %>
-      <%= content_tag(:dt, k.humanize.titleize) %>
-      <%= content_tag(:dd, v) %>
+    <% current_form_submission.form_fields.each do |field| %>
+      <%= content_tag(:dt, field.title) %>
+      <% if current_form_submission.send(field.slug).blank? %>
+        <%= content_tag(:dd, "(null)") %>
+      <% else %>
+        <%= content_tag(:dd, current_form_submission.send(field.slug)) %>
+      <% end %>
     <% end %>
   </dl>
 </section>

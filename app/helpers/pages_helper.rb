@@ -97,6 +97,14 @@ module PagesHelper
       if params[:published] && ['published','draft'].include?(params[:published])
         pages = pages.select(&:"#{params[:published]}?")
       end
+      order_methods = pages.collect { |p| p.template.order_method }
+        .reject(&:blank?).uniq
+      if order_methods.size == 1
+        pages = pages.sort_by { |p| p.send(p.template.order_method) }
+        order_direction = pages.collect { |p| p.template.order_direction }
+          .reject(&:blank?).uniq.first
+        pages = pages.reverse if order_direction == 'desc'
+      end
       pages
     end
   end
