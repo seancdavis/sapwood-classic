@@ -71,7 +71,7 @@ class Form < ActiveRecord::Base
     methods = fields.collect(&:slug)
     CSV.generate do |csv|
       csv << fields.collect(&:title) + ["Created At", "Last Updated"]
-      submissions.each do |s|
+      submissions.includes(:form_fields).each do |s|
         attrs = []
         methods.each { |m| attrs << s.send(m) }
         attrs << s.created_at
