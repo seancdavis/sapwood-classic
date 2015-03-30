@@ -72,11 +72,17 @@ module PagesHelper
 
   def eligible_parents(page)
     @eligible_parents ||= begin
-      templates = site_templates.select {
-        |t| t.children.include?(page.template.slug)
-      }
-      site_pages.select { |p| templates.collect(&:id).include?(p.template_id) }
-        .sort_by(&:title)
+      pages = []
+      t = page.template
+      current_site.templates.includes(:children, :webpages).each do |template|
+        pages << template.pages if template.children.include?(t)
+      end
+      pages = (pages.flatten + [current_page_parent]).reject(&:blank?)
+      if pages.size > 0
+        pages.uniq.sort_by(&:title)
+      else
+        []
+      end
     end
   end
 
@@ -100,7 +106,7 @@ module PagesHelper
       order_methods = pages.collect { |p| p.template.order_method }
         .reject(&:blank?).uniq
       if order_methods.size == 1
-        pages = pages.sort_by { |p| p.send(p.template.order_method) }
+        pages = pages.sort_by { |p| p.send(order_methods.first) }
         order_direction = pages.collect { |p| p.template.order_direction }
           .reject(&:blank?).uniq.first
         pages = pages.reverse if order_direction == 'desc'
@@ -117,8 +123,7 @@ module PagesHelper
   end
 
   def page_children_button(page)
-    children = page.template.children.reject(&:blank?)
-    templates = site_templates.select { |t| children.include?(t.slug) }
+    templates = page.template.children
     if templates.size > 1
       path = builder_route([page], :show)
       link_to(
@@ -178,11 +183,12 @@ module PagesHelper
   def new_page_children_links(prefix = "New")
     @new_page_children_links ||= begin
       content_tag(:div, :class => 'new-buttons dropdown') do
-        if template_children.size > 1
+        children = template_children.not_maxed_out
+        if children.size > 0.9
           o = link_to("New Page", '#', :class => 'new dropdown-trigger')
           o += content_tag(:ul) do
             o2 = ''
-            template_children.select { |t| !t.maxed_out? }.each do |template|
+            children.select { |t| !t.maxed_out? }.each do |template|
               o2 += content_tag(
                 :li,
                 link_to(
@@ -197,8 +203,8 @@ module PagesHelper
             end
             o2.html_safe
           end
-        elsif template_children.size > 0
-          template = template_children.first
+        elsif children.size > 0
+          template = children.first
           link_to(
             "#{prefix} #{template.title}",
             new_builder_site_page_path(

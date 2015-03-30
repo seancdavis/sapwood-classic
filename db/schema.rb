@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319162741) do
+ActiveRecord::Schema.define(version: 20150330171958) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -134,6 +134,13 @@ ActiveRecord::Schema.define(version: 20150319162741) do
     t.text     "secondary_urls"
   end
 
+  create_table "template_descendants", force: true do |t|
+    t.integer  "parent_id"
+    t.integer  "child_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "template_fields", force: true do |t|
     t.integer  "template_group_id"
     t.string   "title"
@@ -169,7 +176,6 @@ ActiveRecord::Schema.define(version: 20150319162741) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "page_templates"
-    t.text     "children"
     t.string   "order_method"
     t.string   "order_direction"
     t.boolean  "can_be_root",        default: false

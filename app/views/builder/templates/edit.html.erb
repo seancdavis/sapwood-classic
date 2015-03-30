@@ -30,9 +30,12 @@
     level of your site. For example, you probably would rather have 'Posts'
     nested under another template.") %>
 
-    <%= f.input :children, :label => 'Child Templates', :as => :check_boxes,
-      :value_method => :slug,
-      :collection => site_templates.reject(&:blank?) %>
+    <%= f.association(
+      :children,
+      :label => 'Child Templates',
+      :as => :check_boxes,
+      :collection => site_templates
+    ) %>
     <%= em_p("Templates are restricted from being created only where you
     allow them. This setting drives that permission. When you check a box here,
     it allows a page with the selected template to be created under this

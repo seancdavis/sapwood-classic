@@ -63,10 +63,7 @@ module TemplatesHelper
   end
 
   def template_children
-    @template_children ||= begin
-      children = current_template.children.reject(&:blank?)
-      site_templates.select { |t| children.include?(t.slug) }
-    end
+    @template_children ||= current_template.children
   end
 
   def template_field_options
@@ -216,10 +213,11 @@ module TemplatesHelper
 
   def eligible_templates(page)
     @eligible_templates ||= begin
-      children = current_template.children.reject(&:blank?)
       # Start with templates that have the same allowable
       # children as the current template
-      templates = site_templates { |t| t.children.reject(&:blank?) == children }
+      templates = site_templates.select { |t|
+        t.children.collect(&:id).sort == template_children.collect(&:id).sort
+      }
       # Get rid of any templates that don't have room for
       # more pages
       templates = templates.reject(&:maxed_out?)
