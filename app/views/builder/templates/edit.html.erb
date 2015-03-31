@@ -43,6 +43,14 @@
     <%= em_p("For example, if this is an 'Article' (or 'Post') template, you
     probably want to allow it to be created from a 'News' (or 'Posts') page.") %>
 
+    <%= f.association(
+      :left_associations,
+      :label => 'HABTM Associations',
+      :as => :check_boxes,
+      :collection => site_templates - [current_template],
+      :checked => current_template.associations.collect(&:id)
+    ) %>
+
     <div class="half-row">
       <%= f.input :order_method, :as => :select, :collection => order_by_fields %>
       <%= f.input :order_direction, :as => :select,

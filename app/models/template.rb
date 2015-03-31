@@ -39,8 +39,23 @@ class Template < ActiveRecord::Base
   has_many :webpages, :class_name => 'Page'
   has_many :template_groups, :dependent => :destroy
   has_many :template_fields, :through => :template_groups
+  # Defines the has_many/belongs_to relationship
   has_many :template_descendants, :foreign_key => :parent_id
   has_many :children, :through => :template_descendants, :as => :child
+  # Defines the has_and_belongs_to_many relationship
+  has_many :left_template_associations, :foreign_key => :left_template_id,
+           :class_name => 'TemplateAssociation'
+  has_many :left_associations, :through => :left_template_associations,
+           :source => :right_template
+  has_many :right_template_associations, :foreign_key => :right_template_id,
+           :class_name => 'TemplateAssociation'
+  has_many :right_associations, :through => :right_template_associations,
+           :source => :left_template
+
+  # Combines HABTM relationships
+  def associations
+    (left_associations + right_associations).flatten.uniq
+  end
 
   # ------------------------------------------ Scopes
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330171958) do
+ActiveRecord::Schema.define(version: 20150331144827) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -132,6 +132,13 @@ ActiveRecord::Schema.define(version: 20150330171958) do
     t.integer  "home_page_id"
     t.string   "git_url"
     t.text     "secondary_urls"
+  end
+
+  create_table "template_associations", force: true do |t|
+    t.integer  "left_template_id"
+    t.integer  "right_template_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "template_descendants", force: true do |t|
