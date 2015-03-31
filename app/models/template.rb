@@ -39,6 +39,8 @@ class Template < ActiveRecord::Base
   has_many :webpages, :class_name => 'Page'
   has_many :template_groups, :dependent => :destroy
   has_many :template_fields, :through => :template_groups
+  has_many :template_resource_types
+  has_many :resource_types, :through => :template_resource_types
   # Defines the has_many/belongs_to relationship
   has_many :template_descendants, :foreign_key => :parent_id
   has_many :children, :through => :template_descendants, :as => :child

@@ -43,13 +43,16 @@
     <%= em_p("For example, if this is an 'Article' (or 'Post') template, you
     probably want to allow it to be created from a 'News' (or 'Posts') page.") %>
 
-    <%= f.association(
-      :left_associations,
-      :label => 'HABTM Associations',
-      :as => :check_boxes,
-      :collection => site_templates - [current_template],
-      :checked => current_template.associations.collect(&:id)
-    ) %>
+    <% if site_resource_types.size > 0 %>
+      <%= f.association(
+        :resource_types,
+        :label => 'Resource Types',
+        :as => :check_boxes,
+        :collection => site_resource_types
+      ) %>
+      <%= em_p("These are the resources that will be associated to pages of this
+      template.") %>
+    <% end %>
 
     <div class="half-row">
       <%= f.input :order_method, :as => :select, :collection => order_by_fields %>

@@ -60,19 +60,8 @@ class Builder::TemplatesController < BuilderController
   end
 
   def update
-    deleted_ass_ids = (
-      current_template.associations.collect(&:id) -
-      params[:template][:left_association_ids].reject(&:blank?).map(&:to_i)
-    )
     slug = current_template.slug
     if current_template.update(update_params)
-      deleted_ass_ids.each do |ass_id|
-        ids = [current_template.id, ass_id]
-        TemplateAssociation.where(
-          :left_template_id => ids,
-          :right_template_id => ids
-        ).destroy_all
-      end
       route = redirect_route.gsub(/\/#{slug}\//, "/#{current_template.slug}/")
       redirect_to(route, :notice => 'Template saved!')
     else
@@ -111,7 +100,7 @@ class Builder::TemplatesController < BuilderController
         :has_show_view,
         :can_have_documents,
         :child_ids => [],
-        :left_association_ids => []
+        :resource_type_ids => []
       ).merge(:last_editor => current_user)
     end
 

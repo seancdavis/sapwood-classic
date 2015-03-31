@@ -22,16 +22,6 @@
         :class => "edit #{action_name == 'edit' ? 'active' : nil}"
       )
     ) %>
-    <% current_template_associations.each do |association| %>
-      <%= content_tag(
-        :li,
-        link_to(
-          association.title.pluralize,
-          '#',
-          :class => "pages #{action_name == 'pages' ? 'active' : nil}"
-        )
-      ) %>
-    <% end %>
     <%= content_tag(
       :li,
       link_to(
