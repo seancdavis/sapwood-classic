@@ -29,6 +29,10 @@ module TemplatesHelper
     end
   end
 
+  def current_template_associations
+    @current_template_associations ||= current_template.associations
+  end
+
   def current_template_groups
     @current_template_groups ||= begin
       current_template.groups.in_order.includes(:template_fields)
