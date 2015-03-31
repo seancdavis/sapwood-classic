@@ -6,6 +6,10 @@ class Builder::ResourcesController < BuilderController
   def index
   end
 
+  def show
+    redirect_to builder_route([current_resource_type], :edit)
+  end
+
   def new
     @current_resource_type = ResourceType.new
   end

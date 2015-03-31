@@ -71,7 +71,13 @@ Rails.application.routes.draw do
       # Resources
       resources :resource_types, :path => :resources,
         :controller => :resources, :param => :slug, :path_names => {
-        :edit => :settings }
+        :edit => :settings } do
+          resources :resource_fields, :path => :fields,
+            :controller => 'resources/fields', :param => :slug do
+              post 'hide' => 'resources/fields#hide', :as => :hide
+              post 'show' => 'resources/fields#show', :as => :show
+          end
+      end
 
       # Forms
       resources :forms, :param => :slug do

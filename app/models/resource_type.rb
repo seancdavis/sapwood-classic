@@ -29,6 +29,8 @@ class ResourceType < ActiveRecord::Base
   has_many :template_resource_types
   has_many :templates, :through => :template_resource_types
 
+  has_many :resource_fields, :dependent => :destroy
+
   # ------------------------------------------ Scopes
 
   scope :alpha, -> { order('title asc') }
@@ -36,5 +38,37 @@ class ResourceType < ActiveRecord::Base
   # ------------------------------------------ Validations
 
   validates :title, :presence => true
+
+  # ------------------------------------------ Callbacks
+
+  after_create :add_default_fields
+
+  def add_default_fields
+    self.fields.create!([
+      {
+        :title => 'Title',
+        :slug => 'title',
+        :data_type => 'string',
+        :required => true,
+        :position => 1,
+        :protected => true,
+        :can_be_hidden => false
+      },
+      {
+        :title => 'Slug',
+        :slug => 'slug',
+        :data_type => 'string',
+        :required => false,
+        :position => 2,
+        :protected => true
+      }
+    ])
+  end
+
+  # ------------------------------------------ Instance Methods
+
+  def fields
+    resource_fields
+  end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331200955) do
+ActiveRecord::Schema.define(version: 20150331202628) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -113,6 +113,24 @@ ActiveRecord::Schema.define(version: 20150331200955) do
   end
 
   add_index "pages", ["ancestry"], name: "index_pages_on_ancestry", using: :btree
+
+  create_table "resource_fields", force: true do |t|
+    t.integer  "resource_type_id"
+    t.string   "title"
+    t.string   "slug"
+    t.string   "data_type"
+    t.text     "options"
+    t.boolean  "required",         default: false
+    t.integer  "position",         default: 0
+    t.string   "label"
+    t.boolean  "protected",        default: false
+    t.string   "default_value"
+    t.boolean  "half_width",       default: false
+    t.boolean  "hidden",           default: false
+    t.boolean  "can_be_hidden",    default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "resource_types", force: true do |t|
     t.integer  "site_id"

@@ -6,13 +6,57 @@ module ResourcesHelper
 
   def current_resource_type
     @current_resource_type ||= begin
-      p = params[:resource_slug] || params[:slug]
+      p = params[:resource_type_slug] || params[:slug]
       site_resource_types.select { |r| r.slug == p }.first
     end
   end
 
   def verify_current_resource_type
     not_found if current_resource_type.nil?
+  end
+
+  def current_resource_fields
+    @current_resource_fields ||= current_resource_type.fields.in_position
+  end
+
+  def current_resource_field
+    @current_resource_field ||= begin
+      slug = params[:resource_field_slug] || params[:slug]
+      current_resource_fields.select { |f| f.slug == slug }.first
+    end
+  end
+
+  def current_resource_actions
+    s = current_site
+    rt = current_resource_type
+    f = current_resource_type_fields
+    [
+      # {
+      #   :title => "#{current_resource_pages.size} Pages",
+      #   :path => builder_route([t, current_resource_pages], :index),
+      #   :class => 'pages'
+      # },
+      {
+        :title => 'Resource Fields',
+        :path => builder_route([rt, f], :index),
+        :controllers => ['fields'],
+        :class => 'form'
+      },
+      {
+        :title => 'Edit Resource Type',
+        :path => builder_route([rt], :edit),
+        :class => 'edit'
+      },
+      # {
+      #   :title => 'Developer Help',
+      #   :path => builder_route([t], :show),
+      #   :class => 'help'
+      # }
+    ]
+  end
+
+  def current_resource_type_fields
+    @current_resource_type_fields ||= current_resource_type.fields
   end
 
   def resource_order_by_fields
@@ -52,21 +96,18 @@ module ResourcesHelper
       else
         o += link_to(
           current_resource_type.slug,
-          builder_route([current_resource_type], :index)
+          builder_route([current_resource_type], :show)
         )
       end
-      # if current_resource_type_field
-      #   if action_name == 'new'
-      #     o += content_tag(:span, '/', :class => 'separator')
-      #     o += link_to("new field", '#', :class => 'disabled')
-      #   else
-      #     o += content_tag(:span, '/', :class => 'separator')
-      #     o += link_to(current_resource_type_field.slug, '#', :class => 'disabled')
-      #   end
-      # elsif controller_name == 'groups'
-      #   o += content_tag(:span, '/', :class => 'separator')
-      #   o += link_to("new group", '#', :class => 'disabled')
-      # end
+      if current_resource_field
+        if action_name == 'new'
+          o += content_tag(:span, '/', :class => 'separator')
+          o += link_to("new field", '#', :class => 'disabled')
+        else
+          o += content_tag(:span, '/', :class => 'separator')
+          o += link_to(current_resource_field.slug, '#', :class => 'disabled')
+        end
+      end
     end
     o.html_safe
   end
