@@ -3,11 +3,17 @@ pages:
   label: Pages
   path: builder_site_pages_path
   controllers: ['pages']
-page_types:
+templates:
   icon: wrench
   label: Templates
   path: builder_site_templates_path
   controllers: ['templates','groups','fields','template_pages']
+  admin: true
+resources:
+  icon: wrench
+  label: Resources
+  path: builder_site_resource_types_path
+  controllers: ['resources']
   admin: true
 library:
   icon: stack-play

@@ -1,0 +1,35 @@
+<article class="resource-type">
+  <%= content_tag(:span, '', :class => 'status') %>
+  <div class="data">
+    <div class="top">
+      <%= content_tag(:h4, resource_type.title, :class => 'title') %>
+      <%= content_tag(:span, resource_type.slug, :class => 'filename') %>
+    </div>
+    <div class="bottom">
+      <%= resource_type_last_edited(resource_type) %>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="top">
+      <%#= link_to(
+        'Form Fields',
+        builder_site_resource_type_resource_type_fields_path(current_site, resource_type),
+        :class => 'form'
+      ) %>
+      <%= link_to(
+        'Edit',
+        builder_route([resource_type], :edit),
+        :class => 'edit'
+      ) %>
+    </div>
+    <div class="bottom">
+      <%= link_to(
+        'Delete',
+        builder_route([resource_type], :show),
+        :class => 'delete',
+        :method => :delete,
+        :data => { :confirm => 'Are you sure?' }
+      ) %>
+    </div>
+  </div>
+</article>

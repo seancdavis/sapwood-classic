@@ -68,6 +68,11 @@ Rails.application.routes.draw do
           :param => :slug, :only => [:index]
       end
 
+      # Resources
+      resources :resource_types, :path => :resources,
+        :controller => :resources, :param => :slug, :path_names => {
+        :edit => :settings }
+
       # Forms
       resources :forms, :param => :slug do
         resources :form_submissions, :path => :submissions, :param => :idx,

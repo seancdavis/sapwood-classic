@@ -9,6 +9,7 @@ class BuilderController < ActionController::Base
     UsersHelper,
     SitesHelper,
     TemplatesHelper,
+    ResourcesHelper,
     PagesHelper,
     ErrorsHelper
   )

@@ -97,7 +97,7 @@
   section.data-table {
     border: 1px solid $color-grey-lighter;
     article.page, article.template, article.form-field, article.user,
-    article.form, article.form-submission {
+    article.form, article.form-submission, article.resource-type {
       position: relative;
       min-height: 72px;
       padding: 10px 10px;
