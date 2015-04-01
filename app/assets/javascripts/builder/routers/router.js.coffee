@@ -20,6 +20,8 @@ class App.Routers.Router extends Backbone.Router
     'sites/:site_slug/pages/:page_slug/library': 'pageMedia'
     # Templates
     'sites/:site_slug/templates/:template_slug/fields': 'templateFields'
+    # Resources
+    'sites/:site_slug/resources/:resource_slug/fields': 'resourceFields'
     # Media
     'sites/:site_slug/library': 'library'
     # Forms
@@ -37,6 +39,9 @@ class App.Routers.Router extends Backbone.Router
     if $('.image-upload-trigger').length > 0
       new App.Views.PageFileUploader
         site: site_slug
+
+  resourceFields: (site_slug, resource_slug) ->
+    new App.Views.ResourceFieldSorter
 
   pageMedia: (site_slug, page_slug) ->
     new App.Views.PageMediaUploader

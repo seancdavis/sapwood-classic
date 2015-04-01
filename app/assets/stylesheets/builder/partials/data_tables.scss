@@ -97,7 +97,8 @@
   section.data-table {
     border: 1px solid $color-grey-lighter;
     article.page, article.template, article.form-field, article.user,
-    article.form, article.form-submission, article.resource-type {
+    article.form, article.form-submission, article.resource-type,
+    article.resource-field {
       position: relative;
       min-height: 72px;
       padding: 10px 10px;
@@ -129,7 +130,7 @@
 
       // ------------------------ Extra styles for sortable lists
 
-      &.form-field {
+      &.form-field, &.resource-field {
         &:hover {
           cursor: move;
           cursor: -webkit-grab;
