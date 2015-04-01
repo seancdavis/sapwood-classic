@@ -68,4 +68,11 @@ module RenderingHelper
     content_tag(:p, text, :class => 'missing-content')
   end
 
+  def google_analytics(id)
+    render(
+      :partial => 'application/google_analytics',
+      :locals => { :google_analytics_id => id }
+    )
+  end
+
 end
