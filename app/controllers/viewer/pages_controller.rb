@@ -16,12 +16,35 @@ class Viewer::PagesController < ViewerController
       slug = params[:page_path].split('/').last
       @current_page = current_site.pages.find_by_slug(slug)
     end
-    not_found if current_page.nil? || !current_template.has_show_view?
-    resolve_layout
-    render(
-      "viewer/#{current_site.slug}/#{current_page_template}", 
-      :layout => @layout
-    )
+    if current_page.nil?
+      rt_slug = params[:page_path].split('/').first
+      rt = current_site.resource_types.where(:slug => [
+        rt_slug.singularize, rt_slug.pluralize
+      ]).first
+      if rt.nil? || !rt.has_show_view?
+        not_found
+      else
+        @current_resource_type = rt
+        if rt_slug == slug
+          file = rt_slug.pluralize
+        else
+          file = rt_slug.singularize
+          @current_resource = rt.resources.find_by_slug(slug)
+        end
+        render(
+          "viewer/#{current_site.slug}/#{file}",
+          :layout => @layout
+        )
+      end
+    elsif current_template.has_show_view?
+      resolve_layout
+      render(
+        "viewer/#{current_site.slug}/#{current_page_template}",
+        :layout => @layout
+      )
+    else
+      not_found
+    end
   end
 
   private
