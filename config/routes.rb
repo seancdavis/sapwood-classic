@@ -77,6 +77,11 @@ Rails.application.routes.draw do
               post 'hide' => 'resources/fields#hide', :as => :hide
               post 'show' => 'resources/fields#show', :as => :show
           end
+          resources :resource_association_fields, :path => :association_fields,
+            :controller => 'resources/association_fields', :param => :slug do
+              post 'hide' => 'resources/association_fields#hide', :as => :hide
+              post 'show' => 'resources/association_fields#show', :as => :show
+          end
       end
 
       # Forms

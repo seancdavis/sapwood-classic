@@ -1,0 +1,25 @@
+<%= builder_page_title(
+  current_resource_breadcrumbs,
+  :class => 'breadcrumbs no-border'
+) do %>
+    <%= content_tag(
+    :div,
+    link_to(
+      'New Field',
+      builder_route([current_resource_type, current_resource_association_fields], :new),
+      :class => 'new'
+    ),
+    :class => 'new-buttons dropdown'
+  ) %>
+  <%= render :partial => 'builder/resources/tabs' %>
+<% end %>
+
+<section id="page-content" class="data-container">
+  <p class="warning">Note: These are the fields on the association between a
+  page and a resource of this type.</p>
+  <% if current_resource_association_fields.size > 0 %>
+    <%= data_table(current_resource_association_fields, 'field') %>
+  <% else %>
+    <%= missing_content("No fields yet! Mayhaps you should add one?") %>
+  <% end %>
+</section>

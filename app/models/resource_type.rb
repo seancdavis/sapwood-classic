@@ -30,6 +30,7 @@ class ResourceType < ActiveRecord::Base
   has_many :templates, :through => :template_resource_types
 
   has_many :resource_fields, :dependent => :destroy
+  has_many :resource_association_fields, :dependent => :destroy
 
   # ------------------------------------------ Scopes
 
@@ -69,6 +70,14 @@ class ResourceType < ActiveRecord::Base
 
   def fields
     resource_fields
+  end
+
+  def association_fields
+    resource_association_fields
+  end
+
+  def assoc_fields
+    resource_association_fields
   end
 
 end

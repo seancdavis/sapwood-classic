@@ -22,6 +22,7 @@ class App.Routers.Router extends Backbone.Router
     'sites/:site_slug/templates/:template_slug/fields': 'templateFields'
     # Resources
     'sites/:site_slug/resources/:resource_slug/fields': 'resourceFields'
+    'sites/:site_slug/resources/:resource_slug/association_fields': 'resourceFields'
     # Media
     'sites/:site_slug/library': 'library'
     # Forms

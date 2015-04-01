@@ -19,6 +19,12 @@ module ResourcesHelper
     @current_resource_fields ||= current_resource_type.fields.in_position
   end
 
+  def current_resource_association_fields
+    @current_resource_association_fields ||= begin
+      current_resource_type.association_fields.in_position
+    end
+  end
+
   def current_resource_field
     @current_resource_field ||= begin
       slug = params[:resource_field_slug] || params[:slug]
@@ -26,10 +32,18 @@ module ResourcesHelper
     end
   end
 
+  def current_resource_association_field
+    @current_resource_association_field ||= begin
+      slug = params[:resource_association_field_slug] || params[:slug]
+      current_resource_association_fields.select { |f| f.slug == slug }.first
+    end
+  end
+
   def current_resource_actions
     s = current_site
     rt = current_resource_type
-    f = current_resource_type_fields
+    f = current_resource_fields
+    af = current_resource_association_fields
     [
       # {
       #   :title => "#{current_resource_pages.size} Pages",
@@ -43,6 +57,12 @@ module ResourcesHelper
         :class => 'form'
       },
       {
+        :title => 'Association Fields',
+        :path => builder_route([rt, af], :index),
+        :controllers => ['association_fields'],
+        :class => 'form'
+      },
+      {
         :title => 'Edit Resource Type',
         :path => builder_route([rt], :edit),
         :class => 'edit'
@@ -53,10 +73,6 @@ module ResourcesHelper
       #   :class => 'help'
       # }
     ]
-  end
-
-  def current_resource_type_fields
-    @current_resource_type_fields ||= current_resource_type.fields
   end
 
   def resource_order_by_fields
