@@ -11,18 +11,34 @@
   </div>
   <div class="actions">
     <div class="top">
-      <%#= link_to(
-        'Form Fields',
-        builder_site_resource_type_resource_type_fields_path(current_site, resource_type),
+      <%= link_to(
+        'Resource Fields',
+        builder_site_resource_type_resource_fields_path(
+          current_site, resource_type
+        ),
         :class => 'form'
       ) %>
       <%= link_to(
-        'Edit',
-        builder_route([resource_type], :edit),
-        :class => 'edit'
+        'Association Fields',
+        builder_site_resource_type_resource_association_fields_path(
+          current_site, resource_type
+        ),
+        :class => 'form'
       ) %>
     </div>
     <div class="bottom">
+      <%= link_to(
+        "View #{resource_type.title.pluralize}",
+        builder_site_resource_type_resources_path(
+          current_site, resource_type
+        ),
+        :class => 'pages'
+      ) %>
+      <%= link_to(
+        'Settings',
+        builder_route([resource_type], :edit),
+        :class => 'edit'
+      ) %>
       <%= link_to(
         'Delete',
         builder_route([resource_type], :show),
