@@ -1,0 +1,17 @@
+# == Schema Information
+#
+# Table name: page_resources
+#
+#  id          :integer          not null, primary key
+#  page_id     :integer
+#  resource_id :integer
+#  field_data  :text
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
+require 'rails_helper'
+
+RSpec.describe PageResource, :type => :model do
+  pending "add some examples to (or delete) #{__FILE__}"
+end

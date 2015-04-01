@@ -1,0 +1,103 @@
+<%= simple_form_for(current_page_resource, :url => @url)  do |f| %>
+
+  <%= f.association(
+    :resource,
+    :required => true,
+    :label => "Choose #{current_resource_type.title.singularize}",
+    :collection => current_resource_type.resources
+  ) %>
+
+  <%= f.simple_fields_for :field_data, OpenStruct.new(f.object.field_data) do |fd| %>
+    <% current_resource_association_fields.each_with_index do |field, idx| %>
+
+      <% if field.half_width? %>
+        <% if(
+          field == current_resource_fields.first ||
+          !current_resource_fields[idx - 1].half_width? ||
+          @half_width == false
+        ) %>
+          <% @half_width = true %>
+          <div class="half-row">
+        <% end %>
+      <% end %>
+
+      <% if field.hidden? %>
+        <%= fd.input(
+          :"#{field.slug}",
+          :as => :hidden,
+          :required => field.required,
+          :wrapper => false,
+          :input_html => {
+            :value => current_page_resource.field_data[field.slug.to_sym] ||
+              field.default_value
+          }
+        ) %>
+      <% else %>
+        <% case field.data_type %>
+        <% when 'date' %>
+          <%= fd.input(
+            :"#{field.slug}",
+            :as => :string,
+            :required => field.required,
+            :label => field.label,
+            :input_html => {
+              :class => 'date-js',
+              :value => current_page_resource.field_data[field.slug.to_sym]
+            }
+          ) %>
+        <% when 'select' %>
+          <%= fd.input(
+            :"#{field.slug}",
+            :as => :"#{field.data_type}",
+            :collection => field.option_values,
+            :required => field.required,
+            :label => field.label,
+            :selected => current_page_resource.field_data[field.slug],
+          ) %>
+        <% when 'check_boxes', 'radio_buttons' %>
+          <%= fd.input(
+            :"#{field.slug}",
+            :as => :"#{field.data_type}",
+            :collection => field.option_values,
+            :required => field.required,
+            :label => field.label,
+            :checked => current_page_resource.field_data[field.slug] ||
+              field.default_value
+          ) %>
+        <% else %>
+          <%= fd.input(
+            :"#{field.slug}",
+            :as => :"#{field.data_type}",
+            :required => field.required,
+            :label => field.label,
+            :input_html => {
+              :value => current_page_resource.field_data[field.slug.to_sym] ||
+                field.default_value
+            }
+          ) %>
+        <% end %>
+      <% end %>
+
+      <% if field.half_width? %>
+        <% if(
+          field == current_resource_fields.last ||
+          !current_resource_fields[idx + 1].half_width?
+        ) %>
+          </div>
+        <% elsif @half_width == true %>
+          <% if @first_half_done.nil? || @first_half_done == false %>
+            <% @first_half_done = true %>
+          <% else %>
+            <% @first_half_done = false %>
+            <% @half_width = false %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+
+    <% end %>
+  <% end %>
+
+  <%= f.submit "Save #{current_resource_type.title.singularize}" %>
+
+<% end %>

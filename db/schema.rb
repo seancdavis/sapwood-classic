@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401150209) do
+ActiveRecord::Schema.define(version: 20150401155649) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -88,6 +88,14 @@ ActiveRecord::Schema.define(version: 20150401150209) do
   create_table "page_documents", force: true do |t|
     t.integer  "page_id"
     t.integer  "document_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "page_resources", force: true do |t|
+    t.integer  "page_id"
+    t.integer  "resource_id"
+    t.text     "field_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

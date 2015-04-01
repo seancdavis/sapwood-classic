@@ -20,7 +20,7 @@ module PagesHelper
     @current_page ||= begin
       if(
         controller_name == 'pages' ||
-        ['editor','documents'].include?(controller_name)
+        ['editor','documents','resources'].include?(controller_name)
       )
         p = params[:page_slug] || params[:slug]
         page = current_site.webpages.find_by_slug(p)
@@ -67,6 +67,18 @@ module PagesHelper
   def current_page_children
     @current_page_children ||= begin
       current_page.children.in_position.includes(:template)
+    end
+  end
+
+  def current_page_resources
+    @current_page_resources ||= begin
+      current_page.send(current_resource_type.slug.pluralize)
+    end
+  end
+
+  def current_page_resource
+    @current_page_resource ||= begin
+      current_page_resources.select { |pr| pr.id == params[:id].to_i }.first
     end
   end
 

@@ -70,6 +70,10 @@ module TemplatesHelper
     @template_children ||= current_template.children
   end
 
+  def template_resource_types
+    @template_resource_types ||= current_template.resource_types
+  end
+
   def template_field_options
     [
       ['String', 'string'],
