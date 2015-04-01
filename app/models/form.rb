@@ -71,9 +71,12 @@ class Form < ActiveRecord::Base
     methods = fields.collect(&:slug)
     CSV.generate do |csv|
       csv << fields.collect(&:title) + ["Created At", "Last Updated"]
-      submissions.includes(:form_fields).each do |s|
+      submissions.includes(:form => [:form_fields]).each do |s|
         attrs = []
-        methods.each { |m| attrs << s.send(m) }
+        methods.each do |m|
+          attr = s.send(m)
+          attrs << (attr.class == FormFile ? attr.file.name : attr)
+        end
         attrs << s.created_at
         attrs << s.updated_at
         csv << attrs

@@ -50,6 +50,7 @@ module FormsHelper
       ['Checkbox', 'boolean'],
       ['Checkboxes', 'check_boxes'],
       ['Radio Buttons', 'radio_buttons'],
+      ['File', 'file']
     ].sort
   end
 
@@ -118,6 +119,14 @@ module FormsHelper
         :input_html => {
           :checked => field.default_value.to_bool
         }
+      )
+    when 'file'
+      form.input(
+        "rtfile_#{field.slug}".to_sym,
+        :as => field.data_type,
+        :label => field.show_label ? (field.label.blank? ? field.title :
+          field.label) : false,
+        :required => field.required
       )
     else
       form.input(

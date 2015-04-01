@@ -12,7 +12,14 @@
       <% if current_form_submission.send(field.slug).blank? %>
         <%= content_tag(:dd, "(null)") %>
       <% else %>
-        <%= content_tag(:dd, current_form_submission.send(field.slug)) %>
+        <% val = current_form_submission.send(field.slug) %>
+        <% if val.class == FormFile %>
+          <%= content_tag(:dd) do %>
+            <%= link_to(val.file.name, val.file.url, :class => 'download') %>
+          <% end %>
+        <% else %>
+          <%= content_tag(:dd, val) %>
+        <% end %>
       <% end %>
     <% end %>
   </dl>

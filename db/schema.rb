@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401155649) do
+ActiveRecord::Schema.define(version: 20150401191516) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -39,6 +39,14 @@ ActiveRecord::Schema.define(version: 20150401155649) do
     t.string   "default_value"
     t.boolean  "show_label",    default: true
     t.boolean  "hidden",        default: false
+  end
+
+  create_table "form_files", force: true do |t|
+    t.integer  "form_submission_id"
+    t.string   "file_uid"
+    t.string   "file_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "form_submissions", force: true do |t|
