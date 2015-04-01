@@ -250,6 +250,7 @@ GEM
       rbvmomi
     orm_adapter (0.5.0)
     paint (0.9.0)
+    pg (0.18.1)
     pickadate-rails (3.5.4.0)
       railties (>= 3.1.0)
     polyglot (0.3.5)
@@ -494,6 +495,9 @@ GEM
     wysihtml5-rails (0.0.4)
       railties (>= 3.1.0)
     yajl-ruby (1.1.0)
+    yaml_db (0.3.0)
+      rails (>= 3.0, < 4.3)
+      rake (>= 0.8.7)
 
 PLATFORMS
   ruby
@@ -529,6 +533,7 @@ DEPENDENCIES
   koala
   mailcatcher
   mysql2
+  pg
   pickadate-rails
   pygments.rb
   rack-cache
@@ -548,3 +553,4 @@ DEPENDENCIES
   whenever
   wirb
   wysihtml5-rails
+  yaml_db

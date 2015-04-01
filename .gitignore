@@ -54,6 +54,7 @@ config/sites/
 
 # Database backups/merges
 db/backups/
+db/data.yml
 
 # Sitemaps & SEO
 /public/sitemaps/

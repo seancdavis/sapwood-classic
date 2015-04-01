@@ -20,6 +20,6 @@ class CreateTemplateDescendants < ActiveRecord::Migration
       end
     end
 
-    remove_column :templates, :children
+    # remove_column :templates, :children
   end
 end

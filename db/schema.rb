@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150401191516) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "documents", force: true do |t|
     t.integer  "site_id"
     t.string   "document_uid"
@@ -257,6 +260,7 @@ ActiveRecord::Schema.define(version: 20150401191516) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "page_templates"
+    t.text     "children"
     t.string   "order_method"
     t.string   "order_direction"
     t.boolean  "can_be_root",        default: false
