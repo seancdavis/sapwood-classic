@@ -39,6 +39,21 @@ module ResourcesHelper
     end
   end
 
+  def resource_field_options
+    [
+      ['String', 'string'],
+      ['Text', 'text'],
+      ['Dropdown', 'select'],
+      ['Date', 'date'],
+      ['Checkbox', 'boolean'],
+      ['Checkboxes', 'check_boxes'],
+      ['Radio Buttons', 'radio_buttons'],
+      # ['Date & Time', 'datetime'],
+      # ['File', 'file']
+      # ['Image', 'image'],
+    ]
+  end
+
   def current_resource_actions
     s = current_site
     rt = current_resource_type

@@ -21,7 +21,7 @@
   </div>
 
   <div class="half-row">
-    <%= f.input :data_type, :collection => template_field_options,
+    <%= f.input :data_type, :collection => resource_field_options,
       :disabled => current_resource_association_field.protected? ? true : false %>
     <%= f.input :options,
       :disabled => current_resource_association_field.protected? ? true : false %>
