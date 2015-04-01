@@ -45,6 +45,7 @@ gem 'reverse_markdown'
 gem 'sidekiq'
 gem 'sitemap_generator'
 gem 'whenever'
+gem 'active_record_query_trace'
 
 group :development do
   gem 'mailcatcher'

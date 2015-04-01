@@ -23,6 +23,7 @@ GEM
       activesupport (= 4.1.0)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_record_query_trace (1.4)
     activemodel (4.1.0)
       activesupport (= 4.1.0)
       builder (~> 3.1)
@@ -498,6 +499,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_record_query_trace
   ancestry
   annotate
   awesome_print

@@ -127,6 +127,7 @@ class Page < ActiveRecord::Base
             super
           else
             page_resources.where(:resource_id => rt.resources.collect(&:id))
+              .includes(:resource)
           end
         elsif method.to_s =~ /image/
           site.documents.find_by_idx(field_data[method.to_s])
