@@ -24,8 +24,6 @@ class FormSubmission < ActiveRecord::Base
 
   belongs_to :form, :touch => true
 
-  has_many :form_fields, :through => :form
-
   # ------------------------------------------ Scopes
 
   scope :desc, -> { order('created_at desc') }
@@ -60,7 +58,9 @@ class FormSubmission < ActiveRecord::Base
   end
 
   def respond_to?(method, include_private = false)
-    return true if form_fields.collect(&:slug).include?(method.to_s)
+    if !form.nil? && form.form_fields.collect(&:slug).include?(method.to_s)
+      return true
+    end
     super
   end
 
