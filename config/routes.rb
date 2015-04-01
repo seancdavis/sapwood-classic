@@ -70,15 +70,17 @@ Rails.application.routes.draw do
 
       # Resources
       resources :resource_types, :path => :resources,
-        :controller => :resources, :param => :slug, :path_names => {
-        :edit => :settings } do
+                :controller => :resources, :param => :slug, :path_names => {
+                :edit => :settings } do
+          resources :resources, :path => :items,
+                    :controller => 'resources/items', :param => :slug
           resources :resource_fields, :path => :fields,
-            :controller => 'resources/fields', :param => :slug do
+                    :controller => 'resources/fields', :param => :slug do
               post 'hide' => 'resources/fields#hide', :as => :hide
               post 'show' => 'resources/fields#show', :as => :show
           end
           resources :resource_association_fields, :path => :association_fields,
-            :controller => 'resources/association_fields', :param => :slug do
+                    :controller => 'resources/association_fields', :param => :slug do
               post 'hide' => 'resources/association_fields#hide', :as => :hide
               post 'show' => 'resources/association_fields#show', :as => :show
           end

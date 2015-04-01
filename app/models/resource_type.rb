@@ -29,6 +29,7 @@ class ResourceType < ActiveRecord::Base
   has_many :template_resource_types
   has_many :templates, :through => :template_resource_types
 
+  has_many :resources, :dependent => :destroy
   has_many :resource_fields, :dependent => :destroy
   has_many :resource_association_fields, :dependent => :destroy
 

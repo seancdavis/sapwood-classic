@@ -15,6 +15,17 @@ module ResourcesHelper
     not_found if current_resource_type.nil?
   end
 
+  def current_resources
+    @current_resources ||= current_resource_type.resources
+  end
+
+  def current_resource
+    @current_resource ||= begin
+      p = params[:resource_slug] || params[:slug]
+      current_resources.select { |r| r.slug == p }.first
+    end
+  end
+
   def current_resource_fields
     @current_resource_fields ||= current_resource_type.fields.in_position
   end
@@ -60,11 +71,12 @@ module ResourcesHelper
     f = current_resource_fields
     af = current_resource_association_fields
     [
-      # {
-      #   :title => "#{current_resource_pages.size} Pages",
-      #   :path => builder_route([t, current_resource_pages], :index),
-      #   :class => 'pages'
-      # },
+      {
+        :title => current_resource_type.title.pluralize,
+        :path => builder_route([rt, current_resources], :index),
+        :controllers => ['items'],
+        :class => 'pages'
+      },
       {
         :title => 'Resource Fields',
         :path => builder_route([rt, f], :index),

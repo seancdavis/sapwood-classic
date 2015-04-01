@@ -1,0 +1,24 @@
+<%= builder_page_title(
+  current_resource_breadcrumbs,
+  :class => 'breadcrumbs no-border'
+) do %>
+  <%= content_tag(
+    :div,
+    link_to(
+      "New #{current_resource_type.title.singularize}",
+      builder_route([current_resource_type, current_resources], :new),
+      :class => 'new'
+    ),
+    :class => 'new-buttons dropdown'
+  ) %>
+  <%= render :partial => 'builder/resources/tabs' %>
+<% end %>
+
+<section id="page-content" class="data-container">
+  <% if current_resources.size > 0 %>
+    <%= data_table(current_resources, 'resource') %>
+  <% else %>
+    <%= missing_content("No #{current_resource_type.title.downcase.pluralize}
+    yet! Perhaps you should create one.") %>
+  <% end %>
+</section>

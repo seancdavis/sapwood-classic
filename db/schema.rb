@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401140307) do
+ActiveRecord::Schema.define(version: 20150401150209) do
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -159,6 +159,15 @@ ActiveRecord::Schema.define(version: 20150401140307) do
     t.string   "order_direction"
     t.integer  "last_editor_id"
     t.boolean  "has_show_view",   default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "resources", force: true do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.integer  "resource_type_id"
+    t.text     "field_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

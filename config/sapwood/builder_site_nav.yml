@@ -13,7 +13,7 @@ resources:
   icon: wrench
   label: Resources
   path: builder_site_resource_types_path
-  controllers: ['resources', 'fields', 'association_fields']
+  controllers: ['resources', 'fields', 'association_fields', 'items']
   admin: true
 library:
   icon: stack-play
