@@ -1,6 +1,8 @@
-<%= builder_page_title(current_page_breadcrumbs, :class => 'breadcrumbs') %>
+<%= builder_page_title(current_page_breadcrumbs, :class => 'breadcrumbs') do %>
+  <%= page_search_field %>
+<% end %>
 
-<div id="page-content">
+<div id="page-content" class="full-width">
 
   <%= em_p("First, fill in all the required fields, then you can move on to
   the optional ones.") %>

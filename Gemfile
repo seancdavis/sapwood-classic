@@ -48,6 +48,7 @@ gem 'sitemap_generator'
 gem 'whenever'
 gem 'active_record_query_trace'
 gem 'yaml_db'
+gem 'pg_search'
 
 group :development do
   gem 'mailcatcher'

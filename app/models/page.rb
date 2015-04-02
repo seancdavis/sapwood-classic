@@ -28,9 +28,17 @@ class Page < ActiveRecord::Base
 
   # ------------------------------------------ Plugins
 
-  include SiteSlug
+  include SiteSlug, PgSearch
 
   has_ancestry
+
+  pg_search_scope(
+    :search_content,
+    :against => [:title, :description, :body, :field_data],
+    :using => {
+      :tsearch => {:dictionary => "english"}
+    }
+  )
 
   # ------------------------------------------ Attributes
 

@@ -82,6 +82,25 @@ module PagesHelper
     end
   end
 
+  def page_search_field
+    content_tag(:div, :class => 'page-search-container') do
+      simple_form_for(
+        :search,
+        :url => builder_route([site_pages], :index),
+        :method => :get
+      ) do |f|
+        f.input(
+          :q,
+          :label => false,
+          :input_html => {
+            :placeholder => 'Search all pages',
+            :value => params[:search] ? params[:search][:q] || nil : nil
+        }
+        )
+      end
+    end
+  end
+
   def eligible_parents(page)
     @eligible_parents ||= begin
       pages = []
@@ -180,6 +199,13 @@ module PagesHelper
       else
         o += link_to(current_page.slug, builder_route([current_page], :show))
       end
+    elsif params[:search] && params[:search][:q]
+      o += sep
+      o += link_to(
+        "?q=#{params[:search][:q].gsub(/\ /, '+')}",
+        '#',
+        :class => 'disabled'
+      )
     end
     o.html_safe
   end
@@ -321,6 +347,11 @@ module PagesHelper
         path = builder_site_template_pages_path(
           current_site, current_template, :published => p, :template => t
         )
+      elsif params[:search] && params[:search][:q]
+        path = builder_site_pages_path(
+          current_site, current_page, :published => p, :template => t,
+          :search => { :q => params[:search][:q] }
+        )
       else
         path = builder_site_pages_path(
           current_site, current_page, :published => p, :template => t
@@ -353,6 +384,13 @@ module PagesHelper
             :template => 'any',
             :published => params[:published]
           )
+        elsif params[:search] && params[:search][:q]
+          path = builder_site_pages_path(
+            current_site,
+            :template => 'any',
+            :published => params[:published],
+            :search => { :q => params[:search][:q] }
+          )
         else
           path = builder_site_pages_path(
             current_site,
@@ -367,6 +405,11 @@ module PagesHelper
           if current_page
             path = builder_site_page_path(
               current_site, current_page, :template => t, :published => p
+            )
+          elsif params[:search] && params[:search][:q]
+            path = builder_site_pages_path(
+              current_site, :template => t, :published => p,
+              :search => { :q => params[:search][:q] }
             )
           else
             path = builder_site_pages_path(

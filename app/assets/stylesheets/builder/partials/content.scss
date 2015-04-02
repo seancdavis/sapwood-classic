@@ -40,9 +40,26 @@
       font-weight: 400;
       @include transition-all;
     }
+    div.page-search-container {
+      float: right;
+      form {
+        display: block;
+        margin: 0;
+        div.input {
+          margin: 0;
+          input {
+            margin: 0;
+            padding: 9px 10px;
+          }
+        }
+      }
+    }
     div.new-buttons {
       float: right;
       text-align: right;
+    }
+    .new-buttons + .page-search-container {
+      margin-right: 15px;
     }
     .page-status {
       i {
