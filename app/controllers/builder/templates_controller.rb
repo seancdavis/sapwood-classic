@@ -89,10 +89,8 @@ class Builder::TemplatesController < BuilderController
 
     def update_params
       params.require(:template).permit(
-        # Template Settings
         :title,
         :description,
-        # Developer Settings
         :slug,
         :can_be_root,
         :order_method,
@@ -101,7 +99,8 @@ class Builder::TemplatesController < BuilderController
         :max_pages,
         :has_show_view,
         :can_have_documents,
-        :children => [],
+        :child_ids => [],
+        :resource_type_ids => []
       ).merge(:last_editor => current_user)
     end
 

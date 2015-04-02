@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319162741) do
+ActiveRecord::Schema.define(version: 20150401191516) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -39,6 +42,14 @@ ActiveRecord::Schema.define(version: 20150319162741) do
     t.string   "default_value"
     t.boolean  "show_label",    default: true
     t.boolean  "hidden",        default: false
+  end
+
+  create_table "form_files", force: true do |t|
+    t.integer  "form_submission_id"
+    t.string   "file_uid"
+    t.string   "file_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "form_submissions", force: true do |t|
@@ -92,6 +103,14 @@ ActiveRecord::Schema.define(version: 20150319162741) do
     t.datetime "updated_at"
   end
 
+  create_table "page_resources", force: true do |t|
+    t.integer  "page_id"
+    t.integer  "resource_id"
+    t.text     "field_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pages", force: true do |t|
     t.integer  "template_id"
     t.string   "title"
@@ -114,6 +133,64 @@ ActiveRecord::Schema.define(version: 20150319162741) do
 
   add_index "pages", ["ancestry"], name: "index_pages_on_ancestry", using: :btree
 
+  create_table "resource_association_fields", force: true do |t|
+    t.integer  "resource_type_id"
+    t.string   "title"
+    t.string   "slug"
+    t.string   "data_type"
+    t.text     "options"
+    t.boolean  "required",         default: false
+    t.integer  "position",         default: 0
+    t.string   "label"
+    t.boolean  "protected",        default: false
+    t.string   "default_value"
+    t.boolean  "half_width",       default: false
+    t.boolean  "hidden",           default: false
+    t.boolean  "can_be_hidden",    default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "resource_fields", force: true do |t|
+    t.integer  "resource_type_id"
+    t.string   "title"
+    t.string   "slug"
+    t.string   "data_type"
+    t.text     "options"
+    t.boolean  "required",         default: false
+    t.integer  "position",         default: 0
+    t.string   "label"
+    t.boolean  "protected",        default: false
+    t.string   "default_value"
+    t.boolean  "half_width",       default: false
+    t.boolean  "hidden",           default: false
+    t.boolean  "can_be_hidden",    default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "resource_types", force: true do |t|
+    t.integer  "site_id"
+    t.string   "title"
+    t.string   "slug"
+    t.text     "description"
+    t.string   "order_method"
+    t.string   "order_direction"
+    t.integer  "last_editor_id"
+    t.boolean  "has_show_view",   default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "resources", force: true do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.integer  "resource_type_id"
+    t.text     "field_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "site_users", force: true do |t|
     t.integer  "site_id"
     t.integer  "user_id"
@@ -132,6 +209,13 @@ ActiveRecord::Schema.define(version: 20150319162741) do
     t.integer  "home_page_id"
     t.string   "git_url"
     t.text     "secondary_urls"
+  end
+
+  create_table "template_descendants", force: true do |t|
+    t.integer  "parent_id"
+    t.integer  "child_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "template_fields", force: true do |t|
@@ -157,6 +241,13 @@ ActiveRecord::Schema.define(version: 20150319162741) do
     t.string   "title"
     t.string   "slug"
     t.integer  "position",    default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "template_resource_types", force: true do |t|
+    t.integer  "template_id"
+    t.integer  "resource_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

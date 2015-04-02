@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.0'
 gem 'unicorn-rails'
 gem 'mysql2'
+gem 'pg'
 
 # ------------------------------------------ Assets
 
@@ -45,6 +46,9 @@ gem 'reverse_markdown'
 gem 'sidekiq'
 gem 'sitemap_generator'
 gem 'whenever'
+gem 'active_record_query_trace'
+gem 'yaml_db'
+gem 'pg_search'
 
 group :development do
   gem 'mailcatcher'

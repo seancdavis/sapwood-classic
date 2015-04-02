@@ -44,7 +44,12 @@ Rails.application.routes.draw do
       # Pages
       resources :pages, :param => :slug do
         resources :documents, :only => [:index, :create, :destroy],
-          :controller => 'pages/documents', :path => :library, :param => :idx
+                  :controller => 'pages/documents', :path => :library, :param => :idx
+        resources :resource_types, :param => :slug, :path => :resources,
+                  :only => [] do
+          resources :resources, :except => [:show], :path => :associations,
+                    :controller => 'pages/resources'
+        end
         get 'move' => 'pages#move', :as => :move
         get 'settings/:slug' => 'pages#edit', :as => :settings
         get 'edit/:editor' => 'pages/editor#edit', :as => :editor
@@ -66,6 +71,24 @@ Rails.application.routes.draw do
           :controller => 'templates/groups', :param => :slug
         resources :pages, :controller => 'templates/template_pages',
           :param => :slug, :only => [:index]
+      end
+
+      # Resources
+      resources :resource_types, :path => :resources,
+                :controller => :resources, :param => :slug, :path_names => {
+                :edit => :settings } do
+          resources :resources, :path => :items,
+                    :controller => 'resources/items', :param => :slug
+          resources :resource_fields, :path => :fields,
+                    :controller => 'resources/fields', :param => :slug do
+              post 'hide' => 'resources/fields#hide', :as => :hide
+              post 'show' => 'resources/fields#show', :as => :show
+          end
+          resources :resource_association_fields, :path => :association_fields,
+                    :controller => 'resources/association_fields', :param => :slug do
+              post 'hide' => 'resources/association_fields#hide', :as => :hide
+              post 'show' => 'resources/association_fields#show', :as => :show
+          end
       end
 
       # Forms

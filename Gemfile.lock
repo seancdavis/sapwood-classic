@@ -23,6 +23,7 @@ GEM
       activesupport (= 4.1.0)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_record_query_trace (1.4)
     activemodel (4.1.0)
       activesupport (= 4.1.0)
       builder (~> 3.1)
@@ -249,6 +250,11 @@ GEM
       rbvmomi
     orm_adapter (0.5.0)
     paint (0.9.0)
+    pg (0.18.1)
+    pg_search (0.7.9)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     pickadate-rails (3.5.4.0)
       railties (>= 3.1.0)
     polyglot (0.3.5)
@@ -493,11 +499,15 @@ GEM
     wysihtml5-rails (0.0.4)
       railties (>= 3.1.0)
     yajl-ruby (1.1.0)
+    yaml_db (0.3.0)
+      rails (>= 3.0, < 4.3)
+      rake (>= 0.8.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_record_query_trace
   ancestry
   annotate
   awesome_print
@@ -527,6 +537,8 @@ DEPENDENCIES
   koala
   mailcatcher
   mysql2
+  pg
+  pg_search
   pickadate-rails
   pygments.rb
   rack-cache
@@ -546,3 +558,4 @@ DEPENDENCIES
   whenever
   wirb
   wysihtml5-rails
+  yaml_db

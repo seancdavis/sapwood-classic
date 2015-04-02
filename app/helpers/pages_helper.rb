@@ -20,7 +20,7 @@ module PagesHelper
     @current_page ||= begin
       if(
         controller_name == 'pages' ||
-        ['editor','documents'].include?(controller_name)
+        ['editor','documents','resources'].include?(controller_name)
       )
         p = params[:page_slug] || params[:slug]
         page = current_site.webpages.find_by_slug(p)
@@ -70,13 +70,50 @@ module PagesHelper
     end
   end
 
+  def current_page_resources
+    @current_page_resources ||= begin
+      current_page.send(current_resource_type.slug.pluralize)
+    end
+  end
+
+  def current_page_resource
+    @current_page_resource ||= begin
+      current_page_resources.select { |pr| pr.id == params[:id].to_i }.first
+    end
+  end
+
+  def page_search_field
+    content_tag(:div, :class => 'page-search-container') do
+      simple_form_for(
+        :search,
+        :url => builder_route([site_pages], :index),
+        :method => :get
+      ) do |f|
+        f.input(
+          :q,
+          :label => false,
+          :input_html => {
+            :placeholder => 'Search all pages',
+            :value => params[:search] ? params[:search][:q] || nil : nil
+        }
+        )
+      end
+    end
+  end
+
   def eligible_parents(page)
     @eligible_parents ||= begin
-      templates = site_templates.select {
-        |t| t.children.include?(page.template.slug)
-      }
-      site_pages.select { |p| templates.collect(&:id).include?(p.template_id) }
-        .sort_by(&:title)
+      pages = []
+      t = page.template
+      current_site.templates.includes(:children, :webpages).each do |template|
+        pages << template.pages if template.children.include?(t)
+      end
+      pages = (pages.flatten + [current_page_parent]).reject(&:blank?)
+      if pages.size > 0
+        pages.uniq.sort_by(&:title)
+      else
+        []
+      end
     end
   end
 
@@ -100,7 +137,7 @@ module PagesHelper
       order_methods = pages.collect { |p| p.template.order_method }
         .reject(&:blank?).uniq
       if order_methods.size == 1
-        pages = pages.sort_by { |p| p.send(p.template.order_method) }
+        pages = pages.sort_by { |p| p.send(order_methods.first) }
         order_direction = pages.collect { |p| p.template.order_direction }
           .reject(&:blank?).uniq.first
         pages = pages.reverse if order_direction == 'desc'
@@ -117,8 +154,7 @@ module PagesHelper
   end
 
   def page_children_button(page)
-    children = page.template.children.reject(&:blank?)
-    templates = site_templates.select { |t| children.include?(t.slug) }
+    templates = page.template.children
     if templates.size > 1
       path = builder_route([page], :show)
       link_to(
@@ -163,6 +199,13 @@ module PagesHelper
       else
         o += link_to(current_page.slug, builder_route([current_page], :show))
       end
+    elsif params[:search] && params[:search][:q]
+      o += sep
+      o += link_to(
+        "?q=#{params[:search][:q].gsub(/\ /, '+')}",
+        '#',
+        :class => 'disabled'
+      )
     end
     o.html_safe
   end
@@ -178,11 +221,12 @@ module PagesHelper
   def new_page_children_links(prefix = "New")
     @new_page_children_links ||= begin
       content_tag(:div, :class => 'new-buttons dropdown') do
-        if template_children.size > 1
+        children = template_children.not_maxed_out
+        if children.size > 0.9
           o = link_to("New Page", '#', :class => 'new dropdown-trigger')
           o += content_tag(:ul) do
             o2 = ''
-            template_children.select { |t| !t.maxed_out? }.each do |template|
+            children.select { |t| !t.maxed_out? }.each do |template|
               o2 += content_tag(
                 :li,
                 link_to(
@@ -197,8 +241,8 @@ module PagesHelper
             end
             o2.html_safe
           end
-        elsif template_children.size > 0
-          template = template_children.first
+        elsif children.size > 0
+          template = children.first
           link_to(
             "#{prefix} #{template.title}",
             new_builder_site_page_path(
@@ -303,6 +347,11 @@ module PagesHelper
         path = builder_site_template_pages_path(
           current_site, current_template, :published => p, :template => t
         )
+      elsif params[:search] && params[:search][:q]
+        path = builder_site_pages_path(
+          current_site, current_page, :published => p, :template => t,
+          :search => { :q => params[:search][:q] }
+        )
       else
         path = builder_site_pages_path(
           current_site, current_page, :published => p, :template => t
@@ -335,6 +384,13 @@ module PagesHelper
             :template => 'any',
             :published => params[:published]
           )
+        elsif params[:search] && params[:search][:q]
+          path = builder_site_pages_path(
+            current_site,
+            :template => 'any',
+            :published => params[:published],
+            :search => { :q => params[:search][:q] }
+          )
         else
           path = builder_site_pages_path(
             current_site,
@@ -349,6 +405,11 @@ module PagesHelper
           if current_page
             path = builder_site_page_path(
               current_site, current_page, :template => t, :published => p
+            )
+          elsif params[:search] && params[:search][:q]
+            path = builder_site_pages_path(
+              current_site, :template => t, :published => p,
+              :search => { :q => params[:search][:q] }
             )
           else
             path = builder_site_pages_path(

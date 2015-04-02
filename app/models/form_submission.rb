@@ -24,7 +24,7 @@ class FormSubmission < ActiveRecord::Base
 
   belongs_to :form, :touch => true
 
-  has_many :form_fields, :through => :form
+  has_many :form_files
 
   # ------------------------------------------ Scopes
 
@@ -60,7 +60,9 @@ class FormSubmission < ActiveRecord::Base
   end
 
   def respond_to?(method, include_private = false)
-    return true if form_fields.collect(&:slug).include?(method.to_s)
+    if !form.nil? && form_fields.collect(&:slug).include?(method.to_s)
+      return true
+    end
     super
   end
 
@@ -71,11 +73,23 @@ class FormSubmission < ActiveRecord::Base
       if !field_data[method.downcase.to_s].nil?
         field_data[method.downcase.to_s]
       elsif respond_to?(method)
-        ""
+        if field_data["rtfile_#{method.to_s}"].present?
+          file = form_files.select { |file|
+            file.id == field_data["rtfile_#{method.to_s}"].to_i
+          }.first
+          # file.nil? ? "" : file.file.url
+          file.nil? ? "" : file
+        else
+          ""
+        end
       else
         super
       end
     end
+  end
+
+  def form_fields
+    form.form_fields
   end
 
 end

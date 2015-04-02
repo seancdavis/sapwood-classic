@@ -22,13 +22,23 @@
 #  last_editor_id   :integer
 #
 
+require 'active_support/inflector'
+
 class Page < ActiveRecord::Base
 
   # ------------------------------------------ Plugins
 
-  include SiteSlug
+  include SiteSlug, PgSearch
 
   has_ancestry
+
+  pg_search_scope(
+    :search_content,
+    :against => [:title, :description, :body, :field_data],
+    :using => {
+      :tsearch => {:dictionary => "english"}
+    }
+  )
 
   # ------------------------------------------ Attributes
 
@@ -41,8 +51,11 @@ class Page < ActiveRecord::Base
 
   has_one :site, :through => :template
 
-  has_many :page_documents
+  has_many :page_documents, :dependent => :destroy
   has_many :documents, :through => :page_documents
+  has_many :page_resources, :dependent => :destroy
+  has_many :resources, :through => :page_resources
+  has_many :resource_types, :through => :template
 
   # ------------------------------------------ Scopes
 
@@ -100,8 +113,12 @@ class Page < ActiveRecord::Base
 
   # ------------------------------------------ Instance Methods
 
+  def resource_type_methods
+    resource_types.map { |rt| rt.slug.pluralize }
+  end
+
   def respond_to_fields
-    field_data.keys
+    field_data.keys + resource_type_methods
   end
 
   def method_missing(method, *arguments, &block)
@@ -109,7 +126,18 @@ class Page < ActiveRecord::Base
       super
     rescue
       if respond_to_fields.include?(method.to_s)
-        if method.to_s =~ /image/
+        singular_method = ActiveSupport::Inflector.singularize(method.to_s)
+        if resource_type_methods.include?(method.to_s)
+          rt = resource_types.select { |rt|
+            [method.to_s, singular_method].include?(rt.slug)
+          }.first
+          if rt.nil?
+            super
+          else
+            page_resources.where(:resource_id => rt.resources.collect(&:id))
+              .includes(:resource)
+          end
+        elsif method.to_s =~ /image/
           site.documents.find_by_idx(field_data[method.to_s])
         else
           field_data[method.to_s]

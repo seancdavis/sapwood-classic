@@ -4,7 +4,17 @@ class Builder::PagesController < BuilderController
   before_filter :verify_admin, :except => [:index, :show, :edit, :update]
 
   def index
-    @pages = site_root_pages
+    # First, we find which set of pages we should start
+    # with, which depends on whether there is a search query
+    # or not.
+    if params[:search] && params[:search][:q]
+      q = params[:search][:q]
+      @pages = current_site.pages.search_content(params[:search][:q]).to_a
+    else
+      @pages = site_root_pages
+    end
+    # If we have a published param, then we're good,
+    # otherwise we set it and get ready to redirect.
     if params[:published]
       if ['published','draft'].include?(params[:published])
         @pages = @pages.select { |p| p.send("#{params[:published]}?") }
@@ -13,6 +23,8 @@ class Builder::PagesController < BuilderController
       redirect = true
       params[:published] = 'all'
     end
+    # If we have a template param, then we're good,
+    # otherwise we set it and get ready to redirect.
     if params[:template]
       if params[:template] != 'all'
         @pages = @pages.select { |p| p.template.slug == params[:template] }
@@ -21,12 +33,24 @@ class Builder::PagesController < BuilderController
       redirect = true
       params[:template] = 'all'
     end
+    # We only redirect if we're missing parameters
     if redirect
-      redirect_to builder_site_pages_path(
-        current_site,
-        :published => params[:published],
-        :template => params[:template]
-      )
+      if q.nil?
+        redirect_to builder_site_pages_path(
+          current_site,
+          :published => params[:published],
+          :template => params[:template]
+        )
+      else
+        redirect_to builder_site_pages_path(
+          current_site,
+          :published => params[:published],
+          :template => params[:template],
+          :search => { :q => q }
+        )
+      end
+    else
+      @pages = Kaminari.paginate_array(@pages).page(params[:page]).per(10)
     end
   end
 

@@ -13,6 +13,19 @@
         :class => "media #{controller_name == 'documents' ? 'active' : nil}"
       )
     ) if current_template.can_have_documents? %>
+    <% template_resource_types.each do |rt| %>
+      <%= content_tag(
+        :li,
+        link_to(
+          rt.title.titleize.pluralize,
+          builder_site_page_resource_type_resources_path(
+            current_site, current_page, rt
+          ),
+          :class => "pages #{controller_name == 'resources' &&
+            current_resource_type.slug == rt.slug ? 'active' : nil}"
+        )
+      ) %>
+    <% end %>
     <%= content_tag(
       :li,
       link_to(

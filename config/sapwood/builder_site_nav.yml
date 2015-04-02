@@ -2,12 +2,18 @@ pages:
   icon: files
   label: Pages
   path: builder_site_pages_path
-  controllers: ['pages']
-page_types:
+  controllers: ['pages', 'documents', 'resources']
+templates:
   icon: wrench
   label: Templates
   path: builder_site_templates_path
   controllers: ['templates','groups','fields','template_pages']
+  admin: true
+resources:
+  icon: wrench
+  label: Resources
+  path: builder_site_resource_types_path
+  controllers: ['resources', 'fields', 'association_fields', 'items']
   admin: true
 library:
   icon: stack-play
