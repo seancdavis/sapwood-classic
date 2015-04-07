@@ -125,6 +125,11 @@
               builder_site_documents_path(current_site, :select => true),
               :class => 'image-upload-trigger button'
             ) %>
+            <%= link_to(
+              "Remove #{field.title}",
+              '#',
+              :class => 'remove-file button'
+            ) unless current_page.field_data[field.slug].blank? %>
           </div>
         <% else %>
           <%= fd.input(

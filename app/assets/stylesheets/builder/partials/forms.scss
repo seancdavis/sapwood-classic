@@ -107,8 +107,12 @@ form {
     }
     a {
       clear: both;
-      margin: 10px 0 0 0;
+      margin: 0;
       @include rounded-button($color-grey, $color-grey-darker);
+      &.remove-file {
+        @include rounded-button($color-danger, $color-danger-darker);
+        margin-left: 5px;
+      }
     }
   }
 
