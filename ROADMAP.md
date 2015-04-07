@@ -51,7 +51,7 @@ version of the application. This way installations will be similar throughout.
 The page structure of a site is not always enough to generate menus. We'll
 create a custom menu builder that come with helpers to build the menus.
 
-v1.4: File Management & Developer Help (May/June 2015)
+v1.5: File Management & Developer Help (May/June 2015)
 -------------
 
 Most aspects of the builder have been given sufficient attention since their
@@ -96,12 +96,12 @@ v1.6: Setup & Theming (June/July 2015)
 *TBD: Aims to remove some of the duplication in setup and streamlines the
 writing code process.*
 
-v1.6: Editor App (June/July 2015)
+v1.7: Editor App (June/July 2015)
 ----------
 
 *TBD: Features to make editing a site simpler.*
 
-v1.7: Developer App & Builder API (August/September 2015)
+v1.8: Developer App & Builder API (August/September 2015)
 ----------
 
 *TBD: Features to make writing code simpler.*
