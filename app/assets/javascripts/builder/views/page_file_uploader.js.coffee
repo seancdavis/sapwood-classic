@@ -5,6 +5,7 @@ class App.Views.PageFileUploader extends Backbone.View
 
   events:
     'click .image-upload-trigger': 'triggerUploader'
+    'click .remove-file': 'removeFile'
 
   initialize: (options) ->
     @site = options.site
@@ -12,6 +13,12 @@ class App.Views.PageFileUploader extends Backbone.View
       @maxFileSize = parseFloat(data)
     @ajaxPage = new App.Views.AjaxPage
       klass: 'page-file-uploader'
+
+  removeFile: (e) ->
+    e.preventDefault()
+    container = $(e.target).parents('.upload-field')
+    container.find('input').val('')
+    container.find('img').remove()
 
   triggerUploader: (e) ->
     e.preventDefault()
