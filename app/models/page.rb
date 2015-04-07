@@ -111,6 +111,14 @@ class Page < ActiveRecord::Base
     template.check_maxed_out
   end
 
+  after_save :parse_markdown
+
+  def parse_markdown
+    if body_md_changed?
+      update_columns(:body => SapwoodMarkdown.to_html(body_md))
+    end
+  end
+
   # ------------------------------------------ Instance Methods
 
   def resource_type_methods

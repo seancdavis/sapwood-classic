@@ -35,7 +35,7 @@ class App.Routers.Router extends Backbone.Router
         site: site_slug
 
   editPage: (site_slug, page_slug, slug) ->
-    new App.Views.EditorButtons
+    new App.Views.MarkdownEditor
     new App.Views.UnloadCheck
     if $('.image-upload-trigger').length > 0
       new App.Views.PageFileUploader

@@ -54,6 +54,37 @@ form {
     &.field-options {
       display: none;
     }
+    // Markdown Text Editor
+    .CodeMirror pre {
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      line-height: 18px;
+    }
+    .editor-toolbar {
+      margin-top: 5px;
+      border: 1px solid $color-light-darker;
+      border-bottom: none;
+      opacity: 1;
+      &:before, &:after {
+        background: none;
+      }
+      a {
+        opacity: 0.6;
+      }
+    }
+    .CodeMirror {
+      border: 1px solid $color-light-darker;
+    }
+    .CodeMirror-scroll {
+      padding: 15px 45px 45px 15px;
+    }
+    .editor-statusbar {
+      span {
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+    }
   }
 
   span.error {
