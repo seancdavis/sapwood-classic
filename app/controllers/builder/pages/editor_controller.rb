@@ -1,5 +1,7 @@
 class Builder::Pages::EditorController < Builder::PagesController
 
+  before_filter :verify_admin, :only => []
+
   include EditorHelper
 
   def edit
