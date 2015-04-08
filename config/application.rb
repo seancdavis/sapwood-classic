@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module App
   class Application < Rails::Application
-    
+
     config.generators do |g|
       g.fixture true
       g.fixture_replacement "factory_girl"

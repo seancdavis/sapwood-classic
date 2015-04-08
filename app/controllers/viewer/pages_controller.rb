@@ -2,6 +2,9 @@ class Viewer::PagesController < ViewerController
 
   before_filter :cors_check
 
+  rescue_from ActionController::RoutingError, :with => :error_404
+  rescue_from ActionView::MissingTemplate, :with => :error_500
+
   def home
     @current_page = current_site.home_page
     if @current_page.nil? || (@current_page.draft? && Rails.env.production?)
@@ -44,6 +47,42 @@ class Viewer::PagesController < ViewerController
       )
     else
       not_found
+    end
+  end
+
+  def error_404
+    if current_site && current_site.title.present?
+      dir = Rails.root.join('app', 'views', 'viewer', current_site.slug).to_s
+      if(
+        File.exists?("#{dir}/404.html.erb") ||
+        File.exists?("#{dir}/404.html")
+      )
+        render(
+          "viewer/#{current_site.slug}/404",
+          :layout => false,
+          :formats => [:html]
+        )
+      else
+        render '404', :formats => [:html]
+      end
+    end
+  end
+
+  def error_500
+    if current_site && current_site.title.present?
+      dir = Rails.root.join('app', 'views', 'viewer', current_site.slug).to_s
+      if(
+        File.exists?("#{dir}/500.html.erb") ||
+        File.exists?("#{dir}/500.html")
+      )
+        render(
+          "viewer/#{current_site.slug}/500",
+          :layout => false,
+          :formats => [:html]
+        )
+      else
+        render '500', :formats => [:html]
+      end
     end
   end
 
