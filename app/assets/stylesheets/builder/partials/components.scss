@@ -91,19 +91,19 @@ a {
   &.unpublish, &.template, &.all, &.help, &.pages, &.maxed-out, &.not-maxed,
   &.unlimited, &.form, &.data-trigger, &.reorder, &.protected, &.unprotected,
   &.hidden, &.hide, &.visible, &.show, &.half-width, &.media, &.move, &.admin,
-  &.user, &.star, &.view {
+  &.user, &.star, &.view, &.not-complete, &.complete {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
       margin-right: 5px;
     }
-    &.published, &.unlimited {
-      color: $color-primary;
+    &.published, &.unlimited, &.complete {
+      color: $color-success;
     }
-    &.not-maxed, &.protected  {
+    &.not-maxed, &.protected {
       color: $color-warning;
     }
-    &.draft, &.maxed-out {
+    &.draft, &.maxed-out, &.not-complete {
       color: $color-danger;
     }
   }
@@ -140,6 +140,7 @@ a {
   &.preview:before        { content: "\e2d9"; }
   &.protected:before      { content: "\e1d0"; }
   &.publish:before,
+  &.complete:before,
   &.not-maxed:before      { content: "\e367"; }
   &.published:before      { content: "\e367"; }
   &.reorder:before        { content: "\e425"; }
@@ -149,6 +150,7 @@ a {
   &.unlimited:before      { content: "\e439"; }
   &.unprotected:before    { content: "\e1d4"; }
   &.unpublish:before,
+  &.not-complete:before,
   &.maxed-out:before      { content: "\e357"; }
   &.user:before           { content: "\e185"; }
   &.view:before           { content: "\e2d9"; }

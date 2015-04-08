@@ -1,0 +1,37 @@
+<article class="error">
+  <%= content_tag(:span, quick_error_status(error), :class => 'status') %>
+  <div class="data">
+    <div class="top">
+      <%= content_tag(:h4, error.name, :class => 'title') %>
+      <%= content_tag(:span, error.path, :class => 'filename') unless error.path.blank? %>
+    </div>
+    <div class="bottom">
+      <%= error_created(error) %>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="top">
+      <%#= link_to(
+        'Edit',
+        builder_route([user], :edit),
+        :class => 'edit'
+      ) %>
+      <%= link_to(
+        'Close',
+        builder_site_error_close_path(current_site, error),
+        :method => :post,
+        :class => 'complete close'
+      ) if error.open? %>
+    </div>
+    <div class="bottom">
+      <%#= link_to(
+        'Remove',
+        builder_route([user], :show),
+        :method => :delete,
+        :class => 'delete',
+        :data => { :confirm => 'This will remove this user from this project.
+          Are you sure?' }
+      ) if user != current_user && error.site_user? %>
+    </div>
+  </div>
+</article>

@@ -76,7 +76,7 @@ class Viewer::PagesController < ViewerController
           render '404', :formats => [:html]
         end
       end
-      Error._404(current_site, error)
+      Error._404(current_site, error, request, current_user || nil)
     end
 
     def error_500(error)
@@ -95,7 +95,7 @@ class Viewer::PagesController < ViewerController
           render '500', :formats => [:html]
         end
       end
-      Error._500(current_site, error)
+      Error._500(current_site, error, request, current_user || nil)
     end
 
     def resolve_layout

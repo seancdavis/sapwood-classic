@@ -31,6 +31,12 @@ users:
   path: builder_site_users_path
   controllers: ['users']
   admin: true
+errors:
+  icon: notification
+  label: Errors
+  path: builder_site_errors_path
+  controllers: ['errors']
+  admin: true
 settings:
   icon: cog3
   label: Settings
