@@ -117,6 +117,16 @@ class Page < ActiveRecord::Base
     if body_md_changed?
       update_columns(:body => SapwoodMarkdown.to_html(body_md))
     end
+    field_data.each do |key, data|
+      if key.to_s =~ /^markdown\_/ && data.present?
+        html = SapwoodMarkdown.to_html(data)
+        field_data_will_change!
+        fd = field_data.merge(
+          :"#{key.to_s.gsub(/^markdown\_/, '')}" => html
+        )
+        update_columns(:field_data => fd)
+      end
+    end
   end
 
   # ------------------------------------------ Instance Methods
@@ -150,6 +160,8 @@ class Page < ActiveRecord::Base
         else
           field_data[method.to_s]
         end
+      elsif method.to_s =~ /^markdown\_/
+        field_data[method.to_s]
       else
         super
       end

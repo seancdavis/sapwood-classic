@@ -64,6 +64,19 @@
         ) %>
       <% else %>
         <% case field.data_type %>
+        <% when 'markdown' %>
+          <%= fd.input(
+            :"markdown_#{field.slug}",
+            :as => :text,
+            :label => field.label,
+            :required => field.required,
+            :input_html => {
+              :value => current_page.send("markdown_#{field.slug}") || field.default_value
+            },
+            :wrapper_html => {
+              :class => 'markdown-editor'
+            }
+          ) %>
         <% when 'date' %>
           <%= fd.input(
             :"#{field.slug}",
