@@ -34,7 +34,7 @@ class Page < ActiveRecord::Base
 
   pg_search_scope(
     :search_content,
-    :against => [:title, :description, :body, :field_data],
+    :against => [:title, :body],
     :using => {
       :tsearch => {:dictionary => "english"}
     }
