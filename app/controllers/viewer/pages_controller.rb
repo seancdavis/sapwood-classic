@@ -62,6 +62,8 @@ class Viewer::PagesController < ViewerController
 
     def error_404(error)
       if current_site && current_site.title.present?
+        @q = request.path.split('/').last.humanize.split('.').first.downcase
+        @results = current_site.pages.search_content(@q).to_a.first(10)
         dir = Rails.root.join('app', 'views', 'viewer', current_site.slug).to_s
         if(
           File.exists?("#{dir}/404.html.erb") ||
@@ -75,8 +77,10 @@ class Viewer::PagesController < ViewerController
         else
           render '404', :formats => [:html]
         end
+      else
+        render :file => 'public/404.html'
       end
-      Error._404(current_site, error, request, current_user || nil)
+      Error._404(current_site, error, request, current_user)
     end
 
     def error_500(error)
@@ -94,8 +98,10 @@ class Viewer::PagesController < ViewerController
         else
           render '500', :formats => [:html]
         end
+      else
+        render '500', :formats => [:html]
       end
-      Error._500(current_site, error, request, current_user || nil)
+      Error._500(current_site, error, request, current_user)
     end
 
     def resolve_layout
