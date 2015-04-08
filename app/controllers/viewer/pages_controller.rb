@@ -2,8 +2,16 @@ class Viewer::PagesController < ViewerController
 
   before_filter :cors_check
 
-  rescue_from ActionController::RoutingError, :with => :error_404
-  rescue_from ActionView::MissingTemplate, :with => :error_500
+  # rescue_from ActionController::RoutingError, :with => :error_404
+  # rescue_from ActionView::MissingTemplate, :with => :error_500
+
+  rescue_from ActionController::RoutingError do |e|
+    error_404(e)
+  end
+
+  rescue_from ActionView::MissingTemplate do |e|
+    error_500(e)
+  end
 
   def home
     @current_page = current_site.home_page
@@ -50,43 +58,45 @@ class Viewer::PagesController < ViewerController
     end
   end
 
-  def error_404
-    if current_site && current_site.title.present?
-      dir = Rails.root.join('app', 'views', 'viewer', current_site.slug).to_s
-      if(
-        File.exists?("#{dir}/404.html.erb") ||
-        File.exists?("#{dir}/404.html")
-      )
-        render(
-          "viewer/#{current_site.slug}/404",
-          :layout => false,
-          :formats => [:html]
-        )
-      else
-        render '404', :formats => [:html]
-      end
-    end
-  end
-
-  def error_500
-    if current_site && current_site.title.present?
-      dir = Rails.root.join('app', 'views', 'viewer', current_site.slug).to_s
-      if(
-        File.exists?("#{dir}/500.html.erb") ||
-        File.exists?("#{dir}/500.html")
-      )
-        render(
-          "viewer/#{current_site.slug}/500",
-          :layout => false,
-          :formats => [:html]
-        )
-      else
-        render '500', :formats => [:html]
-      end
-    end
-  end
-
   private
+
+    def error_404(error)
+      if current_site && current_site.title.present?
+        dir = Rails.root.join('app', 'views', 'viewer', current_site.slug).to_s
+        if(
+          File.exists?("#{dir}/404.html.erb") ||
+          File.exists?("#{dir}/404.html")
+        )
+          render(
+            "viewer/#{current_site.slug}/404",
+            :layout => false,
+            :formats => [:html]
+          )
+        else
+          render '404', :formats => [:html]
+        end
+      end
+      Error._404(current_site, error)
+    end
+
+    def error_500(error)
+      if current_site && current_site.title.present?
+        dir = Rails.root.join('app', 'views', 'viewer', current_site.slug).to_s
+        if(
+          File.exists?("#{dir}/500.html.erb") ||
+          File.exists?("#{dir}/500.html")
+        )
+          render(
+            "viewer/#{current_site.slug}/500",
+            :layout => false,
+            :formats => [:html]
+          )
+        else
+          render '500', :formats => [:html]
+        end
+      end
+      Error._500(current_site, error)
+    end
 
     def resolve_layout
       if params[:layout] && params[:layout].to_bool == false

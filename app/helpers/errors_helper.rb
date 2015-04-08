@@ -1,7 +1,8 @@
 module ErrorsHelper
 
   def not_found
-    raise ActionController::RoutingError.new('Not Found')
+    error = ActionController::RoutingError.new('Not Found')
+    raise error
   end
 
 end
