@@ -54,6 +54,7 @@ class Error < ActiveRecord::Base
       :message => e.message,
       :backtrace => e.backtrace.join("\n")
     )
+    send_notification(e)
   end
 
   def self._500(site, e, request, user = nil)
@@ -68,6 +69,11 @@ class Error < ActiveRecord::Base
       :message => e.message,
       :backtrace => e.backtrace.join("\n")
     )
+    send_notification(e)
+  end
+
+  def self.send_notification(error)
+    ExceptionNotifier.notify_exception(error)
   end
 
 end
