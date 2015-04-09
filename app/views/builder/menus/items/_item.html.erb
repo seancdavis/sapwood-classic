@@ -20,6 +20,13 @@
   <div class="actions">
     <div class="top">
       <%= link_to(
+        'New Sub Item',
+        new_builder_site_menu_menu_item_path(
+          current_site, current_menu, :parent => item.slug
+        ),
+        :class => 'new'
+      ) %>
+      <%= link_to(
         'Edit',
         builder_route([current_menu, item], :edit),
         :class => 'edit'

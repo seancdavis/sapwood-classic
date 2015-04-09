@@ -46,7 +46,8 @@ class Builder::Menus::ItemsController < BuilderController
   private
 
     def create_params
-      update_params.merge(:menu => current_menu)
+      params.require(:menu_item).permit(:page_id, :title, :url, :in_list)
+        .merge(:menu => current_menu)
     end
 
     def update_params

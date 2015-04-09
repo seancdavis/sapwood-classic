@@ -6,6 +6,11 @@
     <div class="half-row">
       <%= f.association :page, :collection => site_pages.sort_by(&:title),
         :label_method => :dropdown_label %>
+      <%= f.input(
+        :in_list,
+        :as => :hidden,
+        :input_html => { :value => params[:parent] }
+      ) if params[:parent] %>
       <%= em_p("You can leave this blank if you want to include an external (or
       custom-built) URL. If you keep a page selected, the URL may change
       automatically.") %>

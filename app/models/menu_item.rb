@@ -20,6 +20,12 @@ class MenuItem < ActiveRecord::Base
 
   include SiteSlug
 
+  has_ancestry
+
+  # ------------------------------------------ Attributes
+
+  attr_accessor :in_list
+
   # ------------------------------------------ Associations
 
   belongs_to :menu, :touch => true
@@ -39,6 +45,15 @@ class MenuItem < ActiveRecord::Base
     unless page_id.blank?
       path = page.page_path
       update_columns(:url => path) unless path == url
+    end
+  end
+
+  before_save :check_parent
+
+  def check_parent
+    unless in_list.blank?
+      page = site.menu_items.find_by_slug(in_list)
+      self.parent_id = page.id unless page.nil?
     end
   end
 
