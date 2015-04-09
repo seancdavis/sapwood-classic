@@ -1,20 +1,23 @@
 # == Schema Information
 #
-# Table name: menus
+# Table name: menu_items
 #
 #  id         :integer          not null, primary key
-#  site_id    :integer
+#  menu_id    :integer
+#  page_id    :integer
 #  title      :string(255)
+#  url        :string(255)
+#  position   :integer
+#  ancestry   :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #
 
-class Menu < ActiveRecord::Base
+class MenuItem < ActiveRecord::Base
 
   # ------------------------------------------ Associations
 
-  belongs_to :site
-
-  has_many :menu_items
+  belongs_to :menu
+  belongs_to :page
 
 end

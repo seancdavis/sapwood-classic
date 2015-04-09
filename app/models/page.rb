@@ -56,6 +56,7 @@ class Page < ActiveRecord::Base
   has_many :page_resources, :dependent => :destroy
   has_many :resources, :through => :page_resources
   has_many :resource_types, :through => :template
+  has_many :menu_items
 
   # ------------------------------------------ Scopes
 

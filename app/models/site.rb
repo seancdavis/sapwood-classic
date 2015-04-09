@@ -40,6 +40,7 @@ class Site < ActiveRecord::Base
   has_many :documents, :dependent => :destroy
   has_many :image_croppings
   has_many :menus
+  has_many :menu_items, :through => :menus
   has_many :theme_errors, :class_name => Error
 
   belongs_to :home_page, :class_name => 'Page'
