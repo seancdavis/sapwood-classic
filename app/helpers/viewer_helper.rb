@@ -46,6 +46,55 @@ module ViewerHelper
     end
   end
 
+  def viewer_menu(slug)
+    menu = current_site.menus.find_by_slug(slug)
+    if menu.nil?
+      nil
+    else
+      content_tag(:nav) do
+        content_tag(:ul) do
+          o = ''
+          menu.items.roots.each do |root|
+            o += content_tag(:li) do
+              o2 = link_to(
+                root.title,
+                root.page_id.blank? ? root.url : viewer_page(root.url)
+              )
+              nodes = root.subtree.arrange_serializable(:order => :position)
+              if nodes.first["children"].size > 0
+                o2 += viewer_submenu_collection(nodes.first["children"])
+              end
+              o2.html_safe
+            end
+          end
+          o.html_safe
+        end
+      end
+    end
+  end
+
+  def viewer_submenu_collection(items)
+    content_tag(:ul) do
+      o2 = ''
+      items.each { |item| o2 += viewer_submenu_item(item) }
+      o2.html_safe
+    end
+  end
+
+  def viewer_submenu_item(item)
+    item = OpenStruct.new(item)
+    content_tag(:li) do
+      o = link_to(
+        item.title,
+        item.page_id.blank? ? item.url : viewer_page(item.url)
+      )
+      if item.children.size > 0
+        o += content_tag(:ul, viewer_submenu_collection(item.children))
+      end
+      o.html_safe
+    end
+  end
+
   def viewer_page_title(title, options = {})
     content_tag(:header, options[:header]) do
       content_tag(:h1) do
