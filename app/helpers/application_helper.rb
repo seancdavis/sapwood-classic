@@ -6,4 +6,12 @@ module ApplicationHelper
     }
   end
 
+  def settings
+    @settings ||= Setting.alpha
+  end
+
+  def setting(name)
+    settings.select { |s| s.title == name }.first
+  end
+
 end
