@@ -183,6 +183,10 @@ class Page < ActiveRecord::Base
       field_data.keys
   end
 
+  def dropdown_label
+    "#{title} #{"[#{page_path}]" unless page_path.blank?}"
+  end
+
   # ------------------------------------------ Class Methods
 
   def self.order_by_fields

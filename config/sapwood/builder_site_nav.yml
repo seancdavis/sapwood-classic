@@ -13,7 +13,7 @@ menus:
   icon: menu
   label: Menus
   path: builder_site_menus_path
-  controllers: ['menus']
+  controllers: ['menus','items']
 resources:
   icon: wrench
   label: Resources

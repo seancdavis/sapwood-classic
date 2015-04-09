@@ -25,4 +25,27 @@ class MenuItem < ActiveRecord::Base
   belongs_to :menu, :touch => true
   belongs_to :page
 
+  has_one :site, :through => :menu
+
+  # ------------------------------------------ Validations
+
+  validates :title, :presence => true
+
+  # ------------------------------------------ Callbacks
+
+  after_save :check_page_path
+
+  def check_page_path
+    unless page_id.blank?
+      path = page.page_path
+      update_columns(:url => path) unless path == url
+    end
+  end
+
+  # ------------------------------------------ Instance Methods
+
+  def label
+    title
+  end
+
 end
