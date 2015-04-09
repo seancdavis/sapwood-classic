@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20150409153501) do
     t.string   "title"
     t.string   "slug"
     t.string   "url"
-    t.integer  "position"
+    t.integer  "position",   default: 0
     t.string   "ancestry"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,4 +1,4 @@
-<article class="menu">
+<article class="menu-item" data-id="<%= item.id %>">
   <%= content_tag(:span, '', :class => 'status') %>
   <div class="data">
     <div class="top">
@@ -13,12 +13,23 @@
         :class => 'path'
       ) %>
     </div>
+    <%= simple_form_for(
+      [:builder, current_site, current_menu, item],
+      :html => { :class => 'item-position' }
+    ) do |f| %>
+      <%= f.input :position, :input_html => { :class => 'position' } %>
+    <% end %>
     <div class="bottom">
       <%= menu_last_updated(item) %>
     </div>
   </div>
   <div class="actions">
     <div class="top">
+      <%= link_to(
+        "View #{item.children.size} Sub Items",
+        builder_site_menu_menu_item_path(current_site, current_menu, item),
+        :class => 'view'
+      ) if item.has_children? %>
       <%= link_to(
         'New Sub Item',
         new_builder_site_menu_menu_item_path(

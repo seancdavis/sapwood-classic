@@ -6,7 +6,7 @@ class CreateMenuItems < ActiveRecord::Migration
       t.string :title
       t.string :slug
       t.string :url
-      t.integer :position
+      t.integer :position, :default => 0
       t.string :ancestry
 
       t.timestamps

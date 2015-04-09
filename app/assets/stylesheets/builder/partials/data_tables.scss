@@ -98,7 +98,8 @@
     border: 1px solid $color-grey-lighter;
     article.page, article.template, article.form-field, article.user,
     article.form, article.form-submission, article.resource-type,
-    article.resource-field, article.resource, article.error, article.menu {
+    article.resource-field, article.resource, article.error, article.menu,
+    article.menu-item {
       position: relative;
       min-height: 72px;
       padding: 10px 10px;
@@ -130,7 +131,7 @@
 
       // ------------------------ Extra styles for sortable lists
 
-      &.form-field, &.resource-field {
+      &.form-field, &.resource-field, &.menu-item {
         &:hover {
           cursor: move;
           cursor: -webkit-grab;
@@ -142,7 +143,7 @@
         > span.status a.unprotected {
           color: $color-grey;
         }
-        form.field-position {
+        form.field-position, form.item-position {
           display: none;
         }
       }

@@ -12,13 +12,27 @@ module MenusHelper
   end
 
   def current_menu_items
-    @current_menu_items ||= current_menu.items
+    @current_menu_items ||= begin
+      if current_menu && current_menu.id.present?
+        current_menu.items.in_position
+      else
+        nil
+      end
+    end
+  end
+
+  def current_menu_item_roots
+    @current_menu_item_roots ||= current_menu_items.select(&:is_root?)
   end
 
   def current_menu_item
     @current_menu_item ||= begin
-      slug = params[:menu_item_slug] || params[:slug]
-      current_menu_items.select { |e| e.slug == slug }.first
+      if current_menu_items.nil?
+        nil
+      else
+        slug = params[:menu_item_slug] || params[:slug]
+        current_menu_items.select { |e| e.slug == slug }.first
+      end
     end
   end
 
@@ -34,12 +48,30 @@ module MenusHelper
         builder_route([current_menu, current_menu_items], :index)
       )
     end
+    if current_menu_item
+      if current_menu_item.id.present?
+        current_menu_item.ancestors.each do |item|
+          o += content_tag(:span, '/', :class => 'separator')
+          o += link_to(item.slug, builder_route([current_menu, item], :show))
+        end
+        o += content_tag(:span, '/', :class => 'separator')
+        o += link_to(
+          current_menu_item.slug,
+          builder_route([current_menu, current_menu_item], :show)
+        )
+      elsif params[:parent].present?
+        item = current_menu_items.select { |i| i.slug == params[:parent] }.first
+        item.ancestors.each do |item|
+          o += content_tag(:span, '/', :class => 'separator')
+          o += link_to(item.slug, builder_route([current_menu, item], :show))
+        end
+        o += content_tag(:span, '/', :class => 'separator')
+        o += link_to(item.slug, builder_route([current_menu, item], :show))
+      end
+    end
     if controller_name == 'items' && ['new', 'create'].include?(action_name)
       o += content_tag(:span, '/', :class => 'separator')
       o += link_to("new item", '#', :class => 'disabled')
-    elsif current_menu_item && current_menu_item.id.present?
-      o += content_tag(:span, '/', :class => 'separator')
-      o += link_to(current_menu_item.slug, '#', :class => 'disabled')
     end
     o.html_safe
   end
@@ -56,7 +88,7 @@ module MenusHelper
     m = current_menu
     [
       {
-        :title => "Menu Items",
+        :title => "Build Menu",
         :path => builder_route([m, current_menu_items], :index),
         :class => 'menu',
         :controllers => ['items']

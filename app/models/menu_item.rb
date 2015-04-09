@@ -8,7 +8,7 @@
 #  title      :string(255)
 #  slug       :string(255)
 #  url        :string(255)
-#  position   :integer
+#  position   :integer          default(0)
 #  ancestry   :string(255)
 #  created_at :datetime
 #  updated_at :datetime
@@ -32,6 +32,10 @@ class MenuItem < ActiveRecord::Base
   belongs_to :page
 
   has_one :site, :through => :menu
+
+  # ------------------------------------------ Scopes
+
+  scope :in_position, -> { order('position asc') }
 
   # ------------------------------------------ Validations
 

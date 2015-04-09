@@ -8,7 +8,7 @@
 #  title      :string(255)
 #  slug       :string(255)
 #  url        :string(255)
-#  position   :integer
+#  position   :integer          default(0)
 #  ancestry   :string(255)
 #  created_at :datetime
 #  updated_at :datetime

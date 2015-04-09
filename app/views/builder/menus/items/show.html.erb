@@ -5,8 +5,10 @@
   <%= content_tag(
     :div,
     link_to(
-      'New (Root) Item',
-      new_builder_site_menu_menu_item_path(current_site, current_menu),
+      "New Item (under #{current_menu_item.title})",
+      new_builder_site_menu_menu_item_path(
+        current_site, current_menu, :parent => current_menu_item.slug
+      ),
       :class => 'new'
     ),
     :class => 'new-buttons dropdown'
@@ -15,8 +17,8 @@
 <% end %>
 
 <section id="page-content" class="data-container">
-  <% if current_menu_item_roots.size > 0 %>
-    <%= data_table(current_menu_item_roots, 'item') %>
+  <% if @menu_items.size > 0 %>
+    <%= data_table(@menu_items, 'item') %>
   <% else %>
     <%= missing_content("No items for this menu. Maybe you should add one!") %>
   <% end %>
