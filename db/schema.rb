@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20150409153501) do
   create_table "menus", force: true do |t|
     t.integer  "site_id"
     t.string   "title"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

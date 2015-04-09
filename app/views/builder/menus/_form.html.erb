@@ -1,0 +1,12 @@
+<%= simple_form_for [:builder, current_site, current_menu] do |f| %>
+
+  <section class="form">
+    <div class="half-row">
+      <%= f.input :title %>
+      <%= f.input :slug, :label => "Method Name" %>
+    </div>
+  </section>
+
+  <%= f.submit "Save Menu" %>
+
+<% end %>

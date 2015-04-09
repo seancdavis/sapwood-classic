@@ -9,6 +9,11 @@ templates:
   path: builder_site_templates_path
   controllers: ['templates','groups','fields','template_pages']
   admin: true
+menus:
+  icon: menu
+  label: Menus
+  path: builder_site_menus_path
+  controllers: ['menus']
 resources:
   icon: wrench
   label: Resources

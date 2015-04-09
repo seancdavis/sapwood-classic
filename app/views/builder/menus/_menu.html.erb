@@ -1,0 +1,30 @@
+<article class="menu">
+  <%= content_tag(:span, '', :class => 'status') %>
+  <div class="data">
+    <div class="top">
+      <%= content_tag(:h4, menu.title, :class => 'title') %>
+      <%= content_tag(:span, menu.slug, :class => 'filename') %>
+    </div>
+    <div class="bottom">
+      <%= menu_last_updated(menu) %>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="top">
+      <%= link_to(
+        'Edit',
+        builder_route([menu], :edit),
+        :class => 'edit'
+      ) if current_user.admin? %>
+    </div>
+    <div class="bottom">
+      <%= link_to(
+        'Delete',
+        builder_route([menu], :show),
+        :method => :delete,
+        :class => 'delete',
+        :data => { :confirm => 'Are you sure?' }
+      ) if current_user.admin? %>
+    </div>
+  </div>
+</article>

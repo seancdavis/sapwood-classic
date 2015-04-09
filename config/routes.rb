@@ -71,6 +71,9 @@ Rails.application.routes.draw do
           :param => :slug, :only => [:index]
       end
 
+      # Menus
+      resources :menus, :param => :slug
+
       # Resources
       resources :resource_types, :path => :resources,
                 :controller => :resources, :param => :slug, :path_names => {

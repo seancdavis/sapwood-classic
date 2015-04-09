@@ -38,10 +38,10 @@ class Site < ActiveRecord::Base
            :class_name => 'Page'
   has_many :forms, :dependent => :destroy
   has_many :documents, :dependent => :destroy
-  has_many :image_croppings
-  has_many :menus
+  has_many :image_croppings, :dependent => :destroy
+  has_many :menus, :dependent => :destroy
   has_many :menu_items, :through => :menus
-  has_many :theme_errors, :class_name => Error
+  has_many :theme_errors, :class_name => Error, :dependent => :destroy
 
   belongs_to :home_page, :class_name => 'Page'
 

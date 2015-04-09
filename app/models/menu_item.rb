@@ -17,7 +17,7 @@ class MenuItem < ActiveRecord::Base
 
   # ------------------------------------------ Associations
 
-  belongs_to :menu
+  belongs_to :menu, :touch => true
   belongs_to :page
 
 end
