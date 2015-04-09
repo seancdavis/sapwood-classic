@@ -94,6 +94,11 @@ module MenusHelper
         :controllers => ['items']
       },
       {
+        :title => "View Full Menu",
+        :path => builder_route([m], :show),
+        :class => 'view'
+      },
+      {
         :title => "Edit Menu",
         :path => builder_route([m], :edit),
         :class => 'edit'

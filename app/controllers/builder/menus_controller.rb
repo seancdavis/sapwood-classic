@@ -5,6 +5,9 @@ class Builder::MenusController < BuilderController
   def index
   end
 
+  def show
+  end
+
   def new
     @current_menu = Menu.new
   end

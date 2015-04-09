@@ -1,0 +1,13 @@
+<% item = OpenStruct.new(list_item) %>
+
+<li>
+  <%= item.title %>
+  <%= content_tag(:span, link_to(item.url, item.url)) %>
+  <%= content_tag(
+    :ul,
+    render(
+      :partial => 'builder/menus/list_item',
+      :collection => item.children
+    )
+  ) if item.children.size > 0 %>
+</li>
