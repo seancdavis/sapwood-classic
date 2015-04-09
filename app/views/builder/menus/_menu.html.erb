@@ -12,6 +12,11 @@
   <div class="actions">
     <div class="top">
       <%= link_to(
+        'Menu Items',
+        builder_site_menu_menu_items_path(current_site, menu),
+        :class => 'menu'
+      ) %>
+      <%= link_to(
         'Edit',
         builder_route([menu], :edit),
         :class => 'edit'

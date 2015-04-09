@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20150409153501) do
     t.integer  "menu_id"
     t.integer  "page_id"
     t.string   "title"
+    t.string   "slug"
     t.string   "url"
     t.integer  "position"
     t.string   "ancestry"

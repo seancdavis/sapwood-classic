@@ -72,7 +72,10 @@ Rails.application.routes.draw do
       end
 
       # Menus
-      resources :menus, :param => :slug
+      resources :menus, :param => :slug do
+        resources :menu_items, :path => :items, :controller => 'menus/items',
+                  :param => :slug
+      end
 
       # Resources
       resources :resource_types, :path => :resources,

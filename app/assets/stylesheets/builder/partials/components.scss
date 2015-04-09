@@ -91,7 +91,7 @@ a {
   &.unpublish, &.template, &.all, &.help, &.pages, &.maxed-out, &.not-maxed,
   &.unlimited, &.form, &.data-trigger, &.reorder, &.protected, &.unprotected,
   &.hidden, &.hide, &.visible, &.show, &.half-width, &.media, &.move, &.admin,
-  &.user, &.star, &.view, &.not-complete, &.complete {
+  &.user, &.star, &.view, &.not-complete, &.complete, &.menu {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
@@ -134,6 +134,7 @@ a {
   &.hide:before           { content: "\e2da"; }
   &.link:before           { content: "\e2c9"; }
   &.media:before          { content: "\e02b"; }
+  &.menu:before           { content: "\e2aa"; }
   &.move:before           { content: "\e352"; }
   &.new:before            { content: "\e35e"; }
   &.pages:before          { content: "\e079"; }

@@ -28,11 +28,19 @@ class Builder::MenusController < BuilderController
     if current_menu.update(update_params)
       redirect_to(
         builder_route([current_menu], :index),
-        :notice => 'Menu created successfully!'
+        :notice => 'Menu updated successfully!'
       )
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    current_menu.destroy
+    redirect_to(
+      builder_route([site_menus], :index),
+      :notice => 'Menu deleted successfully!'
+    )
   end
 
   private

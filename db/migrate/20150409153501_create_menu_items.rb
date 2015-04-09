@@ -4,6 +4,7 @@ class CreateMenuItems < ActiveRecord::Migration
       t.integer :menu_id
       t.integer :page_id
       t.string :title
+      t.string :slug
       t.string :url
       t.integer :position
       t.string :ancestry

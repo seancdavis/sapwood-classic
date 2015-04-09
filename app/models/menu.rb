@@ -30,4 +30,10 @@ class Menu < ActiveRecord::Base
 
   validates :title, :presence => true
 
+  # ------------------------------------------ Instance Methods
+
+  def items
+    menu_items
+  end
+
 end

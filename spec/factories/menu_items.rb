@@ -6,6 +6,7 @@
 #  menu_id    :integer
 #  page_id    :integer
 #  title      :string(255)
+#  slug       :string(255)
 #  url        :string(255)
 #  position   :integer
 #  ancestry   :string(255)
