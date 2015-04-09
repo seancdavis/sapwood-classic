@@ -1,5 +1,7 @@
 class Builder::ErrorsController < BuilderController
 
+  before_filter :verify_admin
+
   include ErrorsHelper
 
   def index
