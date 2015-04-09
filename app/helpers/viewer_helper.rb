@@ -6,9 +6,9 @@ module ViewerHelper
 
   def meta_tag(content)
     content_tag(
-      :meta, 
-      nil, 
-      :name => 'description', 
+      :meta,
+      nil,
+      :name => 'description',
       :content => content
     ) unless content.blank?
   end
@@ -19,7 +19,7 @@ module ViewerHelper
 
   def viewer_collection(collection, partial)
     render(
-      :partial => "viewer/#{current_site.slug}/#{partial}", 
+      :partial => "viewer/#{current_site.slug}/#{partial}",
       :collection => collection
     )
   end
@@ -32,9 +32,9 @@ module ViewerHelper
           path = is_home_page?(page) ? viewer_home : viewer_page(page.slug)
           active = (request.path.split('/').last == path.split('/').last)
           o += content_tag(
-            :li, 
+            :li,
             link_to(
-              page.slug.gsub(/\_/, ' ').titleize, 
+              page.slug.gsub(/\_/, ' ').titleize,
               path,
               :class => "#{page.slug} #{'active' if active}"
             ),
