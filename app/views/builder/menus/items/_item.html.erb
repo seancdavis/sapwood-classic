@@ -3,7 +3,15 @@
   <div class="data">
     <div class="top">
       <%= content_tag(:h4, item.title, :class => 'title') %>
-      <%= content_tag(:span, item.url, :class => 'filename') %>
+      <%= content_tag(
+        :span,
+        link_to(
+          item.url,
+          item.page_id.blank? ? item.url : viewer_page(item.url),
+          :target => :blank
+        ),
+        :class => 'path'
+      ) %>
     </div>
     <div class="bottom">
       <%= menu_last_updated(item) %>
