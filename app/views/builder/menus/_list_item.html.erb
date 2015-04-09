@@ -2,7 +2,14 @@
 
 <li>
   <%= item.title %>
-  <%= content_tag(:span, link_to(item.url, item.url)) %>
+  <%= content_tag(
+    :span,
+    link_to(
+      item.url,
+      item.page_id.blank? ? item.url : viewer_page(item.url),
+      :target => :blank
+    )
+  ) %>
   <%= content_tag(
     :ul,
     render(
