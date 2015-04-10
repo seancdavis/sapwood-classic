@@ -34,6 +34,11 @@ Rails.application.routes.draw do
   namespace :builder, :path => '' do
     resources :sites, :param => :slug, :path_names => { :edit => :settings } do
 
+      # Site Settings
+      get 'settings/croppers' => 'sites#croppers', :as => :cropper
+      patch 'settings/croppers' => 'sites#update_croppers',
+            :as => :update_croppers
+
       # Site Actions
       post 'pull' => 'sites#pull', :as => :pull
       post 'import' => 'sites#import', :as => :import

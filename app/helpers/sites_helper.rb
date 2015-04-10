@@ -77,29 +77,29 @@ module SitesHelper
       },
       {
         :title => "Image Croppers",
-        :path => '#',
+        :path => builder_site_cropper_path(current_site),
         :class => 'crop'
       },
-      {
-        :title => 'Deploy Code',
-        :path => builder_site_pull_path(current_site),
-        :class => 'download',
-        :request_type => 'post',
-        :confirm => 'Are you sure? This will stash any changes you have made.'
-      },
-      {
-        :title => 'Import New Repo',
-        :path => builder_site_import_path(current_site),
-        :class => 'code',
-        :request_type => 'post',
-        :confirm => 'Ready to import project?'
-      },
-      {
-        :title => 'Generate Symlinks',
-        :path => builder_site_symlink_path(current_site),
-        :class => 'link',
-        :request_type => 'post'
-      }
+      # {
+      #   :title => 'Deploy Code',
+      #   :path => builder_site_pull_path(current_site),
+      #   :class => 'download',
+      #   :request_type => 'post',
+      #   :confirm => 'Are you sure? This will stash any changes you have made.'
+      # },
+      # {
+      #   :title => 'Import New Repo',
+      #   :path => builder_site_import_path(current_site),
+      #   :class => 'code',
+      #   :request_type => 'post',
+      #   :confirm => 'Ready to import project?'
+      # },
+      # {
+      #   :title => 'Generate Symlinks',
+      #   :path => builder_site_symlink_path(current_site),
+      #   :class => 'link',
+      #   :request_type => 'post'
+      # }
     ]
     if Rails.env.production?
       actions << {

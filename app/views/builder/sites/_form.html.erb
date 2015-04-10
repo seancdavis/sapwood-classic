@@ -1,51 +1,28 @@
 <%= simple_form_for([:builder, current_site]) do |f| %>
 
-  <% tabs = ['details'] %>
-  <% tabs << 'image-croppers' unless current_site.id.nil? %>
-
-  <%= form_tabs tabs %>
-
-  <section class="form tabbed details">
+  <div class="half-row">
+    <%= f.input :title %>
+    <%= f.input :url, :as => :string, :label => 'Primary domain (no http://)' %>
+  </div>
+  <%= f.input :secondary_urls, :label => 'Seconday domains (no http://)' %>
+  <%= em_p(
+    "Note: Place each domain on a new line. Any domain here will redirect to
+    your primary domain."
+  ) %>
+  <% if current_site.id.nil? %>
     <div class="half-row">
-      <%= f.input :title %>
-      <%= f.input :url, :as => :string, :label => 'Primary domain (no http://)' %>
+      <%= f.input :git_url, :as => :string, :label => 'Remote Git Path' %>
+      <%= f.input(
+        :new_repo,
+        :as => :boolean,
+        :label => 'Create and push new repo?'
+      ) if current_site.id.nil? %>
     </div>
-    <%= f.input :secondary_urls, :label => 'Seconday domains (no http://)' %>
-    <%= em_p(
-      "Note: Place each domain on a new line. Any domain here will redirect to
-      your primary domain."
-    ) %>
-    <% if current_site.id.nil? %>
-      <div class="half-row">
-        <%= f.input :git_url, :as => :string, :label => 'Remote Git Path' %>
-        <%= f.input(
-          :new_repo,
-          :as => :boolean,
-          :label => 'Create and push new repo?'
-        ) if current_site.id.nil? %>
-      </div>
-    <% else %>
-      <%= f.input :git_url, :as => :string %>
-    <% end %>
-    <%= f.input(:home_page_id, :collection => site_pages) if site_pages.size > 0 %>
-    <%= f.input :description %>
-  </section>
-
-  <% unless current_site.id.nil? %>
-    <section class="form tabbed image-croppers">
-      <% croppings = (
-        current_site.image_croppings + [ImageCropping.new]
-      ) %>
-      <%= f.simple_fields_for(:image_croppings, croppings) do |crop| %>
-        <%= crop.input :title %>
-        <div class="half-row">
-          <%= crop.input :width, :label => 'Width (px)' %>
-          <%= crop.input :height, :label => 'Height (px)' %>
-        </div>
-        <%= content_tag(:hr) unless crop.object == croppings.last %>
-      <% end %>
-    </section>
+  <% else %>
+    <%= f.input :git_url, :as => :string %>
   <% end %>
+  <%= f.input(:home_page_id, :collection => site_pages) if site_pages.size > 0 %>
+  <%= f.input :description %>
 
   <%= f.submit %>
 
