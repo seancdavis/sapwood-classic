@@ -40,6 +40,28 @@ namespace :sapwood do
       #   "#{Rails.root}/config/taproot.yml",
       #   "#{Rails.root}/config/sapwood.yml"
       # ].each { |file| FileUtils.rm(file) if File.exists?(file) }
+
+      Site.all.each do |site|
+        file = "#{Rails.root}/config/sites/#{site.slug.gsub(/\-/, '_')}.yml"
+        if File.exists?(file)
+          settings = YAML.load_file(file)[Rails.env].to_ostruct
+          settings.each_pair do |k,v|
+            if v.class == OpenStruct
+              v.each_pair do |k2, v|
+                if v.class == OpenStruct
+                  v.each_pair do |k3, v|
+                    save_site_setting(site, "#{k}_#{k2}_#{k3}", v)
+                  end
+                else
+                  save_site_setting(site, "#{k}_#{k2}", v)
+                end
+              end
+            else
+              save_site_setting(site, k.to_s, v)
+            end
+          end
+        end
+      end
     end
 
     def save_setting(k,v)
@@ -51,6 +73,15 @@ namespace :sapwood do
         )
         puts "Created setting: #{k}"
       end
+    end
+
+    def save_site_setting(site, k, v)
+      SiteSetting.create!(
+        :site => site,
+        :title => k,
+        :body => v
+      )
+      puts "Created setting: #{k}"
     end
 
     def allowed_settings

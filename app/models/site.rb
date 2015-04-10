@@ -42,6 +42,7 @@ class Site < ActiveRecord::Base
   has_many :menus, :dependent => :destroy
   has_many :menu_items, :through => :menus
   has_many :theme_errors, :class_name => Error, :dependent => :destroy
+  has_many :site_settings, :dependent => :destroy
 
   belongs_to :home_page, :class_name => 'Page'
 
@@ -79,19 +80,6 @@ class Site < ActiveRecord::Base
 
   def croppers
     crop_settings
-  end
-
-  def class_file
-    slug.gsub(/\-/, '_')
-  end
-
-  def settings
-    file = File.join(Rails.root,'config','sites',"#{class_file}.yml")
-    if File.exists?(file)
-      YAML.load_file(file)[Rails.env].to_ostruct
-    else
-      OpenStruct.new
-    end
   end
 
   def files
@@ -139,6 +127,10 @@ class Site < ActiveRecord::Base
 
   def pages
     Rails.env.production? ? webpages.published : webpages
+  end
+
+  def settings
+    site_settings
   end
 
 end
