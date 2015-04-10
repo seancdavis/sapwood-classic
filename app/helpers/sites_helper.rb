@@ -72,12 +72,13 @@ module SitesHelper
       },
       {
         :title => "Custom Settings",
-        :path => '#',
-        :class => 'settings'
+        :path => builder_site_site_settings_path(s),
+        :class => 'settings',
+        :controllers => ['settings']
       },
       {
         :title => "Image Croppers",
-        :path => builder_site_cropper_path(current_site),
+        :path => builder_site_cropper_path(s),
         :class => 'crop'
       },
       # {
@@ -110,6 +111,13 @@ module SitesHelper
       }
     end
     actions
+  end
+
+  def setting_last_updated(setting)
+    date = setting.updated_at.strftime("%h %d")
+    content_tag(:span, :class => 'last-edited') do
+      "Last updated #{content_tag(:span, date)}".html_safe
+    end
   end
 
 end

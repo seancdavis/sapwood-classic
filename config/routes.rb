@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       get 'settings/croppers' => 'sites#croppers', :as => :cropper
       patch 'settings/croppers' => 'sites#update_croppers',
             :as => :update_croppers
+      resources :site_settings, :controller => 'sites/settings', :param => :slug
 
       # Site Actions
       post 'pull' => 'sites#pull', :as => :pull

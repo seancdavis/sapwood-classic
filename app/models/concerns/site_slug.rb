@@ -17,7 +17,8 @@ module SiteSlug
     association = self.class.table_name.gsub(/^heartwood\_/, '')
     slug = clean_slug(self.title.downcase)
     dups = self.site.send(association).where(:slug => slug) - [self]
-    separator = (self.class == Template || self.class == Page) ? '_' : '-'
+    underscore_classes = [Template, ResourceType, SiteSetting]
+    separator = underscore_classes.include?(self.class) ? '_' : '-'
     slug = "#{slug}#{separator}#{self.id}" if dups.count > 0
     slug
   end

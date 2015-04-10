@@ -25,4 +25,14 @@ class SiteSetting < ActiveRecord::Base
 
   validates :title, :presence => true
 
+  # ------------------------------------------ Scopes
+
+  scope :alpha, -> { order('title asc') }
+
+  # ------------------------------------------ Instance Methods
+
+  def value
+    body
+  end
+
 end
