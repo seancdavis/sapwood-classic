@@ -102,14 +102,14 @@ module SitesHelper
       #   :request_type => 'post'
       # }
     ]
-    if Rails.env.production?
-      actions << {
-        :title => 'Backup Database',
-        :path => builder_site_backup_path(current_site),
-        :class => 'database',
-        :request_type => 'post'
-      }
-    end
+    # if Rails.env.production?
+    #   actions << {
+    #     :title => 'Backup Database',
+    #     :path => builder_site_backup_path(current_site),
+    #     :class => 'database',
+    #     :request_type => 'post'
+    #   }
+    # end
     actions
   end
 
