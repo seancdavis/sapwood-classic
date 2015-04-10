@@ -1,0 +1,28 @@
+<nav class="page tabs">
+  <ul>
+    <% current_site_actions.each do |t| %>
+      <% if t[:confirm].present? %>
+        <%= content_tag(
+          :li,
+          link_to(
+            t[:title],
+            t[:path],
+            :class => "#{t[:class]} #{tab_active?(t) ? 'active' : nil}",
+            :method => t[:request_type] || :get,
+            :data => { :confirm => t[:confirm] }
+          )
+        ) %>
+      <% else %>
+        <%= content_tag(
+          :li,
+          link_to(
+            t[:title],
+            t[:path],
+            :class => "#{t[:class]} #{tab_active?(t) ? 'active' : nil}",
+            :method => t[:request_type] || :get
+          )
+        ) %>
+      <% end %>
+    <% end %>
+  </ul>
+</nav>

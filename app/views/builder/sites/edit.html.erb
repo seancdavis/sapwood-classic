@@ -1,3 +1,8 @@
-<%= builder_page_title("#{current_site.title} Settings") %>
+<%= builder_page_title(
+  current_page_breadcrumbs,
+  :class => 'breadcrumbs no-border'
+) do %>
+  <%= render :partial => 'tabs' %>
+<% end %>
+
 <%= content_tag(:section, render('form'), :id => 'page-content') %>
-<%= sidebar %>
