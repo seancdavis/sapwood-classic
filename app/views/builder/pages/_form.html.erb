@@ -41,28 +41,16 @@
           }
         ) unless field.hidden? %>
       <% elsif field.slug == 'body' && !field.hidden? %>
-        <div class="body-buttons input">
-          <label>Content / Body</label>
-          <% if current_page.slug %>
-            <%= link_to(
-              'Launch Rich Text Editor',
-              builder_site_page_editor_path(current_site, current_page, 'wysiwyg'),
-              :class => 'button wysiwyg'
-            ) %>
-            <%= link_to(
-              'Launch Markdown Editor',
-              builder_site_page_editor_path(current_site, current_page, 'markdown'),
-              :class => 'button markdown'
-            ) %>
-          <% else %>
-            <p>
-              <em>Save the page to edit the content (we wouldn't want you to lose
-              your work!).</em>
-            </p>
-          <% end %>
-          <%= f.input :body_md, :as => :hidden, :wrapper => false %>
-          <%= f.input :body, :as => :hidden, :wrapper => false %>
-        </div>
+        <%= f.input(
+          :body_md,
+          :label => field.label,
+          :input_html => {
+            :value => current_page.body_md || field.default_value
+          },
+          :wrapper_html => {
+            :class => 'markdown-editor'
+          }
+        ) %>
       <% elsif field.hidden? %>
         <%= fd.input(
           :"#{field.slug}",
@@ -76,6 +64,19 @@
         ) %>
       <% else %>
         <% case field.data_type %>
+        <% when 'markdown' %>
+          <%= fd.input(
+            :"markdown_#{field.slug}",
+            :as => :text,
+            :label => field.label,
+            :required => field.required,
+            :input_html => {
+              :value => current_page.send("markdown_#{field.slug}") || field.default_value
+            },
+            :wrapper_html => {
+              :class => 'markdown-editor'
+            }
+          ) %>
         <% when 'date' %>
           <%= fd.input(
             :"#{field.slug}",

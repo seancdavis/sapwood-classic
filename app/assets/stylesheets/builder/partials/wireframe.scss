@@ -6,7 +6,8 @@ body {
   #container {
     > header {
       width: 100%;
-      padding: 10px 0;
+      // padding: 10px 0;
+      padding: 0;
       background: $color-dark;
       z-index: 9999;
     }
@@ -23,6 +24,9 @@ body {
         &.full-width, &.page.form, &.data-container {
           width: 100%;
           padding: 0;
+          &.with-sidebar {
+            width: 75%;
+          }
         }
         &.documents {
           width: 100%;

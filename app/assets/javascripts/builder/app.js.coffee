@@ -1,6 +1,4 @@
 window.App =
-  Models: {}
-  Collections: {}
   Routers: {}
   Views: {}
 

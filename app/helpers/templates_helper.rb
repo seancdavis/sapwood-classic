@@ -78,6 +78,7 @@ module TemplatesHelper
     [
       ['String', 'string'],
       ['Text', 'text'],
+      ['Markdown', 'markdown'],
       ['Dropdown', 'select'],
       ['Date', 'date'],
       ['Checkbox', 'boolean'],

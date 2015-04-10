@@ -6,9 +6,9 @@ module ViewerHelper
 
   def meta_tag(content)
     content_tag(
-      :meta, 
-      nil, 
-      :name => 'description', 
+      :meta,
+      nil,
+      :name => 'description',
       :content => content
     ) unless content.blank?
   end
@@ -19,7 +19,7 @@ module ViewerHelper
 
   def viewer_collection(collection, partial)
     render(
-      :partial => "viewer/#{current_site.slug}/#{partial}", 
+      :partial => "viewer/#{current_site.slug}/#{partial}",
       :collection => collection
     )
   end
@@ -32,9 +32,9 @@ module ViewerHelper
           path = is_home_page?(page) ? viewer_home : viewer_page(page.slug)
           active = (request.path.split('/').last == path.split('/').last)
           o += content_tag(
-            :li, 
+            :li,
             link_to(
-              page.slug.gsub(/\_/, ' ').titleize, 
+              page.slug.gsub(/\_/, ' ').titleize,
               path,
               :class => "#{page.slug} #{'active' if active}"
             ),
@@ -43,6 +43,55 @@ module ViewerHelper
         end
         o.html_safe
       end
+    end
+  end
+
+  def viewer_menu(slug)
+    menu = current_site.menus.find_by_slug(slug)
+    if menu.nil?
+      nil
+    else
+      content_tag(:nav) do
+        content_tag(:ul) do
+          o = ''
+          menu.items.roots.each do |root|
+            o += content_tag(:li) do
+              o2 = link_to(
+                root.title,
+                root.page_id.blank? ? root.url : viewer_page(root.url)
+              )
+              nodes = root.subtree.arrange_serializable(:order => :position)
+              if nodes.first["children"].size > 0
+                o2 += viewer_submenu_collection(nodes.first["children"])
+              end
+              o2.html_safe
+            end
+          end
+          o.html_safe
+        end
+      end
+    end
+  end
+
+  def viewer_submenu_collection(items)
+    content_tag(:ul) do
+      o2 = ''
+      items.each { |item| o2 += viewer_submenu_item(item) }
+      o2.html_safe
+    end
+  end
+
+  def viewer_submenu_item(item)
+    item = OpenStruct.new(item)
+    content_tag(:li) do
+      o = link_to(
+        item.title,
+        item.page_id.blank? ? item.url : viewer_page(item.url)
+      )
+      if item.children.size > 0
+        o += content_tag(:ul, viewer_submenu_collection(item.children))
+      end
+      o.html_safe
     end
   end
 
@@ -72,10 +121,6 @@ module ViewerHelper
 
   def slug_title(slug)
     slug.gsub(/\_/, ' ').humanize.titleize
-  end
-
-  def site_settings
-    @site_settings ||= current_site.settings
   end
 
 end

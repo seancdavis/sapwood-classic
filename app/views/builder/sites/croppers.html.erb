@@ -1,0 +1,10 @@
+<%= builder_page_title(
+  current_page_breadcrumbs,
+  :class => 'breadcrumbs no-border'
+) do %>
+  <%= render :partial => 'tabs' %>
+<% end %>
+
+<%= content_tag(:section, render('cropper_form'), :id => 'page-content') %>
+
+<%= sidebar %>

@@ -40,8 +40,27 @@ class Builder::SitesController < BuilderController
 
   def update
     if current_site.update(update_params)
-      redirect_to(route([current_site], :edit, 'builder'),
-        :notice => t('notices.updated', :item => "Site"))
+      redirect_to(
+        route([current_site], :edit, 'builder'),
+        :notice => t('notices.updated', :item => "Site")
+      )
+    else
+      render('edit')
+    end
+  end
+
+  def croppers
+    unless current_user.admin?
+      redirect_to(builder_site_path(current_site))
+    end
+  end
+
+  def update_croppers
+    if current_site.update(update_params)
+      redirect_to(
+        builder_site_cropper_path(current_site),
+        :notice => t('notices.updated', :item => "Site")
+      )
     else
       render('edit')
     end

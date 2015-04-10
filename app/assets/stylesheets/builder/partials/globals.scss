@@ -41,3 +41,9 @@
     outline: none;
   }
 }
+
+a {
+  &:focus, &:active {
+    outline: none;
+  }
+}

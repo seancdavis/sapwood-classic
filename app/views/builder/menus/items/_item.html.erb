@@ -1,0 +1,56 @@
+<article class="menu-item" data-id="<%= item.id %>">
+  <%= content_tag(:span, '', :class => 'status') %>
+  <div class="data">
+    <div class="top">
+      <%= content_tag(:h4, item.title, :class => 'title') %>
+      <%= content_tag(
+        :span,
+        link_to(
+          item.url,
+          item.page_id.blank? ? item.url : viewer_page(item.url),
+          :target => :blank
+        ),
+        :class => 'path'
+      ) %>
+    </div>
+    <%= simple_form_for(
+      [:builder, current_site, current_menu, item],
+      :html => { :class => 'item-position' }
+    ) do |f| %>
+      <%= f.input :position, :input_html => { :class => 'position' } %>
+    <% end %>
+    <div class="bottom">
+      <%= menu_last_updated(item) %>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="top">
+      <%= link_to(
+        "View #{item.children.size} Sub Items",
+        builder_site_menu_menu_item_path(current_site, current_menu, item),
+        :class => 'view'
+      ) if item.has_children? %>
+      <%= link_to(
+        'New Sub Item',
+        new_builder_site_menu_menu_item_path(
+          current_site, current_menu, :parent => item.slug
+        ),
+        :class => 'new'
+      ) %>
+      <%= link_to(
+        'Edit',
+        builder_route([current_menu, item], :edit),
+        :class => 'edit'
+      ) %>
+    </div>
+    <div class="bottom">
+      <%= link_to(
+        'Delete',
+        builder_route([current_menu, item], :show),
+        :method => :delete,
+        :class => 'delete',
+        :data => { :confirm => 'Are you sure?' }
+      ) if current_user.admin? %>
+    </div>
+  </div>
+</article>

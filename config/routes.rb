@@ -34,6 +34,12 @@ Rails.application.routes.draw do
   namespace :builder, :path => '' do
     resources :sites, :param => :slug, :path_names => { :edit => :settings } do
 
+      # Site Settings
+      get 'settings/croppers' => 'sites#croppers', :as => :cropper
+      patch 'settings/croppers' => 'sites#update_croppers',
+            :as => :update_croppers
+      resources :site_settings, :controller => 'sites/settings', :param => :slug
+
       # Site Actions
       post 'pull' => 'sites#pull', :as => :pull
       post 'import' => 'sites#import', :as => :import
@@ -52,8 +58,6 @@ Rails.application.routes.draw do
         end
         get 'move' => 'pages#move', :as => :move
         get 'settings/:slug' => 'pages#edit', :as => :settings
-        get 'edit/:editor' => 'pages/editor#edit', :as => :editor
-        patch 'edit/:editor' => 'pages/editor#parse', :as => :parser
         get 'help' => 'pages#help', :as => :help
         post 'publish' => 'pages#publish', :as => :publish
         post 'unpublish' => 'pages#unpublish', :as => :unpublish
@@ -71,6 +75,12 @@ Rails.application.routes.draw do
           :controller => 'templates/groups', :param => :slug
         resources :pages, :controller => 'templates/template_pages',
           :param => :slug, :only => [:index]
+      end
+
+      # Menus
+      resources :menus, :param => :slug do
+        resources :menu_items, :path => :items, :controller => 'menus/items',
+                  :param => :slug
       end
 
       # Resources
@@ -109,6 +119,11 @@ Rails.application.routes.draw do
 
       # Users
       resources :users, :except => [:show]
+
+      # Error Tracker
+      resources :errors, :only => [:index, :show] do
+        post 'close' => 'errors#close', :as => :close
+      end
     end
   end
 

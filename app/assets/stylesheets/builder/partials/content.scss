@@ -1,5 +1,73 @@
 #content {
 
+  #page-content {
+    ul.menu-tree {
+      margin: 0;
+      padding: 0;
+      li {
+        display: block;
+        margin: 15px 0;
+        font-size: 16px;
+        line-height: 16px;
+        font-weight: 600;
+        color: $color-dark-lightest;
+        vertical-align: top;
+        &:before {
+          display: inline-block;
+          margin-right: 5px;
+          font-family: 'Icomoon-Ultimate';
+          font-size: 10px;
+          line-height: 16px;
+          content: "\e375";
+        }
+        span {
+          display: inline-block;
+          font-size: 14px;
+          line-height: 16px;
+          font-weight: 200;
+          vertical-align: top;
+          a {
+            display: inline-block;
+            margin-left: 5px;
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: 200;
+            vertical-align: top;
+            color: $color-1;
+          }
+        }
+        ul {
+          margin: 0;
+          padding: 0;
+          margin-left: 30px;
+          li {
+            margin: 15px 0;
+            font-size: 16px;
+            line-height: 16px;
+            font-weight: 600;
+            color: $color-dark-lightest;
+            span {
+              display: inline-block;
+              font-size: 14px;
+              line-height: 16px;
+              font-weight: 200;
+              vertical-align: top;
+              a {
+                display: inline-block;
+                margin-left: 5px;
+                font-size: 14px;
+                line-height: 16px;
+                font-weight: 200;
+                vertical-align: top;
+                color: $color-1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   .page-title {
     margin: 0 0 10px 0;
     padding: 0 0 10px 0;
@@ -44,12 +112,18 @@
       float: right;
       form {
         display: block;
+        width: auto;
         margin: 0;
         div.input {
           margin: 0;
           input {
+            width: 150px;
             margin: 0;
             padding: 9px 10px;
+            @include transition(width 0.25s ease-in-out);
+            &:focus {
+              width: 300px;
+            }
           }
         }
       }

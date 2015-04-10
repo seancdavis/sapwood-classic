@@ -1,0 +1,23 @@
+<%= builder_page_title(
+  menus_breadcrumbs,
+  :class => 'breadcrumbs no-border'
+) do %>
+  <%= content_tag(
+    :div,
+    link_to(
+      'New (Root) Item',
+      new_builder_site_menu_menu_item_path(current_site, current_menu),
+      :class => 'new'
+    ),
+    :class => 'new-buttons dropdown'
+  ) %>
+  <%= render :partial => 'builder/menus/tabs' %>
+<% end %>
+
+<section id="page-content" class="data-container">
+  <% if current_menu_item_roots.size > 0 %>
+    <%= data_table(current_menu_item_roots, 'item') %>
+  <% else %>
+    <%= missing_content("No items for this menu. Maybe you should add one!") %>
+  <% end %>
+</section>

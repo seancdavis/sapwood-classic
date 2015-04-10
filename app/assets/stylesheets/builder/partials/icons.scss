@@ -1268,6 +1268,9 @@
 .icon-hanger:before {
   content: "\e19e";
 }
+.icon-quote:before {
+  content: "\e19f";
+}
 .icon-quotes-left:before {
   content: "\e19f";
 }
@@ -2018,7 +2021,7 @@
 .icon-clipboard4:before {
   content: "\e298";
 }
-.icon-list:before {
+.icon-unordered-list:before, .icon-list:before {
   content: "\e299";
 }
 .icon-list2:before {
@@ -2027,7 +2030,7 @@
 .icon-list3:before {
   content: "\e29b";
 }
-.icon-numbered-list:before {
+.icon-ordered-list:before, .icon-numbered-list:before {
   content: "\e29c";
 }
 .icon-list4:before {
@@ -2211,6 +2214,9 @@
   content: "\e2d8";
 }
 .icon-eye:before {
+  content: "\e2d9";
+}
+.icon-preview:before {
   content: "\e2d9";
 }
 .icon-eye-blocked:before {

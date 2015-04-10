@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401191516) do
+ActiveRecord::Schema.define(version: 20150410010107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,21 @@ ActiveRecord::Schema.define(version: 20150401191516) do
     t.text     "crop_data"
     t.string   "document_site"
     t.string   "document_name"
+  end
+
+  create_table "errors", force: true do |t|
+    t.integer  "site_id"
+    t.integer  "user_id"
+    t.string   "code"
+    t.string   "name"
+    t.string   "ip"
+    t.text     "path"
+    t.text     "referrer"
+    t.text     "message"
+    t.text     "backtrace"
+    t.boolean  "closed",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "form_fields", force: true do |t|
@@ -92,6 +107,28 @@ ActiveRecord::Schema.define(version: 20150401191516) do
     t.string   "title"
     t.string   "slug"
     t.boolean  "public",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "menu_items", force: true do |t|
+    t.integer  "menu_id"
+    t.integer  "page_id"
+    t.string   "title"
+    t.string   "slug"
+    t.string   "url"
+    t.integer  "position",   default: 0
+    t.string   "ancestry"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "menu_items", ["ancestry"], name: "index_menu_items_on_ancestry", using: :btree
+
+  create_table "menus", force: true do |t|
+    t.integer  "site_id"
+    t.string   "title"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -187,6 +224,23 @@ ActiveRecord::Schema.define(version: 20150401191516) do
     t.string   "slug"
     t.integer  "resource_type_id"
     t.text     "field_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "settings", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "site_settings", force: true do |t|
+    t.integer  "site_id"
+    t.string   "title"
+    t.string   "slug"
+    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

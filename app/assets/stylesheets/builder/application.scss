@@ -6,6 +6,8 @@
 @import 'pickadate/classic';
 @import 'pickadate/classic.date';
 @import 'pickadate/classic.time';
+@import 'editor';
+@import 'yue';
 @import 'jquery.Jcrop';
 
 // ------------------------------------------ Partials
@@ -26,5 +28,3 @@
 @import 'partials/uploader';
 @import 'partials/images';
 @import 'partials/filters';
-@import 'partials/markdown_editor';
-@import 'partials/wysiwyg_editor';

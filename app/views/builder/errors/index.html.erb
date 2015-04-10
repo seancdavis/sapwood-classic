@@ -1,0 +1,15 @@
+<%= builder_page_title(errors_breadcrumbs, :class => 'breadcrumbs') %>
+
+<section id="page-content" class="data-container">
+  <%= render :partial => 'filters' %>
+  <% if @errors.size > 0 %>
+    <%= data_table(@errors, 'error') %>
+    <%= paginate(@errors) %>
+  <% else %>
+    <% if params[:error_status] == 'all' %>
+      <%= missing_content("No errors for this site!") %>
+    <% else %>
+      <%= missing_content("No #{params[:error_status]} errors.") %>
+    <% end %>
+  <% end %>
+</section>

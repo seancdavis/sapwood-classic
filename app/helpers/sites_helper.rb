@@ -56,4 +56,68 @@ module SitesHelper
     o.html_safe
   end
 
+  def current_site_breadcrumbs
+    @current_site_breadcrumbs ||= begin
+      o = link_to("site settings", edit_builder_site_path(current_site))
+    end
+  end
+
+  def current_site_actions
+    s = current_site
+    actions = [
+      {
+        :title => "Site Details",
+        :path => edit_builder_site_path(s),
+        :class => 'edit'
+      },
+      {
+        :title => "Custom Settings",
+        :path => builder_site_site_settings_path(s),
+        :class => 'settings',
+        :controllers => ['settings']
+      },
+      {
+        :title => "Image Croppers",
+        :path => builder_site_cropper_path(s),
+        :class => 'crop'
+      },
+      # {
+      #   :title => 'Deploy Code',
+      #   :path => builder_site_pull_path(current_site),
+      #   :class => 'download',
+      #   :request_type => 'post',
+      #   :confirm => 'Are you sure? This will stash any changes you have made.'
+      # },
+      # {
+      #   :title => 'Import New Repo',
+      #   :path => builder_site_import_path(current_site),
+      #   :class => 'code',
+      #   :request_type => 'post',
+      #   :confirm => 'Ready to import project?'
+      # },
+      # {
+      #   :title => 'Generate Symlinks',
+      #   :path => builder_site_symlink_path(current_site),
+      #   :class => 'link',
+      #   :request_type => 'post'
+      # }
+    ]
+    if Rails.env.production?
+      actions << {
+        :title => 'Backup Database',
+        :path => builder_site_backup_path(current_site),
+        :class => 'database',
+        :request_type => 'post'
+      }
+    end
+    actions
+  end
+
+  def setting_last_updated(setting)
+    date = setting.updated_at.strftime("%h %d")
+    content_tag(:span, :class => 'last-edited') do
+      "Last updated #{content_tag(:span, date)}".html_safe
+    end
+  end
+
 end

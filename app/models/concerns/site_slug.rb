@@ -17,7 +17,8 @@ module SiteSlug
     association = self.class.table_name.gsub(/^heartwood\_/, '')
     slug = clean_slug(self.title.downcase)
     dups = self.site.send(association).where(:slug => slug) - [self]
-    separator = (self.class == Template || self.class == Page) ? '_' : '-'
+    underscore_classes = [Template, ResourceType, SiteSetting]
+    separator = underscore_classes.include?(self.class) ? '_' : '-'
     slug = "#{slug}#{separator}#{self.id}" if dups.count > 0
     slug
   end
@@ -26,7 +27,8 @@ module SiteSlug
     clean_slug = s.gsub(/\&/, ' and ') # replace ampersand with "and"
     clean_slug = clean_slug.gsub(/\./, '-') # replace periods with hyphens
     clean_slug = clean_slug.gsub(/[^a-zA-Z0-9 \-\_]/, "") # remove any remaining bad characters
-    separator = self.class == Template || self.class == ResourceType ? '_' : '-'
+    underscore_classes = [Template, ResourceType, SiteSetting]
+    separator = underscore_classes.include?(self.class) ? '_' : '-'
     clean_slug.gsub!(/\ /, separator) # replace spaces with underscores
     clean_slug.gsub!(/#{separator}+/, separator) # replace repeating underscores
     clean_slug

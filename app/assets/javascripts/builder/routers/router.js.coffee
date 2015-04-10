@@ -20,6 +20,9 @@ class App.Routers.Router extends Backbone.Router
     'sites/:site_slug/pages/:page_slug/library': 'pageMedia'
     # Templates
     'sites/:site_slug/templates/:template_slug/fields': 'templateFields'
+    # Menus
+    'sites/:site_slug/menus/:menu_slug/items': 'menuItems'
+    'sites/:site_slug/menus/:menu_slug/items/:item_slug': 'menuItems'
     # Resources
     'sites/:site_slug/resources/:resource_slug/fields': 'resourceFields'
     'sites/:site_slug/resources/:resource_slug/association_fields': 'resourceFields'
@@ -35,7 +38,7 @@ class App.Routers.Router extends Backbone.Router
         site: site_slug
 
   editPage: (site_slug, page_slug, slug) ->
-    new App.Views.EditorButtons
+    new App.Views.MarkdownEditor
     new App.Views.UnloadCheck
     if $('.image-upload-trigger').length > 0
       new App.Views.PageFileUploader
@@ -56,6 +59,9 @@ class App.Routers.Router extends Backbone.Router
   templateFields: (site_slug, template_slug) ->
     new App.Views.FieldSorter
     new App.Views.GroupEditor
+
+  menuItems: (site_slug, menu_slug, item_slug = null) ->
+    new App.Views.MenuItemSorter
 
   formFields: (site_slug, form_slug) ->
     new App.Views.FormFieldSorter

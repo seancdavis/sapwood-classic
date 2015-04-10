@@ -1,0 +1,26 @@
+<%= simple_form_for [
+  :builder, current_site, current_menu, current_menu_item
+] do |f| %>
+
+  <section class="form">
+    <div class="half-row">
+      <%= f.association :page, :collection => site_pages.sort_by(&:title),
+        :label_method => :dropdown_label %>
+      <%= f.input(
+        :in_list,
+        :as => :hidden,
+        :input_html => { :value => params[:parent] }
+      ) if params[:parent] %>
+      <%= em_p("You can leave this blank if you want to include an external (or
+      custom-built) URL. If you keep a page selected, the URL may change
+      automatically.") %>
+    </div>
+    <div class="half-row">
+      <%= f.input :title, :label => 'Label' %>
+      <%= f.input :url, :as => :string, :label => 'URL' %>
+    </div>
+  </section>
+
+  <%= f.submit "Save Menu" %>
+
+<% end %>

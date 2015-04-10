@@ -91,19 +91,20 @@ a {
   &.unpublish, &.template, &.all, &.help, &.pages, &.maxed-out, &.not-maxed,
   &.unlimited, &.form, &.data-trigger, &.reorder, &.protected, &.unprotected,
   &.hidden, &.hide, &.visible, &.show, &.half-width, &.media, &.move, &.admin,
-  &.user, &.star, &.view {
+  &.user, &.star, &.view, &.not-complete, &.complete, &.menu, &.image,
+  &.settings {
     &:before {
       font-family: 'Icomoon-Ultimate';
       font-size: 10px;
       margin-right: 5px;
     }
-    &.published, &.unlimited {
-      color: $color-primary;
+    &.published, &.unlimited, &.complete {
+      color: $color-success;
     }
-    &.not-maxed, &.protected  {
+    &.not-maxed, &.protected {
       color: $color-warning;
     }
-    &.draft, &.maxed-out {
+    &.draft, &.maxed-out, &.not-complete {
       color: $color-danger;
     }
   }
@@ -132,23 +133,28 @@ a {
   &.help:before           { content: "\e359"; }
   &.hidden:before         { content: "\e2da"; }
   &.hide:before           { content: "\e2da"; }
+  &.image:before          { content: "\e02b"; }
   &.link:before           { content: "\e2c9"; }
   &.media:before          { content: "\e02b"; }
+  &.menu:before           { content: "\e2aa"; }
   &.move:before           { content: "\e352"; }
   &.new:before            { content: "\e35e"; }
   &.pages:before          { content: "\e079"; }
   &.preview:before        { content: "\e2d9"; }
   &.protected:before      { content: "\e1d0"; }
   &.publish:before,
+  &.complete:before,
   &.not-maxed:before      { content: "\e367"; }
   &.published:before      { content: "\e367"; }
   &.reorder:before        { content: "\e425"; }
+  &.settings:before       { content: "\e1df"; }
   &.show:before           { content: "\e2d9"; }
   &.star:before           { content: "\e2fc"; }
   &.template:before       { content: "\e097"; }
   &.unlimited:before      { content: "\e439"; }
   &.unprotected:before    { content: "\e1d4"; }
   &.unpublish:before,
+  &.not-complete:before,
   &.maxed-out:before      { content: "\e357"; }
   &.user:before           { content: "\e185"; }
   &.view:before           { content: "\e2d9"; }

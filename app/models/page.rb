@@ -56,6 +56,7 @@ class Page < ActiveRecord::Base
   has_many :page_resources, :dependent => :destroy
   has_many :resources, :through => :page_resources
   has_many :resource_types, :through => :template
+  has_many :menu_items
 
   # ------------------------------------------ Scopes
 
@@ -111,6 +112,24 @@ class Page < ActiveRecord::Base
     template.check_maxed_out
   end
 
+  after_save :parse_markdown
+
+  def parse_markdown
+    if body_md_changed?
+      update_columns(:body => SapwoodMarkdown.to_html(body_md))
+    end
+    field_data.each do |key, data|
+      if key.to_s =~ /^markdown\_/ && data.present?
+        html = SapwoodMarkdown.to_html(data)
+        field_data_will_change!
+        fd = field_data.merge(
+          :"#{key.to_s.gsub(/^markdown\_/, '')}" => html
+        )
+        update_columns(:field_data => fd)
+      end
+    end
+  end
+
   # ------------------------------------------ Instance Methods
 
   def resource_type_methods
@@ -142,6 +161,8 @@ class Page < ActiveRecord::Base
         else
           field_data[method.to_s]
         end
+      elsif method.to_s =~ /^markdown\_/
+        field_data[method.to_s]
       else
         super
       end
@@ -160,6 +181,10 @@ class Page < ActiveRecord::Base
     template.fields.collect(&:slug) -
       ['title','description','body','show_in_nav','slug','position'] -
       field_data.keys
+  end
+
+  def dropdown_label
+    "#{title} #{"[#{page_path}]" unless page_path.blank?}"
   end
 
   # ------------------------------------------ Class Methods

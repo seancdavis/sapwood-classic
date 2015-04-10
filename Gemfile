@@ -64,10 +64,6 @@ group :console do
   gem 'awesome_print'
 end
 
-group :development do
-  gem 'dbsync'
-end
-
 group :production do
   gem 'rack-cache', :require => 'rack/cache'
 end
