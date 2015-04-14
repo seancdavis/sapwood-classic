@@ -12,45 +12,6 @@ To submit an idea, please [create an
 issue](https://github.com/seancdavis/sapwood/issues/new) and prepend it with
 `[request]`.
 
-v1.4: Many Small Enhancements (April 2015)
--------------
-
-With the release of v1.3, the content management portion of Sapwood is quite
-extensive and flexible. It's now time to look at the builder and add some small
-enhancements.
-
-#### Custom Error Pages
-
-We are going to trap `404` and `500` errors on a site and allow you to add
-custom error pages that use each site's stylesheets. Future default templates
-will come packaged with these.
-
-Both will have their own defaults, but can be overridden by template files.
-
-#### Text Editing
-
-The rich text editor is going away, and the markdown editor will be
-significantly enhanced. More than likely, it will be wrapped up in a javascript
-library and plugged back in to the site.
-
-This will come with an embedded editor for quick edits, but with the option to
-launch the full-screen window.
-
-#### Markdown Editing for Dynamic Fields
-
-Sometimes you need more than one field for rich text editing on a given
-template. This will give you that option.
-
-#### App & Site Settings
-
-All settings will be brought into the database and managed from the production
-version of the application. This way installations will be similar throughout.
-
-#### Menu Builder
-
-The page structure of a site is not always enough to generate menus. We'll
-create a custom menu builder that come with helpers to build the menus.
-
 v1.5: File Management & Developer Help (May/June 2015)
 -------------
 
