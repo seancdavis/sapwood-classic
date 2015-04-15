@@ -58,7 +58,8 @@ module ViewerHelper
             o += content_tag(:li) do
               o2 = link_to(
                 root.title,
-                root.page_id.blank? ? root.url : viewer_page(root.url)
+                root.page_id.blank? ? root.url : viewer_page(root.url),
+                :class => root.page_id.blank? ? 'disabled' : ''
               )
               nodes = root.subtree.arrange_serializable(:order => :position)
               if nodes.first["children"].size > 0
