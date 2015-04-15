@@ -8,7 +8,7 @@ namespace :sapwood do
     task :symlink, [:slug] => :environment do |t, args|
 
       # create references
-      # 
+      #
       slug = args.slug
       underscore = "#{slug.underscore}"
       service = "#{underscore}_viewer.rb"
@@ -16,8 +16,14 @@ namespace :sapwood do
 
       if Dir.exists?(project_dir)
         Dir.glob("#{project_dir}/**/*", File::FNM_DOTMATCH).each do |file|
-          # if the file is a file
-          if File.file?(file)
+          # Make sure the file is not in a directory we don't want to look in
+          path_arr = file.split('/')
+          dir = file.split('/')[path_arr.index(slug).to_i + 1]
+          if(
+            !['.git','images','middleman','static','fonts'].include?(dir) &&
+            File.file?(file) && file.text?
+          )
+            puts file
             # get the filename
             filename = file.split('/').last
             # if filename is a symlink reference to the directory
@@ -52,16 +58,16 @@ namespace :sapwood do
       end
 
       # create symlinks
-      # 
+      #
       # {
       #   "images"                    => "app/assets/images/viewer/#{slug}",
-      #   "javascripts"               => "app/assets/javascripts/viewer/#{slug}", 
-      #   "stylesheets"               => "app/assets/stylesheets/viewer/#{slug}", 
+      #   "javascripts"               => "app/assets/javascripts/viewer/#{slug}",
+      #   "stylesheets"               => "app/assets/stylesheets/viewer/#{slug}",
       #   "templates"                 => "app/views/viewer/#{slug}",
       #   "templates/layout.html.erb" => "app/views/layouts/viewer/#{slug}.html.erb",
-      #   "utilities/services.rb"     => "app/viewer_services/#{service}", 
-      #   "utilities/tasks.rake"      => "lib/tasks/viewer/#{underscore}.rake", 
-      #   "utilities/config.yml"      => "config/viewer/#{underscore}.yml", 
+      #   "utilities/services.rb"     => "app/viewer_services/#{service}",
+      #   "utilities/tasks.rake"      => "lib/tasks/viewer/#{underscore}.rake",
+      #   "utilities/config.yml"      => "config/viewer/#{underscore}.yml",
       # }.each do |source, dest|
       #   dir = dest.split('/')[0..-2].join('/')
       #   unless Dir.exists?(dir)
