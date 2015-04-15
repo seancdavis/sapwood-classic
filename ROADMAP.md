@@ -12,7 +12,7 @@ To submit an idea, please [create an
 issue](https://github.com/seancdavis/sapwood/issues/new) and prepend it with
 `[request]`.
 
-v1.5: File Management & Developer Help (May/June 2015)
+v1.5: File Management & Developer Help (May 2015)
 -------------
 
 Most aspects of the builder have been given sufficient attention since their
@@ -29,29 +29,23 @@ site's files.
 You will be able to capture and customize much more information about a file
 you upload.
 
-#### Developer Helpers
-
-Like pages and template, there will be a developer helper page added to a
-particular asset so you know how to use or manipulate the file.
-
 #### Cropper UI
 
 The file cropper settings are tucked away and difficult to find. They will be
 moved to the media library, and the process of cropping will be made a little
 cleaner.
 
-#### Developer Help Pages
-
-v1.1 added a couple developer help pages to read dynamic content and help
-developers learn how to access that content. Now it's time to make these pages
-a little easier to use and to add more content to them.
-
 ### Form Helpers
 
 We're going to replace form notes with helper tooltips. This should make forms
 much easier to digest and show you help items only if you need them.
 
-v1.6: Setup & Theming (June/July 2015)
+### UI Cleanup
+
+We've added a lot in the last few months. It's time to give the UI a quick
+touch-up.
+
+v1.6: Setup & Theming (May/June 2015)
 ----------
 
 *TBD: Aims to remove some of the duplication in setup and streamlines the
@@ -62,13 +56,9 @@ v1.7: Editor App (June/July 2015)
 
 *TBD: Features to make editing a site simpler.*
 
-v1.8: Developer App & Builder API (August/September 2015)
-----------
-
-*TBD: Features to make writing code simpler.*
-
 v2.0: Separating Functional Apps & Documentation (Late 2015)
 ----------
 
-*TBD: 2.0 will introduce a fully-documented API and will be an organized
-package of self-hosted applications.*
+*2.0 will introduce a fully-documented API and will be an organized package of
+self-hosted applications, as building, developing and viewing will all be
+managed by separate applications.*
