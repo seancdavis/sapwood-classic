@@ -46,12 +46,12 @@ module ViewerHelper
     end
   end
 
-  def viewer_menu(slug)
+  def viewer_menu(slug, options = {})
     menu = current_site.menus.find_by_slug(slug)
     if menu.nil?
       nil
     else
-      content_tag(:nav) do
+      content_tag(:nav, options[:nav_html]) do
         content_tag(:ul) do
           o = ''
           menu.items.roots.each do |root|
