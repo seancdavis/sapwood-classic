@@ -184,6 +184,7 @@ GEM
       nokogiri (~> 1.5, >= 1.5.11)
     formatador (0.2.5)
     fssm (0.2.10)
+    geocoder (1.2.8)
     haml (4.0.6)
       tilt
     hike (1.2.3)
@@ -519,6 +520,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   fog
+  geocoder
   hirb
   httpclient
   jbuilder
