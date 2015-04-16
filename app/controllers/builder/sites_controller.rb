@@ -100,17 +100,6 @@ class Builder::SitesController < BuilderController
     )
   end
 
-  def sync
-    remote_url = SapwoodSetting.remote.url
-    key = SapwoodSetting.api.public_key
-    system("curl http://#{remote_url}/api/v1/database/dump?public_key=#{key}")
-    SapwoodDatabase.new.sync
-    redirect_to(
-      route([current_site], :edit, 'builder'),
-      :notice => 'Database synced successfully!'
-    )
-  end
-
   def symlink
     SapwoodProject.new(current_site).update_symlinks
     redirect_to(
