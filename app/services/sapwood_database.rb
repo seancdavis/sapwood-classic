@@ -7,17 +7,11 @@ class SapwoodDatabase
   end
 
   def backup
-    cmd =  "mysqldump -u #{config[:user]} --password='#{config[:password]}' "
-    cmd += "#{config[:name]} > #{backup_file}"
-    system(cmd)
+    system("pg_dump --username #{config[:user]} #{config[:name]} > #{backup_file}")
     if File.exists?(backup_file_copy)
       system("rm #{backup_file_copy}")
     end
     system("cp #{backup_file} #{backup_file_copy}")
-  end
-
-  def sync
-    system("bundle exec rake dbsync:clone")
   end
 
   def backup_file_copy
