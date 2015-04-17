@@ -2,7 +2,10 @@ module SitesHelper
 
   def current_site
     @current_site ||= begin
-      if ['localhost',SapwoodSetting.site.url].include?(request.host)
+      if(
+        ['localhost',SapwoodSetting.site.url].include?(request.host) ||
+        request.host =~ /^192\.168/ || request.host =~ /^10\.1/
+      )
         p = params[:site_slug] || params[:slug]
         if user_signed_in?
           my_sites.select{ |s| s.slug == p }.first unless p.nil?
