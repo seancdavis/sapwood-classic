@@ -90,7 +90,7 @@ module ViewerHelper
         item.page_id.blank? ? item.url : viewer_page(item.url)
       )
       if item.children.size > 0
-        o += content_tag(:ul, viewer_submenu_collection(item.children))
+        o += viewer_submenu_collection(item.children)
       end
       o.html_safe
     end
