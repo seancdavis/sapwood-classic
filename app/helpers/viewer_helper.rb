@@ -54,7 +54,7 @@ module ViewerHelper
       content_tag(:nav, options[:nav_html]) do
         content_tag(:ul, options[:ul_level_1]) do
           o = ''
-          menu.items.roots.each do |root|
+          menu.items.roots.order('position asc').each do |root|
             o += content_tag(:li) do
               o2 = link_to(
                 root.title,
@@ -79,7 +79,9 @@ module ViewerHelper
   def viewer_submenu_collection(items, level, options)
     content_tag(:ul, options[:"ul_level_#{level}"]) do
       o2 = ''
-      items.each { |item| o2 += viewer_submenu_item(item, level, options) }
+      items.sort_by(&:position).each do |item|
+        o2 += viewer_submenu_item(item, level, options)
+      end
       o2.html_safe
     end
   end
