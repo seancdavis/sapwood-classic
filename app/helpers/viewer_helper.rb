@@ -79,7 +79,7 @@ module ViewerHelper
   def viewer_submenu_collection(items, level, options)
     content_tag(:ul, options[:"ul_level_#{level}"]) do
       o2 = ''
-      items.sort_by(&:position).each do |item|
+      items.sort_by { |i| i['position'] }.each do |item|
         o2 += viewer_submenu_item(item, level, options)
       end
       o2.html_safe
