@@ -69,7 +69,7 @@
             :"markdown_#{field.slug}",
             :as => :text,
             :label => field.label,
-            :required => field.required,
+            :required => false,
             :input_html => {
               :value => current_page.send("markdown_#{field.slug}") || field.default_value
             },

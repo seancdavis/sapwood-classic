@@ -97,7 +97,7 @@ class Builder::PagesController < BuilderController
   end
 
   def edit
-    if current_template_group.nil? && params[:slug] != 'media'
+    if current_template_group.nil?
       redirect_to builder_site_page_settings_path(
         current_site, current_page, current_template_groups.first
       )

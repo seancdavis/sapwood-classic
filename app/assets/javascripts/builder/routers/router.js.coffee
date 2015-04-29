@@ -32,6 +32,7 @@ class App.Routers.Router extends Backbone.Router
     'sites/:site_slug/forms/:form_slug/fields': 'formFields'
 
   newPage: (site_slug) ->
+    new App.Views.MarkdownEditor
     new App.Views.UnloadCheck
     if $('.image-upload-trigger').length > 0
       new App.Views.PageFileUploader

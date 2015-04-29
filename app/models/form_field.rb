@@ -38,6 +38,16 @@ class FormField < ActiveRecord::Base
 
   validates :title, :data_type, :presence => true
 
+  # ------------------------------------------ Callbacks
+
+  after_validation :check_empty_label
+
+  def check_empty_label
+    if title.present? && label.blank?
+      self.label = title
+    end
+  end
+
   # ------------------------------------------ Instance Methods
 
   def option_values
