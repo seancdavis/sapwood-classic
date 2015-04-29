@@ -46,10 +46,7 @@ class Builder::Menus::ItemsController < BuilderController
 
   def destroy
     current_menu_item.destroy
-    redirect_to(
-      builder_route([current_menu, current_menu_items], :index),
-      :notice => 'Menu item deleted successfully!'
-    )
+    redirect_to(redirect_route, :notice => 'Menu item deleted successfully!')
   end
 
   private
