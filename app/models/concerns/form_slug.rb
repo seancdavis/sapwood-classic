@@ -6,9 +6,9 @@ module FormSlug
   end
 
   def sluggify_slug
-    unless title.blank?
+    if title.present? && slug.blank?
       s = create_slug
-      update_column(:slug, s) unless slug == s
+      update_column(:slug, s)
       s
     end
   end
