@@ -15,15 +15,6 @@ issue](https://github.com/seancdavis/sapwood/issues/new) and prepend it with
 v1.5: File Management & Developer Help (May/June 2015)
 -------------
 
-Most aspects of the builder have been given sufficient attention since their
-initial release. But, other than switching to Dragonfly, we haven't done much
-with the media library. This release will focus on sites' libraries.
-
-#### Galleries / Categories
-
-Files will be able to be grouped together for better organization for your
-site's files.
-
 #### File Attributes
 
 You will be able to capture and customize much more information about a file
@@ -40,10 +31,12 @@ cleaner.
 We're going to replace form notes with helper tooltips. This should make forms
 much easier to digest and show you help items only if you need them.
 
-### UI Cleanup
+### Form Email Notifications
 
-We've added a lot in the last few months. It's time to give the UI a quick
-touch-up.
+Sometimes you need email notifications to be sent to a specific email address,
+dependent on the selection. This will give you that ability, but still work for
+just one email address.
+
 
 v1.6: Setup & Theming (May/June 2015)
 ----------
