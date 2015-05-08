@@ -23,7 +23,7 @@ Renders one partial template per object in a collection of objects.
 For example, if you have an articles method in your `viewer_service` that returns a collection of pages, and you have a partial - `templates/_article.html.erb` - marked up to display that article, then you could render the collection like so:
 
 ```erb
-<%= viewer_collection(viewer_sevice.articles, 'article') %>
+<%= viewer_collection(viewer_service.articles, 'article') %>
 ```
 
 ### `viewer_image(filename, options = {})`
