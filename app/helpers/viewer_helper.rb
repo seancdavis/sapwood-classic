@@ -52,9 +52,9 @@ module ViewerHelper
       nil
     else
       content_tag(:nav, options[:nav_html]) do
-        content_tag(:ul) do
+        content_tag(:ul, options[:ul_level_1]) do
           o = ''
-          menu.items.roots.each do |root|
+          menu.items.roots.order('position asc').each do |root|
             o += content_tag(:li) do
               o2 = link_to(
                 root.title,
@@ -63,7 +63,9 @@ module ViewerHelper
               )
               nodes = root.subtree.arrange_serializable(:order => :position)
               if nodes.first["children"].size > 0
-                o2 += viewer_submenu_collection(nodes.first["children"])
+                o2 += viewer_submenu_collection(
+                  nodes.first["children"], 2, options
+                )
               end
               o2.html_safe
             end
@@ -74,15 +76,17 @@ module ViewerHelper
     end
   end
 
-  def viewer_submenu_collection(items)
-    content_tag(:ul) do
+  def viewer_submenu_collection(items, level, options)
+    content_tag(:ul, options[:"ul_level_#{level}"]) do
       o2 = ''
-      items.each { |item| o2 += viewer_submenu_item(item) }
+      items.sort_by { |i| i['position'] }.each do |item|
+        o2 += viewer_submenu_item(item, level, options)
+      end
       o2.html_safe
     end
   end
 
-  def viewer_submenu_item(item)
+  def viewer_submenu_item(item, level, options)
     item = OpenStruct.new(item)
     content_tag(:li) do
       o = link_to(
@@ -90,7 +94,7 @@ module ViewerHelper
         item.page_id.blank? ? item.url : viewer_page(item.url)
       )
       if item.children.size > 0
-        o += content_tag(:ul, viewer_submenu_collection(item.children))
+        o += viewer_submenu_collection(item.children, level + 1, options)
       end
       o.html_safe
     end

@@ -5,12 +5,14 @@ class Viewer::PagesController < ViewerController
   # rescue_from ActionController::RoutingError, :with => :error_404
   # rescue_from ActionView::MissingTemplate, :with => :error_500
 
-  rescue_from ActionController::RoutingError do |e|
-    error_404(e)
-  end
+  if Rails.env.production?
+    rescue_from ActionController::RoutingError do |e|
+      error_404(e)
+    end
 
-  rescue_from ActionView::MissingTemplate do |e|
-    error_500(e)
+    rescue_from ActionView::MissingTemplate do |e|
+      error_500(e)
+    end
   end
 
   def home

@@ -49,6 +49,7 @@ gem 'whenever'
 gem 'active_record_query_trace'
 gem 'yaml_db'
 gem 'pg_search'
+gem 'geocoder'
 
 group :development do
   gem 'mailcatcher'

@@ -12,7 +12,7 @@ To submit an idea, please [create an
 issue](https://github.com/seancdavis/sapwood/issues/new) and prepend it with
 `[request]`.
 
-v1.5: File Management & Developer Help (May 2015)
+v1.5: File Management & Developer Help (May/June 2015)
 -------------
 
 Most aspects of the builder have been given sufficient attention since their

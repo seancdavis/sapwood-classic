@@ -23,7 +23,6 @@ namespace :sapwood do
             !['.git','images','middleman','static','fonts'].include?(dir) &&
             File.file?(file) && file.text?
           )
-            puts file
             # get the filename
             filename = file.split('/').last
             # if filename is a symlink reference to the directory

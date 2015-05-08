@@ -37,7 +37,10 @@ module RoutingHelper
   end
 
   def viewer_home
-    if request.host == SapwoodSetting.site.url
+    if(
+      request.host == SapwoodSetting.site.url ||
+      request.host =~ /^192\.168/ || request.host =~ /^10\.1/
+    )
       preview_home_path
     else
       send("#{current_site.slug.underscore}_home_path")
@@ -45,7 +48,10 @@ module RoutingHelper
   end
 
   def viewer_page(page_path)
-    if request.host == SapwoodSetting.site.url
+    if(
+      request.host == SapwoodSetting.site.url ||
+      request.host =~ /^192\.168/ || request.host =~ /^10\.1/
+    )
       preview_page_path(:page_path => page_path).gsub(/\/+/, '/')
     else
       send("#{current_site.slug.underscore}_page_path", :page_path => page_path)

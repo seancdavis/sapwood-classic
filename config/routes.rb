@@ -44,7 +44,6 @@ Rails.application.routes.draw do
       post 'pull' => 'sites#pull', :as => :pull
       post 'import' => 'sites#import', :as => :import
       post 'backup' => 'sites#backup', :as => :backup
-      post 'sync' => 'sites#sync', :as => :sync
       post 'symlink' => 'sites#symlink', :as => :symlink
 
       # Pages
