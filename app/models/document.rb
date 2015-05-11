@@ -81,7 +81,7 @@ class Document < ActiveRecord::Base
 
   def is_image?
     begin
-      document.mime_type.split('/').first == 'image'
+      %w{jpg jpeg png gif}.include?(document.ext.downcase)
     rescue
       false
     end
