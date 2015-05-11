@@ -16,11 +16,10 @@
 
 FactoryGirl.define do
   factory :site do
-    account_id 1
-title "MyString"
-slug "MyString"
-url "MyString"
-description "MyText"
+    title { Faker::Lorem.word }
+    url { Faker::Internet.url }
+    description { Faker::Lorem.paragraph }
+    git_url { Faker::Internet.url }
   end
 
 end

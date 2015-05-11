@@ -91,6 +91,7 @@ GEM
       compass (>= 0.12.2)
     connection_pool (2.1.0)
     daemons (1.1.9)
+    database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -514,6 +515,7 @@ DEPENDENCIES
   cambium!
   coffee-rails
   compass-rails
+  database_cleaner
   devise
   dragonfly
   exception_notification

@@ -43,7 +43,17 @@ class FormSubmission < ActiveRecord::Base
   def send_notification
     form = self.form
     return false if form.notification_emails.blank?
-    emails = form.notification_emails.split("\n").collect(&:strip)
+    emails = []
+    form.notification_emails.split("\n").collect(&:strip).each do |email|
+      email_options = email.split('|')
+      if email_options.size > 1
+        if self.field_data[email_options[1]] == email_options[2]
+          emails << email_options[0]
+        end
+      else
+        emails << email
+      end
+    end
     FormsMailer.new_submission(self, emails).deliver
   end
 
