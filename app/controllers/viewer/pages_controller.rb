@@ -77,7 +77,7 @@ class Viewer::PagesController < ViewerController
             :formats => [:html]
           )
         else
-          render '404', :formats => [:html]
+          render 'previewer/404', :formats => [:html]
         end
       else
         render :file => 'public/404.html'
@@ -98,10 +98,10 @@ class Viewer::PagesController < ViewerController
             :formats => [:html]
           )
         else
-          render '500', :formats => [:html]
+          render 'previewer/500', :formats => [:html]
         end
       else
-        render '500', :formats => [:html]
+        render 'previewer/500', :formats => [:html]
       end
       Error._500(current_site, error, request, current_user)
     end
