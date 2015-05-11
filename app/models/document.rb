@@ -88,13 +88,17 @@ class Document < ActiveRecord::Base
   end
 
   def crop_url(version)
-    c = crop(version)
-    if c.nil?
-      nil
+    if version == 'full'
+      document.url
     else
-      magic  = "#{c.crop_width.to_i}x#{c.crop_height.to_i}"
-      magic += "+#{c.x.to_i}+#{c.y.to_i}"
-      document.thumb(magic).thumb("#{c.width.to_i}x#{c.height.to_i}#").url
+      c = crop(version)
+      if c.nil?
+        nil
+      else
+        magic  = "#{c.crop_width.to_i}x#{c.crop_height.to_i}"
+        magic += "+#{c.x.to_i}+#{c.y.to_i}"
+        document.thumb(magic).thumb("#{c.width.to_i}x#{c.height.to_i}#").url
+      end
     end
   end
 

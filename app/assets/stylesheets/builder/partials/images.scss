@@ -44,6 +44,24 @@ section.images-container {
           font-weight: 400;
         }
       }
+      form.image-croppings {
+        display: none;
+        height: 170px;
+        overflow-y: scroll;
+        padding: 5px;
+        div.input {
+          margin: 5px 0;
+        }
+        label {
+          text-align: left;
+          color: $color-light;
+        }
+        input[type=text] {
+          padding: 5px;
+          font-size: 13px;
+          line-height: 13px;
+        }
+      }
     }
   }
 }

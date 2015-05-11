@@ -56,6 +56,7 @@ class App.Routers.Router extends Backbone.Router
   library: (site_slug) ->
     new App.Views.FileUploader
       slug: site_slug
+    new App.Views.CropUrls
 
   templateFields: (site_slug, template_slug) ->
     new App.Views.FieldSorter

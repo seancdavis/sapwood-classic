@@ -2,6 +2,17 @@
   data-idx="<%= file.idx %>">
   <%= image_tag file.thumbnail %>
   <header class="<%= 'select' if params[:select] %>">
+    <% if file.is_image? && params[:select].blank? %>
+      <form class="image-croppings">
+        <% (['full'] + file.croppings).each do |c| %>
+          <div class="input">
+            <%= content_tag(:label, c) %>
+            <input type="text" value="<%= file.crop_url(c) %>" readonly="true">
+          </div>
+        <% end %>
+      </form>
+      <%= link_to('', '#', :class => 'crop-urls link') %>
+    <% end %>
     <%= link_to(
       '',
       builder_site_document_cropper_path(current_site, file),

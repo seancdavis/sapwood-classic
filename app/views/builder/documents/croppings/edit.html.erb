@@ -1,5 +1,5 @@
 <%= simple_form_for(
-  [:builder, current_file], 
+  [:builder, current_file],
   :url => builder_site_document_crop_path(current_site, current_file)
 ) do |f| %>
 
@@ -9,8 +9,8 @@
     <% current_site.image_croppings.each do |cropping| %>
       <%= data.simple_fields_for cropping.slug do |crop| %>
 
-        <section class="form tabbed cropper <%= cropping.slug %>" data-slug="<%= cropping.slug %>" 
-          data-width="<%= cropping.width %>" 
+        <section class="form tabbed cropper <%= cropping.slug %>" data-slug="<%= cropping.slug %>"
+          data-width="<%= cropping.width %>"
           data-height="<%= cropping.height %>"
           data-ratio="<%= cropping.width.to_f / cropping.height.to_f %>"
           data-img-width="<%= current_file.document.width %>"
@@ -20,22 +20,22 @@
           <% value = current_file.crop(cropping.slug) %>
           <% ['x','y','crop_width','crop_height'].each do |dim| %>
             <%= crop.input(
-              dim.to_sym, 
-              :as => :hidden, 
+              dim.to_sym,
+              :as => :hidden,
               :wrapper => false,
               :required => false,
-              :input_html => { 
+              :input_html => {
                 :value => value.nil? ? nil : value.send(dim),
                 :data => { :value => value.nil? ? 0 : value.send(dim), }
-              } 
+              }
             ) %>
           <% end %>
           <% ['width','height'].each do |dim| %>
             <%= crop.input(
-              dim.to_sym, 
+              dim.to_sym,
               :as => :hidden,
               :wrapper => false,
-              :input_html => { :value => cropping.send(dim) } 
+              :input_html => { :value => cropping.send(dim) }
             ) %>
           <% end %>
         </section>
