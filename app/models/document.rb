@@ -72,10 +72,29 @@ class Document < ActiveRecord::Base
     end
   end
 
+  def croppings
+    begin
+      crop_data.keys
+    rescue
+      []
+    end
+  end
+
   def crop(version)
     unless crop_data[version].blank?
       hash = crop_data[version].map { |k,v| {k => v.to_f} }.reduce(:merge)
       OpenStruct.new(hash)
+    end
+  end
+
+  def crop_url(version)
+    c = crop(version)
+    if c.nil?
+      nil
+    else
+      magic  = "#{c.crop_width.to_i}x#{c.crop_height.to_i}"
+      magic += "+#{c.x.to_i}+#{c.y.to_i}"
+      document.thumb(magic).thumb("#{c.width.to_i}x#{c.height.to_i}#").url
     end
   end
 
