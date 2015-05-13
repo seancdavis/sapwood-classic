@@ -52,9 +52,8 @@ module RenderingHelper
     content_tag(:ul, :class => 'tabs') do
       o = ''
       tabs.each do |t|
-        label = t.gsub(/\-/, ' ').titleize
-        o += content_tag(:li, link_to(label, '#', :data => {
-          :section => t.downcase } ))
+        o += content_tag(:li, link_to(t.last, '#', :data => {
+          :section => t.first } ))
       end
       o.html_safe
     end

@@ -3,7 +3,7 @@
   :url => builder_site_document_crop_path(current_site, current_file)
 ) do |f| %>
 
-  <%= form_tabs site_image_croppings.collect(&:slug) %>
+  <%= form_tabs site_image_croppings.collect { |c| [c.slug, c.title] } %>
 
   <%= f.simple_fields_for :crop_data do |data| %>
     <% current_site.image_croppings.each do |cropping| %>
