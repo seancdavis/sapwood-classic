@@ -13,24 +13,28 @@ class App.Views.ImageCropper extends Backbone.View
     e.preventDefault()
     $.get $(e.target).attr('href'), (data) =>
       @ajaxPage.loadContent('Crop Image', data)
-      new App.Views.Tabs
-      container = $('.ajax-page-content').find('section.cropper.active').first()
-      @initCropper(container)
-      $('ul.tabs a').click (e) =>
-        container = $("section.cropper.#{$(e.target).data('section')}")
-        @initCropper(container)
+      for container in $('.ajax-page-content').find('section.cropper')
+        @initCropper($(container))
 
   initCropper: (container) ->
     img = container.find('img').first()
-    c = @getFormCoords(container)
-    @cropper = img.Jcrop
-      aspectRatio: container.data('ratio')
-      setSelect: [c.x, c.y, c.x + c.w, c.y + c.h]
-      onSelect: (coords) =>
-        @setFormCoords(coords, img, container)
-      onChange: (coords) =>
-        @setFormCoords(coords, img, container)
-    
+    img.on 'load', () =>
+      c = @getFormCoords(container)
+      x = c.x * (img.width() / container.data('img-width'))
+      y = c.y * (img.height() / container.data('img-height'))
+      @cropper = img.Jcrop
+        aspectRatio: container.data('ratio')
+        setSelect: [
+          x,
+          y,
+          x + (c.w * (img.width() / container.data('img-width'))),
+          y + (c.h * (img.height() / container.data('img-height')))
+        ]
+        onSelect: (coords) =>
+          @setFormCoords(coords, img, container)
+        onChange: (coords) =>
+          @setFormCoords(coords, img, container)
+
   setFormCoords: (coords, img, parent) ->
     prefix = "#document_crop_data_#{parent.data('slug')}"
     if coords.w == 0
@@ -39,7 +43,7 @@ class App.Views.ImageCropper extends Backbone.View
       $("#{prefix}_crop_width").val($("#{prefix}_crop_width").data('value'))
       $("#{prefix}_crop_height").val($("#{prefix}_crop_height").data('value'))
     else
-      $("#{prefix}_x").val        coords.x / img.width() * parent.data('img-width') 
+      $("#{prefix}_x").val        coords.x / img.width() * parent.data('img-width')
       $("#{prefix}_y").val        coords.y / img.height() * parent.data('img-height')
       $("#{prefix}_crop_width").val    coords.w / img.width() * parent.data('img-width')
       $("#{prefix}_crop_height").val   coords.h / img.height() * parent.data('img-height')

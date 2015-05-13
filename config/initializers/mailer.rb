@@ -1,6 +1,6 @@
 ActionMailer::Base.default_url_options = { :host => SapwoodSetting.site.url }
 
-if Rails.env.development?
+if Rails.env.development? || Rails.env.test?
   # use mailcatcher in development (http://mailcatcher.me/)
   ActionMailer::Base.smtp_settings = {
     :address => '127.0.0.1',

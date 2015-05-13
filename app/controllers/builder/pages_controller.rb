@@ -1,7 +1,7 @@
 class Builder::PagesController < BuilderController
 
   before_filter :verify_current_page, :except => [:index, :new, :create]
-  before_filter :verify_admin, :except => [:index, :show, :edit, :update]
+  before_filter :verify_admin, :only => [:destroy]
 
   def index
     # First, we find which set of pages we should start

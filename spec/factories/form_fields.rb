@@ -21,12 +21,12 @@
 
 FactoryGirl.define do
   factory :form_field do
-    form_id 1
-title "MyString"
-data_type "MyString"
-options "MyText"
-required false
-position 1
+    form
+    title { Faker::Lorem.word }
+    data_type "string"
+    options "MyText"
+    required false
+    position 1
   end
 
 end

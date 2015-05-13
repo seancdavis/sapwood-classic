@@ -21,13 +21,13 @@
 
 FactoryGirl.define do
   factory :form do
-    site_id 1
-title "MyString"
-slug "MyString"
-description "MyText"
-body "MyText"
-thank_you_body "MyText"
-notification_emails "MyText"
+    site
+    title { Faker::Lorem.word }
+    slug "MyString"
+    description "MyText"
+    body "MyText"
+    thank_you_body "MyText"
+    notification_emails "MyText"
   end
 
 end

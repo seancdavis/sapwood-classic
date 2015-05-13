@@ -12,9 +12,9 @@
 
 FactoryGirl.define do
   factory :form_submission do
-    form_id 1
-idx 1
-field_data "MyText"
+    form
+    idx 1
+    field_data {}
   end
 
 end

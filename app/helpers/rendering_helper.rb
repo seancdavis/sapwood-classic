@@ -48,18 +48,6 @@ module RenderingHelper
     end
   end
 
-  def form_tabs(tabs)
-    content_tag(:ul, :class => 'tabs') do
-      o = ''
-      tabs.each do |t|
-        label = t.gsub(/\-/, ' ').titleize
-        o += content_tag(:li, link_to(label, '#', :data => {
-          :section => t.downcase } ))
-      end
-      o.html_safe
-    end
-  end
-
   def em_p(text)
     content_tag(:p, :class => 'note') { content_tag(:em) { text } }
   end

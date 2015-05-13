@@ -128,4 +128,46 @@ module ViewerHelper
     slug.gsub(/\_/, ' ').humanize.titleize
   end
 
+  def viewer_search_form(url = viewer_page('search'))
+    simple_form_for(:search, :url => url, :method => :get) do |f|
+      o = f.input :q, :label => false, :wrapper => false
+      o += f.submit
+    end
+  end
+
+  def viewer_search_results
+    if params[:search] && params[:search][:q]
+      results = current_site.pages.search_content(params[:search][:q]).to_a
+    else
+      []
+    end
+  end
+
+  def viewer_paginated_search_results(per_page = 10)
+    Kaminari.paginate_array(viewer_search_results).page(params[:page] || 1)
+      .per(per_page)
+  end
+
+  def render_viewer_search_results(per_page = 10)
+    if viewer_search_results.size > 0
+      o = ''
+      viewer_paginated_search_results(per_page).each do |page|
+        o += content_tag(:div, :class => 'search-result') do
+          o2 = content_tag(
+            :h2,
+            link_to(page.title, viewer_page(page.page_path))
+          )
+          o2 += simple_format(page.description) if page.description.present?
+        end
+      end
+    else
+      o = content_tag(
+        :p,
+        'There are no pages that match your search.',
+        :class => 'no-results'
+      )
+    end
+    o.html_safe
+  end
+
 end
