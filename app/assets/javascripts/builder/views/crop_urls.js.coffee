@@ -12,7 +12,6 @@ class App.Views.CropUrls extends Backbone.View
   toggleCropUrls: (e) ->
     e.preventDefault()
     form = $(e.target).parents('header').find('form.image-croppings').first()
-    console.log form.length
     form.toggle()
     form.find("input[type='text']").first().focus()
 
