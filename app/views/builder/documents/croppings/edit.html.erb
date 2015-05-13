@@ -3,13 +3,11 @@
   :url => builder_site_document_crop_path(current_site, current_file)
 ) do |f| %>
 
-  <%= form_tabs site_image_croppings.collect { |c| [c.slug, c.title] } %>
-
   <%= f.simple_fields_for :crop_data do |data| %>
     <% current_site.image_croppings.each do |cropping| %>
       <%= data.simple_fields_for cropping.slug do |crop| %>
 
-        <section class="form tabbed cropper <%= cropping.slug %>" data-slug="<%= cropping.slug %>"
+        <section class="form cropper <%= cropping.slug %>" data-slug="<%= cropping.slug %>"
           data-width="<%= cropping.width %>"
           data-height="<%= cropping.height %>"
           data-ratio="<%= cropping.width.to_f / cropping.height.to_f %>"

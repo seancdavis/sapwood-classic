@@ -7,7 +7,6 @@ class App.Routers.Router extends Backbone.Router
     new App.Views.DefaultHelpers
     new App.Views.Header
     new App.Views.Shortcuts
-    new App.Views.Tabs if $('ul.tabs').length > 0
     new App.Views.PickADate if $('.time-js').length > 0 || $('.date-js').length > 0
     new App.Views.FieldForm if $('.field-data-type').length > 0
     new App.Views.ImageCropper if $('.image-crop-trigger').length > 0
