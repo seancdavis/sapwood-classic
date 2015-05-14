@@ -3,7 +3,7 @@ class App.Views.CropUrls extends Backbone.View
   el: 'body'
 
   events:
-    'focus .image-croppings input[type=text]': 'selectText'
+    'focus .version-urls input[type=text]': 'selectText'
     'click a.crop-urls.link': 'toggleCropUrls'
 
   selectText: (e) ->
@@ -11,7 +11,7 @@ class App.Views.CropUrls extends Backbone.View
 
   toggleCropUrls: (e) ->
     e.preventDefault()
-    form = $(e.target).parents('header').find('form.image-croppings').first()
+    form = $(e.target).parents('header').find('form.version-urls').first()
     form.toggle()
     form.find("input[type='text']").first().focus()
 

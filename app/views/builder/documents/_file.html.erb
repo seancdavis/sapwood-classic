@@ -3,13 +3,20 @@
   <%= image_tag file.thumbnail %>
   <header class="<%= 'select' if params[:select] %>">
     <% if file.is_image? && params[:select].blank? %>
-      <form class="image-croppings">
+      <form class="version-urls">
         <% (['full'] + file.croppings).each do |c| %>
           <div class="input">
             <%= content_tag(:label, c) %>
             <input type="text" value="<%= file.crop_url(c) %>" readonly="true">
           </div>
         <% end %>
+      </form>
+      <%= link_to('', '#', :class => 'crop-urls link') %>
+    <% else %>
+      <form class="version-urls">
+          <div class="input">
+            <input type="text" value="<%= file.document.url %>" readonly="true">
+          </div>
       </form>
       <%= link_to('', '#', :class => 'crop-urls link') %>
     <% end %>
