@@ -37,26 +37,24 @@
       ) %>
     </div>
     <div class="bottom">
-      <% if current_user.admin?  %>
-        <% if page.published? %>
-          <%= link_to(
-            "Unpublish",
-            builder_site_page_unpublish_path(current_site, page,
-              :redirect_route => request.path),
-            :method => :post,
-            :class => 'unpublish',
-            :data => { :confirm => 'Are you sure?' }
-          ) %>
-        <% else %>
-          <%= link_to(
-            "Publish",
-            builder_site_page_publish_path(current_site, page,
-              :redirect_route => request.path),
-            :method => :post,
-            :class => 'publish',
-            :data => { :confirm => 'Are you sure?' }
-          ) %>
-        <% end %>
+      <% if page.published? %>
+        <%= link_to(
+          "Unpublish",
+          builder_site_page_unpublish_path(current_site, page,
+            :redirect_route => request.path),
+          :method => :post,
+          :class => 'unpublish',
+          :data => { :confirm => 'Are you sure?' }
+        ) %>
+      <% else %>
+        <%= link_to(
+          "Publish",
+          builder_site_page_publish_path(current_site, page,
+            :redirect_route => request.path),
+          :method => :post,
+          :class => 'publish',
+          :data => { :confirm => 'Are you sure?' }
+        ) %>
       <% end %>
       <%= link_to(
         "Delete",
