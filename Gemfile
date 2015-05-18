@@ -51,8 +51,7 @@ gem 'yaml_db'
 gem 'pg_search'
 gem 'geocoder'
 gem 'honeypot-captcha'
-gem 'mailchimp'
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'paper_trail'
 
 group :development do
   gem 'mailcatcher'
