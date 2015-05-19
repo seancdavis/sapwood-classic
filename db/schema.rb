@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20151125142844) do
     t.string   "item_path"
     t.integer  "site_id"
     t.integer  "user_id"
+    t.string   "action"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
