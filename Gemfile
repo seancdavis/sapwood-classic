@@ -52,6 +52,7 @@ gem 'pg_search'
 gem 'geocoder'
 gem 'honeypot-captcha'
 gem 'paper_trail'
+gem 'request_store'
 
 group :development do
   gem 'mailcatcher'
