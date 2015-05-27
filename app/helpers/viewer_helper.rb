@@ -158,6 +158,7 @@ module ViewerHelper
             link_to(page.title, viewer_page(page.page_path))
           )
           o2 += simple_format(page.description) if page.description.present?
+          o2.html_safe
         end
       end
     else
