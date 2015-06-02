@@ -1,5 +1,9 @@
 <article class="image" data-src="<%= file.document.url %>"
   data-idx="<%= file.idx %>">
+  <%= content_tag(
+        :span,
+        file.document_name
+      ) if site_setting('show_media_lib_captions')%>
   <%= image_tag file.thumbnail %>
   <header class="<%= 'select' if params[:select] %>">
     <% if file.is_image? && params[:select].blank? %>
