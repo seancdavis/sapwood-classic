@@ -2,11 +2,12 @@ class Viewer::PagesController < ViewerController
 
   before_filter :cors_check
 
-  # rescue_from ActionController::RoutingError, :with => :error_404
-  # rescue_from ActionView::MissingTemplate, :with => :error_500
-
   if Rails.env.production?
     rescue_from ActionController::RoutingError do |e|
+      error_404(e)
+    end
+
+    rescue_from URI::InvalidURIError do |e|
       error_404(e)
     end
 
