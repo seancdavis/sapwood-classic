@@ -49,7 +49,7 @@ module PagesHelper
   def current_page_parent
     @current_page_parent ||= begin
       if params[:parent]
-        current_site.pages.find_by_slug(params[:parent])
+        current_site.webpages.find_by_slug(params[:parent])
       else
         current_page_ancestors.last
       end
