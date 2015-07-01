@@ -137,7 +137,12 @@ module ViewerHelper
 
   def viewer_search_results
     if params[:search] && params[:search][:q]
-      results = current_site.pages.search_content(params[:search][:q]).to_a
+      results = []
+      current_site.pages.search_content(params[:search][:q]).to_a.each do |page|
+        t = site_templates.select { |t| t.id == page.template_id }.first
+        results << page if t.has_show_view?
+      end
+      results
     else
       []
     end
