@@ -132,7 +132,7 @@
 
       // ------------------------ Extra styles for sortable lists
 
-      &.form-field, &.resource-field, &.menu-item {
+      &.form-field, &.resource-field, &.menu-item, &.page.sortable {
         &:hover {
           cursor: move;
           cursor: -webkit-grab;
@@ -144,7 +144,7 @@
         > span.status a.unprotected {
           color: $color-grey;
         }
-        form.field-position, form.item-position {
+        form.field-position, form.item-position, form.page-position {
           display: none;
         }
       }

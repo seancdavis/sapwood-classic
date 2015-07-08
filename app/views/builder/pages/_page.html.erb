@@ -1,4 +1,4 @@
-<article class="page">
+<article class="page <%= 'sortable' if sortable_pages? %>" data-id="<%= page.id %>">
   <%= content_tag(:span, page_quick_status(page), :class => 'status') %>
   <div class="data">
     <div class="top">
@@ -13,6 +13,12 @@
         :class => 'path'
       ) if page.template.has_show_view? %>
     </div>
+    <%= simple_form_for(
+      [:builder, current_site, page],
+      :html => { :class => 'page-position' }
+    ) do |f| %>
+      <%= f.input :position, :input_html => { :class => 'position' } %>
+    <% end if sortable_pages? %>
     <div class="bottom">
       <%= page_last_edited(page) %>
       <%= link_to(

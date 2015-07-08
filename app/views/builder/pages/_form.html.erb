@@ -32,10 +32,19 @@
         <% end %>
       <% end %>
 
-      <% if ['title','slug','position','description','show_in_nav'].include?(field.slug) %>
+      <% if ['title','slug','description','show_in_nav'].include?(field.slug) %>
         <%= f.input(
           field.slug.to_sym,
           :label => field.label,
+          :input_html => {
+            :value => current_page.send(field.slug) || field.default_value
+          }
+        ) unless field.hidden? %>
+      <% elsif field.slug == 'position' %>
+        <%= f.input(
+          field.slug.to_sym,
+          :label => field.label,
+          :as => :string,
           :input_html => {
             :value => current_page.send(field.slug) || field.default_value
           }
