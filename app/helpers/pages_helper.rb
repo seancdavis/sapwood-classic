@@ -101,6 +101,18 @@ module PagesHelper
     end
   end
 
+  def sortable_pages?
+    pages = (action_name == 'index') ? @pages : current_page_children
+    template_ids = pages.collect(&:template_id).uniq.map(&:to_i)
+    templates = site_templates.select { |t| template_ids.include?(t.id) }
+    order_methods = templates.collect(&:order_method).uniq.reject(&:blank?)
+    if order_methods.size <= 1 && order_methods.first == 'position'
+      true
+    else
+      false
+    end
+  end
+
   def eligible_parents(page)
     @eligible_parents ||= begin
       pages = []

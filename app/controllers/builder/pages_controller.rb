@@ -50,7 +50,7 @@ class Builder::PagesController < BuilderController
         )
       end
     else
-      @pages = Kaminari.paginate_array(@pages).page(params[:page]).per(10)
+      @pages = Kaminari.paginate_array(@pages).page(params[:page]).per(15)
     end
   end
 
@@ -108,19 +108,27 @@ class Builder::PagesController < BuilderController
   end
 
   def update
-    process_files
-    slug = current_page.slug
-    if current_page.update(update_params)
-      # save_files
-      route = redirect_route.gsub(/#{slug}/, current_page.slug)
-      redirect_to(route,
-        :notice => t(
-          'notices.updated',
-          :item => controller_name.humanize.titleize
-        )
-      )
-    else
-      render('edit')
+    respond_to do |format|
+      format.html do
+        process_files
+        slug = current_page.slug
+        if current_page.update(update_params)
+          # save_files
+          route = redirect_route.gsub(/#{slug}/, current_page.slug)
+          redirect_to(route,
+            :notice => t(
+              'notices.updated',
+              :item => controller_name.humanize.titleize
+            )
+          )
+        else
+          render('edit')
+        end
+      end
+      format.json do
+        current_page.update!(update_params)
+        render :nothing => true
+      end
     end
   end
 

@@ -15,7 +15,9 @@ class App.Routers.Router extends Backbone.Router
 
   routes:
     # Pages
+    'sites/:site_slug/pages?*filters': 'pages'
     'sites/:site_slug/pages/new': 'newPage'
+    'sites/:site_slug/pages/:page_slug?*filters': 'pages'
     'sites/:site_slug/pages/:page_slug/settings/:slug': 'editPage'
     'sites/:site_slug/pages/:page_slug/library': 'pageMedia'
     # Templates
@@ -30,6 +32,9 @@ class App.Routers.Router extends Backbone.Router
     'sites/:site_slug/library': 'library'
     # Forms
     'sites/:site_slug/forms/:form_slug/fields': 'formFields'
+
+  pages: (site_slug, page_slug = null) ->
+    new App.Views.PageSorter
 
   newPage: (site_slug) ->
     new App.Views.MarkdownEditor

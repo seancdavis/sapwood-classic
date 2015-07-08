@@ -3,7 +3,8 @@
   <%= page_search_field %>
 <% end %>
 
-<section id="page-content" class="data-container">
+<section id="page-content" class="data-container"
+        data-sortable="<%= sortable_pages? %>">
   <% if @pages.size > 0 %>
     <%= render :partial => 'filters', :locals => { :pages => site_root_pages } %>
     <%= data_table(@pages, 'page') %>
