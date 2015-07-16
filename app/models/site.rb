@@ -41,7 +41,6 @@ class Site < ActiveRecord::Base
   has_many :image_croppings, :dependent => :destroy
   has_many :menus, :dependent => :destroy
   has_many :menu_items, :through => :menus
-  has_many :theme_errors, :class_name => Error, :dependent => :destroy
   has_many :site_settings, :dependent => :destroy
 
   belongs_to :home_page, :class_name => 'Page'

@@ -83,7 +83,6 @@ class Viewer::PagesController < ViewerController
       else
         render :file => 'public/404.html'
       end
-      Error._404(current_site, error, request, current_user)
     end
 
     def error_500(error)
@@ -104,7 +103,6 @@ class Viewer::PagesController < ViewerController
       else
         render 'previewer/500', :formats => [:html]
       end
-      Error._500(current_site, error, request, current_user)
     end
 
     def resolve_layout

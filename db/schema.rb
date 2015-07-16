@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410010107) do
+ActiveRecord::Schema.define(version: 20150716172341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,21 +25,6 @@ ActiveRecord::Schema.define(version: 20150410010107) do
     t.text     "crop_data"
     t.string   "document_site"
     t.string   "document_name"
-  end
-
-  create_table "errors", force: true do |t|
-    t.integer  "site_id"
-    t.integer  "user_id"
-    t.string   "code"
-    t.string   "name"
-    t.string   "ip"
-    t.text     "path"
-    t.text     "referrer"
-    t.text     "message"
-    t.text     "backtrace"
-    t.boolean  "closed",     default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "form_fields", force: true do |t|
