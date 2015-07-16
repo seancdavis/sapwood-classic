@@ -118,11 +118,6 @@ Rails.application.routes.draw do
 
       # Users
       resources :users, :except => [:show]
-
-      # Error Tracker
-      resources :errors, :only => [:index, :show] do
-        post 'close' => 'errors#close', :as => :close
-      end
     end
   end
 
