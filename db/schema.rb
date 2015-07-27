@@ -22,8 +22,18 @@ ActiveRecord::Schema.define(version: 20151125142844) do
     t.string   "item_path"
     t.integer  "site_id"
     t.integer  "user_id"
+    t.string   "action"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "blocks", force: true do |t|
+    t.integer  "block_id"
+    t.integer  "page_id"
+    t.integer  "position",   default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
   end
 
   create_table "documents", force: true do |t|
@@ -35,6 +45,14 @@ ActiveRecord::Schema.define(version: 20151125142844) do
     t.text     "crop_data"
     t.string   "document_site"
     t.string   "document_name"
+  end
+
+  create_table "domains", force: true do |t|
+    t.string   "title"
+    t.integer  "site_id"
+    t.integer  "redirect_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "form_fields", force: true do |t|
@@ -135,104 +153,24 @@ ActiveRecord::Schema.define(version: 20151125142844) do
     t.datetime "updated_at"
   end
 
-  create_table "page_resources", force: true do |t|
-    t.integer  "page_id"
-    t.integer  "resource_id"
-    t.text     "field_data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "pages", force: true do |t|
-    t.integer  "template_id"
     t.string   "title"
     t.string   "slug"
-    t.text     "description"
     t.text     "body"
     t.string   "ancestry"
-    t.boolean  "published",        default: false
-    t.text     "field_data"
+    t.boolean  "published",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "position",         default: 0
-    t.string   "old_template_ref"
-    t.string   "order"
-    t.boolean  "show_in_nav",      default: true
-    t.text     "body_md"
+    t.integer  "position",      default: 0
     t.string   "page_path"
-    t.integer  "last_editor_id"
+    t.integer  "site_id"
+    t.json     "field_data"
+    t.string   "template_name"
+    t.json     "meta"
     t.text     "field_search"
   end
 
   add_index "pages", ["ancestry"], name: "index_pages_on_ancestry", using: :btree
-
-  create_table "reference_caches", force: true do |t|
-    t.string   "item_type"
-    t.integer  "item_id"
-    t.string   "site_title"
-    t.string   "site_path"
-    t.string   "item_path"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "resource_association_fields", force: true do |t|
-    t.integer  "resource_type_id"
-    t.string   "title"
-    t.string   "slug"
-    t.string   "data_type"
-    t.text     "options"
-    t.boolean  "required",         default: false
-    t.integer  "position",         default: 0
-    t.string   "label"
-    t.boolean  "protected",        default: false
-    t.string   "default_value"
-    t.boolean  "half_width",       default: false
-    t.boolean  "hidden",           default: false
-    t.boolean  "can_be_hidden",    default: true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "resource_fields", force: true do |t|
-    t.integer  "resource_type_id"
-    t.string   "title"
-    t.string   "slug"
-    t.string   "data_type"
-    t.text     "options"
-    t.boolean  "required",         default: false
-    t.integer  "position",         default: 0
-    t.string   "label"
-    t.boolean  "protected",        default: false
-    t.string   "default_value"
-    t.boolean  "half_width",       default: false
-    t.boolean  "hidden",           default: false
-    t.boolean  "can_be_hidden",    default: true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "resource_types", force: true do |t|
-    t.integer  "site_id"
-    t.string   "title"
-    t.string   "slug"
-    t.text     "description"
-    t.string   "order_method"
-    t.string   "order_direction"
-    t.integer  "last_editor_id"
-    t.boolean  "has_show_view",   default: true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "resources", force: true do |t|
-    t.string   "title"
-    t.string   "slug"
-    t.integer  "resource_type_id"
-    t.text     "field_data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "settings", force: true do |t|
     t.string   "title"
@@ -254,7 +192,6 @@ ActiveRecord::Schema.define(version: 20151125142844) do
   create_table "site_users", force: true do |t|
     t.integer  "site_id"
     t.integer  "user_id"
-    t.boolean  "site_admin", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -262,94 +199,29 @@ ActiveRecord::Schema.define(version: 20151125142844) do
   create_table "sites", force: true do |t|
     t.string   "title"
     t.string   "slug"
-    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "home_page_id"
     t.string   "git_url"
-    t.text     "secondary_urls"
-    t.string   "template_url"
-  end
-
-  create_table "template_descendants", force: true do |t|
-    t.integer  "parent_id"
-    t.integer  "child_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "template_fields", force: true do |t|
-    t.integer  "template_group_id"
-    t.string   "title"
-    t.string   "slug"
-    t.string   "data_type"
-    t.text     "options"
-    t.boolean  "required",          default: false
-    t.integer  "position",          default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "label"
-    t.boolean  "protected",         default: false
-    t.boolean  "hidden",            default: false
-    t.boolean  "can_be_hidden",     default: true
-    t.string   "default_value"
-    t.boolean  "half_width",        default: false
-  end
-
-  create_table "template_groups", force: true do |t|
-    t.integer  "template_id"
-    t.string   "title"
-    t.string   "slug"
-    t.integer  "position",    default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "template_resource_types", force: true do |t|
-    t.integer  "template_id"
-    t.integer  "resource_type_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "templates", force: true do |t|
-    t.integer  "site_id"
-    t.string   "title"
-    t.string   "slug"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "page_templates"
-    t.text     "children"
-    t.string   "order_method"
-    t.string   "order_direction"
-    t.boolean  "can_be_root",        default: false
-    t.boolean  "limit_pages",        default: false
-    t.integer  "max_pages",          default: 0
-    t.boolean  "maxed_out",          default: false
-    t.integer  "last_editor_id"
-    t.boolean  "has_show_view",      default: true
-    t.boolean  "can_have_documents", default: false
+    t.string   "uid"
+    t.json     "config"
   end
 
   create_table "users", force: true do |t|
     t.string   "name"
     t.text     "settings"
-    t.boolean  "admin",                  default: false
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "fb_access_token"
-    t.datetime "fb_token_expires"
+    t.string   "api_key"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
