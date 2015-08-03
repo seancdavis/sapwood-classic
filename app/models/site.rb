@@ -50,6 +50,10 @@ class Site < ActiveRecord::Base
 
   # ------------------------------------------ Instance Method
 
+  def to_param
+    uid
+  end
+
   def site
     self
   end
