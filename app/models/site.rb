@@ -47,9 +47,9 @@ class Site < ActiveRecord::Base
 
   # ------------------------------------------ Validations
 
-  validates :title, :template_url, :git_url, :presence => true
+  validates :title, :uid, :git_url, :presence => true
 
-  validates_uniqueness_of :title
+  validates_uniqueness_of :title, :uid
 
   validates_format_of :title, :with => /\A[A-Za-z][A-Za-z0-9\ ]+\z/
 
