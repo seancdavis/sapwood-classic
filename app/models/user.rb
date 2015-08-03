@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
   # ------------------------------------------ Plugins
 
-  include ActivityLog
+  include ActivityLog, Presenter
 
   # ------------------------------------------ Devise
 
@@ -56,26 +56,8 @@ class User < ActiveRecord::Base
 
   # ------------------------------------------ Instance Methods
 
-  def display_name
-    name || email
-  end
-
-  def first_name
-    return email if name.nil?
-    name.split(' ').first
-  end
-
-  def last_name
-    return email if name.nil?
-    name.split(' ').last
-  end
-
   def site_user?
     !admin?
-  end
-
-  def title
-    display_name
   end
 
   private
@@ -85,7 +67,7 @@ class User < ActiveRecord::Base
         :item => self,
         :site => nil,
         :item_path => nil,
-        :user => RequestStore.store[:sapwood],
+        :user => RequestStore.store[:topkit],
         :action => self.new_record? ? 'created' : 'updated'
       )
     end
