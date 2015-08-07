@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(version: 20151125142844) do
     t.string   "git_url"
     t.string   "uid"
     t.json     "config"
+    t.json     "templates"
   end
 
   create_table "users", force: true do |t|

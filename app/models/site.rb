@@ -10,6 +10,7 @@
 #  git_url    :string(255)
 #  uid        :string(255)
 #  config     :json
+#  templates  :json
 #
 
 require 'active_support/inflector'
