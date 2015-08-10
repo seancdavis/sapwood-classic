@@ -14,6 +14,7 @@
 #
 
 require 'active_support/inflector'
+require 'yaml'
 
 class Site < ActiveRecord::Base
 
@@ -25,10 +26,10 @@ class Site < ActiveRecord::Base
 
   has_many :site_users
   has_many :users, :through => :site_users
-  has_many :templates, :dependent => :destroy
+  # has_many :templates, :dependent => :destroy
   has_many :resource_types, :dependent => :destroy
-  has_many :webpages, :through => :templates, :dependent => :destroy,
-           :class_name => 'Page'
+  # has_many :webpages, :through => :templates, :dependent => :destroy,
+  #          :class_name => 'Page'
   has_many :forms, :dependent => :destroy
   has_many :documents, :dependent => :destroy
   has_many :menus, :dependent => :destroy
@@ -68,39 +69,45 @@ class Site < ActiveRecord::Base
     secondary_urls.split("\n").collect(&:strip)
   end
 
-  def method_missing(method, *arguments, &block)
-    begin
-      super
-    rescue
-      # This enables us to call a template and will return
-      # all the pages for that template
-      template = templates.find_by_slug(method)
-      if template.nil?
-        singular_method = ActiveSupport::Inflector.singularize(method)
-        template = templates.find_by_slug(singular_method)
-      end
-      if template.nil?
-        super
-      else
-        template.pages
-      end
-    end
+  def update_config!
+    config_dir = "#{Rails.root}/projects/#{slug}/config"
+    templates = YAML.load(File.read("#{config_dir}/templates.yml")).to_json
+    update_columns(:templates => templates)
   end
 
-  def respond_to?(method, include_private = false)
-    template = templates.find_by_slug(method)
-    if template.nil?
-      singular_method = ActiveSupport::Inflector.singularize(method)
-      template = templates.find_by_slug(singular_method)
-    end
-    template.nil? ? super : true
-  end
+  # def method_missing(method, *arguments, &block)
+  #   begin
+  #     super
+  #   rescue
+  #     # This enables us to call a template and will return
+  #     # all the pages for that template
+  #     template = templates.find_by_slug(method)
+  #     if template.nil?
+  #       singular_method = ActiveSupport::Inflector.singularize(method)
+  #       template = templates.find_by_slug(singular_method)
+  #     end
+  #     if template.nil?
+  #       super
+  #     else
+  #       template.pages
+  #     end
+  #   end
+  # end
+
+  # def respond_to?(method, include_private = false)
+  #   template = templates.find_by_slug(method)
+  #   if template.nil?
+  #     singular_method = ActiveSupport::Inflector.singularize(method)
+  #     template = templates.find_by_slug(singular_method)
+  #   end
+  #   template.nil? ? super : true
+  # end
 
   # ------------------------------------------ Deprecated Methods
 
-  def page_types
-    templates
-  end
+  # def page_types
+  #   templates
+  # end
 
   def pages
     Rails.env.production? ? webpages.published : webpages
