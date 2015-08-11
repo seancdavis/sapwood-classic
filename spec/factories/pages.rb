@@ -19,16 +19,20 @@
 #  field_search  :text
 #
 
+
+#
+
 FactoryGirl.define do
   factory :page do
-    page_type_id 1
-title "MyString"
-slug "MyString"
-description "MyText"
-body "MyText"
-ancestry "MyString"
-published false
-field_data "MyText"
+    title { Faker::Lorem.words(4).join(' ') }
+    site
+
+    factory :published_page do
+      published true
+    end
+    factory :draft_page do
+      published false
+    end
   end
 
 end
