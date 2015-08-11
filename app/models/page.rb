@@ -25,7 +25,7 @@ class Page < ActiveRecord::Base
 
   # ------------------------------------------ Plugins
 
-  include PgSearch, ActivityLog
+  include PgSearch, ActivityLog, Presenter
 
   has_ancestry
 
@@ -131,10 +131,6 @@ class Page < ActiveRecord::Base
 
   def draft?
     !published?
-  end
-
-  def status
-    published? ? 'published' : 'draft'
   end
 
 end
