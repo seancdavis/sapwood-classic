@@ -1,24 +1,22 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: pages
 #
-#  id                     :integer          not null, primary key
-#  name                   :string(255)
-#  settings               :text
-#  admin                  :boolean          default(FALSE)
-#  email                  :string(255)      default(""), not null
-#  encrypted_password     :string(255)      default(""), not null
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
-#  created_at             :datetime
-#  updated_at             :datetime
-#  api_key                :string(255)
+#  id            :integer          not null, primary key
+#  title         :string(255)
+#  slug          :string(255)
+#  body          :text
+#  ancestry      :string(255)
+#  published     :boolean          default(FALSE)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  position      :integer          default(0)
+#  page_path     :string(255)
+#  site_id       :integer
+#  field_data    :json
+#  template_name :string(255)
+#  meta          :json
+#  field_search  :text
 #
 
 require 'rails_helper'
