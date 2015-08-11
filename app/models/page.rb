@@ -25,9 +25,11 @@ class Page < ActiveRecord::Base
 
   # ------------------------------------------ Plugins
 
-  include SiteSlug, PgSearch, ActivityLog
+  include PgSearch, ActivityLog
 
   has_ancestry
+
+  has_superslug :title, :slug, :context => :site
 
   pg_search_scope(
     :search_content,

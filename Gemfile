@@ -49,6 +49,7 @@ gem 'geocoder'
 gem 'honeypot-captcha'
 gem 'paper_trail'
 gem 'request_store'
+gem 'superslug', '~> 1.3.0'
 
 group :development do
   gem 'mailcatcher'
