@@ -60,7 +60,7 @@ class Site < ActiveRecord::Base
   end
 
   def templates
-    Template.new(self)
+    TemplateCollection.new(self)
   end
 
   # def files
