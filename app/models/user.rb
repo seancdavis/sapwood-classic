@@ -47,7 +47,6 @@ class User < ActiveRecord::Base
 
   # ------------------------------------------ Scopes
 
-  scope :admins, -> { where(:admin => true) }
   scope :alpha, -> { all.to_a.sort_by(&:last_name) }
 
   # ------------------------------------------ Callbacks
@@ -56,16 +55,8 @@ class User < ActiveRecord::Base
 
   # ------------------------------------------ Instance Methods
 
-  def site_user?
-    !admin?
-  end
-
-  def all_sites
-    @all_sites ||= admin? ? Site.alpha : sites.alpha
-  end
-
   def first_site
-    @first_site ||= all_sites.first
+    sites.alpha.first
   end
 
   def has_sites?
