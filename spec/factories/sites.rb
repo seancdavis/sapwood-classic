@@ -13,12 +13,14 @@
 #  templates  :json
 #
 
+
+#
+
 FactoryGirl.define do
   factory :site do
-    title { Faker::Lorem.word }
-    url { Faker::Internet.url }
-    description { Faker::Lorem.paragraph }
-    git_url { Faker::Internet.url }
+    title { Faker::Lorem.words(4).join(' ') }
+    # git_url { Faker::Internet.url }
+    # uid { SecureRandom.hex(12) }
   end
 
 end

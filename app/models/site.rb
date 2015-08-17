@@ -57,6 +57,15 @@ class Site < ActiveRecord::Base
     self.uid = SecureRandom.hex(9)
   end
 
+  after_create :generate_default_config
+
+  def generate_default_config
+    convert_title_to_slug # superslug runs this
+    config = { :title => title, :slug => slug, :uid => uid }
+    config_will_change!
+    update_columns(:config => config)
+  end
+
   # ------------------------------------------ Instance Method
 
   def pages
@@ -67,8 +76,19 @@ class Site < ActiveRecord::Base
     uid
   end
 
-  def templates
-    TemplateCollection.new(self)
+  # def templates
+  #   TemplateCollection.new(self)
+  # end
+
+  def update_config(attrs = {})
+    attrs.each do |key, value|
+      if ['title','slug','uid'].include?(key.to_s)
+        update_columns(key.to_sym => value)
+      end
+    end
+    conf = self.config.merge(attrs)
+    config_will_change!
+    update_columns(:config => conf)
   end
 
   # def files
