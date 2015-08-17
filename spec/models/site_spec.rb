@@ -21,4 +21,8 @@ describe Site, :type => :model do
     @site = create(:site)
   end
 
+  it 'generates and self-assigns a UID when created' do
+    expect(@site.uid.size).to eq(18)
+  end
+
 end
