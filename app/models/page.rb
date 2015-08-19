@@ -61,7 +61,7 @@ class Page < ActiveRecord::Base
 
   # ------------------------------------------ Validations
 
-  validates :title, :site_id, :presence => true
+  validates :title, :template_name, :site_id, :presence => true
 
   # ------------------------------------------ Callbacks
 
@@ -78,6 +78,10 @@ class Page < ActiveRecord::Base
   end
 
   # ------------------------------------------ Instance Methods
+
+  def template
+    @template ||= site.templates.find(template_name)
+  end
 
   # def resource_type_methods
   #   resource_types.map { |rt| rt.slug.pluralize }

@@ -8,7 +8,7 @@ class ViewerController < ActionController::Base
   include(
     ApplicationHelper, 
     RoutingHelper,
-    ErrorsHelper,
+    # ErrorsHelper,
     UsersHelper,
     SitesHelper,
     PagesHelper,
