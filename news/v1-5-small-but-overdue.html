@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>v1.5 Small, But Overdue</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="article">
+  <h1><a href="../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../index.html">features</a></li>
+      <li><a href="../docs.html">docs</a></li>
+      <li class="active"><a href="../news.html">news</a></li>
+      <li><a href="../contributing.html">contribute</a></li>
+      <li><a href="../ideas.html">ideas</a></li>
+      <li><a href="../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="article">
+      <div class="page" id="article">
+  <header>
+    <time>05.13.15</time>
+    <h1>v1.5 Small, But Overdue</h1>
+  </header>
+  <section class="body">
+    <p>Sapwood development continues to maintain stamina, and I&#39;m happy to announce that we&#39;re already at v1.5, and staying on track of one minor release every month.</p>
+
+<p>v1.5 is nothing special, but it was completely necessary. Instead of waiting for a larger minor release, I decided to wrap up a few, small (but important) features, and give them their own release.</p>
+
+<p>In addition to fixing a few bugs, we have the following new features:</p>
+
+<h2 id="selective-form-notifications">Selective Form Notifications</h2>
+
+<p>Previously, you were limited to sending a notification to one or more users when a form was filled out on your site.</p>
+
+<p>Using the same field as before, you can now specify email notifications based on a value in a given field. It looks like this:</p>
+<div class="highlight"><pre>email|name|value
+</pre></div>
+<p>The <code>name</code> is the name attribute for the field. You can find it as the small, grey text next to the field in the field listing for that form.</p>
+
+<p>So, for example, if I wanted to send George a notification when the <code>subject</code> is <code>Cheese</code>, and Lillian gets a notice when the <code>subject</code> is <code>Pizza</code>, and Bob always gets a notification (because he&#39;s Bob), the field would look like this:</p>
+<div class="highlight"><pre>george@example.com|subject|Cheese
+lillian@example.com|subject|Pizza
+bob@example.com
+</pre></div>
+<p><em>Thanks to my good friend, <a href="https://twitter.com/hungrymedia">Warren Harrison</a>, for his effort on this feature.</em></p>
+
+<h2 id="search-form-helpers">Search Form Helpers</h2>
+
+<p>It seems the clients I&#39;m working for are always wanting search functions on their site (which deserves its own discussion), and I kept writing the same, long code every time. So wrapped it up in Sapwood.</p>
+
+<p>Now you have the following methods available for your sites:</p>
+
+<ul>
+<li><code>viewer_search_form</code>: Renders a search form with an optional custom page route (other than search)</li>
+<li><code>viewer_search_results</code>: Fetches the search results based on the params of <code>viewer_search_form</code> (won&#39;t work with a custom form).</li>
+<li><code>viewer_paginated_search_results</code>: Paginates the search results based on a <code>per_page</code> argument.</li>
+<li><code>render_viewer_search_results</code>: Renders the search results into <code>div</code>s with titles and descriptions.</li>
+</ul>
+
+<h2 id="shortcuts!">Shortcuts!</h2>
+
+<p>It&#39;s hidden, and it&#39;s just one simple shortcut, but it starts the process of bringing keyboard shortcuts into Sapwood for workflow enhancement.</p>
+
+<p>The only shortcut today is <code>Alt</code>+<code>L</code>, which will show your media library without reloading the page you are on.</p>
+
+<p>I hope to add on this very soon.</p>
+
+<h2 id="image-version-links">Image Version Links</h2>
+
+<p>There hasn&#39;t been a good way to get to the url for a given image, or a cropped version of an image ... until now! There is a link icon on each file in your media library and it will show the url options for that file.</p>
+
+<h2 id="cropper-cleanup">Cropper Cleanup</h2>
+
+<p>Previously, the cropper was not working well when images were wider than the window. As a real quick fix, images will always be <code>800px</code> wide when cropping. This will likely change in the future, but it fixes the issues for very large images.</p>
+
+<hr>
+
+<p>That&#39;s about it! Thank you for using Sapwood.</p>
+
+  </section>
+</div>
+
+    </div>
+
+    <script src="../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

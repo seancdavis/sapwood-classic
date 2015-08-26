@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Rake Tasks</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="active">
+          <a href="../writing_code.html">Writing Code</a>
+            <ul class="subnav">
+                <li><a href="directory_structure.html">Directory Structure</a></li>
+                <li><a href="static_development.html">Static Development</a></li>
+                <li><a href="previewing_your_site.html">Previewing Your Site</a></li>
+                <li><a href="hooking_into_rails.html">Hooking Into Rails</a></li>
+                <li><a href="rendering_process.html">Rendering Process</a></li>
+                <li><a href="the_service_object.html">The Service Object</a></li>
+                <li><a href="view_helpers.html">View Helpers</a></li>
+                <li><a href="stylesheets.html">Stylesheets</a></li>
+                <li><a href="javascripts.html">Javascripts</a></li>
+                <li><a class="active" href="rake_tasks.html">Rake Tasks</a></li>
+                <li><a href="custom_settings.html">Custom Settings</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Rake Tasks</h1>
+  </header>
+  <div class="page-content"><p><a href="https://github.com/ruby/rake">Rake tasks</a> are a great way to automate repeated tasks. We continue to add rake tasks to the Sapwood project to make it easier to work with.</p>
+
+<blockquote>
+<p>If you have an idea for a task that should be added to Sapwood, add it!</p>
+</blockquote>
+
+<p>The <code>utilities/tasks.rake</code> file is for building site-specific rake tasks. And, frankly, that&#39;s about where this discussion ends. Anything you need to do for that site, add it to your <code>tasks.rake</code> file and voila!</p>
+
+<p>The only recommendation of any importance is that you namespace your tasks with your (underscored) project slug.</p>
+<div class="highlight"><pre><span class="n">namespace</span> <span class="ss">:my_site</span> <span class="k">do</span>
+  <span class="n">desc</span> <span class="s1">&#39;My first task&#39;</span>
+  <span class="n">task</span> <span class="ss">:my_first_task</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+<p>That task would then be accessible by running the following command.</p>
+<div class="highlight"><pre>$ bundle exec rake my_site:my_first_task
+</pre></div>
+<p>This simple helps avoid conflict with other tasks.</p>
+
+<p>At any time, you can see all available tasks by running:</p>
+<div class="highlight"><pre>$ bundle exec rake -vT
+</pre></div></div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

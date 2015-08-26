@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>1.2 to 1.3</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="">
+          <a href="../writing_code.html">Writing Code</a>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="active">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+            <ul class="subnav">
+                <li><a href="1-1-to-1-2.html">1.1 to 1.2</a></li>
+                <li><a class="active" href="1-2-to-1-3.html">1.2 to 1.3</a></li>
+                <li><a href="1-3-to-1-4.html">1.3 to 1.4</a></li>
+            </ul>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>1.2 to 1.3</h1>
+  </header>
+  <div class="page-content"><p>Because we&#39;re making the transition to using PostgreSQL from MySQL (for searching purposes), we&#39;re back to a pretty manual upgrade to v1.3. Let&#39;s get to it.</p>
+
+<h3 id="upgrade-server-(production)">Upgrade Server (production)</h3>
+
+<p>If you are upgrading your production server, first ssh into the server. And it&#39;s always good practice to get your server up to date first.</p>
+<div class="highlight"><pre>$ sudo apt-get update
+$ sudo apt-get upgrade -y
+</pre></div>
+<h3 id="setup-postgresql-(production)">Setup PostgreSQL (production)</h3>
+
+<p>If you don&#39;t have PostgreSQL installed, let&#39;s start with that to minimize the amount of time you are down.</p>
+
+<h4 id="install-postgresql">Install PostgreSQL</h4>
+
+<p>You&#39;ll want to do this <strong>on your production server</strong>, since your development server doesn&#39;t use a database.</p>
+<div class="highlight"><pre>$ sudo apt-get -y install postgresql libpq-dev postgresql-contrib
+</pre></div>
+<h4 id="add-database-user">Add Database User</h4>
+
+<p>Next, let&#39;s add the database user. You can use the same username and password as before, or make up a new one. Just make note of what you are using.</p>
+<div class="highlight"><pre>$ sudo -u postgres psql
+
+postgres=# CREATE ROLE [db_user] LOGIN CREATEDB PASSWORD &#39;[db_pass]&#39;;
+</pre></div>
+<h3 id="update-code">Update Code</h3>
+
+<p>Change into your Sapwood project directory. Remember, this is different depending on your setup.</p>
+<div class="highlight"><pre>$ cd ~/apps/sapwood
+</pre></div>
+<p>Upgrade your code to the latest release.</p>
+<div class="highlight"><pre>$ git checkout release
+$ git pull origin release
+</pre></div>
+<p>Install our new gems.</p>
+<div class="highlight"><pre>$ bundle install
+</pre></div>
+<h3 id="transition-content-(production)">Transition Content (production)</h3>
+
+<p>It&#39;s probably not a bad idea to get your database backed up first, although we&#39;re moving to PostgreSQL, so this doesn&#39;t matter too much.</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake sapwood:db:backup
+</pre></div>
+<p>Next, we&#39;re going to store your database content to file using <code>yaml_db</code>:</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake db:data:dump
+</pre></div>
+<p>Then, swap out your database config. It should look something like this for your new PostgreSQL setup:</p>
+
+<p class="file"><code>config/database.yml</code></p>
+<div class="highlight"><pre><span class="l-Scalar-Plain">production</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgresql</span>
+  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">db_name</span><span class="p-Indicator">]</span>
+  <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">db_user</span><span class="p-Indicator">]</span>
+  <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">db_pass</span><span class="p-Indicator">]</span>
+  <span class="l-Scalar-Plain">encoding</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">unicode</span>
+  <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
+  <span class="l-Scalar-Plain">pool</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>
+  <span class="l-Scalar-Plain">timeout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5000</span>
+</pre></div>
+<p>If it&#39;s working right, you should be able to create and migrate your new database.</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake db:create
+$ RAILS_ENV=production bundle exec rake db:migrate
+</pre></div>
+<p>Then bring the new content into the pg database:</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake db:data:load
+</pre></div>
+<h4 id="open-up-postgresql">Open Up PostgreSQL</h4>
+
+<p>To allow for remote connections, you will need to change a few settings on your production server.</p>
+
+<p>There are two config files you need to adjust:</p>
+
+<p class="file"><code>/etc/postgresql/9.3/main/pg_hba.conf</code></p>
+<div class="highlight"><pre># add this to the bottom of the file
+host    all             all             0.0.0.0/0               trust
+</pre></div>
+<p class="file"><code>/etc/postgresql/9.3/main/postgresql.conf</code></p>
+<div class="highlight"><pre># change this
+listen_addresses = &#39;localhost&#39;          # what IP address(es) to listen on;
+
+# to this
+listen_addresses = &#39;*&#39;          # what IP address(es) to listen on;
+</pre></div>
+<p>Then enable <code>5432</code> port if you&#39;re using <code>ufw</code>:</p>
+<div class="highlight"><pre>$ sudo ufw allow 5432
+</pre></div>
+<p>And restart postgres:</p>
+<div class="highlight"><pre>$ sudo service postgresql restart
+</pre></div>
+<h3 id="transition-content-(development)">Transition Content (development)</h3>
+
+<p>In development, all you need to do is swap out your database config so that you connect to the remote PostgreSQL database. This should look something like this:</p>
+
+<p class="file"><code>config/database.yml</code></p>
+<div class="highlight"><pre><span class="l-Scalar-Plain">development</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgresql</span>
+  <span class="l-Scalar-Plain">encoding</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">unicode</span>
+  <span class="l-Scalar-Plain">pool</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>
+  <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">prod_ip</span><span class="p-Indicator">]</span>
+  <span class="l-Scalar-Plain">port</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5432</span>
+  <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">db_user</span><span class="p-Indicator">]</span>
+  <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">db_pass</span><span class="p-Indicator">]</span>
+  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">db_name</span><span class="p-Indicator">]</span>
+</pre></div>
+<h3 id="precompile-assets-(production)">Precompile Assets (production)</h3>
+
+<p>You&#39;ll need to update your content and precompile your assets.</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake assets:precompile
+</pre></div>
+<h3 id="restart-server">Restart Server</h3>
+
+<p>Then stop and start your server (this is better than restarting in this case). In development, this is:</p>
+<div class="highlight"><pre>$ bundle exec rails s
+</pre></div>
+<p>In production:</p>
+<div class="highlight"><pre>$ sudo service unicorn_taproot stop
+$ sudo service unicorn_taproot start
+</pre></div>
+<hr>
+
+<p>Now you should be up and running!</p>
+
+<blockquote>
+<p><em>The only thing I&#39;ve noticed that&#39;s odd with this transition is that templates that were allowed to have themselves as children are unset. All you have to do is go back in the templates and choose itself as a child for any template that allowed itself to be a child of itself.</em></p>
+</blockquote>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

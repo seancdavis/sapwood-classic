@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>v1.4 Introduces Menus and Error Tracking</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="article">
+  <h1><a href="../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../index.html">features</a></li>
+      <li><a href="../docs.html">docs</a></li>
+      <li class="active"><a href="../news.html">news</a></li>
+      <li><a href="../contributing.html">contribute</a></li>
+      <li><a href="../ideas.html">ideas</a></li>
+      <li><a href="../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="article">
+      <div class="page" id="article">
+  <header>
+    <time>04.10.15</time>
+    <h1>v1.4 Introduces Menus and Error Tracking</h1>
+  </header>
+  <section class="body">
+    <p>Even though we&#39;ve only had about a week between v1.3 and v1.4, this new version comes about 40 quick commits later, but offers several new features. Let&#39;s look at the big ones.</p>
+
+<h2 id="custom-menu-builder">Custom Menu Builder</h2>
+
+<p>We hadn&#39;t given much attention to menus in the past. But I was beginning to see some issues with hard-coding menus, and getting requests for different behavior on menus.</p>
+
+<p>Therefore, although simple at first, we now have a custom menu builder.</p>
+
+<p>To stay consistent, simple, and predictable, the menu builder works just like pages. Menu items are nestable, and you drill down by clicking through to children, and following breadcrumbs in the title.</p>
+
+<p>And I also added a quick snapshot of the entire menu. Although there is no editing capabilities from this screen, it does offer an ability to see the nested lists in one shot.</p>
+
+<h3 id="rendering-menus">Rendering Menus</h3>
+
+<p>Menus are nice and easy to render. The menu itself has a <code>slug</code>, which is used when you call <code>&lt;%= viewer_menu(slug) %&gt;</code>.</p>
+
+<p>See <a href="../docs/building_content/menus.html">the doc page</a> for more information.</p>
+
+<h2 id="custom-error-pages">Custom Error Pages</h2>
+
+<p>I&#39;d been putting it off, but I finally added in custom error pages. No longer do we default to the standard Rails error pages.</p>
+
+<p>Sapwood itself comes with two sets of <code>404</code> and <code>500</code> error pages.</p>
+
+<h3 id="builder-errors">Builder Errors</h3>
+
+<p>Builder errors in development will still lead you to the interactive errors page so you can see what&#39;s going on. In production, we land on static error pages, but still get the error notification.</p>
+
+<h3 id="viewer-errors">Viewer Errors</h3>
+
+<p>The viewer is only trapping two errors at the moment (see below for more information). Trapped errors will render a more dynamic error page. The default <code>404</code> page will render a list of search results, while the <code>500</code> page has a simple message.</p>
+
+<h3 id="custom-error-pages">Custom Error Pages</h3>
+
+<p>Overriding error pages in your individual site&#39;s is simple. Just add a <code>404.html.erb</code> and/or a <code>500.html.erb</code> template in your <code>templates</code> directory.</p>
+
+<blockquote>
+<p><em>Note: These error pages will only be rendered for the errors being trapped (see below).</em></p>
+
+<p><strong>Also note: You still have access to your assets, since we&#39;re rendering an <code>erb</code> template, but you may not have access to the <code>current_page</code> object, depending on the error.</strong></p>
+</blockquote>
+
+<h2 id="trapping-errors">Trapping Errors</h2>
+
+<p>On the viewer (in your public sites), we are trapping two errors:</p>
+
+<ul>
+<li><code>ActionController::RoutingError</code> (404)</li>
+<li><code>ActionView::MissingTemplate</code> (500)</li>
+</ul>
+
+<p>This is just to start simply and see how it works.</p>
+
+<p>When an error occurs, it is saved in the database. You can access these errors through your builder application.</p>
+
+<p>The trapped errors also act as a checklist in a way, as you can close errors when you have resolved them. This is the first step in making this process much more dynamic.</p>
+
+<h2 id="all-markdown,-all-the-time">All Markdown, All the Time</h2>
+
+<p>While Sapwood aims to be flexible, I was being a little too flexible when it came to editing text. There are three important changes to note.</p>
+
+<p>First, we&#39;re now <strong>only using markdown</strong>. Markdown is easy to learn and this way we can be much more flexible with how we handle editing.</p>
+
+<p>Second, because of the first point, I also added the ability for any field to be a <em>markdown</em> field, which will automatically load a markdown editor and parse it on save.</p>
+
+<p>And last, I stopped using my self-built markdown editor. Instead I found <a href="https://github.com/lepture/editor">this awesome editor</a> and began using it. I plan to work on this project a bit and enhance how it works with Sapwood over time, but for now this is still a significant improvement over my self-built editor.</p>
+
+<h2 id="dynamic-settings">Dynamic Settings</h2>
+
+<p>The last major update is about bringing settings into the database. As you probably know, there are two types of settings in Sapwood:</p>
+
+<ul>
+<li>Sapwood (app) Settings</li>
+<li>Site Settings</li>
+</ul>
+
+<p>Sapwood settings are those that affect the entire application. Because some low-level tasks rely on these settings, we aren&#39;t <em>using</em> the settings in the database just yet, but we are using v1.4 to <em>bring those settings into the database</em>. They will be used in the future.</p>
+
+<p>Meanwhile, site settings have previously been included in a <code>utilities/config.yml</code> file in each site&#39;s repo. No longer does this need to be the case. Now those settings will be kept within the database, and they are editable in the builder (under <em>Settings</em>).</p>
+
+<p>You can still access site settings the same way. See <a href="../docs/building_content/site_settings.html">the doc page</a> for more information.</p>
+
+  </section>
+</div>
+
+    </div>
+
+    <script src="../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

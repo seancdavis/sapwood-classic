@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>v1.2 Brings Major Workflow Enhancements</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="article">
+  <h1><a href="../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../index.html">features</a></li>
+      <li><a href="../docs.html">docs</a></li>
+      <li class="active"><a href="../news.html">news</a></li>
+      <li><a href="../contributing.html">contribute</a></li>
+      <li><a href="../ideas.html">ideas</a></li>
+      <li><a href="../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="article">
+      <div class="page" id="article">
+  <header>
+    <time>03.20.15</time>
+    <h1>v1.2 Brings Major Workflow Enhancements</h1>
+  </header>
+  <section class="body">
+    <p>When I released v1.0, I found that the idea of separating page types and templates was confusing, and I agreed with the feedback. v1.1 worked to consolidate page types and templates into one, where every single page has a template and that template designates the file that is to be rendered when that page is viewed. Simple enough.</p>
+
+<p>The consolidation was complex enough that I didn&#39;t worry much about the design or workflow that went along with it. And it quickly became apparent that there was confusion not necessarily in the new way templates worked, but how to make templates and pages work together through the app. In other words, the UI needed help.</p>
+
+<p>That&#39;s why v1.2 focused on further enhancements to pages and templates, while it also worked to distinguish users of the app into two roles -- <em>developer</em> or <em>site user</em>. And, while v1.2 was in full development, I had what I&#39;m calling a <em>sponsored request</em> to bring forms into the v1.2 release.</p>
+
+<p>What I ended up with was a release that was much larger than I originally anticipated. A few weeks and 99 commits later, we have an app that I believe is worlds better than its v1.1 ancestor.</p>
+
+<p>Below you will find the specific improvements v1.2 brings to Sapwood. To upgrade to v1.2 <a href="../docs/upgrade-guides/1-1-to-1-2.html">look here</a>.</p>
+
+<h2 id="surfacing-&amp;-organizing-data">Surfacing &amp; Organizing Data</h2>
+
+<p>From the beginning, the goal of Sapwood was to be simple and easy to use, while also being a little prettier than some of its counterparts, like WordPress. That&#39;s a difficult combination of attributes to obtain, especially in considering how flexible Sapwood is (the whole <em>starting from scratch and building simple site with complex data structures</em> thing).</p>
+
+<p>I spend a lot of time using <a href="https://about.gitlab.com">GitLab</a> and <a href="https://github.com">GitHub</a>. I took inspiration in the way each application organizes its issue tracker within its over repository modules. You can see this inspiration come together in Sapwood 1.2.</p>
+
+<p>What we&#39;re now left with is more organized content. Breadcrumbs and titles were combined, filters were added, and more data and actions related to a list of components were surfaced in index (list) views. This lessens the number of clicks for some tasks, while making finding other attributes a lot easier.</p>
+
+<p>That&#39;s a general snapshot of what was affected overall. To explain every nuance that was added would be tiresome and useless. The screenshot below is the new pages index listing for the Sapwood site, and that design is now carried throughout the app.</p>
+
+<p><img src="../media/W1siZiIsIjIwMTUvMDMvMjAvNWN0czhhZTNzel9TY3JlZW5fU2hvdF8yMDE1XzAzXzIwX2F0XzcuMzIuMTdfUE0ucG5nIl1d/Screen&#32;Shot&#32;2015-03-20&#32;at&#32;7.32.17&#32;PM.png@sha=e6ad097a113db7db" alt="Pages Index"></p>
+
+<h2 id="quick-edit-for-template-fields">Quick Edit for Template Fields</h2>
+
+<p>One area that was a huge drain on workflow efficiency was in how long it took to create (and later edit/move) template fields. We now have more data surface on the listing of fields, which gives you a much quicker snapshot of the form you are building for the pages of that template. There is also the ability to drag and drop fields (and group) to reorder them on the fly.</p>
+
+<p><img src="../media/W1siZiIsIjIwMTUvMDMvMjAvMjVkZDMwd20yOF9TY3JlZW5fU2hvdF8yMDE1XzAzXzIwX2F0XzcuNDAuMjdfUE0ucG5nIl1d/Screen-Shot-2015-03-20-at-7.40.27-PM.png@sha=5f0b6e8aeb423488" alt="Drag and drop template fields"></p>
+
+<h2 id="user-roles">User Roles</h2>
+
+<p>While user roles/permissions will likely become more complex over time, for now we really only need two roles within a Sapwood application -- <em>developer</em> and <em>editor</em>.</p>
+
+<p>A <em>developer</em> is an administrator. They have access to all sites within the application and they have the ability to build out the content structure of those sites.</p>
+
+<p>Your clients, and perhaps some of your teammates, are your editors. Their only purpose is to <em>edit the content on the site</em>. For that reason, they have access to:</p>
+
+<ul>
+<li>view and edit pages</li>
+<li>view and add media</li>
+<li>view form submissions</li>
+</ul>
+
+<p>Beyond that, they don&#39;t need more control, although likely permissions will become more dynamic as that request moves to the top of the list.</p>
+
+<h2 id="quick-file-improvements">Quick File Improvements</h2>
+
+<p>Uploading to Amazon S3 is nice because there is no max capacity. However,
+Sapwood isn&#39;t built to be a file management solution. And because of that,
+we transitioned to local file storage. This is simpler, safer, and more efficient. When the time comes, there will be further improvements made, but we&#39;re building as we need it, so for now this is the idea solution.</p>
+
+<h2 id="other-improvements">Other Improvements</h2>
+
+<p>Beyond the changes above, there were some other, smaller improvements made. Here&#39;s a list that&#39;s probably still missing some new features:</p>
+
+<ul>
+<li>form fields have drag and drop reordering</li>
+<li>form submissions can be exported to CSV</li>
+<li>there are dynamic methods available for retrieving pages of a certain template within a site (see <a href="../docs/writing_code/the_service_object.html">the service object</a> for a little more info)</li>
+<li>page parents and templates can be changed on the fly via the &quot;move&quot; form</li>
+</ul>
+
+  </section>
+</div>
+
+    </div>
+
+    <script src="../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

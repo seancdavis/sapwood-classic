@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Custom Settings</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="active">
+          <a href="../writing_code.html">Writing Code</a>
+            <ul class="subnav">
+                <li><a href="directory_structure.html">Directory Structure</a></li>
+                <li><a href="static_development.html">Static Development</a></li>
+                <li><a href="previewing_your_site.html">Previewing Your Site</a></li>
+                <li><a href="hooking_into_rails.html">Hooking Into Rails</a></li>
+                <li><a href="rendering_process.html">Rendering Process</a></li>
+                <li><a href="the_service_object.html">The Service Object</a></li>
+                <li><a href="view_helpers.html">View Helpers</a></li>
+                <li><a href="stylesheets.html">Stylesheets</a></li>
+                <li><a href="javascripts.html">Javascripts</a></li>
+                <li><a href="rake_tasks.html">Rake Tasks</a></li>
+                <li><a class="active" href="custom_settings.html">Custom Settings</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Custom Settings</h1>
+  </header>
+  <div class="page-content"><p>While I plan to surface settings in the UI, at this time site-specific settings need to be added to your code. And that&#39;s where you <code>utilities/config.yml</code> file comes into play.</p>
+
+<h2 id="adding-settings">Adding Settings</h2>
+
+<p>The config file is of the <a href="http://www.yaml.org/">YAML</a> file type, which has a strict indentation-based syntax.</p>
+
+<p>The settings are broken up by the current environment, so you can use different settings if you need.</p>
+
+<p>You should break your settings up as semantically as possible to keep it simple for you. You can use our <a href="https://github.com/seancdavis/sapwood/blob/master/config/sapwood.sample.yml">Sapwood settings file</a> as an example of how you might configure your settings file.</p>
+
+<p>You should use this for values you may use throughout the site that you want to abstract into one location. One example is URLs for social sites. That way you don&#39;t have to dig through markup if one of your social URLs change.</p>
+
+<h2 id="accessing-settings">Accessing Settings</h2>
+
+<p>The settings are available in a view through the <code>site_setting</code> method. Settings are loaded into a recursive set of <code>OpenStruct</code> objects.</p>
+
+<p>Let&#39;s say you are in development and have this setting:</p>
+<div class="highlight"><pre><span class="l-Scalar-Plain">development</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">social</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">facebook</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://www.facebook.com/I_Am_Awesome</span>
+</pre></div>
+<p>You could get to the <em><a href="https://www.facebook.com/I_Am_Awesome">https://www.facebook.com/I_Am_Awesome</a></em> value through <code>site_setting.social.facebook</code>.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

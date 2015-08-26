@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Javascripts</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="active">
+          <a href="../writing_code.html">Writing Code</a>
+            <ul class="subnav">
+                <li><a href="directory_structure.html">Directory Structure</a></li>
+                <li><a href="static_development.html">Static Development</a></li>
+                <li><a href="previewing_your_site.html">Previewing Your Site</a></li>
+                <li><a href="hooking_into_rails.html">Hooking Into Rails</a></li>
+                <li><a href="rendering_process.html">Rendering Process</a></li>
+                <li><a href="the_service_object.html">The Service Object</a></li>
+                <li><a href="view_helpers.html">View Helpers</a></li>
+                <li><a href="stylesheets.html">Stylesheets</a></li>
+                <li><a class="active" href="javascripts.html">Javascripts</a></li>
+                <li><a href="rake_tasks.html">Rake Tasks</a></li>
+                <li><a href="custom_settings.html">Custom Settings</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Javascripts</h1>
+  </header>
+  <div class="page-content"><p>The <code>javascripts</code> directory is (you guessed it!) for storing all your javascript files.</p>
+
+<h2 id="setup">Setup</h2>
+
+<p>Following a similar pattern with stylesheets, you should include a manifest file at <code>javascripts/application.js</code>.</p>
+
+<p>As you can see at the bottom of your default layout (<code>templates/layout.html.erb</code>), it expects a javascript file as mentioned above.</p>
+<div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">javascript_include_tag</span> <span class="s1">&#39;viewer/[site_slug]/application&#39;</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+<p>You can <a href="http://guides.rubyonrails.org/asset_pipeline.html#manifest-files-and-directives">read more here</a> if you are unfamiliar with loading files into the asset pipeline.</p>
+
+<h2 id="frameworks">Frameworks</h2>
+
+<p>There are about a million javascript frameworks out there. We are partial to <a href="http://backbonejs.org/">Backbone.js</a> and use <a href="https://github.com/meleyal/backbone-on-rails">this gem</a> to bring it into rails.</p>
+
+<p>To use Backbone, all you need to add to <code>application.js</code> are these two lines:</p>
+<div class="highlight"><pre><span class="c1">//= require underscore</span>
+<span class="c1">//= require backbone</span>
+</pre></div>
+<p>We&#39;ll leave it up to you to set up your Backbone directory structure, but you can mimic <a href="https://github.com/seancdavis/sapwood/tree/master/app/assets/javascripts/builder">the builder&#39;s structure</a> if you&#39;d like.</p>
+
+<p>Like CSS frameworks, I&#39;m not opposed to any others, but just haven&#39;t made them a priority because that&#39;s not what I use on a regular basis. Feel free to add others to Sapwood and create a pull request explaining why they are beneficial.</p>
+
+<blockquote>
+<p>If you create a pull request to add a js framework, we&#39;re likely going to ask you to document how to use the library with Sapwood.</p>
+</blockquote>
+
+<h2 id="other-helpers">Other Helpers</h2>
+
+<p>You can keep an eye on <a href="https://github.com/seancdavis/sapwood/blob/master/Gemfile">our Gemfile</a> to know what other helpers are already in the repo.</p>
+
+<p>And, again, feel free to add your own to Sapwood if you think users will find global benefit to it.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Stylesheets</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="active">
+          <a href="../writing_code.html">Writing Code</a>
+            <ul class="subnav">
+                <li><a href="directory_structure.html">Directory Structure</a></li>
+                <li><a href="static_development.html">Static Development</a></li>
+                <li><a href="previewing_your_site.html">Previewing Your Site</a></li>
+                <li><a href="hooking_into_rails.html">Hooking Into Rails</a></li>
+                <li><a href="rendering_process.html">Rendering Process</a></li>
+                <li><a href="the_service_object.html">The Service Object</a></li>
+                <li><a href="view_helpers.html">View Helpers</a></li>
+                <li><a class="active" href="stylesheets.html">Stylesheets</a></li>
+                <li><a href="javascripts.html">Javascripts</a></li>
+                <li><a href="rake_tasks.html">Rake Tasks</a></li>
+                <li><a href="custom_settings.html">Custom Settings</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Stylesheets</h1>
+  </header>
+  <div class="page-content"><p>The <code>stylesheets</code> directory in your project should hold all of your stylesheets.</p>
+
+<h2 id="setup">Setup</h2>
+
+<h3 id="using-sass">Using Sass</h3>
+
+<p>Rails has adopted <a href="http://sass-lang.com/">Sass</a> as its preferred CSS preprocessor. Sass can help keep your CSS nice and organized, but if you don&#39;t want to, you aren&#39;t forced to use it.</p>
+
+<h3 id="the-manifest-file">The Manifest File</h3>
+
+<p>If you&#39;re going the Rails way and using Sass, then you should create a manifest file - <code>application.scss</code> - from which you import all your style partials (and any vendor files).</p>
+
+<p>You can place vendor files and partials at any location within the stylesheets directory and they will be available to be imported into your project.</p>
+
+<blockquote>
+<p>If you have a vendor file you believe would be useful to be available to all Sapwood projects, add it to the Sapwood repo, create a pull request and explain why it&#39;s useful.</p>
+</blockquote>
+
+<h2 id="loading-stylesheets">Loading Stylesheets</h2>
+
+<p>Rails comes with a helper to load stylesheets - <code>stylesheet_link_tag</code>. In fact, if you look at your generated layout, you see this in the <code>&lt;head&gt;</code> section:</p>
+<div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">stylesheet_link_tag</span> <span class="s1">&#39;viewer/[site_slug]/application&#39;</span><span class="p">,</span> <span class="ss">:media</span> <span class="o">=&gt;</span> <span class="s1">&#39;all&#39;</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+<p>By default this will load your manifest file, as long as it is named <code>application.(s)css</code> (the file extension doesn&#39;t need to be <code>scss</code>).</p>
+
+<p>You can change the name or load other stylesheets as necessary.</p>
+
+<h2 id="frameworks-&amp;-helpers">Frameworks &amp; Helpers</h2>
+
+<h3 id="available-frameworks">Available Frameworks</h3>
+
+<p>Sapwood currently doesn&#39;t support popular CSS frameworks like <a href="http://getbootstrap.com/">Bootstrap</a> or <a href="http://foundation.zurb.com/">Foundation</a>. If you must have these options, then we suggest one of two solutions:</p>
+
+<ul>
+<li>Include the necessary files manually in your project.</li>
+<li>Add the ability to add these files to Sapwood and create your pull request.</li>
+</ul>
+
+<h3 id="sass-helper-libraries">Sass Helper Libraries</h3>
+
+<p>In addition, we&#39;ve made the <a href="https://github.com/thoughtbot/bourbon">Bourbon</a> and <a href="https://github.com/compass/compass-rails">Compass</a> gems available for you to include in your project as needed.</p>
+
+<p>Like frameworks, feel free to open a pull request if you&#39;d like to add a Sass library to Sapwood.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

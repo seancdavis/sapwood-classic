@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>The Configuration File</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="active">
+          <a href="../getting_started.html">Getting Started</a>
+            <ul class="subnav">
+                <li><a href="production_environment.html">Production Environment</a></li>
+                <li><a href="development_environment.html">Development Environment</a></li>
+                <li><a class="active" href="the_configuration_file.html">The Configuration File</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="">
+          <a href="../writing_code.html">Writing Code</a>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>The Configuration File</h1>
+  </header>
+  <div class="page-content"><blockquote>
+<p><em>DEPRECATION NOTICE: The config file will be deprecated and built into the app in an upcoming release.</em></p>
+</blockquote>
+
+<p>Sapwood comes with a config file which helps surfaces both design and functional options for making your instance of this application unique to you.</p>
+
+<p>The file is not tracked by Git, but a sample from which we work is located at <code>config/sapwood.sample.yml</code>.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<p>You can see the settings are broken up by environment. While you likely aren&#39;t sharing this file between environments, this at least makes it possible. It then enables you to have one config file (not tracked by Git) that can hold your development and production values.</p>
+
+<p>This file should be copied to <code>config/sapwood.yml</code>, and from there it becomes active.</p>
+
+<p>The values within the environment in which you are working are loaded into the <code>SapwoodSetting</code> constant as a recursive <a href="http://www.ruby-doc.org/stdlib-2.0/libdoc/ostruct/rdoc/OpenStruct.html"><code>OpenStruct</code></a>. So, for example, if you entered &quot;Sapwood&quot; as the site title, you could access that setting via <code>SapwoodSetting.site.title</code>.</p>
+
+<h2 id="options">Options</h2>
+
+<p>The options are grouped into semantic categories (which aren&#39;t really ordered in any particular way just yet). Let&#39;s look at each of them.</p>
+
+<h3 id="site">Site</h3>
+
+<ul>
+<li><code>title</code>: (default: <code>Sapwood</code>) The default title for the site. This is used when we don&#39;t have a dynamic title available.</li>
+<li><code>url</code>: The URL at which you will run this application. In development, this is usually <code>localhost</code>, and in production it is whatever you are using as your domain. *Note: omit the protocol and just include the domain.</li>
+</ul>
+
+<h3 id="design">Design</h3>
+
+<p>This may be built out in the future, but for now we&#39;re just toggling a color palette.</p>
+
+<h4 id="colors">Colors</h4>
+
+<ul>
+<li><code>primary</code>: (default: <code>099B77</code>) The primary color. Make this nice and bright!</li>
+<li><code>secondary</code>: (default: <code>34495E</code>) Accent color that should be in good contrast to the primary color.</li>
+<li><code>dark</code>: (default: <code>363636</code>) A dark color, for fonts and other dark grey accents.</li>
+<li><code>grey</code>: (default: <code>929E9E</code>) A medium grey.</li>
+<li><code>light</code>: (default: <code>FFFFFF</code>) A light color typically used in contrast to darker colors.</li>
+</ul>
+
+<h3 id="dragonfly">Dragonfly</h3>
+
+<p><a href="https://github.com/markevans/dragonfly">Dragonfly</a> is the gem we use for file uploads. You don&#39;t need to configure anything here other than a unique key.</p>
+
+<ul>
+<li><code>secret</code>: Just some random hash.</li>
+<li><code>host</code>: Usually the URL to your Sapwood project, it is the <em>asset host</em>, used to access your uploads.</li>
+<li><code>max_file_size</code>: (default: <code>4.0</code>) The maximum allowable file size for uploads (in MB)</li>
+</ul>
+
+<h3 id="sapwood-api">Sapwood API</h3>
+
+<p>Sapwood has begun using an API so a development and production installation of the app can talk with each other. In other words, it&#39;s used for syncing content.</p>
+
+<ul>
+<li><code>public_key</code>: Any random hash. It doesn&#39;t matter what it is, but <strong>be sure this matches all other instances of this application that you want to talk with each other.</strong></li>
+</ul>
+
+<h3 id="remote">Remote</h3>
+
+<p>These settings are used for syncing content. These are only relevant to a development installation.</p>
+
+<ul>
+<li><code>url</code>:  The url of your production app. Unlike <code>site.url</code>, this is specific to your production installation. You can leave it blank if you are in production.</li>
+<li><code>db_backup_file</code>: The full ssh reference to the database backup file. This is explained much more fully in the Communicative Workflow section on <a href="../communicative_workflow.html">syncing content</a>.</li>
+</ul>
+
+<h3 id="google">Google</h3>
+
+<p>These are settings for Google products that hook into Sapwood.</p>
+
+<ul>
+<li><code>analytics_id</code>: Your Google Analytics ID. It is only used in the builder, since individual sites are managed however you want.</li>
+</ul>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

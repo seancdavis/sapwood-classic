@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Starting From Scratch</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="active">
+          <a href="../creating_a_site.html">Creating A Site</a>
+            <ul class="subnav">
+                <li><a class="active" href="starting_from_scratch.html">Starting From Scratch</a></li>
+                <li><a href="import_existing_site.html">Import Existing Site</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="">
+          <a href="../writing_code.html">Writing Code</a>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Starting From Scratch</h1>
+  </header>
+  <div class="page-content"><p>You&#39;re ready for a new site. Maybe you&#39;ve gone through wireframing or maybe you have no idea what this site even is. In any case, it&#39;s time to create a Sapwood site.</p>
+
+<p>There&#39;s one very important distinction we need to make before we dig too deep in here. Following the <a href="../communicative_workflow.html">Communicative Workflow</a>, content lives in your production database, while a site&#39;s code follows a more normal development cycle.</p>
+
+<p>Given the workflow, it doesn&#39;t <em>really</em> matter in which environment you create the site. But it makes more sense to create it <strong>in development</strong>, since it&#39;s easier to debug if something goes awry.</p>
+
+<h2 id="create-remote-repository">Create Remote Repository</h2>
+
+<p>Let&#39;s get this out of the way first. Create <em>an empty</em> remote repository.</p>
+
+<h3 id="an-awesome-benefit!">An Awesome Benefit!</h3>
+
+<p>One awesome benefit of Sapwood is that the only files in your project repo are those unique to your project. Because of this, it&#39;s possible that you won&#39;t have any sensitive data in your files (and, really, you shouldn&#39;t track that with git anyways). And it&#39;s also unlikely that you&#39;re building some super secret app with Sapwood.</p>
+
+<p>Because of this, it&#39;s <em>possible</em> that your code be public. Obviously, there&#39;s no <em>functional</em> benefit to that (other than cost), but it&#39;s possible.</p>
+
+<blockquote>
+<p>Note: If you are still looking for a good choice for hosting your code, I put wrote an article <a href="http://thepolymathlab.com/free-alternatives-to-github-for-private-git-hosting">on just that topic</a>.</p>
+</blockquote>
+
+<h2 id="create-the-site">Create the Site</h2>
+
+<p>Now, <strong>in your development app</strong>, sign in and go to the new site form (<code>/sites/new</code>). You&#39;ll notice a checkbox that says:</p>
+
+<blockquote>
+<p>&quot;CREATE AND PUSH NEW REPO?&quot;</p>
+</blockquote>
+
+<p>Check it.</p>
+
+<p>This is reading the value from <code>REMOTE GIT URL</code>. Remember, this is the URL to the empty, remote repository you just created.</p>
+
+<p>Following this practice helps the app know where to push the repo after it is created. You&#39;ll know this step worked if you have code in your remote repo.</p>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<p>If something went wrong, before you report an issue, try these steps:</p>
+
+<ol>
+<li>change into <code>projects/[project_slug]</code> directory within your Sapwood app</li>
+<li>try to push (<code>git push origin master</code>)</li>
+</ol>
+
+<p>If the code is present but you can&#39;t push, it is likely to do with your configuration. If the code is not there, then something went wrong during the process of creating the files.</p>
+
+<p>If you can&#39;t pinpoint or solve the issue, <a href="https://github.com/seancdavis/sapwood/issues/new">report it</a>.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

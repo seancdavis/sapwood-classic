@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>1.1 to 1.2</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="">
+          <a href="../writing_code.html">Writing Code</a>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="active">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+            <ul class="subnav">
+                <li><a class="active" href="1-1-to-1-2.html">1.1 to 1.2</a></li>
+                <li><a href="1-2-to-1-3.html">1.2 to 1.3</a></li>
+                <li><a href="1-3-to-1-4.html">1.3 to 1.4</a></li>
+            </ul>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>1.1 to 1.2</h1>
+  </header>
+  <div class="page-content"><p>After working out a lot of kinks and reorganizing the structure of the app in v1.1, the upgrade to v1.2 is easy.</p>
+
+<h3 id="upgrade-server-(production)">Upgrade Server (production)</h3>
+
+<p>If you are upgrading your production server, first ssh into the server. And it&#39;s always good practice to get your server up to date first.</p>
+<div class="highlight"><pre>$ sudo apt-get update
+$ sudo apt-get upgrade -y
+</pre></div>
+<h3 id="update-code">Update Code</h3>
+
+<p>Change into your Sapwood project directory. Remember, this is different depending on your setup.</p>
+<div class="highlight"><pre>$ cd ~/apps/sapwood
+</pre></div>
+<p>Upgrade your code to the latest release.</p>
+<div class="highlight"><pre>$ git checkout release
+$ git pull origin release
+</pre></div>
+<p>Then install any new gems.</p>
+<div class="highlight"><pre>$ bundle install
+</pre></div>
+<h3 id="transition-content-(production)">Transition Content (production)</h3>
+
+<p>First, back up your database before we go any farther (you can also do this through the UI).</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake sapwood:db:backup
+</pre></div>
+<p>Then migrate your database.</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake db:migrate
+</pre></div>
+<p>Last, you can run the auto-update rake task, which transitions some content smoothly from v1.1.</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake sapwood:update:one_two
+</pre></div>
+<h3 id="precompile-assets">Precompile Assets</h3>
+
+<p>If you are in production, you&#39;ll need to update your content and precompile your assets. <em>Note: You can also run this in development if you aren&#39;t going to develop for Sapwood</em>.</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake assets:precompile
+</pre></div>
+<h3 id="new-settings">New Settings</h3>
+
+<p>A few settings we added to your <code>config/sapwood.yml</code> file, so make sure that is up to date.</p>
+
+<p class="file"><code>config/sapwood.yml</code></p>
+<div class="highlight"><pre><span class="l-Scalar-Plain">dragonfly</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">secret</span><span class="p-Indicator">:</span>             <span class="s">&#39;&#39;</span>                  <span class="c1"># some random hash</span>
+  <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span>               <span class="s">&#39;&#39;</span>                  <span class="c1"># your asset host (with protocol)</span>
+  <span class="l-Scalar-Plain">max_file_size</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">4.0</span>                 <span class="c1"># maximum size (in MB) for upload</span>
+<span class="l-Scalar-Plain">google</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">analytics_id</span><span class="p-Indicator">:</span>       <span class="s">&#39;&#39;</span>                  <span class="c1"># google analytics ID (for builder traffic only)</span>
+</pre></div>
+<p>And if you take a look at <code>config/sapwood.sample.yml</code>, you&#39;ll see you can also get rid of a few settings. Most important are your AWS S3 settings.</p>
+
+<h3 id="restart-server">Restart Server</h3>
+
+<p>Then stop and start your server (this is better than restarting in this case). In development, this is:</p>
+<div class="highlight"><pre>$ bundle exec rails s
+</pre></div>
+<p>In production:</p>
+<div class="highlight"><pre>$ sudo service unicorn_taproot stop
+$ sudo service unicorn_taproot start
+</pre></div>
+<p>Now you should be up and running!</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

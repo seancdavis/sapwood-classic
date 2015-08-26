@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Resources</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="active">
+          <a href="../building_content.html">Building Content</a>
+            <ul class="subnav">
+                <li><a href="pages.html">Pages</a></li>
+                <li><a class="active" href="resources.html">Resources</a></li>
+                <li><a href="menus.html">Menus</a></li>
+                <li><a href="forms.html">Forms</a></li>
+                <li><a href="media_library.html">Media Library</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="site_settings.html">Site Settings</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../writing_code.html">Writing Code</a>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Resources</h1>
+  </header>
+  <div class="page-content"><p>Resources are a new addition to Sapwood as of v1.3. They are <em>content-rich metadata that support a content-rich, many-to-many relationship with pages</em>.</p>
+
+<p>In other words <em>resources</em> provide the missing link to be able to create a many-to-many association among pages. </p>
+
+<h2 id="a-little-background">A Little Background</h2>
+
+<p>To give you some background, I ran into two scenarios in which the only thing holding someone back from using Sapwood was that they couldn&#39;t have content-rich associations among pages.</p>
+
+<p>In the first scenario, all the site needed were <em>tags</em>. They had a blog and needed to tag articles. That was simple enough, and I had planned to add a rigid <em>tag</em> feature in 1.3 or 1.4 anyways.</p>
+
+<p>The second scenario followed quickly. That site needed <em>recipes</em>, where <em>recipe</em> would have been a template, and the <em>recipes</em> its pages. Each recipe was to have many ingredients. There were two quirks:</p>
+
+<p>First, the ingredients needed to link to one another such that there could exist a view that would list all the recipes one ingredient had. This meant that the traditional one-to-many relationship would not suffice (because the ingredient needed to be associated with more than one recipe).</p>
+
+<p>Second, while each ingredient needed that link, the association between the ingredient and a recipe would have a varying <em>quantity</em>. In other words, not only did the ingredient need unique data, but the <em>association</em> between the recipe and the ingredient also needed unique data.</p>
+
+<p>In Rails, this is a straightforward problem. We would create a model called <code>RecipeIngredient</code> and it would hold the association along with the quantity.</p>
+
+<p>To build it into Sapwood was a challenge, but it worked! Now, resources handle that many-to-many association for you. And, what&#39;s better is they eliminate the need for any hard-coded tag feature, because you get to determine when and how you want to use tags.</p>
+
+<h2 id="resource-types">Resource Types</h2>
+
+<p>Adding resources works very similarly to templates. In that way, a <em>resource</em> is to a <em>page</em> as a <em>resource type</em> is to a <em>template</em>.</p>
+
+<p>So, the first thing you need to do is define your resource type, say <em>Tag</em>.</p>
+
+<h3 id="creating-resource-types">Creating Resource Types</h3>
+
+<p>You&#39;ll notice that resource types act very similarly to templates, with fewer features.</p>
+
+<h4 id="title-&amp;-method-name">Title &amp; Method Name</h4>
+
+<p>The title is an arbitrary name for the resource type, although it is used to generate the method name if you leave that blank. For example, <em>Tag</em> would be your <code>title</code> and then <em>tag</em> would be filled in as your <code>method_name</code>.</p>
+
+<p>The method name is used to access the resources of this resource type from any given page. See <em>Accessing Resources</em> below for more info.</p>
+
+<h4 id="show-view,-order-method-&amp;-direction">Show View, Order Method &amp; Direction</h4>
+
+<p>Just like templates, you can choose for resource types to have a show view. Here&#39;s how it works:</p>
+
+<p>If there is no root-level page with a <code>slug</code> matching the resource type&#39;s method name, then there will be a view at <code>yoursite.com/[plural_method_name]</code> which is meant to be the index view for all resources of that resource type. And your view template should follow that structure.</p>
+
+<p>For example, if you have a <em>Tag</em> resource type with a show view, then you will have a view at <code>yoursite.com/tags</code>, which will look for a view file named <code>tags.html.erb</code>.</p>
+
+<p>Furthermore, each resource created for that resource type will be available at <code>yoursite.com/[plural_method_name]/[resource_slug]</code>, assuming, once again, there is no page with a matching path.</p>
+
+<p>This view looks for the <em>singular</em> method name. So, in our example, this would render a <code>tag.html.erb</code> view file, while your current resource would be the specific tag that had a <code>slug</code> matching the last URL segment.</p>
+
+<blockquote>
+<p><strong>Don&#39;t forget, Sapwood leaves this maintenance up to you. If you have a Tag resource, it&#39;s up to you to make sure you don&#39;t have a Tag page at the root of your site.</strong></p>
+</blockquote>
+
+<h3 id="linking-to-templates">Linking to Templates</h3>
+
+<p>Access to resources are set on templates. For example, if you have an Article template, you might want to make a Tag resource available to it. You do this in the template&#39;s settings.</p>
+
+<p>If set, for each resource type a template has access to, the page of that template will get a new tab where it can associate itself to a particular resource. This is also where the association fields are filled in, if necessary.</p>
+
+<h2 id="creating-resources">Creating Resources</h2>
+
+<p>Remember, <em>Tag</em> was a resource type. But, creating a specific tag, like <em>red</em>, would be done under the resource type in the Resources section of the builder. This is the only place they can be added (for now).</p>
+
+<h3 id="resource-fields">Resource Fields</h3>
+
+<p>Resource fields are the fields set on the resource itself, not on the association between a page and a resource.</p>
+
+<p>Like templates, resources have protected fields. But, really there are only two: <code>title</code> and <code>slug</code>. We use the <code>slug</code> to generate view URLs if necessary.</p>
+
+<p>So, for example, if you have an Ingredient resource type, you might want a URL field for that ingredient, pointing to some wiki about the ingredient.</p>
+
+<h3 id="association-fields">Association Fields</h3>
+
+<p>In contrast, association fields are the fields set on the link between the page and a resource. Sometimes, like in the case of a simple tagging system, you won&#39;t need any. Other times, like with ingredients, you might need extra data (where an ingredient might want a <em>quantity</em> field).</p>
+
+<h2 id="using-resources">Using Resources</h2>
+
+<p>When working in a view template, you know you have the <code>current_page</code> object. That object has metaprogrammed methods on it relating to any resource to which it has access.</p>
+
+<p>For example, if an article is allowed to have tags, then you can get to a particular article&#39;s tags by calling <code>current_page.tags</code>.</p>
+
+<p>What you are actually returned is an object representing the <em>association</em>, not the resource itself. However, the association has access to its resource&#39;s methods. So, if you have a recipe and you want its ingredients, this will work:</p>
+<div class="highlight"><pre><span class="cp">&lt;%</span> <span class="n">current_page</span><span class="o">.</span><span class="n">recipes</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  &lt;li&gt;</span>
+<span class="x">    </span><span class="cp">&lt;%=</span> <span class="n">r</span><span class="o">.</span><span class="n">quantity</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;%=</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">title</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  &lt;/li&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+<p>Notice that this is accessing <code>quantity</code>, which would be an association field, and <code>title</code>, which would be a resource field.</p>
+
+<hr>
+
+<p>As usual, if you have any questions about resources, <a href="https://github.com/seancdavis/sapwood/issues/new">ask me</a>.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

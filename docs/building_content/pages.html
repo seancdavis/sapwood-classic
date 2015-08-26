@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Pages</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="active">
+          <a href="../building_content.html">Building Content</a>
+            <ul class="subnav">
+                <li><a class="active" href="pages.html">Pages</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="menus.html">Menus</a></li>
+                <li><a href="forms.html">Forms</a></li>
+                <li><a href="media_library.html">Media Library</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="site_settings.html">Site Settings</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../writing_code.html">Writing Code</a>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Pages</h1>
+  </header>
+  <div class="page-content"><p>As mentioned in <a href="../building_content.html">the chapter introduction</a>, the structure of a site is almost entirely built around <em>pages</em>. And that determines a good portion of the code you will write.</p>
+
+<h2 id="introducing-page-templates">Introducing Page Templates</h2>
+
+<p>We make the fields within our pages dynamic by applying <em>templates</em> to them. This follows similar logic to WordPress&#39; <a href="http://codex.wordpress.org/Post_Types">post types</a>.</p>
+
+<p>Templates give you the ability to define a custom (dynamic) set of attributes on a page. They also have some built-in helpers to help you build out the structure of your site in a way that makes sense to your editors.</p>
+
+<p>Each template has its own <em>view file</em> (in your code), as necessary. We talk more about this in <a href="../writing_code/rendering_process.html">the rendering process section</a>.</p>
+
+<h2 id="creating-page-templates">Creating Page Templates</h2>
+
+<p>Any of the following scenarios present the need for a template:</p>
+
+<ul>
+<li>You want to create a page (or pages) with a unique set of fields. For example, an <em>Article</em> page type might have a <em>featured image</em>.</li>
+<li>You want a certain page type to only be allowed to be created under one of your root-level pages.</li>
+<li>You need the same fields as another page, but a different layout (view file).</li>
+</ul>
+
+<p>Try to keep it as simple as possible. Only create a template when you actually need one. And <strong>pay attention to all of the settings for your template.</strong> Check out the bottom of this doc for an example.</p>
+
+<h3 id="creating-a-new-template">Creating A New Template</h3>
+
+<p>Creating a new template happens in the templates section. Creating a new page, however, happens in the pages section, which is based strictly on the options you have added for your templates. In other words, you can only create pages of a certain template based on where you said that could happen.</p>
+
+<p>Sapwood was built in this way because it helps your editors navigate the page portion of the builder in the site tree structure.</p>
+
+<h2 id="template-fields">Template Fields</h2>
+
+<p>The <em>form fields</em> are the dynamic fields for each page created with that particular template. Some fields are protected because they are columns on the database, but you can still rename and reorder them.</p>
+
+<p>When you create a dynamic field, it creates a <em>method on the <code>Page</code> object with the <code>name</code></em> you give it. For example, if a page needs a sidebar, you would create a field called <em>Sidebar</em> with a name <code>sidebar</code>. Then, when you mark up your view file, you could get to that sidebar doing something like this:</p>
+<div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">current_page</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">html_safe</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+<p>Every page has an associated <em>Developer Help</em> page that lists the available attributes on the page and the values they would return.</p>
+
+<h3 id="grouping-fields">Grouping Fields</h3>
+
+<p>Sometimes templates need a lot of custom fields. That gets messy for one form. Sapwood give you the ability to group fields. Each group essentially becomes its own <em>Settings</em> form on any page created with that template.</p>
+
+<p>For example, let&#39;s say you have a <em>Location</em> template. It would probably need an address, along with lots of other data. You might consider creating an <em>Address</em> group so the address fields become their own form, making it easier to edit data for that page.</p>
+
+<h3 id="file-fields">File Fields</h3>
+
+<p>The <code>file</code> field type is unique to the rest of the fields. Other field types just create text-based attributes cached on the page object. But the <code>file</code> field actually creates an association to a <code>Document</code> object.</p>
+
+<blockquote>
+<p>This isn&#39;t a true <a href="http://guides.rubyonrails.org/association_basics.html">Active Record Association</a>, but it acts like one.</p>
+</blockquote>
+
+<p>Therefore, if you have a <code>file</code> field on your page, then calling that field&#39;s <code>name</code> only gives you the <code>Document</code> object.</p>
+
+<p>For example, let&#39;s say your template has an <code>image</code> field. If you were to call it like other fields on pages of the same template, you would do:</p>
+<div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">current_page</span><span class="o">.</span><span class="n">image</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+<p>In this case, that returns</p>
+<div class="highlight"><pre>=&gt; #&lt;Document:0x007f044c765500&gt;
+</pre></div>
+<p>To get to the <a href="http://markevans.github.io/dragonfly">Dragonfly</a> image (file) object, you need to call <code>document</code> on that document, and then you have access to Dragonfly&#39;s methods (which is what Sapwood uses for managing files).</p>
+
+<p>See <a href="http://markevans.github.io/dragonfly/models/#urls">this section</a> in Dragonfly&#39;s docs for info on some of the methods available to you.</p>
+
+<p>But, if you wanted the original image, then you&#39;d need to do something like this:</p>
+<div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">viewer_image</span><span class="p">(</span><span class="n">current_page</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+<h2 id="template-options">Template Options</h2>
+
+<p>Templates have several built-in features that help you to build a specific content structure. See the options below. We&#39;ll use <em>News</em> and <em>Article</em> templates as examples throughout to demonstrate which options might be selected.</p>
+
+<h3 id="title">Title</h3>
+
+<p>The <code>title</code> an arbitrary name for the template that is only used on the UI in the builder.</p>
+
+<h3 id="template-filename">Template Filename</h3>
+
+<p>This determines the <em>view file</em> you will create, <strong>without the <code>.html.erb</code> extension.</strong></p>
+
+<p>For example, if you have a <em>News</em> template, you would probably want this setting to be <code>news</code>, which would mean your view file would be <code>news.html.erb</code>.</p>
+
+<h3 id="can-have-root-pages?">Can have root pages?</h3>
+
+<p>If this is selected, then when you are on the root listing of pages, you will see a button for a creating a page with that template (assuming other options do not override this).</p>
+
+<p>For example, for a <em>News</em> template, you would likely want it to have root pages, while an <em>Article</em> <strong>would not</strong>, since you would want those pages to only be created under the news template.</p>
+
+<h3 id="child-templates">Child Templates</h3>
+
+<p>Child templates determine which page templates can be created <em>from</em> this page template.</p>
+
+<p>For example, your <em>News</em> template would allow <em>Article</em> pages to be created as children, while an <em>Article</em> would probably not have any children.</p>
+
+<h3 id="order-method-&amp;-direction">Order Method &amp; Direction</h3>
+
+<p>You can set up the direction to order pages of this template. This won&#39;t be necessary all the time.</p>
+
+<p>For example, this is irrelevant for <em>News</em>, as you likely only have one page created with the <em>News</em> template. But with the <em>Article</em> template, you might want its pages ordered by <code>publish_date</code> in <code>desc</code> order.</p>
+
+<h3 id="limiting-pages">Limiting Pages</h3>
+
+<p>You can limit the number of pages created with this page template. This comes in handy when that number is predictable.</p>
+
+<p>For example, you only need one page for <em>News</em>, so you would check the box to limit and put <code>1</code> in the <em>Max Pages</em> field. But for <em>Article</em> pages, there would be no limit, since you can have an unlimited number of articles (in most cases).</p>
+
+<h3 id="has-show-view">Has Show View</h3>
+
+<p>Not every template&#39;s pages will want show views. For example, let&#39;s say you have a <em>Home</em> template that is allowed to have <em>Feature</em> pages below it. You don&#39;t necessarily want the <em>Feature</em> pages to have their own view (meaning their own, unique URL). Unchecking this option means the page has no direct URL to it. It also removes it from automatic sitemap generation.</p>
+
+<h3 id="can-have-documents">Can Have Documents</h3>
+
+<p>Many times you need several images or documents to be associated with a single page. Previously, you could still accomplish this by having a page act as a file, but now we can directly associate them. Selecting this option will give you a <em>Media</em> tab for pages of the template. Media you add to the Media tab goes into your site&#39;s media library, but it also associated with the page.</p>
+
+<p>You can simply call <code>current_page.documents</code> to get the collection of associated <code>Document</code> objects.</p>
+
+<blockquote>
+<p>The <em>Developer Help</em> page is available for every template and gives you a synopsis of the options set up for that template, semantically.</p>
+</blockquote>
+
+<hr>
+
+<p>It can be a little confusing, so let&#39;s consider a couple examples.</p>
+
+<h2 id="example:-home-page-slider">Example: Home Page Slider</h2>
+
+<p>In this case, consider:</p>
+
+<blockquote>
+<p>We have a home page that has a dynamic feature slider that can have an unlimited number of features.</p>
+</blockquote>
+
+<p>Since features should be dynamic, they should be their own template. So, we&#39;d create a <em>Feature</em> template with these <em>extra</em> fields:</p>
+
+<ul>
+<li><code>image</code> (the image to display in the slider)</li>
+<li><code>button_text</code> (the label for a call-to-action button)</li>
+<li><code>url</code> (the url or path for the call-to-action button)</li>
+</ul>
+
+<p>For all the other fields, we can use the other fields we always have (title, body, description, etc.).</p>
+
+<p>Now, even if the home page doesn&#39;t have any unique fields, what is unique to it is that it is the only page from which features can be created. So, we should create a <em>Home</em> template without any unique fields. But you would select <em>Feature</em> as a child template of <em>Home</em>.</p>
+
+<p>Then, you create your home page from your home template form. And, from that you can create features.</p>
+
+<p>See, not too difficult.</p>
+
+<p>Another trick to consider here is that <strong>not every page needs a view template</strong>. You are forced to choose a template, but you might not use it. In the case of features, they probably don&#39;t have their own url, right? But they are still pages. <em>Just because you have a page doesn&#39;t mean the page has to have a url</em>.</p>
+
+<h2 id="example:-site-structure">Example: Site Structure</h2>
+
+<p>Let&#39;s look at a site overall, with some more typical components. Let&#39;s say our requirements are:</p>
+
+<ul>
+<li>home page with feature slider</li>
+<li>blog posts</li>
+<li>about page with subpages, including a team page that lists team members&#39; photos and bios</li>
+<li>contact form</li>
+</ul>
+
+<p>Here&#39;s just one approach for configuring the templates on this site:</p>
+<div class="highlight"><pre>&gt; Home (limit pages, max: 1)
+
+    &gt; Feature (no limit, no show view)
+
+&gt; About Root (limit pages, max: 1)
+
+    &gt; About (no limit)
+
+        &gt; Team (limit pages, max: 1)
+
+            &gt; Team Member (no limit, no show view)
+
+&gt; News (limit pages, max: 1)
+
+    &gt; Article (no limit)
+
+&gt; Contact (limit pages, max: 1)
+</pre></div>
+<p>There are a few items to make note of if this scenario.</p>
+
+<p>First, you see that all of our root-level templates have a max of 1 page. The advantage to this is that once the first page is created, there won&#39;t be any more allowed. This makes it easier on your editors, because then they won&#39;t be able to create any root-level pages. It also makes your navigation easier to build.</p>
+
+<p>Also note the <em>About Root</em> can be difficult to name. I say it doesn&#39;t matter too much because after you create the first one, you don&#39;t have to mess with it again. It&#39;s better to save semantic naming the pages you will continue to create throughout the life of the site.</p>
+
+<p>Also, note that you <em>could</em> use the <em>About</em> template in both cases, and say <em>About</em> is an child template of itself. This makes it infinitely nestable. But, there are a few negative effects to this. First, you will still be able to create root pages, and second you will be able to infinitely nest about pages, which could be confusing to your editors.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

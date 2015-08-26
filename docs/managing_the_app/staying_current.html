@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Staying Current</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="">
+          <a href="../writing_code.html">Writing Code</a>
+        </li>
+        <li class="active">
+          <a href="../managing_the_app.html">Managing the App</a>
+            <ul class="subnav">
+                <li><a class="active" href="staying_current.html">Staying Current</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Staying Current</h1>
+  </header>
+  <div class="page-content"><p>The <a href="https://github.com/seancdavis/sapwood">Sapwood code</a> is hosted publicly on GitHub. Its various branches are used for managing different segments or versions of the application.</p>
+
+<p>If you have followed <a href="../getting_started/production_environment.html">this guide</a> to setting up your production environment, then you are likely working from the <code>release</code> branch (if you&#39;re not, you should be).</p>
+
+<h2 id="updating-production">Updating Production</h2>
+
+<p>Because the process of updating sapwood is somewhat involved, we&#39;ve packaged up the tasks in a rake task so it&#39;s easy for you to manage.</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake sapwood:update
+</pre></div>
+<p>This will bring your app to the current version. It essentially just pulls the <code>release</code> branch, and then reloads everything it needs to reload.</p>
+
+<p>If you run in to problems here, you may have to manually restart some services.</p>
+
+<h3 id="sidekiq">Sidekiq</h3>
+
+<p>We use <a href="http://sidekiq.org/">Sidekiq</a> to manage our background processes. If pulling project repos is not working, it&#39;s likely this services is not running. There is a rake task for restarting sidekiq.</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake sapwood:restart_sidekiq
+</pre></div>
+<h3 id="rails-server">Rails Server</h3>
+
+<p>If some changes didn&#39;t take effect, or you can&#39;t get to the site, you probably want to restart your rails server while there is a <code>restart_server</code> command, you should probably stop and start it to be safe.</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake sapwood:stop_server
+$ RAILS_ENV=production bundle exec rake sapwood:start_server
+</pre></div>
+<blockquote>
+<p><strong>It is important that when you update the production application, you inform your team and ensure all development environments are up to date.</strong> You will want to always ensure your development and production environments are using the same version (meaning sharing the latest commit to the stable branch).</p>
+</blockquote>
+
+<h2 id="updating-development">Updating Development</h2>
+
+<p>In development, you can run the update rake task (without the <code>RAILS_ENV=production</code>), but it doesn&#39;t give you much in development. It&#39;s easier to just pull the repo and then restart your rails server.</p>
+<div class="highlight"><pre>$ git pull origin release
+$ bundle exec rails s
+</pre></div></div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

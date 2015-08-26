@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Production Environment</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="active">
+          <a href="../getting_started.html">Getting Started</a>
+            <ul class="subnav">
+                <li><a class="active" href="production_environment.html">Production Environment</a></li>
+                <li><a href="development_environment.html">Development Environment</a></li>
+                <li><a href="the_configuration_file.html">The Configuration File</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="">
+          <a href="../writing_code.html">Writing Code</a>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Production Environment</h1>
+  </header>
+  <div class="page-content"><p>In the <a href="../communicative_workflow.html">communicative workflow</a> chapter, you will learn that all content revolves around one production instance of the app. It is both the place you build the content structure of your sites, but it is also the app that hosts the live versions of the sites you build.</p>
+
+<blockquote>
+<p>This guide is really only for one developer on your team. You should only need one production instance of Sapwood, and therefore you only need to do this one time. If this is already setup for your team, then head over and get <a href="development_environment.html">your local environment up and running</a>.</p>
+</blockquote>
+
+<p>Let&#39;s look at how to setup your production server, and get Sapwood running on the server.</p>
+
+<p>Like the rest of these guides, this assumes you know your way around a Ruby on Rails project. This section, in particular, assumes you&#39;ve had to deploy a RoR project.</p>
+
+<h2 id="server-requirements">Server Requirements</h2>
+
+<h3 id="choosing-a-server">Choosing A Server</h3>
+
+<p>If your experience in deploying projects is strictly using Heroku or a shared environment like you have with Bluehost, then you&#39;ll need to change a bit here. This guide covers installing Sapwood on <strong>a dedicated private server</strong>. Shared servers and Heroku are not supported.</p>
+
+<p>If that sounds expensive, it&#39;s because it usually is. Fortunately, there are some awesome companies like <a href="https://www.digitalocean.com">Digital Ocean</a> popping up. Digital Ocean offers dedicated, virtual private servers <a href="https://www.digitalocean.com/pricing">starting at $5 per month</a>.</p>
+
+<h3 id="operating-system">Operating System</h3>
+
+<p>Sapwood will work wherever you can run a Ruby on Rails project. For reference, I develop on Mac OS X Yosemite, while my production servers run Ubuntu 14.04.</p>
+
+<p><strong>For this guide, we&#39;re going to assume you&#39;re working with an Ubuntu/Debian installation.</strong> Obviously, you can use Sapwood in production with other operating systems, but you&#39;ll have to find the equivalent packages.</p>
+
+<h3 id="minimum-specifications">Minimum Specifications</h3>
+
+<p>The minimum specs for your server are somewhat open-ended. Obviously, the faster the better, but here&#39;s what I am running.</p>
+
+<ul>
+<li>Ubuntu 14.04 x64</li>
+<li>1GB RAM</li>
+<li>4GB Swapfile</li>
+<li>30GB SSD Disk</li>
+<li>1 CPU</li>
+</ul>
+
+<blockquote>
+<p>While Rails is scalable, it takes some extra configuration with your web server and perhaps multiple machines. This isn&#39;t shown here and a concurrency scenario hasn&#39;t yet been tested.</p>
+
+<p>Therefore, if you have a high-traffic site you are going to build using Sapwood, I&#39;d love to hear your story and the obstacles you overcame.</p>
+
+<p>This also means Sapwood doesn&#39;t guarantee mileage with high-traffic sites. One production instance of Sapwood is known to be running 5 small sites, and still performing (subjectively) well. Caching and concurrency are on the roadmap.</p>
+</blockquote>
+
+<h2 id="server-preparation">Server Preparation</h2>
+
+<h3 id="required-packages/programs">Required Packages/Programs</h3>
+
+<p>At this point, we&#39;re assuming you know how to prepare a production server.</p>
+
+<blockquote>
+<p>If you&#39;ve never done this sort of thing before, then check out my <a href="https://github.com/rocktree/ripen">one-command install script</a>.</p>
+</blockquote>
+
+<p>You will need the ensure the following is true on your machine.</p>
+
+<ul>
+<li><code>deploy</code> user with full <code>sudo</code> privileges</li>
+<li>ssh access to the server on any port</li>
+</ul>
+
+<p>We need a handful of packages. You&#39;re probably best to just run this command:</p>
+<div class="highlight"><pre>$ sudo apt-get -y install build-essential zlib1g-dev libssl-dev libreadline-gplv2-dev python-software-properties make libxml2 libxml2-dev libxslt1-dev imagemagick libmagickwand-dev nodejs libmagic-dev
+</pre></div>
+<p>In addition, you need the following programs.</p>
+
+<ul>
+<li><a href="http://git-scm.com/">Git</a></li>
+<li><a href="http://nginx.org/">Nginx</a></li>
+<li><a href="http://www.postgresql.org/">PostgreSQL Server</a></li>
+<li><a href="https://www.ruby-lang.org/en/">Ruby 2.1</a></li>
+<li><a href="http://bundler.io/">Bundler</a></li>
+</ul>
+
+<h3 id="configure-git">Configure Git</h3>
+
+<p>It&#39;s easiest if your server has its own Git identity. We recommend creating a unique key for each server that has a unique sapwood installation, as it makes them easier to manage and it&#39;s a little more secure.</p>
+
+<p>First, ensure you don&#39;t already have a key.</p>
+<div class="highlight"><pre>$ ls -al ~/.ssh
+</pre></div>
+<p>If you don&#39;t see an <code>id_rsa</code> and a <code>id_rsa.pub</code> file in there, then you&#39;re good to go.</p>
+
+<p>Following <a href="https://help.github.com/articles/generating-ssh-keys">the GitHub tutorial</a>, let&#39;s generate the key.</p>
+<div class="highlight"><pre>$ ssh-keygen -t rsa -C [email_address]
+</pre></div>
+<p>The email address doesn&#39;t actually have to be an email address, especially for
+a deploy key. You can make it unique to your server, like the following example.</p>
+<div class="highlight"><pre>$ ssh-keygen -t rsa -C rtcms01
+</pre></div>
+<p>You&#39;ll see the following message.</p>
+<div class="highlight"><pre>Enter file in which to save the key (/home/deploy/.ssh/id_rsa):
+</pre></div>
+<p>Just hit <code>enter</code>. That&#39;s where we want that file.</p>
+
+<p>Then it asks you to create a passphrase for the private key.</p>
+<div class="highlight"><pre>Enter passphrase (empty for no passphrase):
+</pre></div>
+<blockquote>
+<p><em>NOTICE: While it is typically recommended you create the passphrase, you want to skip that step here so Git doesn&#39;t prompt us when we&#39;re running commands behind the scenes.</em></p>
+</blockquote>
+
+<p>Next, you&#39;ll want to ensure your server&#39;s Git identity is configured. You just need a fake name and a fake email address. Something like the following will work.</p>
+<div class="highlight"><pre>$ git config --global user.name &quot;rtcms01&quot;
+$ git config --global user.email &quot;rtcms01@rocktree.us&quot;
+</pre></div>
+<p>The last thing you should do is add that key as a deploy key on your git
+server. This step could differ greatly depending on the application you use to
+manage your git repositories.</p>
+
+<h2 id="setup-postgresql">Setup PostgreSQL</h2>
+
+<h3 id="install-postgresql">Install PostgreSQL</h3>
+
+<p>You&#39;ll want to do this on your production server, since your development server doesn&#39;t use a database.</p>
+<div class="highlight"><pre>$ sudo apt-get -y install postgresql libpq-dev postgresql-contrib
+</pre></div>
+<h3 id="add-database-user">Add Database User</h3>
+
+<p>Next, let&#39;s add the database user. Make note of the username and password you are using.</p>
+<div class="highlight"><pre>$ sudo -u postgres psql
+
+postgres=# CREATE ROLE [db_user] LOGIN CREATEDB PASSWORD &#39;[db_pass]&#39;;
+</pre></div>
+<h3 id="open-for-remote-connections">Open for Remote Connections</h3>
+
+<p>The communicative workflow is all about being able to talk with the production database from your development environment(s). To do that, we need to open up PostgreSQL to allow for remote connections.</p>
+
+<p>There are two config files you need to adjust:</p>
+
+<p class="file"><code>/etc/postgresql/9.3/main/pg_hba.conf</code></p>
+<div class="highlight"><pre># add this to the bottom of the file
+host    all             all             0.0.0.0/0               trust
+/etc/postgresql/9.3/main/postgresql.conf
+# change this
+listen_addresses = &#39;localhost&#39;          # what IP address(es) to listen on;
+
+# to this
+listen_addresses = &#39;*&#39;          # what IP address(es) to listen on;
+</pre></div>
+<p>Then enable 5432 port if you&#39;re using ufw:</p>
+<div class="highlight"><pre>$ sudo ufw allow 5432
+</pre></div>
+<p>And restart postgres:</p>
+<div class="highlight"><pre>$ sudo service postgresql restart
+</pre></div>
+<h2 id="application-setup">Application Setup</h2>
+
+<p>Now you have a working server and it&#39;s time to install Sapwood and configure some other items on your server.</p>
+
+<h3 id="clone-repository">Clone Repository</h3>
+
+<p>First, let&#39;s make a directory for our application.</p>
+<div class="highlight"><pre>$ mkdir ~/apps
+</pre></div>
+<blockquote>
+<p><strong>WARNING: While you can place the project elsewhere if you know what you&#39;re doing, the location of the project is tied to a few of these steps.</strong></p>
+</blockquote>
+
+<p>Next, clone the repo from GitHub.</p>
+<div class="highlight"><pre>$ cd ~/apps
+$ git clone https://github.com/seancdavis/sapwood.git -b release
+</pre></div>
+<blockquote>
+<p>Note: This is moving you directly to the <code>release</code> branch of the project. This is the latest stable release on the current major version.</p>
+</blockquote>
+
+<h3 id="configure-database">Configure Database</h3>
+
+<p>First, configure the database to your environment (<code>production</code> in this case).</p>
+<div class="highlight"><pre>$ cp config/database.sample.yml config/database.yml
+$ vim config/database.yml
+</pre></div>
+<blockquote>
+<p>Note: You can use whichever editor you&#39;d prefer. We like vim, but usually nano is easier for beginners.</p>
+</blockquote>
+
+<p>We need a production database, so your config should look something like this:</p>
+
+<p class="file"><code>config/database.yml</code></p>
+<div class="highlight"><pre><span class="l-Scalar-Plain">production</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgresql</span>
+  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">db_name</span><span class="p-Indicator">]</span>
+  <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">username</span><span class="p-Indicator">]</span>
+  <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">password</span><span class="p-Indicator">]</span>
+  <span class="l-Scalar-Plain">encoding</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">unicode</span>
+  <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
+  <span class="l-Scalar-Plain">pool</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>
+  <span class="l-Scalar-Plain">timeout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5000</span>
+</pre></div>
+<p>Here, replace <code>[username]</code>, <code>[password]</code> and <code>[db_name]</code> with your values.</p>
+
+<blockquote>
+<p>Note: You&#39;re likely going to need to change the socket path from the default. If you&#39;re following this tutorial, then the socket path shown above should work fine.</p>
+</blockquote>
+
+<h3 id="configure-app-settings">Configure App Settings</h3>
+
+<p>Next, let&#39;s change the general application config.</p>
+
+<blockquote>
+<p><em>DEPRECATION NOTICE: The config file will be deprecated and built into the app in an upcoming release.</em></p>
+</blockquote>
+<div class="highlight"><pre>$ cp config/sapwood.sample.yml config/sapwood.yml
+$ vim config/sapwood.yml
+</pre></div>
+<p>Add a value for all the blank values, and customize anything you wish. You can learn more about this file <a href="the_configuration_file.html">here</a>.</p>
+
+<h3 id="install-gems">Install Gems</h3>
+
+<p>Install the gems using Bundler.</p>
+<div class="highlight"><pre>$ bundle install --without development test
+</pre></div>
+<h3 id="create-database">Create Database</h3>
+
+<p>Create and migrate the database.</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake db:create
+$ RAILS_ENV=production bundle exec rake db:migrate
+</pre></div>
+<h3 id="precompile-assets">Precompile Assets</h3>
+
+<p>Precompile the assets.</p>
+<div class="highlight"><pre>$ RAILS_ENV=production bundle exec rake assets:precompile
+</pre></div>
+<h3 id="configure-unicorn-and-nginx">Configure Unicorn and Nginx</h3>
+
+<p>Move unicorn script to its proper location and update.</p>
+<div class="highlight"><pre>$ sudo cp lib/deploy/unicorn_init /etc/init.d/unicorn_sapwood
+$ sudo cp lib/deploy/unicorn.rb config/unicorn.rb
+$ sudo update-rc.d -f unicorn_sapwood defaults
+</pre></div>
+<p>Start the unicorn workers (your rails server).</p>
+<div class="highlight"><pre>$ mkdir -p tmp/pids
+$ sudo service unicorn_sapwood start
+</pre></div>
+<p>Add and edit the nginx configuration.</p>
+<div class="highlight"><pre>$ sudo cp lib/deploy/nginx /etc/nginx/sites-enabled/sapwood
+$ sudo rm /etc/nginx/sites-enabled/default
+$ sudo vim /etc/nginx/sites-enabled/sapwood
+</pre></div>
+<p>You&#39;ll want to change and uncomment the following line to reflect the domain name you&#39;re going to use.</p>
+
+<p class="file"><code>/etc/nginx/sites-enabled/sapwood</code></p>
+<div class="highlight"><pre><span class="c1"># server_name cms.yourdomain.com;</span>
+</pre></div>
+<blockquote>
+<p>This is the domain name to the builder portion of the app, NOT a site you&#39;re going to create using Sapwood.</p>
+</blockquote>
+
+<p>Restart nginx.</p>
+<div class="highlight"><pre>$ sudo service nginx restart
+</pre></div>
+<h2 id="give-it-a-whirl">Give It A Whirl</h2>
+
+<p>At this point, you should be up and running in production. If you hit a bump along the way, <a href="https://github.com/seancdavis/sapwood/issues/new">let us know</a>. Otherwise, you&#39;re off to the races. Check out some of the other docs on how to use sapwood.</p>
+
+<h2 id="this-was-a-lot!!">THIS WAS A LOT!!</h2>
+
+<p>It is a lot to write and maintain and it&#39;s a lot to ask of you to do manually to get this thing up and running. I&#39;d love to simplify these docs to essentially enable our users to install with just a few commands.</p>
+
+<p>If you&#39;re up for the challenge, I&#39;m looking to package the development and production installation processes into just a few scripts using a similar approach as we have with <a href="https://github.com/rocktree/ripen">Ripen</a>.</p>
+
+<p><a href="mailto:sean@rocktree.us">Send me a note</a> if you&#39;re interested.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Building Content</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../index.html">features</a></li>
+      <li class="active"><a href="../docs.html">docs</a></li>
+      <li><a href="../news.html">news</a></li>
+      <li><a href="../contributing.html">contribute</a></li>
+      <li><a href="../ideas.html">ideas</a></li>
+      <li><a href="../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="active">
+          <a href="building_content.html">Building Content</a>
+            <ul class="subnav">
+                <li><a href="building_content/pages.html">Pages</a></li>
+                <li><a href="building_content/resources.html">Resources</a></li>
+                <li><a href="building_content/menus.html">Menus</a></li>
+                <li><a href="building_content/forms.html">Forms</a></li>
+                <li><a href="building_content/media_library.html">Media Library</a></li>
+                <li><a href="building_content/users.html">Users</a></li>
+                <li><a href="building_content/site_settings.html">Site Settings</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="writing_code.html">Writing Code</a>
+        </li>
+        <li class="">
+          <a href="managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Building Content</h1>
+  </header>
+  <div class="page-content"><p>The <a href="communicative_workflow.html">Communicative Workflow</a> shows us that <strong>content determines code</strong>. When you create a site, the default code base is created for you. However, Sapwood works best if you determine your <em>content structure</em> before writing any code.</p>
+
+<h2 id="the-theory">The Theory</h2>
+
+<p>The technical theory is that by creating one large and flexible data model vs. many, smaller and more content-specific models, you cut out a significant amount of <em>potential waste</em>.</p>
+
+<p>Let&#39;s compare Sapwood to <a href="https://wordpress.org/">WordPress</a> in this regard. When you create a new WordPress site, it starts you with pages, posts and media. To use anything beyond these <a href="http://codex.wordpress.org/Post_Types">post types</a>, you need a plugin.</p>
+
+<blockquote>
+<p>By the way, I don&#39;t dislike the WordPress structure. It is built to be able to spin up sites in a snap. Sapwood simply has a different purpose, which is to cut out waste and facilitate development when building customized and flexible sites.</p>
+</blockquote>
+
+<p>So, what does every website have? <em>Pages</em>. No, seriously, that&#39;s it.</p>
+
+<p>Most other components are (or <em>could be</em>) extensions of a page. I found in creating sites using rails that even when I tried to cut out waste, I was still building different versions of the same thing repeatedly. These things (models) just had different names and a different fields.</p>
+
+<p>On top of that, there tended to be models that functioned different from pages, but existed in most of the sites I built - forms and files.</p>
+
+<p>If a site required anything beyond that, it&#39;s usually because it was an <em>app</em> (vs. a <em>site</em>), and needed a completely different approach.</p>
+
+<blockquote>
+<p>I am developing <a href="https://github.com/rocktree/cambium">a ruby gem</a> to speed up <em>app</em> development for projects that aren&#39;t <em>eligible</em> for Sapwood.</p>
+</blockquote>
+
+<h2 id="it&#39;s-a-little-weird">It&#39;s a Little Weird</h2>
+
+<p>I understand it&#39;s an odd concept to get used to, but I think you&#39;ll like it. It cuts out a significant amount of waste in the development process and let&#39;s you focus on presentation, which means you end up with a better-looking site that acts essentially the same as it would have had you built a million different data models. But it also let&#39;s you get on the command line and work in your favorite editor -- it still <em>feels</em> like developing.</p>
+
+<hr>
+
+<p>The sections in this chapter teach the nuances of the content structure of a site.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

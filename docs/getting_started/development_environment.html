@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Development Environment</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="active">
+          <a href="../getting_started.html">Getting Started</a>
+            <ul class="subnav">
+                <li><a href="production_environment.html">Production Environment</a></li>
+                <li><a class="active" href="development_environment.html">Development Environment</a></li>
+                <li><a href="the_configuration_file.html">The Configuration File</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="">
+          <a href="../writing_code.html">Writing Code</a>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Development Environment</h1>
+  </header>
+  <div class="page-content"><p>Sapwood works best when you follow the <a href="../communicative_workflow.html">communicative workflow</a>. This means we have one production server that manages and hosts the content, along with one or more development environments using that content in their own instance.</p>
+
+<p>It makes more sense to first have a production instance running. If you haven&#39;t installed your production server yet, <a href="production_environment.html">refer to that section</a>. If you are just installing a development instance to play around with Sapwood, it will work completely fine in that capacity.</p>
+
+<p>Let&#39;s look at how to get a development environment setup.</p>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>Any computer will work fine, as long as you can run ruby projects. For the sake of making this article brief, we&#39;re going to assume <strong>you know how to run a Ruby on Rails application on your machine.</strong> This also means that Windows is not the ideal operating system.</p>
+
+<p>You don&#39;t need a ton of power or space to run this application, especially since your assets should be served remotely. This is what you will need:</p>
+
+<ul>
+<li>Ruby 2.1</li>
+<li>Git</li>
+<li>ImageMagick</li>
+<li>Qt</li>
+</ul>
+
+<p>If you have all the packages required to use the programs listed above, then you should be good to go.</p>
+
+<h2 id="clone-repo">Clone Repo</h2>
+
+<p>You likely have a directory in which you store your web projects. If you don&#39;t, it really doesn&#39;t matter where you decide to put the project. Most people create a directory within their home directory, called whatever they prefer -- <code>sites</code>, <code>www</code>, <code>code</code>, <code>apps</code>, etc. It&#39;s your choice. Go into that directory and then clone the repository from GitHub.</p>
+<div class="highlight"><pre>$ cd /path/to/your/codes
+$ git clone git@github.com:seancdavis/sapwood.git -b release
+</pre></div>
+<blockquote>
+<p>Note: Notice here we are specifically cloning the <code>release</code> branch of the sapwood repo. This branch tracks the most recent release, down to the patch.</p>
+</blockquote>
+
+<h2 id="configure-application">Configure Application</h2>
+
+<p>We have a few things to configure before we can be up and running. First, your
+database.</p>
+
+<h3 id="database">Database</h3>
+
+<blockquote>
+<p><em>NOTICE: The communicative workflow is built around sharing your product database.</em> The <a href="production_environment.html">production setup guide</a> talks about how to open your production database to allow for remote connections.</p>
+</blockquote>
+
+<p>To get started, <strong>copy</strong> <code>config/database.sample.yml</code> to <code>config/database.yml</code>.</p>
+
+<blockquote>
+<p>Be sure to <em>copy</em> and <strong>not</strong> <em>rename</em> the database file. It&#39;ll be easier to endure updates in the future.</p>
+</blockquote>
+
+<p>Modify this file to fit your team&#39;s settings.</p>
+<div class="highlight"><pre><span class="l-Scalar-Plain">development</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">postgresql</span>
+  <span class="l-Scalar-Plain">encoding</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">unicode</span>
+  <span class="l-Scalar-Plain">pool</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>
+  <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">prod_ip</span><span class="p-Indicator">]</span>
+  <span class="l-Scalar-Plain">port</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5432</span>
+  <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">db_user</span><span class="p-Indicator">]</span>
+  <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">db_pass</span><span class="p-Indicator">]</span>
+  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">db_name</span><span class="p-Indicator">]</span>
+</pre></div>
+<h3 id="app-config">App Config</h3>
+
+<p>Next is the application config. Copy <code>config/sapwood.sample.yml</code> to
+<code>config/sapwood.yml</code>. Add a value for all the blank values, and customize
+anything you wish.</p>
+
+<p><a href="the_configuration_file.html">Learn more about this file</a>.</p>
+
+<blockquote>
+<p><em>DEPRECATION NOTICE: This file is being deprecated in an upcoming release. At that time, settings will be stored in the database.</em></p>
+</blockquote>
+
+<h2 id="get-up-and-running">Get Up and Running</h2>
+
+<p>Install the gems using Bundler.</p>
+<div class="highlight"><pre>$ bundle install
+</pre></div>
+<p>This is likely where you will run into issues if you don&#39;t have all the necessary dependencies. If you can&#39;t debug the issue locally, feel free to <a href="https://github.com/seancdavis/sapwood/issues/new">create an issue</a> if you&#39;re stuck.</p>
+
+<blockquote>
+<p><strong>WARNING: You should not execute any database commands from within development, as they may destructively alter your live app.</strong></p>
+</blockquote>
+
+<h2 id="that&#39;s-it!">That&#39;s It!</h2>
+
+<p>Once your bundle is installed, your development is ready to go. Start your rails server and get to work!</p>
+
+<p>While the content will show up immediately (assuming you have a production instance running), you will need to import the git repos as needed. See <a href="../communicative_workflow/working_with_git.html">Working with Git</a> for more information.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

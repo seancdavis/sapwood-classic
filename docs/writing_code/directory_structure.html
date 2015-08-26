@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Directory Structure</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="active">
+          <a href="../writing_code.html">Writing Code</a>
+            <ul class="subnav">
+                <li><a class="active" href="directory_structure.html">Directory Structure</a></li>
+                <li><a href="static_development.html">Static Development</a></li>
+                <li><a href="previewing_your_site.html">Previewing Your Site</a></li>
+                <li><a href="hooking_into_rails.html">Hooking Into Rails</a></li>
+                <li><a href="rendering_process.html">Rendering Process</a></li>
+                <li><a href="the_service_object.html">The Service Object</a></li>
+                <li><a href="view_helpers.html">View Helpers</a></li>
+                <li><a href="stylesheets.html">Stylesheets</a></li>
+                <li><a href="javascripts.html">Javascripts</a></li>
+                <li><a href="rake_tasks.html">Rake Tasks</a></li>
+                <li><a href="custom_settings.html">Custom Settings</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Directory Structure</h1>
+  </header>
+  <div class="page-content"><p>When you create a new site and repo, it comes with a default site framework, based on rails (since it uses rails).</p>
+<div class="highlight"><pre>+ images
+    - .symlink
++ javascripts
+    - .symlink
++ stylesheets
+    - .symlink
++ templates
+    - .symlink
+    - _header.html.erb
+    - layout.html.erb
++ utilities
+    - config.yml
+    - services.rb
+    - tasks.rake
+</pre></div>
+<blockquote>
+<p>For information on <code>.symlink</code> files, see <a href="hooking_into_rails.html">this section</a>. The rest of the files and directories are introduced below.</p>
+</blockquote>
+
+<h2 id="images">Images</h2>
+
+<p>Any <em>static images</em> for your site go here. Remember, each site has its own <a href="../building_content/media_library.html">media library</a>, so the files you put here should be files that don&#39;t need to be dynamic.</p>
+
+<p>Typically, this includes images like the logos, icons, backgrounds, and so forth. However, if you want to make those items dynamic, there&#39;s no reason you couldn&#39;t grab them from the database.</p>
+
+<p>When hooked into rails, these files will go to <code>app/assets/images/viewer/[site_slug]</code>.</p>
+
+<p>Images are best accessed via Sapwood&#39;s <a href="../api_reference/view_helpers.html">view helpers</a>.</p>
+
+<h2 id="javascripts">Javascripts</h2>
+
+<p>This is where all your JavaScript files go, including any vendor files not otherwise available in Sapwood. <a href="javascripts.html">Learn more about JavaScript within sapwood</a>.</p>
+
+<p>Since this is rails, your JavaScript manifest file is called from your layout, which you can read about in the <a href="directory_structure.html#templates">templates</a> section.</p>
+
+<p>When hooked into rails, these files will go to <code>app/assets/javascripts/viewer/[site_slug]</code>.</p>
+
+<h2 id="stylesheets">Stylesheets</h2>
+
+<p>This is where all your CSS files go, including any vendor files not otherwise available in sapwood. <a href="stylesheets.html">Learn more about stylesheets in Sapwood</a>.</p>
+
+<p>Since this is rails, your CSS manifest file is called from your layout, which you can read about in the <a href="directory_structure.html#templates">templates</a> section.</p>
+
+<p>When hooked into rails, these files will go to <code>app/assets/stylesheets/viewer/[site_slug]</code>.</p>
+
+<h2 id="templates">Templates</h2>
+
+<p>The templates directory holds all of your view files for your pages. It comes with two files by default.</p>
+
+<p>The <code>templates</code> directory is symlinked to <code>app/views/viewer/[site_slug]</code>.</p>
+
+<h3 id="header-partial">Header Partial</h3>
+
+<p><code>_header.html.erb</code> is really just a placeholder for a header. In conjunction with the layout, it demonstrates how you would include a self-contained partial in another view file. It can be deleted as necessary.</p>
+
+<h3 id="layout">Layout</h3>
+
+<p>At this time, you are only given one layout for your site. So, it should be as open-ended as possible, but you may need to add variables if you need to change content within your layout on the fly.</p>
+
+<p>The layout comes named <code>layout.html.erb</code>, but you can call it whatever you want. What is more important is how it is hooked into rails, which you can read about <a href="hooking_into_rails.html">here</a>.</p>
+
+<p>While the files within this directory are symlinked, the layout is specifically symlinked to <code>app/views/layouts/viewer/[site_slug]</code>.</p>
+
+<h2 id="utilities">Utilities</h2>
+
+<p>There are some floating files that are hooked into different locations throughout the Sapwood app. They are placed in a utilities directory by default just to make your repo a little easier to manage. You can rename the directory anything you&#39;d like as long as the symlinks within the files do not change.</p>
+
+<p>We have three default utility files.</p>
+
+<h3 id="config.yml">config.yml</h3>
+
+<p>The <code>config.yml</code> file is a site-specific, static settings file. While the plan is to eventually make site settings dynamic, at this time they are kept in the code.</p>
+
+<p>This file is symlinked to <code>config/sites/[site_slug].yml</code>.</p>
+
+<h3 id="services.rb">services.rb</h3>
+
+<p>The <code>services.rb</code> file is a service object - it is a class dedicated to the unique logic to a site. <a href="the_service_object.html">Learn more about the service object</a>.</p>
+
+<p>This file is symlinked to <code>app/services/[site_slug]_viewer.rb</code>.</p>
+
+<h3 id="tasks.rake">tasks.rake</h3>
+
+<p>You may want some custom rake tasks for your site. These go in your <code>tasks.rake</code> file. They can help you run automated tasks that are unique to one site on your app. <a href="rake_tasks.html">Learn more about rake tasks</a>.</p>
+
+<p>This file is symlinked to <code>lib/tasks/viewer/[site_slug].rake</code>.</p>
+
+<hr>
+
+<p>Read on in this chapter&#39;s sections to learn the abilities of each of these components and how they can work together to help you create an awesome site.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

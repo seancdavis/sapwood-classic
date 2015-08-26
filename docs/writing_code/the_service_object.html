@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>The Service Object</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="">
+          <a href="../building_content.html">Building Content</a>
+        </li>
+        <li class="active">
+          <a href="../writing_code.html">Writing Code</a>
+            <ul class="subnav">
+                <li><a href="directory_structure.html">Directory Structure</a></li>
+                <li><a href="static_development.html">Static Development</a></li>
+                <li><a href="previewing_your_site.html">Previewing Your Site</a></li>
+                <li><a href="hooking_into_rails.html">Hooking Into Rails</a></li>
+                <li><a href="rendering_process.html">Rendering Process</a></li>
+                <li><a class="active" href="the_service_object.html">The Service Object</a></li>
+                <li><a href="view_helpers.html">View Helpers</a></li>
+                <li><a href="stylesheets.html">Stylesheets</a></li>
+                <li><a href="javascripts.html">Javascripts</a></li>
+                <li><a href="rake_tasks.html">Rake Tasks</a></li>
+                <li><a href="custom_settings.html">Custom Settings</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>The Service Object</h1>
+  </header>
+  <div class="page-content"><p>The service object (in <code>utilities/sevices.rb</code> in your site repo) is where all of your server side logic should be placed. It&#39;s where you create customized queries, keeping your view templates nice and clean.</p>
+
+<p>If you don&#39;t know about rails&#39; service objects, they are pretty fantastic. If you want to know more, <a href="http://brewhouse.io/blog/2014/04/30/gourmet-service-objects.html">peruse this article</a>.</p>
+
+<h2 id="how-it-works">How it Works</h2>
+
+<p>The service object is a ruby class named after your site. So, if your site is called <em>My Site</em>&quot; then Sapwood would have auto-generated the slug <code>my-site</code> for it, and your service object would be called <code>MySiteViewer</code>.</p>
+
+<p>By default it looks like this:</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">MySiteViewer</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+    <span class="vi">@site</span> <span class="o">=</span> <span class="n">site</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</pre></div>
+<p>We use an <em>instance</em> of this class to call its methods. Therefore, all methods will be written and <em>instance methods</em> and <strong>not</strong> <em>class methods</em>. That makes it possible for you to cache results into variables. You can see how to do this <a href="the_service_object.html#accessing-the-methods">below</a>.</p>
+
+<h2 id="writing-queries">Writing Queries</h2>
+
+<p>You&#39;d write queries in a similar way to how you&#39;d write them in rails, but we need to alter them a bit. For instance, everything we do, we do within the context of a site (<code>@site</code>), which is set when the class is instantiated.</p>
+
+<h3 id="pages-&amp;-templates">Pages &amp; Templates</h3>
+
+<p>Pages are almost always going to be accessed through a template. Because, if you recall from <a href="../building_content.html">our theory on content</a>, templates take the place of otherwise static models. And because your queries are typically done by targeting specific models in an app, it makes sense that we&#39;d usually start with a template when attempting to get to a page, or a collection of pages.</p>
+
+<p>For example, let&#39;s saying we have a page displaying a listing of news articles, where the articles have a template of <em>Article</em>.</p>
+
+<p>You wouldn&#39;t need to query the listing page at all, because Sapwood does that for you. What you need to query are the posts to display on that page. So, the first thing we need to do is give that method a name (let&#39;s say <code>articles</code>) and then query the template.</p>
+
+<p>Templates, like pages (and most other records in Sapwood) have a <code>slug</code> attribute that is unique to some other model it belongs to.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">articles</span>
+  <span class="vi">@site</span><span class="o">.</span><span class="n">page_types</span><span class="o">.</span><span class="n">find_by_slug</span><span class="p">(</span><span class="s1">&#39;article&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+<p>Since we know we only have one template within this site with a slug of <code>article</code>, and in know how the rails <a href="http://guides.rubyonrails.org/active_record_querying.html#find-by"><code>find_by_...</code> method</a> works, we know what we have returned is a <code>Template</code> object.</p>
+
+<p>We then need to go one step further so we can actually get to the pages from that template.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">articles</span>
+  <span class="vi">@site</span><span class="o">.</span><span class="n">page_types</span><span class="o">.</span><span class="n">find_by_slug</span><span class="p">(</span><span class="s1">&#39;article&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pages</span>
+<span class="k">end</span>
+</pre></div>
+<p>And now we have all pages created with the template <em>Article</em>.</p>
+
+<p>Read on below for other query helpers.</p>
+
+<h3 id="forms">Forms</h3>
+
+<p>Forms are accessed similarly, except you only have one level to dig. Want you need is the slug of the form, which you can find on the forms edit form in your site builder.</p>
+
+<p>So, if your form has a slug of <code>contact-us</code>, then you can grab that form like so:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">contact_form</span>
+  <span class="vi">@site</span><span class="o">.</span><span class="n">forms</span><span class="o">.</span><span class="n">find_by_slug</span><span class="p">(</span><span class="s1">&#39;contact-us&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+<h2 id="ordering-results">Ordering Results</h2>
+
+<p>Because our data types are dynamic, we don&#39;t create a physical database column for each data type - that would be ridiculous. But, we do cache one attribute of your choosing to order pages of a particular template. This is accomplished on the template&#39;s form.</p>
+
+<p>These are stored as a <code>string</code> type, so it may not be a super fast query, but it will work.</p>
+
+<blockquote>
+<p>Remember, we&#39;re trying to solve for the problem of creating simple, unique sites quickly without duplicating effort. So, complex queries are not a forte of Sapwood (yet).</p>
+</blockquote>
+
+<p>There are two scope helpers for ordering pages, and all they do is specify the direction by which to order the results.</p>
+
+<p>Using the example above, let&#39;s say our articles are to be ordered by a custom <code>publish_date</code> field. We would want them in descending order, so we can adjust our query.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">articles</span>
+  <span class="vi">@site</span><span class="o">.</span><span class="n">page_types</span><span class="o">.</span><span class="n">find_by_slug</span><span class="p">(</span><span class="s1">&#39;article&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pages</span><span class="o">.</span><span class="n">desc</span>
+<span class="k">end</span>
+</pre></div>
+<p>The opposite of the <code>desc</code> scope is <code>asc</code>.</p>
+
+<blockquote>
+<p>If you want to get more complex than that, you&#39;ll need to grab the pages and then sort your array of results. You should become familiar with Ruby&#39;s <a href="http://apidock.com/ruby/Enumerable/sort_by"><code>sort_by</code> method</a>.</p>
+</blockquote>
+
+<h2 id="caching-results">Caching Results</h2>
+
+<p>As we mentioned above (and explain <a href="the_service_object.html#accessing-the-methods">below</a>), an instance of the service object is stored in a variable by Sapwood. That means that you can cache query results here, too, so that you don&#39;t have to hit the database a second time if you are running the same query twice on one page.</p>
+
+<p>We do this by setting an instance variable and initializing it the first time the method is run.</p>
+
+<p>Using our articles example, we could do this:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">articles</span>
+  <span class="vi">@articles</span> <span class="o">||=</span> <span class="vi">@site</span><span class="o">.</span><span class="n">page_types</span><span class="o">.</span><span class="n">find_by_slug</span><span class="p">(</span><span class="s1">&#39;article&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pages</span><span class="o">.</span><span class="n">desc</span>
+<span class="k">end</span>
+</pre></div>
+<p>These queries can get quite long, and sometimes you need multiple lines to get a result. You can use <code>begin</code> to accomplish this.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">articles</span>
+  <span class="vi">@articles</span> <span class="o">||=</span> <span class="k">begin</span>
+    <span class="vi">@site</span><span class="o">.</span><span class="n">page_types</span><span class="o">.</span><span class="n">find_by_slug</span><span class="p">(</span><span class="s1">&#39;article&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pages</span><span class="o">.</span><span class="n">desc</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+<p>If you use the multi-line approach, make sure the last line in your block returns what you want the method to return.</p>
+
+<h3 id="using-views">Using Views</h3>
+
+<p>Alternatively, you could use a template to store and instance variable that calls the service method. Just make sure you know it&#39;s the first time that method is called during the rendering process.</p>
+
+<h2 id="pagination">Pagination</h2>
+
+<p>Sapwood uses <a href="https://github.com/amatsuda/kaminari">Kaminari</a> for pagination. You should read Kaminari&#39;s docs to learn more about how you can paginate results.</p>
+
+<p>In general, though, it&#39;s quite simple. If you wanted 10 articles per page on your list page (keeping the example going), you would have something like this:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">articles</span><span class="p">(</span><span class="n">page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="vi">@articles</span> <span class="o">||=</span> <span class="k">begin</span>
+    <span class="vi">@site</span><span class="o">.</span><span class="n">page_types</span><span class="o">.</span><span class="n">find_by_slug</span><span class="p">(</span><span class="s1">&#39;article&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pages</span><span class="o">.</span><span class="n">desc</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+<p>Since we&#39;re not in a model, it&#39;s safer here to pass a page to the method rather than trying to access the <code>params</code> from inside the service object.</p>
+
+<h3 id="rendering">Rendering</h3>
+
+<p>If you&#39;re using pagination, don&#39;t forget to <a href="https://github.com/amatsuda/kaminari#views">generate the page links</a>.</p>
+
+<h3 id="arrays">Arrays</h3>
+
+<p>Kaminari also lets you paginate arrays, in the case you needed more complex logic in your query.</p>
+
+<p>Let&#39;s say you don&#39;t want to render articles that aren&#39;t published. That might look something like this.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">articles</span><span class="p">(</span><span class="n">page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="vi">@articles</span> <span class="o">||=</span> <span class="k">begin</span>
+    <span class="n">articles</span> <span class="o">=</span> <span class="vi">@site</span><span class="o">.</span><span class="n">page_types</span><span class="o">.</span><span class="n">find_by_slug</span><span class="p">(</span><span class="s1">&#39;article&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pages</span><span class="o">.</span><span class="n">desc</span>
+    <span class="n">articles</span> <span class="o">=</span> <span class="n">articles</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span> <span class="n">a</span><span class="o">.</span><span class="n">published</span> <span class="o">==</span> <span class="kp">true</span> <span class="p">}</span>
+    <span class="no">Kaminari</span><span class="o">.</span><span class="n">paginate_array</span><span class="p">(</span><span class="n">articles</span><span class="p">)</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+<p>Note here that you want to paginate after you have your results, otherwise you may lose records and not render the desired number of results.</p>
+
+<h2 id="accessing-the-methods">Accessing the Methods</h2>
+
+<p>An instance of the service object is stored in the <a href="https://github.com/seancdavis/Sapwood/blob/master/app/helpers/viewer_helper.rb#L3-5"><code>viewer_service</code> method</a> which instantiates a <code>@viewer_service</code> variable.</p>
+
+<p>And, because we already have the current site stored, everything happens nice and quick without hitting the database a million times.</p>
+
+<p>The methods are therefore best accessed through the <code>viewer_service</code> method. So, in your template, you could call <code>viewer_service.articles</code> to access our example method.</p>
+
+<p>Easy enough? Good! Go have fun.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

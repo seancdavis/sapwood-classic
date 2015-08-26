@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Communicative Workflow</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../index.html">features</a></li>
+      <li class="active"><a href="../docs.html">docs</a></li>
+      <li><a href="../news.html">news</a></li>
+      <li><a href="../contributing.html">contribute</a></li>
+      <li><a href="../ideas.html">ideas</a></li>
+      <li><a href="../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="active">
+          <a href="communicative_workflow.html">Communicative Workflow</a>
+            <ul class="subnav">
+                <li><a href="communicative_workflow/working_with_git.html">Working with Git</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="building_content.html">Building Content</a>
+        </li>
+        <li class="">
+          <a href="writing_code.html">Writing Code</a>
+        </li>
+        <li class="">
+          <a href="managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Communicative Workflow</h1>
+  </header>
+  <div class="page-content"><p>Sapwood is built around the idea of a Communicative Workflow. This workflow enables you to build unique and fully customized sites from the ground up, all while working in a team.</p>
+
+<h2 id="development-vs.-production">Development vs. Production</h2>
+
+<p>In Sapwood, like most web development projects, the <em>development</em> environment means <em>an instance of the entire application that runs locally on your machine or one of your team member&#39;s machines</em>. There can be as many of these instances as you need -- likely equal to the number of team members.</p>
+
+<p>The <em>production</em> environment is <em>the one instance of Sapwood that hosts the final versions of your sites</em>. Production is accessible via a specific domain name.</p>
+
+<p>And while <em>there is only one production environment</em>, you <em>could</em> create more than one. In that case, they would operate separately from each other.</p>
+
+<h2 id="content-flow">Content Flow</h2>
+
+<p>Since v1.1, content does not <em>flow</em> at all. It simply <em>lives</em> in production. There is no more syncing or worrying about staying updated with production. If you connect your databases correctly, then you any content you interact with is live in production.</p>
+
+<p>Because of this, pages that are in <em>DRAFT</em> status are not viewable by the public in production. However, your development app will see them. It is for this reason that you can add sections to your site even after the site is live.</p>
+
+<h2 id="code-flow">Code Flow</h2>
+
+<p>The code flows as it normally would in a rails project. You develop and test locally, and then you <em>&quot;deploy&quot; to production</em>. You and your teammates use git, along with some features of the UI to stay up to date with the latest code (and to track your changes).</p>
+
+<p>Git is explained in more detail in <a href="communicative_workflow/working_with_git.html">this section</a>.</p>
+
+<h2 id="content-determines-code">Content Determines Code</h2>
+
+<p><strong>Content determines code</strong>. That means the way in which you build the content determines how you <strong>must</strong> build the code if you want your site to be error-free.</p>
+
+<p>This is explained much more fully in <a href="building_content.html">Building Content</a>.</p>
+
+<h2 id="future-versions">Future Versions</h2>
+
+<p>A big part of building content effectively is to have full access to and knowledge of the Sapwood API. In this version of the docs, you can find the items you need to be able to build a site.</p>
+
+<p>That being said, the primary goal of v2.0 is to get more organized and provide a full API reference. <a href="mailto:sean@rocktree.us">Let us know</a> if you&#39;d like to contribute.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

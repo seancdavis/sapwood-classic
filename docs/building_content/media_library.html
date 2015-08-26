@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Media Library</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="active">
+          <a href="../building_content.html">Building Content</a>
+            <ul class="subnav">
+                <li><a href="pages.html">Pages</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="menus.html">Menus</a></li>
+                <li><a href="forms.html">Forms</a></li>
+                <li><a class="active" href="media_library.html">Media Library</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="site_settings.html">Site Settings</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../writing_code.html">Writing Code</a>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Media Library</h1>
+  </header>
+  <div class="page-content"><p>The media library is a collection of all the files uploaded to the site.</p>
+
+<blockquote>
+<p>At this time, only image and pdf files are allowed to be uploaded.</p>
+</blockquote>
+
+<h2 id="adding-files">Adding Files</h2>
+
+<p>Adding files is simple. Go to the library and choose &quot;New Document.&quot; The file will be uploaded on the fly. When it&#39;s done, a thumbnail preview of the file will appear (even for pdf files).</p>
+
+<p>You can also upload files on the fly from any page with a custom <code>file</code> field.</p>
+
+<h2 id="adding-to-pages">Adding to Pages</h2>
+
+<p>There are two ways in which you can associate a document to a page: <em>template fields</em> and <em>direct association</em>.</p>
+
+<h3 id="template-field">Template Field</h3>
+
+<p>You can create a <em>file</em> field on a template. This would create a pseudo <code>belongs_to</code> association for the field you create. So, this would be instances where you only need to associate one specific type of document. For example, an <em>Article</em> template may have a <code>featured_image</code> field on it.</p>
+
+<h3 id="direct-association">Direct Association</h3>
+
+<p>You can also choose for all pages of a template to be allowed to have their own, segmented media libraries (although files added to them will still be accessible from the site&#39;s media library). You wan to use this option in the case where you need to add multiple images to a specific type of page.</p>
+
+<p>See <a href="pages.html#template-options">this section</a> for more information.</p>
+
+<h2 id="cropping-images">Cropping Images</h2>
+
+<p>You can define custom croppers in each site&#39;s settings. You give a name for the cropper and set the dimensions, and it takes place automatically.</p>
+
+<p>There are a couple quirks to consider here:</p>
+
+<ul>
+<li>Cropping an image is only available from the media library (not directly from a page).</li>
+<li>The thumbnail preview for an image is auto-generated. A custom cropper will not override this, and the thumbnail will never be adjusted - it will always crop to the middle of the image.</li>
+</ul>
+
+<h2 id="categorizing-files">Categorizing Files</h2>
+
+<p>Currently, all files are lumped together and organized by upload date. This feature will be developed throughout a later v1 minor release.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>

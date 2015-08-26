@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Forms</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,300'
+      rel='stylesheet' type='text/css'>
+
+    <!-- <link href="" rel="shortcut icon"
+      type="image/png"> -->
+
+    <link href="../../assets/viewer/sapwood/application-dafa3d162cbc465e3e792aef336d55ca.css" media="all" rel="stylesheet" />
+    <script src="../../assets/modernizr-b7e936629a2c2fa6623b83ea794fb16f.js"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="h21N0kbXgswcPU2OfnRvr8ldldhSI15UBs+gcUZVEj8=" name="csrf-token" />
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-39017032-8', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+  <body>
+
+    <header class="documentation">
+  <h1><a href="../../index.html">sapwood</a></h1>
+  <nav class="main">
+    <ul>
+      <li><a href="../../index.html">features</a></li>
+      <li class="active"><a href="../../docs.html">docs</a></li>
+      <li><a href="../../news.html">news</a></li>
+      <li><a href="../../contributing.html">contribute</a></li>
+      <li><a href="../../ideas.html">ideas</a></li>
+      <li><a href="../../support.html">support</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div id="container" class="documentation">
+      <aside id="doc-sidebar">
+  <nav>
+    <ul>
+      <li><a href="../../docs.html">Introduction</a></li>
+        <li class="">
+          <a href="../getting_started.html">Getting Started</a>
+        </li>
+        <li class="">
+          <a href="../creating_a_site.html">Creating A Site</a>
+        </li>
+        <li class="">
+          <a href="../communicative_workflow.html">Communicative Workflow</a>
+        </li>
+        <li class="active">
+          <a href="../building_content.html">Building Content</a>
+            <ul class="subnav">
+                <li><a href="pages.html">Pages</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="menus.html">Menus</a></li>
+                <li><a class="active" href="forms.html">Forms</a></li>
+                <li><a href="media_library.html">Media Library</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="site_settings.html">Site Settings</a></li>
+            </ul>
+        </li>
+        <li class="">
+          <a href="../writing_code.html">Writing Code</a>
+        </li>
+        <li class="">
+          <a href="../managing_the_app.html">Managing the App</a>
+        </li>
+        <li class="">
+          <a href="../upgrade-guides.html">Upgrade Guides</a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+<section id="doc-page">
+  <header>
+    <h1>Forms</h1>
+  </header>
+  <div class="page-content"><p>When you go to the forms tab, you&#39;ll see that forms act very much like templates. They have custom, dynamic fields, and some options for being customized. The two differences that distinguish a form from a template are:</p>
+
+<ul>
+<li>Forms have <em>submissions</em>, meaning they accept public visitor input.</li>
+<li>Forms are not essential to having a working site.</li>
+</ul>
+
+<h2 id="creating-forms">Creating Forms</h2>
+
+<p>When you navigate to <em>Forms</em> in the builder, there is a <em>New Form</em> button from which you can create new, custom forms.</p>
+
+<p>This presents you with all the options for the form, but you have to save the form before you can get to the custom fields.</p>
+
+<h2 id="form-fields">Form Fields</h2>
+
+<p>Unlike a template, we start out without a single field when you create a new form. This makes the form entirely flexible and up to your imagination.</p>
+
+<p>Since you&#39;re likely to build templates before forms, I&#39;ll just say that fields act very similarly with forms as they do with templates. You can drag and drop to reorder, you can hide fields, require fields, etc. The main difference is that form fields do not have an associated group, since they must all be displayed as one form.</p>
+
+<h2 id="form-options">Form Options</h2>
+
+<p>Forms come with a lot of options, which are now all consolidated on the <em>Settings</em> page for each form. Here are the options:</p>
+
+<h3 id="title">Title</h3>
+
+<p>This is simply an arbitrary title by which you represent the form in the builder.</p>
+
+<h3 id="description">Description</h3>
+
+<p>Description has no current use and will be deprecated soon.</p>
+
+<h3 id="submit-button-label">Submit Button Label</h3>
+
+<p>This enables you to change the <code>value</code> attribute on the submit input when the form is rendered. If you leave it blank, the <a href="https://github.com/plataformatec/simple_form">Simple Form</a> default will be used.</p>
+
+<h3 id="notification-emails">Notification Emails</h3>
+
+<p>When a new submission is created, you can be notified via email. Place each email address on a separate line and each email address will get a notification.</p>
+
+<h3 id="page-response">Page Response</h3>
+
+<p>When a form submission is created on your site, what is happening behind the scenes is a request is being sent to your Sapwood API. After receiving and completing it, it redirects back to the page on which the form was rendered. However, in this case, the form fields are removed and there is a response message where the form used to be. It is in this section that you write the HTML markup for that response.</p>
+
+<h3 id="custom-email-response">Custom Email Response</h3>
+
+<p>This was born out of a sponsored feature request, which you might imagine considering its narrow use. You are able to build a custom email to be sent to the visitor who creates the form submission on your site.</p>
+
+<p>To do this, you will need to designate one of your custom fields as being the <em>email address</em> for that form submission. That is what the mailer uses for the <em>To</em> address when sending the message.</p>
+
+<blockquote>
+<p><em>Note: It is wise to test your email response before deploying to production.</em></p>
+</blockquote>
+
+<h2 id="rendering-a-form">Rendering a Form</h2>
+
+<p>You need to hard-code a form into a specific page template, but you can do so using some Sapwood helpers.</p>
+
+<p>First, you have to find the form, which is done best via the form&#39;s slug. You get the slug from the URL when inside the form builder (it should look like <code>.../forms/[form_slug]/edit</code>). To retrieve the form object, you can use the following code from within your service object.</p>
+
+<p class="file"><code>utilities/service.rb</code></p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">contact_form</span>
+  <span class="vi">@site</span><span class="o">.</span><span class="n">forms</span><span class="o">.</span><span class="n">find_by_slug</span><span class="p">(</span><span class="n">slug</span><span class="p">)</span> <span class="c1"># where `slug` is the form slug</span>
+<span class="k">end</span>
+</pre></div>
+<p>If you have retrieved the form object, then in your view, all you need is:</p>
+<div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">form_markup</span><span class="p">(</span><span class="n">viewer_service</span><span class="o">.</span><span class="n">contact_form</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+<p>And the form will be automatically rendered.</p>
+
+<h2 id="form-submissions">Form Submissions</h2>
+
+<p>In the builder, each form has a Submissions tab. This tab lists the form submissions created for that form. You are now able to manipulate and export this data.</p>
+
+<h3 id="editing-submissions">Editing Submissions</h3>
+
+<p>When you hover over a form submission, you&#39;ll see an <em>Edit</em> link. This will take you to a form that will enable you to edit the submission.</p>
+
+<p>Do note that any <em>hidden</em> fields will be available to be edited here. That is a good use case for having fields that you don&#39;t want visitors to populate, but that you can populate after you take action on the submission.</p>
+
+<h3 id="viewing-a-submission">Viewing A Submission</h3>
+
+<p>There is also a <em>View</em> option for each submission, which simple lists the fields for that submission and their associated values.</p>
+
+<h3 id="exporting-submissions">Exporting Submissions</h3>
+
+<p>Last, submissions can be exported. This is done from the submissions listing for a particular form. This will dump all dynamic fields, along with <code>created_at</code> and <code>updated_at</code>, for each form submission from that form.</p>
+</div>
+</section>
+
+    </div>
+
+    <script src="../../assets/viewer/sapwood/application-bd4f381b5632ea4af03f349191923b31.js"></script>
+  </body>
+</html>
