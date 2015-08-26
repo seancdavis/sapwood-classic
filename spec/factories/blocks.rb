@@ -13,9 +13,10 @@
 
 FactoryGirl.define do
   factory :block do
-    parent_id 1
-page_id 1
-position 1
+    page
+    block { create(:page) }
+    # position
+    title { Faker::Lorem.word.downcase }
   end
 
 end

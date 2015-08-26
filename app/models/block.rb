@@ -15,11 +15,15 @@ class Block < ActiveRecord::Base
 
   # ------------------------------------------ Associations
 
-  belongs_to :parents, :class_name => 'Page'
   belongs_to :page
+  belongs_to :block, :class_name => 'Page'
 
   # ------------------------------------------ Scopes
 
   scope :in_position, -> { order('position asc') }
+
+  # ------------------------------------------ Validations
+
+  validates :title, :block_id, :page_id, :presence => true
 
 end
