@@ -19,9 +19,6 @@
 #  field_search  :text
 #
 
-
-#
-
 FactoryGirl.define do
   factory :page do
     title { Faker::Lorem.words(4).join(' ') }

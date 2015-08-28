@@ -19,9 +19,6 @@
 #  field_search  :text
 #
 
-
-#
-
 require 'rails_helper'
 
 describe Page, :type => :model do
