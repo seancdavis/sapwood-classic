@@ -148,8 +148,7 @@
             :required => field.required,
             :label => field.label,
             :input_html => {
-              :value => current_page.field_data[field.slug.to_sym] ||
-                field.default_value
+              :value => current_page.send(field.slug) || field.default_value
             }
           ) %>
         <% end %>
