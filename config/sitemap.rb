@@ -6,7 +6,7 @@ Site.all.each do |site|
       site_pages = site.pages.includes(:template)
       (site_pages - [site.home_page]).each do |page|
         if page.page_path.present? && page.template.has_show_view?
-          puts page.page_path
+          add page.page_path, :lastmod => page.updated_at
         end
       end
     end
