@@ -50,6 +50,7 @@ gem 'active_record_query_trace'
 gem 'yaml_db'
 gem 'pg_search'
 gem 'geocoder'
+gem 'honeypot-captcha'
 
 group :development do
   gem 'mailcatcher'
