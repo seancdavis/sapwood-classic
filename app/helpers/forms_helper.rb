@@ -79,7 +79,8 @@ module FormsHelper
   def form_markup(form)
     simple_form_for(
       FormSubmission.new,
-      :url => api_v1_forms_path(:key => form.key)
+      :url => api_v1_forms_path(:key => form.key),
+      :html => { :honeypot => true }
     ) do |f|
       f.simple_fields_for :field_data do |field_data|
         o = f.input(
