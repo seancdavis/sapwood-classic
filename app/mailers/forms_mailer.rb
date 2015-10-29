@@ -10,7 +10,8 @@ class FormsMailer < ActionMailer::Base
     @form = @submission.form
     @site = @form.site
     mail(
-      :to => emails, 
+      :to => emails,
+      :from => "noreply@#{@site.url.strip}",
       :subject => "[#{@site.title}] New #{@form.title} Submission"
     )
   end
