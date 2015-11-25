@@ -20,6 +20,7 @@
 #  body_md          :text
 #  page_path        :string(255)
 #  last_editor_id   :integer
+#  field_search     :text
 #
 
 FactoryGirl.define do
