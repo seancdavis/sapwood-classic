@@ -20,6 +20,7 @@
 #  body_md          :text
 #  page_path        :string(255)
 #  last_editor_id   :integer
+#  field_search     :text
 #
 
 require 'active_support/inflector'
@@ -34,7 +35,7 @@ class Page < ActiveRecord::Base
 
   pg_search_scope(
     :search_content,
-    :against => [:title, :body],
+    :against => [:title, :body, :field_search],
     :using => {
       :tsearch => {:dictionary => "english"}
     }
@@ -128,6 +129,12 @@ class Page < ActiveRecord::Base
         update_columns(:field_data => fd)
       end
     end
+  end
+
+  after_save :cache_field_search
+
+  def cache_field_search
+    update_columns(:field_search => field_data.values.join(' '))
   end
 
   # ------------------------------------------ Instance Methods

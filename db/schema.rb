@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716172341) do
+ActiveRecord::Schema.define(version: 20151125142844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 20150716172341) do
     t.text     "body_md"
     t.string   "page_path"
     t.integer  "last_editor_id"
+    t.text     "field_search"
   end
 
   add_index "pages", ["ancestry"], name: "index_pages_on_ancestry", using: :btree
