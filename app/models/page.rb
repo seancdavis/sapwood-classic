@@ -120,7 +120,7 @@ class Page < ActiveRecord::Base
       update_columns(:body => SapwoodMarkdown.to_html(body_md))
     end
     field_data.each do |key, data|
-      if key.to_s =~ /^markdown\_/ && data.present?
+      if key.to_s =~ /^markdown\_/ && !data.nil?
         html = SapwoodMarkdown.to_html(data)
         field_data_will_change!
         fd = field_data.merge(
