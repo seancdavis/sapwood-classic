@@ -204,6 +204,9 @@ GEM
     honeypot-captcha (0.0.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     httpclient (2.5.3.3)
     i18n (0.6.11)
     inflecto (0.0.2)
@@ -242,10 +245,13 @@ GEM
       skinny (>= 0.1.2)
       sqlite3-ruby
       thin
+    mailchimp (0.0.9)
+      httparty
     mime-types (1.25.1)
     mini_portile (0.6.1)
     minitest (5.4.2)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     mysql2 (0.3.16)
     net-scp (1.2.1)
@@ -555,6 +561,7 @@ DEPENDENCIES
   kaminari
   koala
   mailcatcher
+  mailchimp
   mysql2
   pg
   pg_search
