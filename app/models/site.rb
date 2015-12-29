@@ -4,7 +4,6 @@
 #
 #  id         :integer          not null, primary key
 #  title      :string(255)
-#  slug       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #  config     :json
@@ -14,10 +13,6 @@ require 'active_support/inflector'
 require 'yaml'
 
 class Site < ActiveRecord::Base
-
-  # ------------------------------------------ Plugins
-
-  has_superslug
 
   # ------------------------------------------ Associations
 
@@ -44,39 +39,22 @@ class Site < ActiveRecord::Base
 
   validates_uniqueness_of :title
 
-  # validates_format_of :title, :with => /\A[A-Za-z][A-Za-z0-9\ ]+\z/
-
   # ------------------------------------------ Callbacks
 
   after_create :generate_default_config
 
   def generate_default_config
-    convert_title_to_slug # superslug runs this
-    config = { :title => title, :slug => slug }
     config_will_change!
-    update_columns(:config => config)
+    update_columns(:config => { :templates => [] })
   end
 
   # ------------------------------------------ Instance Method
-
-  def pages
-    @pages ||= Rails.env.production? ? webpages.published : webpages
-  end
-
-  def to_param
-    id
-  end
 
   def templates
     TemplateCollection.new(self)
   end
 
   def update_config(attrs = {})
-    attrs.each do |key, value|
-      if ['title','slug','uid'].include?(key.to_s)
-        update_columns(key.to_sym => value)
-      end
-    end
     conf = self.config.merge!(attrs)
     config_will_change!
     update_columns(:config => conf)
