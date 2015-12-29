@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   end
 
   def has_sites?
-    all_sites.size > 0
+    sites.size > 0
   end
 
   def has_multiple_sites?
