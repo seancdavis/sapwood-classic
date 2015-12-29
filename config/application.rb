@@ -24,7 +24,6 @@ module App
       g.helper false
     end
 
-    config.autoload_paths += %W(#{config.root}/app/viewer_services)
     config.autoload_paths += %W(#{config.root}/lib/utilities)
 
     # Settings in config/environments/* take precedence over those specified here.
