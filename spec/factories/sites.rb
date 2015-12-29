@@ -7,12 +7,8 @@
 #  slug       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#  git_url    :string(255)
-#  uid        :string(255)
 #  config     :json
-#  templates  :json
 #
-
 
 #
 

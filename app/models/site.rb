@@ -7,10 +7,7 @@
 #  slug       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#  git_url    :string(255)
-#  uid        :string(255)
 #  config     :json
-#  templates  :json
 #
 
 require 'active_support/inflector'
@@ -24,11 +21,11 @@ class Site < ActiveRecord::Base
 
   # ------------------------------------------ Associations
 
-  has_many :site_users
+  has_many :site_users, :dependent => :destroy
   has_many :users, :through => :site_users
   # has_many :templates, :dependent => :destroy
   # has_many :resource_types, :dependent => :destroy
-  has_many :webpages, :dependent => :destroy, :class_name => 'Page'
+  has_many :pages, :dependent => :destroy
   # has_many :forms, :dependent => :destroy
   # has_many :documents, :dependent => :destroy
   # has_many :menus, :dependent => :destroy
@@ -45,23 +42,17 @@ class Site < ActiveRecord::Base
 
   validates :title, :presence => true
 
-  validates_uniqueness_of :title, :uid
+  validates_uniqueness_of :title
 
-  validates_format_of :title, :with => /\A[A-Za-z][A-Za-z0-9\ ]+\z/
+  # validates_format_of :title, :with => /\A[A-Za-z][A-Za-z0-9\ ]+\z/
 
   # ------------------------------------------ Callbacks
-
-  before_create :generate_uid
-
-  def generate_uid
-    self.uid = SecureRandom.hex(9)
-  end
 
   after_create :generate_default_config
 
   def generate_default_config
     convert_title_to_slug # superslug runs this
-    config = { :title => title, :slug => slug, :uid => uid }
+    config = { :title => title, :slug => slug }
     config_will_change!
     update_columns(:config => config)
   end
@@ -73,7 +64,7 @@ class Site < ActiveRecord::Base
   end
 
   def to_param
-    uid
+    id
   end
 
   def templates
