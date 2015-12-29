@@ -82,17 +82,14 @@ end
 
 # ------------------------------------------ Development/Test
 
-group :development do
-  gem 'guard-rspec', :require => false
-end
-
 group :development, :test do
   gem 'annotate'
-  gem 'capybara'
-  gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'launchy'
   gem 'rspec-rails'
-  gem 'selenium-webdriver'
+  gem 'guard-rspec'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'poltergeist'
+  gem 'capybara-screenshot'
 end

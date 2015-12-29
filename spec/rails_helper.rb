@@ -7,12 +7,10 @@ require 'rspec/rails'
 require 'ejs'
 require 'capybara/rspec'
 require 'capybara/rails'
+require 'capybara-screenshot/rspec'
+require 'capybara/poltergeist'
 
-Capybara.register_driver :selenium do |app|
-  profile = Selenium::WebDriver::Firefox::Profile.new
-  profile.native_events = true
-  Capybara::Selenium::Driver.new(app, :browser => :firefox, profile: profile)
-end
+Capybara.javascript_driver = :poltergeist
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
