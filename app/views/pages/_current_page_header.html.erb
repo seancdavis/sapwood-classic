@@ -2,32 +2,32 @@
   <nav class="breadcrumbs">
     <ul>
       <li>
-        <%= link_to 'Site Pages', site_editor_pages_path(current_site) %>
+        <%= link_to 'Site Pages', site_pages_path(current_site) %>
       </li>
       <% current_page_ancestors.each do |page| %>
         <li>
-          <%= link_to page.title, site_editor_page_path(current_site, page) %>
+          <%= link_to page.title, site_page_path(current_site, page) %>
         </li>
       <% end %>
     </ul>
   </nav>
   <div class="actions">
     <%= icon_to 'save', '#', :class => 'save-page' %>
-    <%#= icon_to 'edit', edit_site_editor_page_path(current_site, current_page) %>
+    <%#= icon_to 'edit', edit_site_page_path(current_site, current_page) %>
     <%#= icon_to 'link', '#' %>
     <% if current_page.published? %>
       <%= icon_to 'unpublish',
-                  site_editor_page_unpublish_path(current_site, current_page),
+                  site_page_unpublish_path(current_site, current_page),
                   :method => :post,
                   :class => 'unpublish' %>
     <% else %>
       <%= icon_to 'publish',
-                  site_editor_page_publish_path(current_site, current_page),
+                  site_page_publish_path(current_site, current_page),
                   :method => :post,
                   :class => 'publish' %>
     <% end %>
     <%= icon_to 'delete',
-                site_editor_page_path(current_site, current_page),
+                site_page_path(current_site, current_page),
                 :method => :delete,
                 :class => 'delete',
                 :data => { :confirm => 'Are you sure?' } %>
@@ -45,9 +45,9 @@
     <span class="slug"
           contenteditable="true"><%= current_page.slug %></span>
   </h1>
-  <% url = site_editor_page_path(current_site, current_page) %>
+  <% url = site_page_path(current_site, current_page) %>
   <% if params[:redirect] %>
-    <% url = site_editor_page_path(current_site, current_page,
+    <% url = site_page_path(current_site, current_page,
                                    :redirect => params[:redirect]) %>
   <% end %>
   <%= simple_form_for(current_page, :url => url) do |f| %>
@@ -71,9 +71,9 @@
 <nav class="page-tabs">
   <ul>
     <% {
-      :content => edit_site_editor_page_path(current_site, current_page),
-      :pages => site_editor_page_path(current_site, current_page),
-      :meta => site_editor_page_meta_path(current_site, current_page)
+      :content => edit_site_page_path(current_site, current_page),
+      :pages => site_page_path(current_site, current_page),
+      :meta => site_page_meta_path(current_site, current_page)
       }.each do |name, path| %>
       <li>
         <%= link_to name.to_s.titleize, path,

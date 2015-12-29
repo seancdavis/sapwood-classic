@@ -1,7 +1,7 @@
 <div class="site-toggle <%= 'dropdown' if current_user.has_multiple_sites? %>">
   <%= link_to(
     current_site.title,
-    site_editor_path(current_site),
+    site_path(current_site),
     :class => (
       current_user.has_multiple_sites? ? 'dropdown-trigger' : 'disabled'
     )
@@ -10,7 +10,7 @@
     <ul>
       <li class="h1">My Sites</li>
       <% (all_sites - [current_site]).each do |site| %>
-        <%= content_tag(:li, link_to(site.title, site_editor_path(site))) %>
+        <%= content_tag(:li, link_to(site.title, site_path(site))) %>
       <% end %>
     </ul>
   <% end %>

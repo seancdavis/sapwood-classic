@@ -34,21 +34,19 @@ Rails.application.routes.draw do
 
   # ------------------------------------------ Editor
 
-  resources :sites, :param => :uid, :path => '', :only => [:show] do
-    get '/' => 'editor/base#home' # Redirects hanging URI segments
+  resources :sites, :only => [:show] do
+    get '/' => 'application#home'
 
-    namespace :editor do
-      get '/' => 'base#home' # Redirects hanging URI segments
-
-      post 'pages/reorder' => 'pages#reorder', :as => :reorder_pages
-      resources :pages, :param => :slug do
-        post 'publish' => 'pages#publish', :as => :publish
-        post 'unpublish' => 'pages#unpublish', :as => :unpublish
-        patch 'nest' => 'pages#nest', :as => :nest
-        get 'meta' => 'pages#meta', :as => :meta
-        post 'blocks/reorder/:title' => 'blocks#reorder', :as => :reorder_blocks
-        resources :blocks, :param => :slug
-      end
+    post 'pages/reorder' => 'pages#reorder', :as => :reorder_pages
+    resources :pages, :param => :slug do
+      post 'publish' => 'pages#publish', :as => :publish
+      post 'unpublish' => 'pages#unpublish', :as => :unpublish
+      patch 'nest' => 'pages#nest', :as => :nest
+      get 'meta' => 'pages#meta', :as => :meta
+      post 'blocks/reorder/:title' => 'blocks#reorder', :as => :reorder_blocks
+      resources :blocks, :param => :slug
+    end
+  end
 
   #     # Site Settings
   #     get 'settings/croppers' => 'sites#croppers', :as => :cropper
@@ -135,8 +133,6 @@ Rails.application.routes.draw do
   #     # Users
   #     resources :users, :except => [:show]
   #   end
-    end
-  end
 
   # ------------------------------------------ Viewer
 
@@ -181,6 +177,6 @@ Rails.application.routes.draw do
 
   # ------------------------------------------ Home Page
 
-  root :to => 'editor/base#home'
+  root :to => 'application#home'
 
 end

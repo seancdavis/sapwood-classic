@@ -1,4 +1,4 @@
-class Editor::BlocksController < Editor::BaseController
+class BlocksController < ApplicationController
 
   before_filter :verify_xhr, :only => [:index, :reorder]
 

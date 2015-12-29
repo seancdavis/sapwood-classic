@@ -1,4 +1,4 @@
-class Editor::PagesController < Editor::BaseController
+class PagesController < ApplicationController
 
   before_filter :verify_current_page, :except => [:index, :new, :create]
   before_filter :verify_xhr, :only => [:new, :create]
@@ -44,11 +44,11 @@ class Editor::PagesController < Editor::BaseController
           :page => parent,
           :title => params[:page][:block_title]
         )
-        redirect = edit_site_editor_page_path(current_site, parent)
-        path = edit_site_editor_page_path(current_site, current_page,
+        redirect = edit_site_page_path(current_site, parent)
+        path = edit_site_page_path(current_site, current_page,
                                           :redirect => redirect)
       else
-        path = edit_site_editor_page_path(current_site, current_page)
+        path = edit_site_page_path(current_site, current_page)
       end
       render :text => "tk-success:#{path}"
     else
@@ -95,9 +95,9 @@ class Editor::PagesController < Editor::BaseController
     parent_page = current_page.parent
     current_page.destroy
     if parent_page.nil?
-      path = site_editor_pages_path(current_site)
+      path = site_pages_path(current_site)
     else
-      path = site_editor_page_path(current_site, parent_page)
+      path = site_page_path(current_site, parent_page)
     end
     redirect_to(path, :notice => t('notices.deleted', :item => 'Page'))
   end

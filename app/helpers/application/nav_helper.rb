@@ -16,7 +16,7 @@ module Application
             end
             o2 += link_to(
               page.title,
-              site_editor_page_path(current_site, page),
+              site_page_path(current_site, page),
               :class => "droppable #{('active' if params[:slug] == page.slug)}",
               :data => { :page_id => page.id }
             )
@@ -45,7 +45,7 @@ module Application
             end
             o2 += link_to(
               page.title,
-              site_editor_page_path(current_site, page),
+              site_page_path(current_site, page),
               :class => "droppable #{('active' if params[:slug] == page.slug)}",
               :data => { :page_id => page.id }
             )

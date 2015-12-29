@@ -1,6 +1,6 @@
-<% url = site_editor_page_path(current_site, current_page) %>
+<% url = site_page_path(current_site, current_page) %>
 <% if params[:redirect] %>
-  <% url = site_editor_page_path(current_site, current_page,
+  <% url = site_page_path(current_site, current_page,
                                  :redirect => params[:redirect]) %>
 <% end %>
 <%= simple_form_for(current_page, :url => url) do |f| %>
@@ -16,14 +16,14 @@
         <div class="block">
           <h2>
             <span><%= field.label %></span>
-            <% path = site_editor_page_blocks_path(current_site, current_page,
+            <% path = site_page_blocks_path(current_site, current_page,
                                                    :b => field.name,
                                                    :t => template.name,
                                                    :redirect => request.path) %>
             <%= link_to "Add Existing #{template.title}", '#',
                         :id => 'existing-block',
                         :data => { :modal_url => path } %>
-            <% new_path = new_site_editor_page_path(current_site,
+            <% new_path = new_site_page_path(current_site,
                                                     :t => template.name,
                                                     :create_block => true,
                                                     :b => field.name,
@@ -32,7 +32,7 @@
                         :id => 'new-block',
                         :data => { :modal_url => new_path } %>
           </h2>
-          <ul data-url="<%= site_editor_page_reorder_blocks_path(
+          <ul data-url="<%= site_page_reorder_blocks_path(
               current_site, current_page, field.name) %>">
             <% current_page_blocks(field.name).each do |page| %>
               <li class="item" data-page="<%= page.id %>">
@@ -44,7 +44,7 @@
                 <span class="title"><%= page.title %></span>
                 <span class="icons">
                   <%= icon_to 'edit',
-                              edit_site_editor_page_path(
+                              edit_site_page_path(
                                 current_site,
                                 page,
                                 :redirect => request.path,
@@ -52,7 +52,7 @@
                               :class => 'edit' %>
                   <%= icon_to(
                     'delete',
-                    site_editor_page_block_path(
+                    site_page_block_path(
                       current_site,
                       current_page,
                       page,

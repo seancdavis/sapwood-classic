@@ -1,9 +1,18 @@
-<%= render 'current_page_header' %>
+<header class="page-header">
+  <% if all_pages_tree.size > 1 %>
+    <div class="actions">
+      <%= icon_to 'save', '#', :class => 'save-order' %>
+      <%= icon_to 'reorder', '#', :class => 'reorder sort-mode' %>
+      <%= icon_to 'nest', '#', :class => 'nest sort-mode' %>
+    </div>
+  <% end %>
+  <h1>Site Pages</h1>
+</header>
 
 <section class="page-content">
-  <% if current_page_children.size > 0 %>
+  <% if all_pages_tree.size > 0 %>
     <%= simple_form_for(
-      :reorder, :url => site_editor_reorder_pages_path(current_site)
+      :reorder, :url => site_reorder_pages_path(current_site)
     ) do |f| %>
       <%= f.input :pages %>
     <% end %>
@@ -17,38 +26,40 @@
         </tr>
       </thead>
       <tbody>
-        <% current_page_children.each do |page| %>
+        <% all_pages_tree.each do |node| %>
+          <% page = page_from_tree_node(node) %>
+          <% next if page.nil? %>
           <tr class="draggable droppable" data-page="<%= page.slug %>"
               data-page-id="<%= page.id %>">
             <td class="status-icon"><%= page.p.status_icon %></td>
             <td>
               <%= simple_form_for(
                 page,
-                :url => site_editor_page_nest_path(current_site, page)
+                :url => site_page_nest_path(current_site, page)
               ) do |f| %>
                 <%= f.input :parent_id, :input_html => { :class => 'parent' } %>
               <% end %>
               <%= content_tag(:span, page.title, :class => 'title') %>
               <div class="icons">
-                <%= icon_to 'right', site_editor_page_path(current_site, page),
+                <%= icon_to 'right', site_page_path(current_site, page),
                             :class => 'right' %>
                 <%= icon_to 'edit',
-                            edit_site_editor_page_path(current_site, page),
+                            edit_site_page_path(current_site, page),
                             :class => 'edit' %>
                 <% if page.published? %>
                   <%= icon_to 'draft',
-                              site_editor_page_unpublish_path(
+                              site_page_unpublish_path(
                                 current_site, page, :redirect => request.path
                               ),
                               :method => :post, :class => 'unpublish' %>
                 <% else %>
                   <%= icon_to 'publish',
-                              site_editor_page_publish_path(
+                              site_page_publish_path(
                                 current_site, page, :redirect => request.path
                               ),
                               :method => :post, :class => 'publish' %>
                 <% end %>
-                <%= icon_to 'delete', site_editor_page_path(current_site, page),
+                <%= icon_to 'delete', site_page_path(current_site, page),
                             :method => :delete, :class => 'delete',
                             :data => { :confirm => 'Are you sure?' } %>
               </div>
