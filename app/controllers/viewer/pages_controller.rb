@@ -2,7 +2,7 @@ class Viewer::PagesController < ViewerController
 
   before_filter :cors_check
 
-  if Rails.env.production?
+  unless Rails.env.development?
     rescue_from ActionController::RoutingError do |e|
       error_404(e)
     end
@@ -75,13 +75,14 @@ class Viewer::PagesController < ViewerController
           render(
             "viewer/#{current_site.slug}/404",
             :layout => false,
-            :formats => [:html]
+            :formats => [:html],
+            :status => 404
           )
         else
-          render 'previewer/404', :formats => [:html]
+          render 'previewer/404', :formats => [:html], :status => 404
         end
       else
-        render :file => 'public/404.html'
+        render :file => 'public/404.html', :status => 404
       end
     end
 
@@ -95,13 +96,14 @@ class Viewer::PagesController < ViewerController
           render(
             "viewer/#{current_site.slug}/500",
             :layout => false,
-            :formats => [:html]
+            :formats => [:html],
+            :status => 500
           )
         else
-          render 'previewer/500', :formats => [:html]
+          render 'previewer/500', :formats => [:html], :status => 500
         end
       else
-        render 'previewer/500', :formats => [:html]
+        render 'previewer/500', :formats => [:html], :status => 500
       end
     end
 
