@@ -102,7 +102,7 @@
 
 <p>The sapwood app operates in a few different namespaces. The <em>front-end</em> (or <em>public</em>) side of the app operates in the <code>viewer</code> namespace.</p>
 
-<p>When a url is hit for the public site of a site within the Sapwood app, it is directed to the <code>viewer/pages_controller#show</code> (it will hit the <code>home</code> action if it is the root url). <a href="https://github.com/seancdavis/sapwood/blob/master/app/controllers/viewer/pages_controller.rb#L10-20">Here&#39;s the current version of that code</a>.</p>
+<p>When a url is hit for the public site of a site within the Sapwood app, it is directed to the <code>viewer/pages_controller#show</code> (it will hit the <code>home</code> action if it is the root url). <a href="https://github.com/seancdavis/sapwood-classic/blob/master/app/controllers/viewer/pages_controller.rb#L10-20">Here&#39;s the current version of that code</a>.</p>
 
 <p>The <code>show</code> action first tries to find the page by its slug. At this time, page slugs are unique to the site in which they exist, which is why we can query in this way. The action throws a <code>404</code> error if it finds no page.</p>
 
