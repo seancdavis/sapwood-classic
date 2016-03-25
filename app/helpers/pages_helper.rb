@@ -167,14 +167,14 @@ module PagesHelper
 
   def page_children_button(page)
     templates = page.template.children
-    if templates.size > 1
+    if templates.to_a.size > 1
       path = builder_route([page], :show)
       link_to(
         'Pages',
         path,
         :class => "pages #{request.path == path ? 'active' : nil}"
       )
-    elsif templates.size > 0
+    elsif templates.to_a.size > 0
       path = builder_site_page_path(current_site, page)
       link_to(
         templates.first.title.pluralize,

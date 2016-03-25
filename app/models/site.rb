@@ -30,12 +30,12 @@ class Site < ActiveRecord::Base
 
   # ------------------------------------------ Associations
 
-  has_many :site_users
+  has_many :site_users, :dependent => :destroy
   has_many :users, :through => :site_users
   has_many :templates, :dependent => :destroy
   has_many :resource_types, :dependent => :destroy
-  has_many :webpages, :through => :templates, :dependent => :destroy,
-           :class_name => 'Page'
+  has_many :resources, :through => :resource_types
+  has_many :webpages, :through => :templates, :class_name => 'Page'
   has_many :forms, :dependent => :destroy
   has_many :documents, :dependent => :destroy
   has_many :image_croppings, :dependent => :destroy
