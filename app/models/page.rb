@@ -77,10 +77,8 @@ class Page < ActiveRecord::Base
   after_commit :cache_order_by
 
   def cache_order_by
-    order_by = self.template.order_method
-    unless order_by.blank?
-      update_columns(:order => self.send(order_by))
-    end
+    return if self.template.nil? || self.template.order_method.blank?
+    update_columns(:order => self.send(self.template.order_method))
   end
 
   after_save :check_template_fields
