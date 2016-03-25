@@ -24,7 +24,7 @@ class FormSubmission < ActiveRecord::Base
 
   belongs_to :form, :touch => true
 
-  has_many :form_files
+  has_many :form_files, :dependent => :destroy
 
   # ------------------------------------------ Scopes
 
