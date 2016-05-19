@@ -110,6 +110,7 @@ class Site < ActiveRecord::Base
   end
 
   def respond_to?(method, include_private = false)
+    return true if super
     template = templates.find_by_slug(method)
     if template.nil?
       singular_method = ActiveSupport::Inflector.singularize(method)

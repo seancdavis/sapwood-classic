@@ -10,7 +10,6 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  page_templates     :text
-#  children           :text
 #  order_method       :string(255)
 #  order_direction    :string(255)
 #  can_be_root        :boolean          default(FALSE)

@@ -7,10 +7,11 @@ module TemplatesHelper
   def current_template
     @current_template ||= begin
       if current_page.nil?
-        p = params[:template_slug] || params[:slug]
-        current_site.templates.find_by_slug(p)
+        slug = params[:template_slug] || params[:slug]
+        site_templates.select { |t| t.slug == slug }.first
       else
-        current_page.template
+        return nil if current_page.template_id.blank?
+        site_templates.select { |t| t.id == current_page.template_id }.first
       end
     end
   end

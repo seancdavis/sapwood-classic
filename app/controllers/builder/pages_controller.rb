@@ -9,7 +9,8 @@ class Builder::PagesController < BuilderController
     # or not.
     if params[:search] && params[:search][:q]
       q = params[:search][:q]
-      @pages = current_site.webpages.search_content(params[:search][:q]).to_a
+      @pages = current_site.webpages.includes(:template => [:children])
+        .search_content(params[:search][:q]).to_a
     else
       @pages = site_root_pages
     end

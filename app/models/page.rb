@@ -176,7 +176,8 @@ class Page < ActiveRecord::Base
   end
 
   def respond_to?(method, include_private = false)
-    respond_to_fields.include?(method.to_s) ? true : super
+    return true if super
+    respond_to_fields.include?(method.to_s)
   end
 
   def missing_fields

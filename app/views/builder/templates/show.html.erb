@@ -23,7 +23,7 @@
     <ul>
       <li>Pages <strong>CAN<%= ' NOT' unless current_template.can_be_root? %>
       </strong> be created at the root level.</li>
-      <% if current_template.children.reject(&:blank?).size > 0 %>
+      <% if template_children.reject(&:blank?).size > 0 %>
         <li>Pages using the following templates may be created underneath pages
         created with this template:
           <ul>

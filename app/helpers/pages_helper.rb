@@ -1,11 +1,13 @@
 module PagesHelper
 
   def site_pages
-    @site_pages ||= current_site.webpages.includes(:template, :last_editor)
+    @site_pages ||= begin
+      current_site.webpages.includes(:last_editor, :template => [:children])
+    end
   end
 
   def site_root_pages
-    @site_root_pages ||= site_pages.roots.in_position
+    @site_root_pages ||= site_pages.select(&:root?).sort_by(&:position)
   end
 
   def site_nav_pages
@@ -13,7 +15,7 @@ module PagesHelper
   end
 
   def site_floating_root_pages
-    @site_floating_root_pages ||= site_root_pages.select { |p| !p.show_in_nav? }
+    @site_floating_root_pages ||= site_root_pages.reject(&:show_in_nav?)
   end
 
   def current_page
@@ -22,10 +24,8 @@ module PagesHelper
         controller_name == 'pages' ||
         ['editor','documents','resources'].include?(controller_name)
       )
-        p = params[:page_slug] || params[:slug]
-        page = current_site.webpages.find_by_slug(p)
-        nil if page.nil?
-        page
+        slug = params[:page_slug] || params[:slug]
+        site_pages.select { |p| p.slug == slug }.first
       else
         nil
       end
@@ -286,7 +286,7 @@ module PagesHelper
   end
 
   def new_root_page_links
-    new_pages = site_templates.not_maxed_out.can_be_root
+    new_pages = site_templates.reject(&:maxed_out?).select(&:can_be_root?)
     content_tag(:div, :class => 'new-buttons dropdown') do
       if new_pages.size > 1
         o = link_to("New Page", '#', :class => 'new button dropdown-trigger')
