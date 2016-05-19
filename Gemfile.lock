@@ -278,6 +278,8 @@ GEM
     pygments.rb (0.6.0)
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.1.0)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.5.2)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -459,6 +461,7 @@ DEPENDENCIES
   pg_search
   pickadate-rails
   pygments.rb
+  quiet_assets
   rack-cache
   rails (= 4.1.0)
   rails-console-tweaks
@@ -480,4 +483,4 @@ DEPENDENCIES
   yaml_db
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

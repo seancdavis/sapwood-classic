@@ -1,6 +1,10 @@
 Rails.application.configure do
 
+  # Show origin of queries.
   ActiveRecordQueryTrace.enabled = true
+
+  # Show assets in log (the "quiet_assets" gem hides them by default)
+  # config.quiet_assets = false
 
   # Settings specified here will take precedence over those in config/application.rb.
 
