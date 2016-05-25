@@ -6,11 +6,11 @@
 <section id="page-content" class="data-container"
         data-sortable="<%= sortable_pages? %>">
   <% if @pages.size > 0 %>
-    <%= render :partial => 'filters' %>
+    <%= render :partial => 'filters', :locals => { :pages => @pages } %>
     <%= data_table(@pages, 'page') %>
     <%= paginate(@pages) %>
   <% elsif site_root_pages.size > 0 %>
-    <%= render :partial => 'filters' %>
+    <%= render :partial => 'filters', :locals => { :pages => @pages } %>
     <%= missing_content("No pages match your criteria.") %>
   <% elsif site_templates.size == 0 && current_user.admin? %>
     <%= missing_content("You need to create a template before you can create a
