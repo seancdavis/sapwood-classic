@@ -29,7 +29,6 @@ gem 'jcrop-rails-v2'
 
 # ------------------------------------------ Utilities
 
-gem 'active_record_query_trace', :group => :development
 gem 'ancestry'
 gem 'cambium', :github => 'rocktree/cambium'
 # gem 'dalli'
@@ -41,24 +40,32 @@ gem 'honeypot-captcha'
 gem 'httpclient'
 gem 'kaminari'
 gem 'koala'
-gem 'mailcatcher', :group => :development
 gem 'mailchimp'
 gem 'pg_search'
 gem 'pygments.rb'
-gem 'quiet_assets', :group => :development
-gem 'rack-cache', :group => :production, :require => 'rack/cache'
-gem 'rack-mini-profiler', :group => :development
 gem 'redcarpet'
 gem 'redis-rails'
 gem 'reverse_markdown'
 gem 'ruby-filemagic'
-gem 'sendgrid', :group => :production
 gem 'sidekiq'
 gem 'sitemap_generator'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'whenever'
 gem 'wysihtml5-rails'
 gem 'yaml_db'
+
+group :development do
+  gem 'active_record_query_trace'
+  gem 'bullet'
+  gem 'mailcatcher'
+  gem 'quiet_assets'
+  gem 'rack-mini-profiler'
+end
+
+group :production do
+  gem 'rack-cache', :require => 'rack/cache'
+  gem 'sendgrid'
+end
 
 # ------------------------------------------ Console
 
