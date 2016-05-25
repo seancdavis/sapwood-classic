@@ -283,6 +283,8 @@ GEM
     rack (1.5.2)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-mini-profiler (0.10.1)
+      rack (>= 1.2.0)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.2)
@@ -479,6 +481,7 @@ DEPENDENCIES
   pygments.rb
   quiet_assets
   rack-cache
+  rack-mini-profiler
   rails (= 4.1.0)
   rails-console-tweaks
   redcarpet
