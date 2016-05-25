@@ -1,35 +1,34 @@
 module PagesHelper
 
-  def site_pages
-    @site_pages ||= begin
-      current_site.webpages.includes(:last_editor, :template => [:children])
-    end
-  end
+  # def site_pages
+  #   @site_pages ||= begin
+  #     current_site.webpages.includes(:last_editor, :template => [:children])
+  #   end
+  # end
 
-  def site_root_pages
-    @site_root_pages ||= site_pages.select(&:root?).sort_by(&:position)
-  end
+  # def site_root_pages
+  #   @site_root_pages ||= site_pages.select(&:root?).sort_by(&:position)
+  # end
 
-  def site_nav_pages
-    @site_nav_pages ||= site_root_pages.select(&:show_in_nav?)
-  end
+  # def site_nav_pages
+  #   @site_nav_pages ||= site_root_pages.select(&:show_in_nav?)
+  # end
 
-  def site_floating_root_pages
-    @site_floating_root_pages ||= site_root_pages.reject(&:show_in_nav?)
-  end
+  # def site_floating_root_pages
+  #   @site_floating_root_pages ||= site_root_pages.reject(&:show_in_nav?)
+  # end
 
   def current_page
     @current_page ||= begin
-      if(
-        controller_name == 'pages' ||
-        ['editor','documents','resources'].include?(controller_name)
-      )
-        slug = params[:page_slug] || params[:slug]
-        site_pages.select { |p| p.slug == slug }.first
-      else
-        nil
-      end
+      controllers = %w(pages editor documents resources)
+      return nil unless controllers.include?(controller_name)
+      slug = params[:page_slug] || params[:slug]
+      current_site.webpages.find_by_slug(slug) || current_site.webpages.build
     end
+  end
+
+  def current_page?
+    current_page.present? && current_page.id.present?
   end
 
   def verify_current_page
@@ -86,7 +85,7 @@ module PagesHelper
     content_tag(:div, :class => 'page-search-container') do
       simple_form_for(
         :search,
-        :url => builder_route([site_pages], :index),
+        :url => builder_route([@pages], :index),
         :method => :get
       ) do |f|
         f.input(
@@ -192,10 +191,10 @@ module PagesHelper
     # render the site url as the link to root pages
     o = link_to(
       current_site.url.blank? ? current_site.slug : current_site.url,
-      builder_route([site_pages], :index)
+      builder_route([@pages], :index)
     )
     # look for current pages and add each
-    if current_page
+    if current_page?
       if has_ancestors?
         current_page_ancestors.each do |a|
           o += sep
@@ -351,7 +350,7 @@ module PagesHelper
     ['all', 'published', 'drafts'].each do |link|
       p = link.singularize
       t = params[:template]
-      if current_page
+      if current_page?
         path = builder_site_page_path(
           current_site, current_page, :published => p, :template => t
         )
@@ -389,7 +388,7 @@ module PagesHelper
         :class => 'dropdown-trigger'
       )
       o += content_tag(:ul) do
-        if current_page
+        if current_page?
           path = builder_site_page_path(
             current_site,
             current_page,
@@ -414,7 +413,8 @@ module PagesHelper
         templates.each do |template|
           t = template.slug
           p = params[:published]
-          if current_page
+
+          if current_page?
             path = builder_site_page_path(
               current_site, current_page, :template => t, :published => p
             )

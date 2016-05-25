@@ -10,9 +10,11 @@ class Builder::PagesController < BuilderController
     if params[:search] && params[:search][:q]
       q = params[:search][:q]
       @pages = current_site.webpages.includes(:template => [:children])
-        .search_content(params[:search][:q]).to_a
+        .search_content(params[:search][:q])
+        .includes(:last_editor, :template => [:children])
+        .to_a
     else
-      @pages = site_root_pages
+      @pages = current_site.webpages.roots.includes(:last_editor, :template => [:children])
     end
     # If we have a published param, then we're good,
     # otherwise we set it and get ready to redirect.

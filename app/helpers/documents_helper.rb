@@ -10,7 +10,7 @@ module DocumentsHelper
 
   def current_page_documents
     @current_page_documents ||= begin
-      if current_page
+      if current_page?
         current_page.documents
       else
         nil

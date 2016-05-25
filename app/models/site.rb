@@ -133,15 +133,4 @@ class Site < ActiveRecord::Base
     site_settings
   end
 
-  def cached_webpages
-    # Rails.cache.fetch("#{cache_key}/cached_webpages",
-    #                   :expires_in => 240.hours) { webpages.to_a }
-    Rails.cache.fetch([self.class.name, updated_at.to_i, :pages],
-                      :expires_in => 240.hours) { webpages.to_a }
-
-    # Rails.cache.fetch("#{self.id}/all_pages", :expires_in => 24.hours) do
-    #   webpages.to_a
-    # end
-  end
-
 end
