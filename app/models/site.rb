@@ -94,28 +94,16 @@ class Site < ActiveRecord::Base
     begin
       super
     rescue
-      # This enables us to call a template and will return
-      # all the pages for that template
-      template = templates.find_by_slug(method)
-      if template.nil?
-        singular_method = ActiveSupport::Inflector.singularize(method)
-        template = templates.find_by_slug(singular_method)
-      end
-      if template.nil?
-        super
-      else
-        template.pages
-      end
+      template = templates.find_by_slug(method.to_s)
+      template.nil? ? super : template.pages
     end
   end
 
   def respond_to?(method, include_private = false)
     return true if super
-    template = templates.find_by_slug(method)
-    if template.nil?
-      singular_method = ActiveSupport::Inflector.singularize(method)
-      template = templates.find_by_slug(singular_method)
-    end
+    t = templates
+    return false unless t.collect(&:slug).include?(method.to_s)
+    template = t.select { |t| t.slug == method.to_s }.first
     template.nil? ? super : true
   end
 
