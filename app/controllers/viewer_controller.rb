@@ -6,7 +6,7 @@ class ViewerController < ActionController::Base
   before_filter :verify_site
 
   include(
-    ApplicationHelper, 
+    ApplicationHelper,
     RoutingHelper,
     ErrorsHelper,
     UsersHelper,

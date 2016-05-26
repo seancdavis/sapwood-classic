@@ -29,6 +29,7 @@ gem 'jcrop-rails-v2'
 
 # ------------------------------------------ Utilities
 
+gem 'actionpack-action_caching'
 gem 'ancestry'
 gem 'cambium', :github => 'rocktree/cambium'
 # gem 'dalli'

@@ -1,7 +1,7 @@
 Rails.application.configure do
 
   # Show origin of queries.
-  ActiveRecordQueryTrace.enabled = true
+  ActiveRecordQueryTrace.enabled = false
 
   # Show assets in log (the "quiet_assets" gem hides them by default)
   # config.quiet_assets = false
@@ -20,7 +20,7 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
   # config.cache_store = :mem_cache_store
-  config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
+  # config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
 
   # Notify of N+1 problems
   config.after_initialize do

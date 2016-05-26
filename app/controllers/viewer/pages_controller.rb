@@ -1,6 +1,13 @@
 class Viewer::PagesController < ViewerController
 
   before_filter :cors_check
+  before_filter :set_home_page, :only => [:index]
+  before_filter :set_current_page, :only => [:show]
+
+  caches_action :show, :cache_path => :show_cache_path.to_proc
+  # "site_#{current_site.id}_page_#{current_page.id}"
+
+  # caches_action :show
 
   unless Rails.env.development?
     rescue_from ActionController::RoutingError do |e|
@@ -17,7 +24,6 @@ class Viewer::PagesController < ViewerController
   end
 
   def home
-    @current_page = current_site.home_page
     if @current_page.nil? || (@current_page.draft? && Rails.env.production?)
       not_found
     else
@@ -26,10 +32,6 @@ class Viewer::PagesController < ViewerController
   end
 
   def show
-    if @current_page.nil?
-      slug = params[:page_path].split('/').last
-      @current_page = current_site.pages.find_by_slug(slug)
-    end
     if current_page.nil?
       rt_slug = params[:page_path].split('/').first
       rt = current_site.resource_types.where(:slug => [
@@ -61,7 +63,24 @@ class Viewer::PagesController < ViewerController
     end
   end
 
+  protected
+
+    def show_cache_path
+      "site_#{current_site.id}_page_#{current_page.id}"
+    end
+
   private
+
+    def set_home_page
+      @current_page = current_site.home_page
+    end
+
+    def set_current_page
+      if @current_page.nil?
+        slug = params[:page_path].split('/').last
+        @current_page = current_site.pages.find_by_slug(slug)
+      end
+    end
 
     def error_404(error)
       if current_site && current_site.title.present?
