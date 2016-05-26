@@ -31,6 +31,15 @@ class App.Views.PageFileUploader extends Backbone.View
         $('.image a.select').click(@selectImage)
         @initUploader()
         @triggered = true
+        $('nav.pagination span > a').click(@loadPage)
+
+  loadPage: (e) =>
+    e.preventDefault()
+    $.get $(e.target).attr('href'), (data) =>
+      $('.images-container').after(data)
+      $('.images-container').first().remove()
+      $('nav.pagination span > a').click(@loadPage)
+      $('.image a.select').click(@selectImage)
 
   selectImage: (e) =>
     e.preventDefault()
