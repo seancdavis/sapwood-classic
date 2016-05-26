@@ -1,29 +1,12 @@
 module PagesHelper
 
-  # def site_pages
-  #   @site_pages ||= begin
-  #     current_site.webpages.includes(:last_editor, :template => [:children])
-  #   end
-  # end
-
-  # def site_root_pages
-  #   @site_root_pages ||= site_pages.select(&:root?).sort_by(&:position)
-  # end
-
-  # def site_nav_pages
-  #   @site_nav_pages ||= site_root_pages.select(&:show_in_nav?)
-  # end
-
-  # def site_floating_root_pages
-  #   @site_floating_root_pages ||= site_root_pages.reject(&:show_in_nav?)
-  # end
-
   def current_page
     @current_page ||= begin
       controllers = %w(pages editor documents resources)
       return nil unless controllers.include?(controller_name)
       slug = params[:page_slug] || params[:slug]
-      current_site.webpages.find_by_slug(slug) || current_site.webpages.build
+      page = current_site.webpages.where(:slug => slug).includes(:template)[0]
+      page || current_site.webpages.build
     end
   end
 
@@ -65,7 +48,8 @@ module PagesHelper
 
   def current_page_children
     @current_page_children ||= begin
-      current_page.children.in_position.includes(:template)
+      current_page.children.in_position
+        .includes(:last_editor, :template => [:children])
     end
   end
 
@@ -117,7 +101,7 @@ module PagesHelper
       pages = []
       t = page.template
       current_site.templates.includes(:children, :webpages).each do |template|
-        pages << template.pages if template.children.include?(t)
+        pages << template.webpages if template.children.include?(t)
       end
       pages = (pages.flatten + [current_page_parent]).reject(&:blank?)
       if pages.size > 0

@@ -1,7 +1,9 @@
 module ResourcesHelper
 
   def site_resource_types
-    @site_resource_types ||= current_site.resource_types.alpha
+    @site_resource_types ||= begin
+      current_site.resource_types.includes(:last_editor, :resources).alpha
+    end
   end
 
   def current_resource_type

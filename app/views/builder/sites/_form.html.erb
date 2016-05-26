@@ -21,7 +21,9 @@
   <% else %>
     <%= f.input :git_url, :as => :string %>
   <% end %>
-  <%= f.input(:home_page_id, :collection => site_pages) if site_pages.size > 0 %>
+  <% if current_site.webpages.present? %>
+    <%= f.input(:home_page_id, :collection => current_site.pages) %>
+  <% end %>
   <%= f.input :description %>
 
   <%= f.submit %>

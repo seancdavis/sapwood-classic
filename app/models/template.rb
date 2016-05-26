@@ -19,6 +19,7 @@
 #  last_editor_id     :integer
 #  has_show_view      :boolean          default(TRUE)
 #  can_have_documents :boolean          default(FALSE)
+#  pages_count        :integer          default(0)
 #
 
 class Template < ActiveRecord::Base
@@ -117,10 +118,16 @@ class Template < ActiveRecord::Base
     end
   end
 
+  after_save :cache_pages_count
+
+  def cache_pages_count
+    update_columns(:pages_count => pages.count)
+  end
+
   after_save :check_maxed_out
 
   def check_maxed_out
-    if limit_pages? && pages.size >= max_pages
+    if limit_pages? && pages_count >= max_pages
       update_columns(:maxed_out => true) if !maxed_out?
     else
       update_columns(:maxed_out => false) if maxed_out?
@@ -142,7 +149,7 @@ class Template < ActiveRecord::Base
   end
 
   def deletable?
-    pages.size == 0
+    pages_count == 0
   end
 
   def pages

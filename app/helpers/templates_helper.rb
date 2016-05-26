@@ -1,17 +1,17 @@
 module TemplatesHelper
 
   def site_templates
-    @site_templates ||= current_site.templates.alpha
+    @site_templates ||= current_site.templates.includes(:last_editor).alpha
   end
 
   def current_template
     @current_template ||= begin
       if current_page.nil?
         slug = params[:template_slug] || params[:slug]
-        site_templates.select { |t| t.slug == slug }.first
+        current_site.templates.find_by_slug(slug)
       else
         return nil if current_page.template_id.blank?
-        site_templates.select { |t| t.id == current_page.template_id }.first
+        current_page.template
       end
     end
   end
@@ -21,12 +21,15 @@ module TemplatesHelper
   end
 
   def current_template_pages
-    @current_template_pages ||= current_template.webpages.alpha
+    @current_template_pages ||= begin
+      current_template.webpages.includes(:last_editor).alpha
+    end
   end
 
   def current_template_pages_paginated
     @current_template_pages_paginated ||= begin
-      Kaminari.paginate_array(current_template_pages).page(params[:page]).per(10)
+      Kaminari.paginate_array(current_template_pages).page(params[:page])
+        .per(10)
     end
   end
 
