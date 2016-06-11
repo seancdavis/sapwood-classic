@@ -67,4 +67,10 @@ class MenuItem < ActiveRecord::Base
     title
   end
 
+  def cached_subtree
+    Rails.cache.fetch([self, 'subtree']) do
+      subtree.arrange_serializable(:order => :position)
+    end
+  end
+
 end

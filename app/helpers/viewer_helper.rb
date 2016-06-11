@@ -61,10 +61,10 @@ module ViewerHelper
                 root.page_id.blank? ? root.url : viewer_page(root.url),
                 :class => root.page_id.blank? ? 'disabled' : ''
               )
-              nodes = root.subtree.arrange_serializable(:order => :position)
-              if nodes.first["children"].size > 0
+              # nodes = root.cached_subtree
+              if root.cached_subtree.first["children"].size > 0
                 o2 += viewer_submenu_collection(
-                  nodes.first["children"], 2, options
+                  root.cached_subtree.first["children"], 2, options
                 )
               end
               o2.html_safe
