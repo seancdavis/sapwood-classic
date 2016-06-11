@@ -30,6 +30,15 @@ class Menu < ActiveRecord::Base
 
   validates :title, :presence => true
 
+  # ------------------------------------------ Callbacks
+
+  after_save :expire_caches
+  after_touch :expire_caches
+
+  def expire_caches
+    menu_items.roots.each { |item| Rails.cache.delete([item, 'subtree']) }
+  end
+
   # ------------------------------------------ Instance Methods
 
   def items

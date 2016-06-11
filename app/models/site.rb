@@ -75,6 +75,13 @@ class Site < ActiveRecord::Base
     end
   end
 
+  after_touch :expire_caches
+  after_save :expire_caches
+
+  def expire_caches
+    Rails.cache.delete_matched(/views\/site\_#{id}\_page\_(.*)/)
+  end
+
   # ------------------------------------------ Instance Method
 
   def croppers
@@ -94,27 +101,16 @@ class Site < ActiveRecord::Base
     begin
       super
     rescue
-      # This enables us to call a template and will return
-      # all the pages for that template
-      template = templates.find_by_slug(method)
-      if template.nil?
-        singular_method = ActiveSupport::Inflector.singularize(method)
-        template = templates.find_by_slug(singular_method)
-      end
-      if template.nil?
-        super
-      else
-        template.pages
-      end
+      template = templates.find_by_slug(method.to_s)
+      template.nil? ? super : template.pages
     end
   end
 
   def respond_to?(method, include_private = false)
-    template = templates.find_by_slug(method)
-    if template.nil?
-      singular_method = ActiveSupport::Inflector.singularize(method)
-      template = templates.find_by_slug(singular_method)
-    end
+    return true if super
+    t = templates
+    return false unless t.collect(&:slug).include?(method.to_s)
+    template = t.select { |t| t.slug == method.to_s }.first
     template.nil? ? super : true
   end
 

@@ -4,8 +4,9 @@
 
   <section class="form">
     <div class="half-row">
-      <%= f.association :page, :collection => site_pages.sort_by(&:title),
-        :label_method => :dropdown_label %>
+      <%= f.association :page,
+                        :collection => current_site.pages.sort_by(&:title),
+                        :label_method => :dropdown_label %>
       <%= f.input(
         :in_list,
         :as => :hidden,

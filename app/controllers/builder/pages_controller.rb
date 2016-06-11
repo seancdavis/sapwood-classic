@@ -9,9 +9,12 @@ class Builder::PagesController < BuilderController
     # or not.
     if params[:search] && params[:search][:q]
       q = params[:search][:q]
-      @pages = current_site.webpages.search_content(params[:search][:q]).to_a
+      @pages = current_site.webpages.includes(:template => [:children])
+        .search_content(params[:search][:q])
+        .includes(:last_editor, :template => [:children])
+        .to_a
     else
-      @pages = site_root_pages
+      @pages = current_site.webpages.roots.includes(:last_editor, :template => [:children])
     end
     # If we have a published param, then we're good,
     # otherwise we set it and get ready to redirect.
@@ -143,19 +146,24 @@ class Builder::PagesController < BuilderController
   end
 
   def destroy
-    current_template
-    parent_page = current_page.parent
-    current_page.destroy
-    if parent_page.nil?
-      path = builder_route([site_root_pages], :index)
+    if current_page == home_page
+      redirect_to [:builder, current_site, :pages],
+                  :alert => 'You may not delete the home page'
     else
-      path = builder_route([parent_page], :show)
+      current_template
+      parent_page = current_page.parent
+      current_page.destroy
+      if parent_page.nil?
+        path = [:builder, current_site, :pages]
+      else
+        path = builder_route([parent_page], :show)
+      end
+      current_template.save
+      redirect_to(
+        path,
+        :notice => t('notices.updated', :item => 'Page')
+      )
     end
-    current_template.save
-    redirect_to(
-      path,
-      :notice => t('notices.updated', :item => 'Page')
-    )
   end
 
   private

@@ -8,9 +8,15 @@ module DocumentsHelper
     site_documents
   end
 
+  def paginated_site_files
+    @paginated_site_files ||= begin
+      Kaminari.paginate_array(site_files).page(params[:page] || 1).per(16)
+    end
+  end
+
   def current_page_documents
     @current_page_documents ||= begin
-      if current_page
+      if current_page?
         current_page.documents
       else
         nil

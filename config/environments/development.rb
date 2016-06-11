@@ -1,6 +1,10 @@
 Rails.application.configure do
 
+  # Show origin of queries.
   ActiveRecordQueryTrace.enabled = false
+
+  # Show assets in log (the "quiet_assets" gem hides them by default)
+  # config.quiet_assets = false
 
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -14,7 +18,17 @@ Rails.application.configure do
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
+  # config.cache_store = :mem_cache_store
+  # config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
+
+  # Notify of N+1 problems
+  config.after_initialize do
+    Bullet.enable = true
+    # Bullet.rails_logger = true
+    # Bullet.raise = true
+    Bullet.add_footer = true
+  end
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true

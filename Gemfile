@@ -29,47 +29,53 @@ gem 'jcrop-rails-v2'
 
 # ------------------------------------------ Utilities
 
-gem 'cambium', :github => 'rocktree/cambium'
-gem 'fog'
-gem 'devise'
+gem 'actionpack-action_caching'
 gem 'ancestry'
-gem 'rails-console-tweaks'
+gem 'cambium', :github => 'rocktree/cambium'
+# gem 'dalli'
+gem 'devise'
 gem 'dragonfly'
-gem 'koala'
-gem 'httpclient'
-gem 'kaminari'
-gem 'ruby-filemagic'
-gem 'redcarpet'
-gem 'pygments.rb'
-gem 'wysihtml5-rails'
-gem 'reverse_markdown'
-gem 'sidekiq'
-gem 'sitemap_generator'
-gem 'whenever'
-gem 'active_record_query_trace'
-gem 'yaml_db'
-gem 'pg_search'
+gem 'fog'
 gem 'geocoder'
 gem 'honeypot-captcha'
+gem 'httpclient'
+gem 'kaminari'
+gem 'koala'
 gem 'mailchimp'
+gem 'pg_search'
+gem 'pygments.rb'
+gem 'redcarpet'
+gem 'redis-rails'
+gem 'reverse_markdown'
+gem 'ruby-filemagic'
+gem 'sidekiq'
+gem 'sitemap_generator'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'whenever'
+gem 'wysihtml5-rails'
+gem 'yaml_db'
 
 group :development do
+  gem 'active_record_query_trace'
+  gem 'bullet'
   gem 'mailcatcher'
+  gem 'quiet_assets'
+  gem 'rack-mini-profiler'
 end
 
 group :production do
+  gem 'rack-cache', :require => 'rack/cache'
   gem 'sendgrid'
 end
+
+# ------------------------------------------ Console
+
+gem 'rails-console-tweaks'
 
 group :console do
   gem 'wirb'
   gem 'hirb'
   gem 'awesome_print'
-end
-
-group :production do
-  gem 'rack-cache', :require => 'rack/cache'
 end
 
 # ------------------------------------------ Errors
