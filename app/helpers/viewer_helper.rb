@@ -61,7 +61,6 @@ module ViewerHelper
                 root.page_id.blank? ? root.url : viewer_page(root.url),
                 :class => root.page_id.blank? ? 'disabled' : ''
               )
-              # nodes = root.cached_subtree
               if root.cached_subtree.first["children"].size > 0
                 o2 += viewer_submenu_collection(
                   root.cached_subtree.first["children"], 2, options
