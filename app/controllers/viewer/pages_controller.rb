@@ -1,9 +1,10 @@
 class Viewer::PagesController < ViewerController
 
   before_filter :cors_check
-  before_filter :set_home_page, :only => [:index]
+  before_filter :set_home_page, :only => [:home]
   before_filter :set_current_page, :only => [:show]
 
+  caches_action :home, :cache_path => :show_cache_path.to_proc
   caches_action :show, :cache_path => :show_cache_path.to_proc
   # "site_#{current_site.id}_page_#{current_page.id}"
 

@@ -75,6 +75,13 @@ class Site < ActiveRecord::Base
     end
   end
 
+  after_touch :expire_caches
+  after_save :expire_caches
+
+  def expire_caches
+    Rails.cache.delete_matched(/views\/site\_#{id}\_page\_(.*)/)
+  end
+
   # ------------------------------------------ Instance Method
 
   def croppers
