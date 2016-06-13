@@ -67,6 +67,14 @@ class ResourceType < ActiveRecord::Base
     ])
   end
 
+  after_save :expire_page_caches
+
+  def expire_page_caches
+    site.pages.each do |page|
+      Rails.cache.delete([page, "resource_type_methods"])
+    end
+  end
+
   # ------------------------------------------ Instance Methods
 
   def fields

@@ -138,7 +138,9 @@ class Page < ActiveRecord::Base
   # ------------------------------------------ Instance Methods
 
   def resource_type_methods
-    resource_types.map { |rt| rt.slug.pluralize }
+    Rails.cache.fetch([self, "resource_type_methods"]) do
+      resource_types.map { |rt| rt.slug.pluralize }
+    end
   end
 
   def respond_to_fields
@@ -177,8 +179,7 @@ class Page < ActiveRecord::Base
 
   def respond_to?(method, include_private = false)
     return true if super
-    # respond_to_fields.include?(method.to_s)
-    false
+    respond_to_fields.include?(method.to_s)
   end
 
   def missing_fields
