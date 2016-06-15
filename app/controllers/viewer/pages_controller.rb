@@ -6,7 +6,7 @@ class Viewer::PagesController < ViewerController
 
   caches_action :home, :cache_path => :show_cache_path.to_proc
   caches_action :show, :cache_path => :show_cache_path.to_proc,
-                :if => Proc.new { params[:search].blank? }
+                :if => Proc.new { params[:search].blank? && !current_page.nil? }
 
   unless Rails.env.development?
     rescue_from ActionController::RoutingError do |e|
