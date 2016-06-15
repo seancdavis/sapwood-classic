@@ -51,7 +51,7 @@ class Viewer::PagesController < ViewerController
           :layout => @layout
         )
       end
-    elsif current_template.has_show_view?
+    elsif current_template.present? && current_template.has_show_view?
       resolve_layout
       render(
         "viewer/#{current_site.slug}/#{current_page_template}",
