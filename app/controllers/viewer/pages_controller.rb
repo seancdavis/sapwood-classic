@@ -83,7 +83,11 @@ class Viewer::PagesController < ViewerController
     def set_current_page
       if @current_page.nil?
         slug = params[:page_path].split('/').last
-        @current_page = current_site.pages.find_by_slug(slug)
+        @current_page = if user_signed_in?
+          current_site.webpages.find_by_slug(slug)
+        else
+          current_site.pages.find_by_slug(slug)
+        end
       end
     end
 
