@@ -5,8 +5,7 @@ class Viewer::PagesController < ViewerController
   before_filter :set_current_page, :only => [:show]
 
   caches_action :home, :cache_path => :show_cache_path.to_proc
-  caches_action :show, :cache_path => :show_cache_path.to_proc,
-                :if => Proc.new { params[:search].blank? && !current_page.nil? }
+  caches_action :show, :cache_path => :show_cache_path.to_proc
 
   unless Rails.env.development?
     rescue_from ActionController::RoutingError do |e|
@@ -65,7 +64,10 @@ class Viewer::PagesController < ViewerController
   protected
 
     def show_cache_path
-      "site_#{current_site.id}_page_#{current_page.id}"
+      q = ''
+      request.query_parameters.each { |k,v| q += "#{k}_#{v}" }
+      q = "_#{q}" unless q.blank?
+      "site_#{current_site.id}_page_#{current_page.id}#{q}"
     end
 
   private
