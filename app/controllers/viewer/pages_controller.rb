@@ -64,6 +64,10 @@ class Viewer::PagesController < ViewerController
   protected
 
     def show_cache_path
+      if current_page.blank?
+        return '404' if current_site.blank?
+        return "site_#{current_site.id}"
+      end
       q = ''
       request.query_parameters.each { |k,v| q += "#{k}_#{v}" }
       q = "_#{q}" unless q.blank?
