@@ -7,7 +7,7 @@
         :span,
         link_to(
           page.page_path,
-          preview_page_path(:page_path => page.page_path),
+          preview_page_path(:page_path => page.page_path.gsub(/^\//, '')),
           :target => :blank
         ),
         :class => 'path'
