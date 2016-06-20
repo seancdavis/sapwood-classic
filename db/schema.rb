@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526102458) do
+ActiveRecord::Schema.define(version: 20160620195106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -311,6 +311,7 @@ ActiveRecord::Schema.define(version: 20160526102458) do
     t.boolean  "has_show_view",      default: true
     t.boolean  "can_have_documents", default: false
     t.integer  "pages_count",        default: 0
+    t.boolean  "disable_cache",      default: false
   end
 
   add_index "templates", ["site_id", "last_editor_id"], name: "index_templates_on_site_id_and_last_editor_id", using: :btree

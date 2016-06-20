@@ -86,6 +86,15 @@
       </div>
     </div>
 
+    <div class="half-row">
+      <div class="input optional">
+        <%= f.input :disable_cache, :wrapper => false %>
+        <%= em_p("Some templates will have forms. Instead of disabling authenticity
+        tokens, Sapwood recommends you simply omit the cache for that page.") %>
+      </div>
+      <div class="input optional"></div>
+    </div>
+
     <%= redirect_field(f) %>
     <%= f.submit "Save Settings" %>
   <% end %>

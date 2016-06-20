@@ -99,6 +99,7 @@ class Builder::TemplatesController < BuilderController
         :max_pages,
         :has_show_view,
         :can_have_documents,
+        :disable_cache,
         :child_ids => [],
         :resource_type_ids => []
       ).merge(:last_editor => current_user)
