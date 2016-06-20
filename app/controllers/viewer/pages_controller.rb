@@ -4,8 +4,10 @@ class Viewer::PagesController < ViewerController
   before_filter :set_home_page, :only => [:home]
   before_filter :set_current_page, :only => [:show]
 
-  caches_action :home, :cache_path => :show_cache_path.to_proc
-  caches_action :show, :cache_path => :show_cache_path.to_proc
+  caches_action :home, :cache_path => :show_cache_path.to_proc,
+                :if => Proc.new { controller_name != 'previewer' }
+  caches_action :show, :cache_path => :show_cache_path.to_proc,
+                :if => Proc.new { controller_name != 'previewer' }
 
   unless Rails.env.development?
     rescue_from ActionController::RoutingError do |e|
