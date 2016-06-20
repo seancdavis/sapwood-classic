@@ -5,9 +5,9 @@ class Viewer::PagesController < ViewerController
   before_filter :set_current_page, :only => [:show]
 
   caches_action :home, :cache_path => :show_cache_path.to_proc,
-                :if => Proc.new { controller_name != 'previewer' }
+                :if => Proc.new { can_cache? }
   caches_action :show, :cache_path => :show_cache_path.to_proc,
-                :if => Proc.new { controller_name != 'previewer' }
+                :if => Proc.new { can_cache? }
 
   unless Rails.env.development?
     rescue_from ActionController::RoutingError do |e|
@@ -64,6 +64,12 @@ class Viewer::PagesController < ViewerController
   end
 
   protected
+
+    def can_cache?
+      controller_name != 'previewer' &&
+      current_template.present? &&
+      !current_template.disable_cache?
+    end
 
     def show_cache_path
       if current_page.blank?

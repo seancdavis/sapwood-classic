@@ -20,6 +20,7 @@
 #  has_show_view      :boolean          default(TRUE)
 #  can_have_documents :boolean          default(FALSE)
 #  pages_count        :integer          default(0)
+#  disable_cache      :boolean          default(FALSE)
 #
 
 class Template < ActiveRecord::Base
