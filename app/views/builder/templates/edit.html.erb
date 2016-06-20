@@ -88,7 +88,7 @@
 
     <div class="half-row">
       <div class="input optional">
-        <%= f.input :disable_cache, :wrapper => false %>
+        <%= f.input :disable_cache, :wrapper => false, :as => :boolean %>
         <%= em_p("Some templates will have forms. Instead of disabling authenticity
         tokens, Sapwood recommends you simply omit the cache for that page.") %>
       </div>
