@@ -26,6 +26,10 @@ development: &default
   site:
     title:              Sapwood             # default title for the site
     url:                ''                  # the url at which you will run this application
+    session_key:        ''                  # Rails' session_store key (config/initializers/session_store.rb)
+    secret_key:         ''                  # Rails' secret key (config/secrets.yml)
+  devise:
+    secret_key:         ''                  # Devise's secret key (config/initializers/devise.rb)
   design:
     colors:
       primary:          099B77              # primary color
