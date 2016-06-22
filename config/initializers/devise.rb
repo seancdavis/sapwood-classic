@@ -4,7 +4,11 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = '2876fb0304d31c60feb1ab26ac277358b4eb26975edca7c9669f1e0ee03d0e39d5fcc4a0fbdae8796ae393b78d6ba811e7d6257963a92183a1b0e20dfc3e49eb'
+  config.secret_key = SapwoodSetting.devise.secret_key
+
+  if SapwoodSetting.devise.secret_key.blank?
+    raise "You must set a secret key for Devise in your sapwood.yml file."
+  end
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,

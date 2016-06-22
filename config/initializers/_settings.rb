@@ -1,11 +1,12 @@
-begin
-  config_file = File.join(Rails.root,'config','sapwood.yml')
-  SapwoodSetting = YAML.load_file(config_file)[Rails.env].to_ostruct
-rescue
-  begin
-    backup_config = File.join(Rails.root,'config','taproot.yml')
-    SapwoodSetting = YAML.load_file(backup_config)[Rails.env].to_ostruct
-  rescue
-    raise "Can't find file: #{config_file}"
-  end
+config_file = if File.exists?(File.join(Rails.root,'config','sapwood.yml'))
+  File.join(Rails.root,'config','sapwood.yml')
+else
+  File.join(Rails.root,'config','taproot.yml')
+end
+
+contents = ERB.new(File.read(config_file)).result
+SapwoodSetting = YAML.load(contents)[Rails.env].to_ostruct
+
+if SapwoodSetting.site.secret_key.blank?
+  raise "You must set a secret key for your app in your sapwood.yml file."
 end
