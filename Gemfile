@@ -54,6 +54,7 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'whenever'
 gem 'wysihtml5-rails'
 gem 'yaml_db'
+gem 'rubyzip', '>= 1.0.0'
 
 group :development do
   gem 'active_record_query_trace'
