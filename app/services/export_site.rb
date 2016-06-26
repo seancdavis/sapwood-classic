@@ -30,6 +30,12 @@ class ExportSite
         end
       end
     end
+    FileUtils.mkdir_p(docs_dir = "#{dir}/media")
+    @site.documents.each do |doc|
+      open("#{docs_dir}/#{doc.document.name}", 'wb') do |file|
+        file << open(doc.document.url).read
+      end
+    end
     ZipFileGenerator.call(dir, zip_file)
     true
   end
