@@ -12,6 +12,7 @@
 #  home_page_id   :integer
 #  git_url        :string(255)
 #  secondary_urls :text
+#  export_status  :integer          default(10)
 #
 
 FactoryGirl.define do

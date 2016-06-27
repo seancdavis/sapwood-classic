@@ -12,6 +12,7 @@
 #  home_page_id   :integer
 #  git_url        :string(255)
 #  secondary_urls :text
+#  export_status  :integer          default(10)
 #
 
 require 'active_support/inflector'
@@ -27,6 +28,9 @@ class Site < ActiveRecord::Base
   serialize :crop_settings, Hash
 
   attr_accessor :new_repo
+
+  enum :export_status => { :export_missing => 10, :export_processing => 20,
+                           :export_ready => 30 }
 
   # ------------------------------------------ Associations
 
@@ -90,6 +94,10 @@ class Site < ActiveRecord::Base
 
   def files
     documents
+  end
+
+  def export_file
+    Rails.root.join('lib', 'exports', "#{slug}.zip")
   end
 
   def redirect_domains

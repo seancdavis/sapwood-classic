@@ -5,7 +5,7 @@
       <%= content_tag(
         :li,
         link_to(
-          attrs.label.titleize, 
+          attrs.label.titleize,
           send(attrs.path, current_site),
           :method => attrs.request_type.blank? ? :get : attrs.request_type.to_sym,
           :data => attrs.confirm.blank? ? nil : { :confirm => attrs.confirm }
@@ -14,4 +14,15 @@
       ) %>
     <% end %>
   <% end %>
+  <li>
+    <% if current_site.export_missing? %>
+      <%= link_to 'Export Site Content',
+                  export_builder_site_path(current_site), :method => :post %>
+    <% elsif current_site.export_processing? %>
+      <span>Content is being exported ...</span>
+    <% elsif current_site.export_ready? %>
+      <%= link_to 'Download Site Content',
+                  download_builder_site_path(current_site), :method => :post %>
+    <% end %>
+  </li>
 </ul>

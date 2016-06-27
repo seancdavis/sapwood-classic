@@ -45,6 +45,8 @@ Rails.application.routes.draw do
       post 'import' => 'sites#import', :as => :import
       post 'backup' => 'sites#backup', :as => :backup
       post 'symlink' => 'sites#symlink', :as => :symlink
+      post 'export', :on => :member
+      post 'download', :on => :member
 
       # Pages
       resources :pages, :param => :slug do

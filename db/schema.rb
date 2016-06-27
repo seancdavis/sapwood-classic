@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627225725) do
+ActiveRecord::Schema.define(version: 20160627230700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -266,6 +266,7 @@ ActiveRecord::Schema.define(version: 20160627225725) do
     t.integer  "home_page_id"
     t.string   "git_url"
     t.text     "secondary_urls"
+    t.integer  "export_status",  default: 10
   end
 
   create_table "template_descendants", force: true do |t|

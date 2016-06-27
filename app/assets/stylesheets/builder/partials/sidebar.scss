@@ -16,7 +16,7 @@ aside#page-sidebar {
     li {
       position: relative;
       &.active {
-        a {
+        a, span {
           color: $color-light;
           background: $color-primary;
           &:hover {
@@ -25,7 +25,7 @@ aside#page-sidebar {
           }
         }
       }
-      a {
+      a, span {
         display: block;
         padding: 7px 10px;
         line-height: 23px;
@@ -54,6 +54,13 @@ aside#page-sidebar {
           &:hover {
             color: $color-danger;
           }
+        }
+      }
+      span {
+        font-style: italic;
+        color: $color-light-darkest;
+        &:hover {
+          background: transparent;
         }
       }
     }

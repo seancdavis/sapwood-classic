@@ -108,6 +108,19 @@ class Builder::SitesController < BuilderController
     )
   end
 
+  def export
+    ExportSite.delay.call(:site => current_site)
+    redirect_to(
+      route([current_site], :edit, 'builder'),
+      :notice => 'Export is processing in the background. The download link will be available when it is complete.'
+    )
+  end
+
+  def download
+    not_found unless current_site.export_ready?
+    send_file current_site.export_file
+  end
+
   private
 
     def verify_admin
