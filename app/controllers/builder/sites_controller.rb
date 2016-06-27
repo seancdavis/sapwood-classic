@@ -75,7 +75,7 @@ class Builder::SitesController < BuilderController
 
   def pull
     if current_site
-      UpdateProjectWorker.perform_async(current_site.id)
+      SapwoodProject.new(current_site).delay.pull_site
     end
     redirect_to(
       route([current_site], :edit, 'builder'),
