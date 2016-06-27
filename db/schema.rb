@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620195106) do
+ActiveRecord::Schema.define(version: 20160627230700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "documents", force: true do |t|
     t.integer  "site_id"
@@ -250,6 +266,7 @@ ActiveRecord::Schema.define(version: 20160620195106) do
     t.integer  "home_page_id"
     t.string   "git_url"
     t.text     "secondary_urls"
+    t.integer  "export_status",  default: 10
   end
 
   create_table "template_descendants", force: true do |t|

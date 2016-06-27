@@ -37,6 +37,9 @@ dump.rdb
 lib/assets/import/
 public/assets/
 
+# Exported Assets
+lib/exports/
+
 # Site-Specific Files
 projects/*
 !projects/.default-site/

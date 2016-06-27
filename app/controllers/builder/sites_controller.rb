@@ -75,7 +75,7 @@ class Builder::SitesController < BuilderController
 
   def pull
     if current_site
-      UpdateProjectWorker.perform_async(current_site.id)
+      SapwoodProject.new(current_site).delay.pull_site
     end
     redirect_to(
       route([current_site], :edit, 'builder'),
@@ -106,6 +106,19 @@ class Builder::SitesController < BuilderController
       route([current_site], :edit, 'builder'),
       :notice => 'Symlinked successfully!'
     )
+  end
+
+  def export
+    ExportSite.delay.call(:site => current_site)
+    redirect_to(
+      route([current_site], :edit, 'builder'),
+      :notice => 'Export is processing in the background. The download link will be available when it is complete.'
+    )
+  end
+
+  def download
+    not_found unless current_site.export_ready?
+    send_file current_site.export_file
   end
 
   private
