@@ -54,6 +54,7 @@ gem 'wysihtml5-rails'
 gem 'yaml_db'
 gem 'rubyzip', '>= 1.0.0'
 gem 'delayed_job_active_record'
+gem 'daemons'
 
 group :development do
   gem 'active_record_query_trace'
