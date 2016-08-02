@@ -68,9 +68,10 @@ class Form < ActiveRecord::Base
   end
 
   def to_csv
-    methods = fields.collect(&:slug)
+    methods = fields.sort_by(&:position).collect(&:slug)
     CSV.generate do |csv|
-      csv << fields.collect(&:title) + ["Created At", "Last Updated"]
+      titles = fields.sort_by(&:position).collect(&:title)
+      csv << titles + ["Created At", "Last Updated"]
       submissions.includes(:form => [:form_fields]).each do |s|
         attrs = []
         methods.each do |m|
