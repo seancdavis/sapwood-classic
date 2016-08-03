@@ -16,8 +16,9 @@ class FormsMailer < ActionMailer::Base
     )
   end
 
-  def response_message(to, form)
+  def response_message(to, form, submission)
     @form = form
+    @submission = submission
     mail(
       :to => to,
       :subject => form.email_subject

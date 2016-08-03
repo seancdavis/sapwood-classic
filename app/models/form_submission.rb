@@ -64,9 +64,23 @@ class FormSubmission < ActiveRecord::Base
       form.email_to_id.present?
         FormsMailer.response_message(
           self.field_data[form.email_to.slug],
-          form
+          form,
+          self
         ).deliver
     end
+  end
+
+  def email_body_html
+    html = form.email_body
+    html.scan(/{[\w_]+}/).each do |m|
+      attr = m.gsub(/[^\w_]/i, '')
+      html = html.gsub(/#{m}/, send(attr).to_s)
+    end
+    html.html_safe
+  end
+
+  def created_at_datetime
+    created_at.strftime('%m/%d/%Y %l:%M %p')
   end
 
   def respond_to?(method, include_private = false)
