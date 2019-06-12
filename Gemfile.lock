@@ -80,7 +80,7 @@ GEM
     bourbon (3.2.3)
       sass (~> 3.2)
       thor
-    builder (3.2.2)
+    builder (3.2.3)
     bullet (5.1.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
@@ -100,6 +100,7 @@ GEM
       sass (~> 3.2.19)
     compass-rails (2.0.0)
       compass (>= 0.12.2)
+    concurrent-ruby (1.1.5)
     daemons (1.1.9)
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
@@ -214,7 +215,8 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     httpclient (2.5.3.3)
-    i18n (0.6.11)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
     jbuilder (2.2.3)
@@ -227,9 +229,9 @@ GEM
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (5.0.3)
+    jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (1.8.1)
+    json (1.8.6)
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -255,7 +257,7 @@ GEM
       httparty
     mime-types (1.25.1)
     mini_portile (0.6.1)
-    minitest (5.4.2)
+    minitest (5.11.3)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -286,14 +288,14 @@ GEM
       yajl-ruby (~> 1.1.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
-    rack (1.5.2)
+    rack (1.5.5)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-mini-profiler (0.10.1)
       rack (>= 1.2.0)
     rack-protection (1.5.3)
       rack
-    rack-test (0.6.2)
+    rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.1.0)
       actionmailer (= 4.1.0)
@@ -315,7 +317,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
-    rake (10.3.2)
+    rake (12.3.2)
     rbvmomi (1.8.2)
       builder
       nokogiri (>= 1.4.1)
@@ -400,14 +402,14 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
-    thor (0.19.1)
-    thread_safe (0.3.4)
+    thor (0.20.3)
+    thread_safe (0.3.6)
     tilt (1.4.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
     trollop (2.0)
-    tzinfo (1.2.2)
+    tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
       execjs (>= 0.3.0)
@@ -471,7 +473,7 @@ DEPENDENCIES
   jcrop-rails-v2
   jquery-fileupload-rails
   jquery-rails
-  jquery-ui-rails
+  jquery-ui-rails (>= 6.0.0)
   kaminari
   koala
   mailcatcher
@@ -505,4 +507,4 @@ DEPENDENCIES
   yaml_db
 
 BUNDLED WITH
-   1.11.2
+   1.17.2
